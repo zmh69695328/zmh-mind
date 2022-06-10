@@ -1,0 +1,81 @@
+{
+    "nodeData": {
+        "id": "1493236ee5d43823",
+        "topic": "new topic",
+        "root": true,
+        "children": [
+            {
+                "topic": "new node",
+                "id": "149333c2b264ea16",
+                "children": [
+                    {
+                        "topic": "new node",
+                        "id": "149337ceb9a5282b"
+                    }
+                ],
+                "direction": 0,
+                "expanded": true
+            },
+            {
+                "topic": "new node",
+                "id": "149351ec2e753914",
+                "direction": 1
+            },
+            {
+                "topic": "new node",
+                "id": "149325c6203884ff",
+                "direction": 0,
+                "children": [
+                    {
+                        "topic": "new node",
+                        "id": "149326a5ad6084d1",
+                        "direction": 1,
+                        "children": [
+                            {
+                                "topic": "new node",
+                                "id": "14933305374e570c"
+                            },
+                            {
+                                "topic": "new node",
+                                "id": "14933255b63329f6",
+                                "children": [
+                                    {
+                                        "topic": "new node",
+                                        "id": "14933372be6da3bc"
+                                    },
+                                    {
+                                        "topic": "new node",
+                                        "id": "14933e41359130bc"
+                                    }
+                                ]
+                            },
+                            {
+                                "topic": "new node",
+                                "id": "149341a6a1d74b69",
+                                "direction": 0
+                            },
+                            {
+                                "topic": "new node",
+                                "id": "149332a8373f5fd8"
+                            },
+                            {
+                                "topic": "new node",
+                                "id": "14934116a0e41b59",
+                                "direction": 1,
+                                "children": [
+                                    {
+                                        "topic": "new node",
+                                        "id": "149347cf25ffdc69",
+                                        "direction": 1
+                                    }
+                                ]
+                            }
+                        ],
+                        "expanded": true
+                    }
+                ]
+            }
+        ]
+    },
+    "linkData": {}
+}
