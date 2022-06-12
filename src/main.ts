@@ -1,8 +1,21 @@
 import './style.css'
+import MindElixir, { E } from './index'
+import data from './examples/data.json'
+let mind = new MindElixir({
+  el: '#map',
+  direction: MindElixir.LEFT,
+  // create new map data
+  data: data,
+  // or set as data that is return from `.getAllData()`
+  // data: {...},
+  draggable: true, // default true
+  contextMenu: true, // default true
+  toolBar: true, // default true
+  nodeMenu: true, // default true
+  keypress: true, // default true
+  locale: 'zh_CN'
+})
+mind.init()
+window.mind=mind
+console.log(mind)
 
-const app = document.querySelector<HTMLDivElement>('#app')!
-
-app.innerHTML = `
-  <h1>Hello Vite!</h1>
-  <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
-`
