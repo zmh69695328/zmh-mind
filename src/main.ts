@@ -1,5 +1,5 @@
 import './style.css'
-import MindElixir, { E } from './index'
+import MindElixir from './index'
 import data from './examples/data.json'
 let mind = new MindElixir({
   el: '#map',

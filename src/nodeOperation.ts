@@ -237,7 +237,7 @@ export const insertParent = function(el, node) {
 }
 
 export const addChildFunction = function(nodeEle, node) {
-  if (!nodeEle) return
+  if (!nodeEle) return undefined
   const nodeObj = nodeEle.nodeObj
   if (nodeObj.expanded === false) {
     this.expandNode(nodeEle, true)

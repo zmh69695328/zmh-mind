@@ -42,7 +42,7 @@ export const unselectNode = function() {
   this.bus.fire('unselectNode')
 }
 export const selectNextSibling = function() {
-  if (!this.currentNode || this.currentNode.dataset.nodeid === 'meroot') return
+  if (!this.currentNode || this.currentNode.dataset.nodeid === 'meroot') return undefined
 
   const sibling = this.currentNode.parentElement.parentElement.nextSibling
   let target: HTMLElement
@@ -64,7 +64,7 @@ export const selectNextSibling = function() {
   return true
 }
 export const selectPrevSibling = function() {
-  if (!this.currentNode || this.currentNode.dataset.nodeid === 'meroot') return
+  if (!this.currentNode || this.currentNode.dataset.nodeid === 'meroot') return undefined
 
   const sibling = this.currentNode.parentElement.parentElement.previousSibling
   let target
@@ -94,7 +94,7 @@ export const selectFirstChild = function() {
   }
 }
 export const selectParent = function() {
-  if (!this.currentNode || this.currentNode.dataset.nodeid === 'meroot') return
+  if (!this.currentNode || this.currentNode.dataset.nodeid === 'meroot') return undefined
 
   const parent = this.currentNode.parentElement.parentElement.parentElement
     .previousSibling
