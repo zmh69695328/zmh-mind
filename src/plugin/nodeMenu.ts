@@ -219,5 +219,10 @@ export default function(mind) {
     } else {
       iconInput.value = ''
     }
+    if (nodeObj.hyperLink) {
+      linkInput.value = nodeObj.hyperLink
+    } else {
+      linkInput.value = ''
+    }
   })
 }
