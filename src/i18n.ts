@@ -7,7 +7,7 @@ const cn = {
   cancelFocus: '取消专注',
   moveUp: '上移',
   moveDown: '下移',
-  link: '连接',
+  // link: '连接',
   clickTips: '请点击目标节点',
 
   font: '文字',
@@ -16,6 +16,8 @@ const cn = {
   icon: '图标',
   tagsSeparate: '多个标签半角逗号分隔',
   iconsSeparate: '多个图标半角逗号分隔',
+  link:'超链接',
+  linkSeparate:'链接地址'
 }
 export default {
   cn,

@@ -308,6 +308,11 @@
                                 "id": "bd42e97d7ac35e99"
                             }
                         ]
+                    },
+                    {
+                        "topic": "Hyper link",
+                        "id": "bd41fd4ca32322a5",
+                        "hyperLink": "https://github.com/ssshooter/mind-elixir-core"
                     }
                 ]
             }

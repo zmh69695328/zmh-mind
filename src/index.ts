@@ -45,6 +45,7 @@ import {
   updateNodeStyle,
   updateNodeTags,
   updateNodeIcons,
+  updateNodeHyperLink,
   processPrimaryNode,
   setNodeTopic,
   moveNodeBefore,
@@ -308,6 +309,7 @@ MindElixir.prototype = {
   updateNodeStyle,
   updateNodeTags,
   updateNodeIcons,
+  updateNodeHyperLink,
   processPrimaryNode,
   setNodeTopic,
 

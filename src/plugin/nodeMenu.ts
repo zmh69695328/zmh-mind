@@ -33,7 +33,8 @@ export default function(mind) {
   const styleDiv = createDiv('nm-style')
   const tagDiv = createDiv('nm-tag')
   const iconDiv = createDiv('nm-icon')
-
+  //different from "linkDiv" which is aims to link nodes with svg,
+  const linkDiv = createDiv('nm-link')
   styleDiv.innerHTML = `
       <div class="nm-fontsize-container">
         ${['15', '24', '32']
@@ -61,6 +62,7 @@ export default function(mind) {
   `
   tagDiv.innerHTML = `${i18n[locale].tag}<input class="nm-tag" tabindex="-1" placeholder="${i18n[locale].tagsSeparate}" /><br>`
   iconDiv.innerHTML = `${i18n[locale].icon}<input class="nm-icon" tabindex="-1" placeholder="${i18n[locale].iconsSeparate}" /><br>`
+  linkDiv.innerHTML = `${i18n[locale].link}<input class="nm-link" tabindex="-1" placeholder="${i18n[locale].linkSeparate}" /><br>`
 
   const menuContainer = document.createElement('nmenu')
   menuContainer.innerHTML = `
@@ -71,6 +73,7 @@ export default function(mind) {
   menuContainer.appendChild(styleDiv)
   menuContainer.appendChild(tagDiv)
   menuContainer.appendChild(iconDiv)
+  menuContainer.appendChild(linkDiv)
   menuContainer.hidden = true
 
   function clearSelect(klass, remove) {
@@ -87,6 +90,7 @@ export default function(mind) {
   const fontBtn:HTMLElement = menuContainer.querySelector('.font')
   const tagInput:HTMLInputElement = mind.container.querySelector('.nm-tag')
   const iconInput:HTMLInputElement = mind.container.querySelector('.nm-icon')
+  const linkInput:HTMLInputElement = mind.container.querySelector('.nm-link')
   menuContainer.onclick = e => {
     if (!mind.currentNode) return
     const nodeObj = mind.currentNode.nodeObj
@@ -159,6 +163,13 @@ export default function(mind) {
     if (e.target.value) {
       const newIcons = e.target.value.split(',')
       mind.updateNodeIcons(mind.currentNode.nodeObj, newIcons)
+    }
+  }
+  linkInput.onchange = (e:InputEvent & { target: HTMLInputElement}) => {
+    if (!mind.currentNode) return
+    if (e.target.value) {
+      const link = e.target.value
+      mind.updateNodeHyperLink(mind.currentNode.nodeObj, link)
     }
   }
   let state = 'open'
