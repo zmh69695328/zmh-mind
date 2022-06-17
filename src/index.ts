@@ -6,7 +6,7 @@ import {
   generateUUID,
   generateNewObj,
 } from './utils/index'
-import { findEle, createInputDiv, layout, Topic, createChildren, createGroup, createTop, createTopic } from './utils/dom'
+import { findEle, createInputDiv, layout, Topic, createChildren, createGroup, createTop, createTopic, shapeTpc } from './utils/dom'
 import { createLinkSvg, createLine } from './utils/svg'
 import {
   selectNode,
@@ -46,6 +46,7 @@ import {
   updateNodeTags,
   updateNodeIcons,
   updateNodeHyperLink,
+  // updateNodeImage,
   processPrimaryNode,
   setNodeTopic,
   moveNodeBefore,
@@ -100,6 +101,11 @@ export interface NodeObj {
   tags?: string[],
   icons?: string[],
   hyperLink?: string,
+  image?:{
+    url:string,
+    width:number,
+    height?:number,
+  }[],
   expanded?: boolean,
   direction?: number,
   root?: boolean
@@ -310,6 +316,7 @@ MindElixir.prototype = {
   updateNodeTags,
   updateNodeIcons,
   updateNodeHyperLink,
+  // updateNodeImage,
   processPrimaryNode,
   setNodeTopic,
 
@@ -322,7 +329,7 @@ MindElixir.prototype = {
   layout,
   linkDiv,
   createInputDiv,
-
+  shapeTpc,
   createChildren, createGroup, createTop, createTopic,
 
   selectNode,

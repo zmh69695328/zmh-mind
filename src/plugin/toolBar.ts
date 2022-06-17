@@ -39,10 +39,12 @@ function createToolBarRBContainer(mind) {
 }
 function createToolBarLTContainer(mind) {
   const toolBarLTContainer = document.createElement('toolbar')
+  const menu  = createButton('siderbar', 'menu')
   const l = createButton('tbltl', 'left')
   const r = createButton('tbltr', 'right')
   const s = createButton('tblts', 'side')
 
+  toolBarLTContainer.appendChild(menu)
   toolBarLTContainer.appendChild(l)
   toolBarLTContainer.appendChild(r)
   toolBarLTContainer.appendChild(s)

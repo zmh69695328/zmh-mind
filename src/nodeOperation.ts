@@ -86,6 +86,20 @@ export const updateNodeHyperLink = function(object, hyperLink) {
   })
 }
 
+// export const updateNodeImage = function(object, image) {
+//   if (!image) return
+//   const oldVal = object.image
+//   object.image = image
+//   const nodeEle = findEle(object.id)
+//   shapeTpc(nodeEle, object)
+//   this.linkDiv()
+//   this.bus.fire('operation', {
+//     name: 'editImage',
+//     obj: object,
+//     origin: oldVal,
+//   })
+// }
+
 export const updateNodeSvgChart = function() {
   // TODO
 }

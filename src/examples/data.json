@@ -313,6 +313,14 @@
                         "topic": "Hyper link",
                         "id": "bd41fd4ca32322a5",
                         "hyperLink": "https://github.com/ssshooter/mind-elixir-core"
+                    },
+                    {
+                        "topic":"tupian",
+                        "id":"14be159ca67a99aa",
+                        "image":[{
+                            "url": "https://cdn.jsdelivr.net/gh/ssshooter/mind-elixir-core/logo.png",
+                            "width": 200
+                          }]
                     }
                 ]
             }

@@ -31,12 +31,15 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
   }
 
   // TODO allow to add online image
-  // if (nodeObj.image) {
-  //   const imgContainer = $d.createElement('img')
-  //   imgContainer.src = nodeObj.image.url
-  //   imgContainer.style.width = nodeObj.image.width + 'px'
-  //   tpc.appendChild(imgContainer)
-  // }
+  if (nodeObj.image) {
+    const images=nodeObj.image
+    images.forEach(val=>{
+      const imgContainer = $d.createElement('img')
+      imgContainer.src = val.url
+      imgContainer.style.width = val.width + 'px'
+      tpc.appendChild(imgContainer)
+    })
+  }
   if (nodeObj.hyperLink) {
     const linkContainer = $d.createElement('a')
     linkContainer.className = 'hyper-link'
@@ -107,14 +110,21 @@ export function createInputDiv(tpc: Topic) {
   console.time('createInputDiv')
   if (!tpc) return
   let div = $d.createElement('div')
-  const origin = tpc.childNodes[0].textContent as string
+  const origin = tpc.innerHTML
   tpc.appendChild(div)
   div.id = 'input-box'
-  div.textContent = origin
+  // div.textContent = origin
+  div.innerHTML=origin
   div.contentEditable = 'true'
   div.spellcheck = false
   div.style.cssText = `min-width:${tpc.offsetWidth - 8}px;`
   if (this.direction === LEFT) div.style.right = '0'
+  // tpc.childNodes.forEach((child:ChildNode)=>{
+  //   if(child.nodeName==='IMG'){
+  //     div.appendChild(child)
+  //   }
+  //   //div.appendChild(child)
+  // })
   div.focus()
 
   selectText(div)
@@ -145,10 +155,22 @@ export function createInputDiv(tpc: Topic) {
     console.log(topic)
     if (topic === '') node.topic = origin
     else node.topic = topic
+    //添加图片支持
+    node.image=[]
+    div.childNodes.forEach((val)=>{
+      if(val.nodeName==='IMG'){
+          node.image.push({
+            url:(val as HTMLImageElement).src,
+            width:(val as HTMLImageElement).width
+          })
+      }
+    })
     div.remove()
     this.inputDiv = div = null
-    if (topic === origin) return // 没有修改不做处理
-    tpc.childNodes[0].textContent = node.topic
+    // TODO 优化
+    // if (topic === origin) return // 没有修改不做处理
+    // tpc.childNodes[0].textContent = node.topic
+    this.shapeTpc(tpc,node)
     this.linkDiv()
     this.bus.fire('operation', {
       name: 'finishEdit',
