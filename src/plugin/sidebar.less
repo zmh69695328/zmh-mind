@@ -1,0 +1,94 @@
+sidebar{
+    position: absolute;
+    left: 20px;
+    top: 195px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+    width: 20em;
+    height: 70%;
+    box-sizing: border-box;
+    padding: 0 8px 8px;
+    transition: 0.3s all;
+    overflow: scroll;
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+    }
+    .sidebar-heading {
+        color: #2c3e50;
+        transition: color .15s ease;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: 700;
+        // padding: 0.15rem 0.1rem 0.15rem 0.35rem;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0;
+        border-left: solid transparent;
+        .sidebar-title{
+            margin-block-start: 0.2em;
+            margin-block-end: 0.2em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            display: inline-block;
+            .arrow{
+                position: relative;
+                top: -0.12em;
+                left: 0.5em;
+                border-left: 6px solid #ccc;
+                &.down {
+                    border-left: 4px solid transparent;
+                    border-right: 4px solid transparent;
+                    border-top: 6px solid #ccc;
+                }
+                &.right{
+                    border-left: 6px solid #ccc;
+                    border-top: 4px solid transparent;
+                    border-bottom: 4px solid transparent;
+                }
+            }
+        }
+    }
+    .sidebar-heading.open, .sidebar-heading:hover {
+        color: inherit;
+    }
+    .sidebar-links{
+        font-weight: 400;
+        display: inline-block;
+        color: #2c3e50;
+        border-left: 0.25rem solid transparent;
+        padding: 0.15rem 0.1rem 0.15rem 0.35rem;
+        line-height: 1.4;
+        width: 100%;
+        box-sizing: border-box;
+        transition: height .1s ease-out;
+        font-size: .95em;
+        overflow: hidden;
+    }
+
+}
+
+.arrow {
+    display: inline-block;
+    width: 0;
+    height: 0;
+}
+ul ul {
+    list-style-type: circle;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+}
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 0.2em;
+    margin-block-end: 0.2em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 20px;
+}
+li {
+    text-align: -webkit-match-parent;
+}

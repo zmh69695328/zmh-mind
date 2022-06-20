@@ -65,6 +65,7 @@ import initMouseEvent from './mouse'
 import contextMenu from './plugin/contextMenu'
 import toolBar from './plugin/toolBar'
 import nodeMenu from './plugin/nodeMenu'
+import siderbar from './plugin/sidebar'
 import nodeDraggable from './plugin/nodeDraggable'
 import keypress from './plugin/keypress'
 import mobileMenu from './plugin/mobileMenu'
@@ -75,6 +76,7 @@ import './index.less'
 import './plugin/contextMenu.less'
 import './plugin/toolBar.less'
 import './plugin/nodeMenu.less'
+import './plugin/sidebar.less'
 import './plugin/mobileMenu.less'
 
 // import { exportSvg, exportPng } from '../painter'
@@ -412,7 +414,7 @@ MindElixir.prototype = {
     this.toolBar && toolBar(this)
     this.nodeMenu && nodeMenu(this)
     this.keypress && keypress(this)
-
+    siderbar(this)
     if (isMobile() && this.mobileMenu) {
       mobileMenu(this)
     } else {
