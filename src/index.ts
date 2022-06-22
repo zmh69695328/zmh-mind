@@ -84,7 +84,7 @@ import './plugin/mobileMenu.less'
 import './iconfont/iconfont.js'
 
 // TODO show up animation
-export const E = findEle
+const E = findEle
 type LinkObj = object
 type operation = {
   name: string
