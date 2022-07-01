@@ -19,5 +19,4 @@ export default function(mind){
     const nodeData=mind.nodeData
     sidebar.innerHTML = `${queryList(nodeData,0)}`
     mind.container.append(sidebar)
-
 }

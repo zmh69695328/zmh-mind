@@ -2,7 +2,7 @@ import './style.css'
 import MindElixir from './index'
 import data from './examples/data.json'
 let mind = new MindElixir({
-  el: '#map',
+  el: 'map',
   direction: MindElixir.LEFT,
   // create new map data
   data: data,

@@ -243,8 +243,8 @@ function customLinkTransform() {
   return resLinks
 }
 
-export let exportSvg = function (instance, fileName) {
-  if (!instance) throw new Error('Mind-elixir instance is not presented. ---> exportSvg(instance, fileName)') 
+export let exportSvg = function (instance=this, fileName='default') {
+  // if (!instance) throw new Error('Mind-elixir instance is not presented. ---> exportSvg(instance, fileName)') 
   initVar()
   $d = instance.container
   let svgFile = generateSvgDom()
@@ -255,6 +255,14 @@ export let exportSvg = function (instance, fileName) {
   a.href = dlUrl
   a.download = (fileName || getFileName()) + '.svg'
   a.click()
+}
+
+export let exportSvgDom = function (instance=this, fileName='default') {
+  // if (!instance) throw new Error('Mind-elixir instance is not presented. ---> exportSvg(instance, fileName)') 
+  initVar()
+  $d = instance.container
+  let svgFile = generateSvgDom()
+  return svgFile
 }
 
 export let exportPng = async function (instance, fileName) {

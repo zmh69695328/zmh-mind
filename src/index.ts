@@ -65,7 +65,7 @@ import initMouseEvent from './mouse'
 import contextMenu from './plugin/contextMenu'
 import toolBar from './plugin/toolBar'
 import nodeMenu from './plugin/nodeMenu'
-import siderbar from './plugin/sidebar'
+import sidebar from './plugin/sidebar'
 import nodeDraggable from './plugin/nodeDraggable'
 import keypress from './plugin/keypress'
 import mobileMenu from './plugin/mobileMenu'
@@ -79,7 +79,7 @@ import './plugin/nodeMenu.less'
 import './plugin/sidebar.less'
 import './plugin/mobileMenu.less'
 
-// import { exportSvg, exportPng } from '../painter'
+import { exportSvg, exportPng } from '../painter'
 
 import './iconfont/iconfont.js'
 
@@ -214,7 +214,7 @@ function MindElixir(this: MindElixirInstance, {
   primaryNodeVerticalGap,
   mobileMenu,
 }: Options) {
-  const box = document.querySelector(el) as HTMLElement
+  const box = document.getElementById(el) as HTMLElement
   if (!box) return
   this.mindElixirBox = box
   this.before = before || {}
@@ -355,7 +355,8 @@ MindElixir.prototype = {
   disableEdit,
   expandNode,
   refresh,
-
+  exportSvg,
+  exportPng,
   init: function() {
     /**
      * @function
@@ -414,7 +415,7 @@ MindElixir.prototype = {
     this.toolBar && toolBar(this)
     this.nodeMenu && nodeMenu(this)
     this.keypress && keypress(this)
-    siderbar(this)
+    sidebar(this)
     if (isMobile() && this.mobileMenu) {
       mobileMenu(this)
     } else {
@@ -456,3 +457,5 @@ MindElixir.new = (topic: string): MindElixirData => ({
 })
 
 export default MindElixir
+
+// export {exportSvg,exportPng} something wrong comes with the rollup
