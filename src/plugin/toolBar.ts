@@ -1,3 +1,5 @@
+import { updateSidebar } from "./sidebar"
+
 const createButton = (id, name) => {
   const button = document.createElement('span')
   button.id = id
@@ -52,11 +54,10 @@ function createToolBarLTContainer(mind) {
   
   menu.onclick=() => {
     const sidebar =document.querySelector('sidebar')
-    
+    updateSidebar(mind,sidebar as HTMLElement)
     if(sidebar.classList.contains('selected')){
       sidebar.removeAttribute('class')
     }else{
-      
       sidebar.setAttribute('class','selected')
     }
   }

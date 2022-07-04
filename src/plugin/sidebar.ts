@@ -9,9 +9,27 @@ function queryList(nodeData:NodeObj,cnt:number):string{
     if(!nodeData?.children||!nodeData.children.length){
         return `<p class="sidebar-title"><span>${nodeData.topic}</span></p>`
     }else{
-        return `<ul class="sidebar-heading open"><p class="sidebar-title"><span>${nodeData.topic}</span> <span class="arrow ${cnt<2?'down':'right'}"></span></p>${res}</ul>`
+        return `<p class="sidebar-title"><span>${nodeData.topic}</span><span class="arrow ${cnt<2?'down':'right'}"></span></p><ul class="sidebar-heading open">${res}</ul>`
     }
     
+}
+
+export function updateSidebar(mind,sidebar:HTMLElement){
+    const nodeData=mind.nodeData
+    sidebar.innerHTML = `${queryList(nodeData,0)}`
+    sidebar.querySelectorAll('.sidebar-title').forEach((e:HTMLElement)=>{
+        e.onclick=()=>{
+              const down = e.querySelector('.down')
+              const right = e.querySelector('.right')
+              if(down){
+                e.parentElement.querySelector('ul').classList.add('hidden')
+                down.classList.replace('down','right')
+              }else{
+                e.parentElement.querySelector('ul').classList.remove('hidden')
+                right.classList.replace('right','down')
+              }
+        }
+    })
 }
 
 export default function(mind){
