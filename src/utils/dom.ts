@@ -118,6 +118,9 @@ export function createInputDiv(tpc: Topic) {
   div.contentEditable = 'true'
   div.spellcheck = false
   div.style.cssText = `min-width:${tpc.offsetWidth - 8}px;`
+  if(tpc.nodeObj?.style?.color==='#ffffff'||(tpc.nodeObj?.id==='root'&&!tpc.nodeObj?.style?.color)){
+    div.style.color='#2c3e50'
+  }
   if (this.direction === LEFT) div.style.right = '0'
   // tpc.childNodes.forEach((child:ChildNode)=>{
   //   if(child.nodeName==='IMG'){

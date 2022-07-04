@@ -12,7 +12,7 @@ const colorList = [
   '#7f8c8d',
   '#94a5a6',
   '#bdc3c7',
-  '#ecf0f1',
+  '#ffffff',
   '#8e44ad',
   '#9b59b6',
   '#2980b9',

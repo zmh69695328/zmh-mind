@@ -79,7 +79,7 @@ import './plugin/nodeMenu.less'
 import './plugin/sidebar.less'
 import './plugin/mobileMenu.less'
 
-import { exportSvg, exportPng } from '../painter'
+import { exportSvg, exportPng, exportSvgDom } from '../painter'
 
 import './iconfont/iconfont.js'
 
@@ -356,6 +356,7 @@ MindElixir.prototype = {
   expandNode,
   refresh,
   exportSvg,
+  exportSvgDom,
   exportPng,
   init: function() {
     /**
