@@ -3,6 +3,10 @@
         "id": "root",
         "topic": "Mind Elixir",
         "root": true,
+        "style": {
+            "color": "#ffffff",
+            "background": "#00aaff"
+        },
         "children": [
             {
                 "topic": "什么是 Mind Elixir",

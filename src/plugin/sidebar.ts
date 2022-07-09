@@ -9,7 +9,7 @@ function queryList(nodeData:NodeObj,cnt:number):string{
     if(!nodeData?.children||!nodeData.children.length){
         return `<p class="sidebar-title"><span>${nodeData.topic}</span></p>`
     }else{
-        return `<p class="sidebar-title"><span>${nodeData.topic}</span><span class="arrow ${cnt<2?'down':'right'}"></span></p><ul class="sidebar-heading open">${res}</ul>`
+        return `<p class="sidebar-title"><span>${nodeData.topic}</span><span class="arrow ${cnt<2?'down':'right'}"></span></p><ul class="sidebar-heading open ${cnt<2?'':'hidden'}">${res}</ul>`
     }
     
 }

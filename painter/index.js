@@ -62,11 +62,14 @@ function generateSvgDom() {
 
 function createSvg(height, width) {
   let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-  svg.setAttribute('height', height)
-  svg.setAttribute('width', width)
+  // svg.setAttribute('height', height)
+  // svg.setAttribute('width', width)
+  svg.setAttribute('width','100%')
+  // svg.setAttribute('height', '600px')
   svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
   svg.setAttribute('version', '1.2')
   svg.setAttribute('xlink', 'http://www.w3.org/1999/xlink')
+  svg.setAttribute('viewBox',`0 0 ${width} ${height}`)
   return svg
 }
 
@@ -263,6 +266,26 @@ export let exportSvgDom = function (instance=this, fileName='default') {
   $d = instance.container
   let svgFile = generateSvgDom()
   return svgFile
+}
+
+export let exportPngDom = async function (instance=this, fileName='default') {
+  // if (!instance) throw new Error('Mind-elixir instance is not presented. ---> exportSvg(instance, fileName)') 
+  initVar()
+  $d = instance.container
+  let svgFile = generateSvgDom()
+  const canvas = document.createElement('canvas')
+  canvas.style.display = 'none'
+  const ctx = canvas.getContext('2d')
+
+  let v = await Canvg.fromString(
+    ctx,
+    head + svgFile.outerHTML.replace(/&nbsp;/g, ' ')
+  )
+  v.start()
+  let imgURL = canvas.toDataURL('image/png')
+  let a = document.createElement('a')
+  a.href = imgURL
+  return a
 }
 
 export let exportPng = async function (instance, fileName) {

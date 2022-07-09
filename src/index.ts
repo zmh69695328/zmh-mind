@@ -452,6 +452,10 @@ MindElixir.new = (topic: string): MindElixirData => ({
     id: generateUUID(),
     topic: topic || 'new topic',
     root: true,
+    style: {
+      color: "#ffffff",
+      background: "#00aaff"
+    },
     children: [],
   },
   linkData: {},
