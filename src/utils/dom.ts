@@ -52,7 +52,7 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
     const iconsContainer = $d.createElement('span')
     iconsContainer.className = 'icons'
     iconsContainer.innerHTML = nodeObj.icons
-      .map(icon => `<span>${encodeHTML(icon)}</span>`)
+    .filter(icon=> icon!=='').map(icon => `<span>${encodeHTML(icon)}</span>`)
       .join('')
     tpc.appendChild(iconsContainer)
   }
@@ -60,7 +60,7 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
     const tagsContainer = $d.createElement('div')
     tagsContainer.className = 'tags'
     tagsContainer.innerHTML = nodeObj.tags
-      .map(tag => `<span>${encodeHTML(tag)}</span>`)
+      .filter(tag=> tag!=='').map(tag => `<span>${encodeHTML(tag)}</span>`)
       .join('')
     tpc.appendChild(tagsContainer)
   }
@@ -106,6 +106,7 @@ export function selectText(div: HTMLElement) {
   }
 }
 
+
 export function createInputDiv(tpc: Topic) {
   console.time('createInputDiv')
   if (!tpc) return
@@ -114,7 +115,7 @@ export function createInputDiv(tpc: Topic) {
   tpc.appendChild(div)
   div.id = 'input-box'
   // div.textContent = origin
-  div.innerHTML=origin
+  div.innerHTML=origin.replace(/<div(([\s\S])*?)<\/div>/, '').replace('🔗','')
   div.contentEditable = 'true'
   div.spellcheck = false
   div.style.cssText = `min-width:${tpc.offsetWidth - 8}px;`

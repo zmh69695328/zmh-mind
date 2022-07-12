@@ -153,14 +153,14 @@ export default function(mind) {
   }
   tagInput.onchange = (e:InputEvent & { target: HTMLInputElement}) => {
     if (!mind.currentNode) return
-    if (e.target.value) {
+    if (e.target.value!==null||e.target.value!==undefined) {
       const newTags = e.target.value.split(',')
       mind.updateNodeTags(mind.currentNode.nodeObj, newTags)
     }
   }
   iconInput.onchange = (e:InputEvent & { target: HTMLInputElement}) => {
     if (!mind.currentNode) return
-    if (e.target.value) {
+    if (e.target.value!==null||e.target.value!==undefined) {
       const newIcons = e.target.value.split(',')
       mind.updateNodeIcons(mind.currentNode.nodeObj, newIcons)
     }
