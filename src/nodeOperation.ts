@@ -383,7 +383,7 @@ export const moveDownNode = function(el) {
   const obj = nodeEle.nodeObj
   moveDownObj(obj)
   if (grp.nextSibling) {
-    grp.insertAdjacentElement('afterend', grp.nextSibling)
+    grp.insertAdjacentElement('beforebegin', grp.nextSibling)
   } else {
     grp.parentNode.prepend(grp)
   }
