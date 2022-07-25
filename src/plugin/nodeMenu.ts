@@ -167,7 +167,7 @@ export default function(mind) {
   }
   linkInput.onchange = (e:InputEvent & { target: HTMLInputElement}) => {
     if (!mind.currentNode) return
-    if (e.target.value) {
+    if (e.target.value!==null||e.target.value!==undefined) {
       const link = e.target.value
       mind.updateNodeHyperLink(mind.currentNode.nodeObj, link)
     }

@@ -9,17 +9,9 @@
   <body>
     <!-- <div id="app"></div> -->
     <script type="module" src="/src/main.ts"></script>
-    <div id="map">
-    </div>
-    <div id="haha" style="width: 100%">
-      <button onclick="exportSB()" style="position: absolute;top: 0px;">sb</button>
+    <div id="map"></div>
+    <div id="haha" style="width: 100%;position: absolute;top: 0px;">
+      <button id="btn-haha" style="position: absolute;top: 0px;">更新</button>
     </div>
   </body>
-  <script async>
-    function exportSB(){
-      console.log('hahha')
-      const haha=document.querySelector('#haha')
-      haha.appendChild(mind.exportSvgDom())
-    }
-  </script>
 </html>

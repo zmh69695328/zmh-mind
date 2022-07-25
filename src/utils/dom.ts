@@ -41,7 +41,7 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
     })
   }
   if (nodeObj.hyperLink) {
-    const linkContainer = $d.createElement('a')
+    const linkContainer =$d.createElement('a')
     linkContainer.className = 'hyper-link'
     linkContainer.target = '_blank'
     linkContainer.innerText = '🔗'

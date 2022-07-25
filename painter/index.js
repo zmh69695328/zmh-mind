@@ -39,7 +39,10 @@ function generateSvgDom() {
       maxRight = right
     }
   } 
-  
+  // maxTop/=10
+  // maxBottom/=10
+  // maxLeft/=10
+  // maxRight/=10
   for (let i = 0; i < primaryNodes.length; i++) {
     let primaryNode = primaryNodes[i]
     if(primaryNode.tagName === 'ROOT') continue
@@ -88,8 +91,8 @@ function RootToSvg() {
   let svg2nd = `<g transform="translate(${IMG_PADDING - maxLeft}, ${
     IMG_PADDING - maxTop
   })">${svg2ndEle.innerHTML}</g>`
-  return (
-    svg2nd +
+  // return (
+    svg2nd +=
     `<g id="root" transform="translate(${rootOffsetX + IMG_PADDING}, ${
       rootOffsetY + IMG_PADDING
     })">
@@ -102,7 +105,14 @@ function RootToSvg() {
         ${nodeObj.topic}
       </text>
   </g>`
-  )
+  // )
+  let topiclinks=$d.querySelector('.topiclinks')
+  if(topiclinks){
+    svg2nd+=`<g transform="translate(${IMG_PADDING - maxLeft}, ${
+      IMG_PADDING - maxTop
+    })">${topiclinks.innerHTML}</g>`
+  }
+  return svg2nd
 }
 
 function PrimaryToSvg(primaryNode) {

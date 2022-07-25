@@ -16,7 +16,7 @@ const cn = {
   icon: '图标',
   tagsSeparate: '多个标签半角逗号分隔',
   iconsSeparate: '多个图标半角逗号分隔',
-  link:'超链接',
+  link:'连线',
   linkSeparate:'链接地址'
 }
 export default {

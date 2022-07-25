@@ -73,7 +73,7 @@ export const updateNodeIcons = function(object, icons) {
 }
 
 export const updateNodeHyperLink = function(object, hyperLink) {
-  if (!hyperLink) return
+  if (hyperLink==null||hyperLink==undefined) return
   const oldVal = object.hyperLink
   object.hyperLink = hyperLink
   const nodeEle = findEle(object.id)
