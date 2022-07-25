@@ -113,6 +113,7 @@ export const selectParent = function() {
  */
 export const getAllDataString = function() {
   const data = {
+    direction:this.direction,
     nodeData: getData(this),
     linkData: this.linkData,
   }
@@ -133,6 +134,7 @@ export const getAllDataString = function() {
  */
 export const getAllData = function(): object {
   const data = {
+    direction:this.direction,
     nodeData: getData(this),
     linkData: this.linkData,
   }

@@ -38,6 +38,6 @@ console.log(mind)
       locale: 'zh_CN'
     })
     mind.init()
-    const svgDiv=document.querySelector('#haha')
-    svgDiv.appendChild(mind.exportSvgDom())
+    // const svgDiv=document.querySelector('#haha')
+    // svgDiv.appendChild(mind.exportSvgDom())
 })

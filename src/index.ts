@@ -118,7 +118,8 @@ export interface NodeElement extends HTMLElement {
 }
 export interface MindElixirData {
   nodeData: NodeObj,
-  linkData?: LinkObj
+  linkData?: LinkObj,
+  direction?:number
 }
 export interface MindElixirInstance {
   mindElixirBox: HTMLElement,
@@ -229,7 +230,7 @@ function MindElixir(this: MindElixirInstance, {
   this.mobileMenu = mobileMenu
   // record the direction before enter focus mode, must true in focus mode, reset to null after exit focus
   // todo move direction to data
-  this.direction = typeof direction === 'number' ? direction : 1
+  this.direction = data.direction?data.direction:(typeof direction === 'number' ? direction : 1)
   this.draggable = draggable === undefined ? true : draggable
   this.newTopicName = newTopicName
   this.editable = editable === undefined ? true : editable
@@ -370,7 +371,8 @@ MindElixir.prototype = {
     addParentLink(this.nodeData)
     console.log('ME_version ' + MindElixir.version)
     console.log(this)
-    this.mindElixirBox.className += ' mind-elixir'
+    if(this.mindElixirBox.className.indexOf('mind-elixir')===-1)
+      this.mindElixirBox.className += ' mind-elixir'
     this.mindElixirBox.innerHTML = ''
 
     this.container = $d.createElement('div') // map container

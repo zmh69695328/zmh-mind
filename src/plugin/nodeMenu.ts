@@ -62,7 +62,7 @@ export default function(mind) {
   `
   tagDiv.innerHTML = `${i18n[locale].tag}<input class="nm-tag" tabindex="-1" placeholder="${i18n[locale].tagsSeparate}" /><br>`
   iconDiv.innerHTML = `${i18n[locale].icon}<input class="nm-icon" tabindex="-1" placeholder="${i18n[locale].iconsSeparate}" /><br>`
-  linkDiv.innerHTML = `${i18n[locale].link}<input class="nm-link" tabindex="-1" placeholder="${i18n[locale].linkSeparate}" /><br>`
+  linkDiv.innerHTML = `${i18n[locale].hyperlink}<input class="nm-link" tabindex="-1" placeholder="${i18n[locale].linkSeparate}" /><br>`
 
   const menuContainer = document.createElement('nmenu')
   menuContainer.innerHTML = `
