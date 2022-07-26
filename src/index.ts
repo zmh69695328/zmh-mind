@@ -230,7 +230,7 @@ function MindElixir(this: MindElixirInstance, {
   this.mobileMenu = mobileMenu
   // record the direction before enter focus mode, must true in focus mode, reset to null after exit focus
   // todo move direction to data
-  this.direction = data.direction?data.direction:(typeof direction === 'number' ? direction : 1)
+  this.direction = data.direction!==undefined?data.direction:(typeof direction === 'number' ? direction : 1)
   this.draggable = draggable === undefined ? true : draggable
   this.newTopicName = newTopicName
   this.editable = editable === undefined ? true : editable
