@@ -19,22 +19,28 @@ export const findEle = (id: string, instance?) => {
   return scope.querySelector(`[data-nodeid=me${id}]`)
 }
 
-function resizeNode(nodeEl:HTMLElement,tpc:Topic){
-  nodeEl.onpointerdown=eDown=>{
+function resizeNode(widthControl:HTMLElement,tpc:Topic){
+  widthControl.onpointerdown=eDown=>{
     if(!tpc.classList.contains('selected')) return
     const startX=eDown.clientX
     const width=tpc.clientWidth-Number(getComputedStyle(tpc).paddingLeft.replace('px',''))-Number(getComputedStyle(tpc).paddingRight.replace('px',''))
-    nodeEl.onpointermove=eMove=>{
+    widthControl.onpointermove=eMove=>{
       const endX=eMove.clientX
       tpc.style.width=(width+endX-startX).toString()+'px'
+      widthControl.style.height=tpc.clientHeight.toString()+'px'
+      //保存样式
+      if(!tpc.nodeObj.style) tpc.nodeObj.style={}
+      tpc.nodeObj.style.width=tpc.style.width
+      //设置宽度控制条的高度
+      tpc.nodeObj.style.controllWidth=widthControl.style.height
       eMove.preventDefault()
     }
-    nodeEl.setPointerCapture(eDown.pointerId)
+    widthControl.setPointerCapture(eDown.pointerId)
     eDown.preventDefault()
   }
-  nodeEl.onpointerup=eUp=>{
-    nodeEl.onpointermove=null
-    nodeEl.releasePointerCapture(eUp.pointerId)
+  widthControl.onpointerup=eUp=>{
+    widthControl.onpointermove=null
+    widthControl.releasePointerCapture(eUp.pointerId)
     this.linkDiv?.()
   }
 }
@@ -55,6 +61,8 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
     tpc.style.background = nodeObj.style.background || 'inherit'
     tpc.style.fontSize = nodeObj.style.fontSize + 'px'
     tpc.style.fontWeight = nodeObj.style.fontWeight || 'normal'
+    tpc.style.width= nodeObj.style.width || 'auto'
+    widthControllLeft.style.height=widthControllRight.style.height=nodeObj.style.controllWidth || '29px'
   }
 
   // TODO allow to add online image
@@ -188,8 +196,6 @@ export function createInputDiv(tpc: Topic) {
     else node.topic = topic
     //添加图片支持
     //去除节点缩放鼠标移动的监听
-    let widthControl=document.querySelector('.width-controll-right') as HTMLElement
-    // widthControl.onmousemove=null
     node.image=[]
     div.childNodes.forEach((val)=>{
       if(val.nodeName==='IMG'){
@@ -206,6 +212,11 @@ export function createInputDiv(tpc: Topic) {
     tpc.childNodes[0].textContent = node.topic
     // this.shapeTpc(tpc,node)
     this.linkDiv()
+    //更新宽度控制条的高度
+    const widthControllLeft=tpc.querySelector('widthControllRight') as HTMLElement
+    const widthControllRight=tpc.querySelector('widthControllRight') as HTMLElement
+    if(!tpc.nodeObj.style) tpc.nodeObj.style={}
+    tpc.nodeObj.style.controllWidth=widthControllLeft.style.height=widthControllRight.style.height=tpc.clientHeight.toString()+'px'
     this.bus.fire('operation', {
       name: 'finishEdit',
       obj: node,

@@ -4,6 +4,7 @@
         "topic": "Mind Elixir",
         "root": true,
         "style": {
+            "width":"500px",
             "color": "#ffffff",
             "background": "#00aaff"
         },

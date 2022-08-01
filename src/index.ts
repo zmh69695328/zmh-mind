@@ -96,7 +96,9 @@ export interface NodeObj {
     fontSize?: string,
     color?: string,
     background?: string,
-    fontWeight?: string
+    fontWeight?: string,
+    width?:string,
+    controllWidth?:string
   },
   parent?: NodeObj,
   children?: NodeObj[],
