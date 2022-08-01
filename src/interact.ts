@@ -26,6 +26,10 @@ export const selectNode = function(targetElement, isNewNode, clickEvent) {
   }
   if (this.currentNode) this.currentNode.className = ''
   targetElement.className = 'selected'
+  const widthControllRight=targetElement.querySelector('widthControllRight')
+  widthControllRight.className='width-controll-right'
+  const widthControllLeft=targetElement.querySelector('widthControllLeft')
+  widthControllLeft.className='width-controll-left'
   this.currentNode = targetElement
   if (isNewNode) {
     this.bus.fire('selectNewNode', targetElement.nodeObj, clickEvent)
@@ -37,6 +41,10 @@ export const selectNode = function(targetElement, isNewNode, clickEvent) {
 export const unselectNode = function() {
   if (this.currentNode) {
     this.currentNode.className = ''
+    const widthControllRight=this.currentNode.querySelector('widthControllRight')
+    widthControllRight.className=''
+    const widthControllLeft=this.currentNode.querySelector('widthControllLeft')
+    widthControllLeft.className=''
   }
   this.currentNode = null
   this.bus.fire('unselectNode')

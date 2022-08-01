@@ -47,6 +47,7 @@
         border-radius: 5px;
         font-size: 25px;
         white-space: pre-wrap;
+        word-break: break-all;
         #input-box {
           padding: 10px @GAP;
         }
@@ -64,7 +65,8 @@
         color: rgb(115, 92, 69);
         padding: 8px 10px;
         margin: 0;
-        white-space: pre;
+        white-space: pre-wrap;
+        word-break: break-all;
         #input-box {
           padding: 8px 10px;
         }
@@ -99,9 +101,30 @@
         pointer-events: all;
         max-width: 800px;
         white-space: pre-wrap;
+        word-break: break-all;
         line-height: 1; // 保证中英文行高一致
         #input-box {
           padding: 5px;
+        }
+        .width-controll-right{
+          border: none;
+          width: 7px;
+          height: 29px;
+          cursor: ew-resize;
+          display: inline-block;
+          position: absolute;
+          right: -4px;
+          top: 1px;
+        }
+        .width-controll-left{
+          border: none;
+          width: 7px;
+          height: 29px;
+          cursor: ew-resize;
+          display: inline-block;
+          position: absolute;
+          left: -4px;
+          top: 1px;
         }
         .tags {
           direction: ltr;

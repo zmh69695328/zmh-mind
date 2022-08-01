@@ -39,6 +39,23 @@ export const createPath = function(d: string) {
   return path
 }
 
+export const createWidthControll = function(d: string) {
+  const g = $d.createElementNS(svgNS, 'g')
+  const left =$d.createElementNS(svgNS, 'rect')
+  const right =$d.createElementNS(svgNS, 'rect')
+  left.setAttribute('width','7')
+  left.setAttribute('height','30')
+  left.setAttribute('opacity','0')
+  left.setAttribute('style','cursor: ew-resize;')
+  left.setAttribute('x','22')
+  g.appendChild(right)
+  g.appendChild(left)
+  left.onmouseover=()=>{
+    console.log('2222222')
+  }
+  // adding translate(0.5,-0.5) can fix render error on windows, but i still dunno why
+  return g
+}
 interface CustomSvg extends SVGElement{
   linkObj?:object
 }

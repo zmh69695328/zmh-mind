@@ -1,8 +1,7 @@
 import { LEFT, RIGHT, SIDE } from '../const'
-import { NodeObj } from '../index'
+import MindElixir, { NodeObj } from '../index'
 import { encodeHTML } from '../utils/index'
 export type Top = HTMLElement
-
 export type Group = HTMLElement
 
 export interface Topic extends HTMLElement {
@@ -20,9 +19,37 @@ export const findEle = (id: string, instance?) => {
   return scope.querySelector(`[data-nodeid=me${id}]`)
 }
 
+function resizeNode(nodeEl:HTMLElement,tpc:Topic){
+  nodeEl.onpointerdown=eDown=>{
+    if(!tpc.classList.contains('selected')) return
+    const startX=eDown.clientX
+    const width=tpc.clientWidth-Number(getComputedStyle(tpc).paddingLeft.replace('px',''))-Number(getComputedStyle(tpc).paddingRight.replace('px',''))
+    nodeEl.onpointermove=eMove=>{
+      const endX=eMove.clientX
+      tpc.style.width=(width+endX-startX).toString()+'px'
+      eMove.preventDefault()
+    }
+    nodeEl.setPointerCapture(eDown.pointerId)
+    eDown.preventDefault()
+  }
+  nodeEl.onpointerup=eUp=>{
+    nodeEl.onpointermove=null
+    nodeEl.releasePointerCapture(eUp.pointerId)
+    this.linkDiv?.()
+  }
+}
 export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
-  tpc.textContent = nodeObj.topic
+  
+  const widthControllRight=$d.createElement('widthControllRight')
+  
+  const widthControllLeft=$d.createElement('widthControllLeft')
 
+  resizeNode.call(this,widthControllLeft,tpc)
+  resizeNode.call(this,widthControllRight,tpc)
+  tpc.textContent = nodeObj.topic
+  //放在textContent之后，因为会清除子节点
+  tpc.appendChild(widthControllRight)
+  tpc.appendChild(widthControllLeft)
   if (nodeObj.style) {
     tpc.style.color = nodeObj.style.color || 'inherit'
     tpc.style.background = nodeObj.style.background || 'inherit'
@@ -83,7 +110,7 @@ export const createGroup = function(nodeObj: NodeObj, omitChildren?: boolean) {
 export const createTop = function(nodeObj: NodeObj): Top {
   const top = $d.createElement('t')
   const tpc = this.createTopic(nodeObj)
-  shapeTpc(tpc, nodeObj)
+  shapeTpc.call(this,tpc, nodeObj)
   top.appendChild(tpc)
   return top
 }
@@ -111,11 +138,11 @@ export function createInputDiv(tpc: Topic) {
   console.time('createInputDiv')
   if (!tpc) return
   let div = $d.createElement('div')
-  const origin = tpc.innerHTML
+  const origin = tpc.childNodes[0].textContent as string
   tpc.appendChild(div)
   div.id = 'input-box'
-  // div.textContent = origin
-  div.innerHTML=origin.replace(/<div(([\s\S])*?)<\/div>/, '').replace('🔗','')
+  div.textContent = origin
+  // div.innerHTML=origin.replace(/<div(([\s\S])*?)<\/div>/, '').replace('🔗','')
   div.contentEditable = 'true'
   div.spellcheck = false
   div.style.cssText = `min-width:${tpc.offsetWidth - 8}px;`
@@ -160,6 +187,9 @@ export function createInputDiv(tpc: Topic) {
     if (topic === '') node.topic = origin
     else node.topic = topic
     //添加图片支持
+    //去除节点缩放鼠标移动的监听
+    let widthControl=document.querySelector('.width-controll-right') as HTMLElement
+    // widthControl.onmousemove=null
     node.image=[]
     div.childNodes.forEach((val)=>{
       if(val.nodeName==='IMG'){
@@ -173,8 +203,8 @@ export function createInputDiv(tpc: Topic) {
     this.inputDiv = div = null
     // TODO 优化
     // if (topic === origin) return // 没有修改不做处理
-    // tpc.childNodes[0].textContent = node.topic
-    this.shapeTpc(tpc,node)
+    tpc.childNodes[0].textContent = node.topic
+    // this.shapeTpc(tpc,node)
     this.linkDiv()
     this.bus.fire('operation', {
       name: 'finishEdit',
