@@ -57,8 +57,8 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
   tpc.appendChild(widthControllRight)
   tpc.appendChild(widthControllLeft)
   if (nodeObj.style) {
-    tpc.style.color = nodeObj.style.color || 'inherit'
-    tpc.style.background = nodeObj.style.background || 'inherit'
+    tpc.style.color = nodeObj.style.color || '#2c3e50'
+    tpc.style.background = nodeObj.style.background?nodeObj.style.background:nodeObj?.parent?.root?'#ffffff':'inherit'
     tpc.style.fontSize = nodeObj.style.fontSize + 'px'
     tpc.style.fontWeight = nodeObj.style.fontWeight || 'normal'
     tpc.style.width= nodeObj.style.width || 'auto'
@@ -196,9 +196,9 @@ export function createInputDiv(tpc: Topic) {
     else node.topic = topic
     //添加图片支持
     //去除节点缩放鼠标移动的监听
-    node.image=[]
     div.childNodes.forEach((val)=>{
       if(val.nodeName==='IMG'){
+          if(!node.image) node.image=[]
           node.image.push({
             url:(val as HTMLImageElement).src,
             width:(val as HTMLImageElement).width
@@ -210,13 +210,15 @@ export function createInputDiv(tpc: Topic) {
     // TODO 优化
     // if (topic === origin) return // 没有修改不做处理
     tpc.childNodes[0].textContent = node.topic
-    // this.shapeTpc(tpc,node)
+    this.shapeTpc(tpc,node)
     this.linkDiv()
     //更新宽度控制条的高度
     const widthControllLeft=tpc.querySelector('widthControllRight') as HTMLElement
     const widthControllRight=tpc.querySelector('widthControllRight') as HTMLElement
-    if(!tpc.nodeObj.style) tpc.nodeObj.style={}
-    tpc.nodeObj.style.controllWidth=widthControllLeft.style.height=widthControllRight.style.height=tpc.clientHeight.toString()+'px'
+    if(!node.style) node.style={}
+    node.style.controllWidth=widthControllLeft.style.height=widthControllRight.style.height=tpc.clientHeight.toString()+'px'
+    //记录节点宽度
+    node.style.width=tpc.clientWidth-Number(getComputedStyle(tpc).paddingLeft.replace('px',''))-Number(getComputedStyle(tpc).paddingRight.replace('px',''))+1+'px'
     this.bus.fire('operation', {
       name: 'finishEdit',
       obj: node,

@@ -390,7 +390,7 @@ MindElixir.prototype = {
     this.root = $d.createElement('root')
 
     this.box = $d.createElement('children')
-    this.box.className = 'box'
+    this.box.className = 'mindbox'
 
     // infrastructure
 

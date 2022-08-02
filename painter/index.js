@@ -15,7 +15,7 @@ function initVar() {
 }
 
 function generateSvgDom() {
-  let primaryNodes = $d.querySelectorAll('.box > grp, root')
+  let primaryNodes = $d.querySelectorAll('.mindbox > grp, root')
   let svgContent = ''
   // calculate distance to center from top, left, bottom, right
   for (let i = 0; i < primaryNodes.length; i++) {

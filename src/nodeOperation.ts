@@ -133,7 +133,7 @@ export const insertSibling = function(el, node) {
 
   const children = t.parentNode.parentNode
   children.insertBefore(grp, t.parentNode.nextSibling)
-  if (children.className === 'box') {
+  if (children.className === 'mindbox') {
     this.processPrimaryNode(grp, newNodeObj)
     this.linkDiv()
   } else {
@@ -179,7 +179,7 @@ export const insertBefore = function(el, node) {
 
   const children = t.parentNode.parentNode
   children.insertBefore(grp, t.parentNode)
-  if (children.className === 'box') {
+  if (children.className === 'mindbox') {
     this.processPrimaryNode(grp, newNodeObj)
     this.linkDiv()
   } else {
@@ -230,7 +230,7 @@ export const insertParent = function(el, node) {
 
   top.insertAdjacentElement('afterend', c)
 
-  if (children0.className === 'box') {
+  if (children0.className === 'mindbox') {
     grp.className = grp0.className // l/rhs
     grp0.className = ''
     grp0.querySelector('.svg3rd').remove()
@@ -485,14 +485,14 @@ export const moveNode = function(from, to) {
   const fromTop = from.parentElement
   const fromChilren = fromTop.parentNode.parentNode
   const toTop = to.parentElement
-  if (fromChilren.className === 'box') {
+  if (fromChilren.className === 'mindbox') {
     // clear svg group of primary node
     fromTop.parentNode.lastChild.remove()
-  } else if (fromTop.parentNode.className === 'box') {
+  } else if (fromTop.parentNode.className === 'mindbox') {
     fromTop.style.cssText = '' // clear style
   }
   if (toTop.tagName === 'T') {
-    if (fromChilren.className === 'box') {
+    if (fromChilren.className === 'mindbox') {
       // clear direaction class of primary node
       fromTop.parentNode.className = ''
     }
