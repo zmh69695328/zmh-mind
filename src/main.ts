@@ -19,9 +19,9 @@ mind.init()
 window.mind=mind
 console.log(mind)
 
- const haha=document.querySelector('#btn-haha')
+const haha=document.querySelector('#btn-haha')
 
- haha?.addEventListener('click',e=>{
+haha?.addEventListener('click',e=>{
     const data=mind.getAllData()
     mind =new MindElixir({
       el: 'map',
@@ -37,7 +37,17 @@ console.log(mind)
       keypress: true, // default true
       locale: 'zh_CN'
     })
+
     mind.init()
     // const svgDiv=document.querySelector('#haha')
     // svgDiv.appendChild(mind.exportSvgDom())
+})
+
+
+const haha2=document.querySelector('#btn-export')
+
+haha2?.addEventListener('click',e=>{
+  const map2=document.querySelector('#map2')
+  map2.textContent=''
+  map2.appendChild(mind.exportSvgDom())
 })

@@ -7,7 +7,7 @@ let maxRight = 10000
 let imgPadding = 40
 let head = `<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">`
 function generateSvgDom() {
-  let primaryNodes = $d.querySelectorAll('.box > grp, root')
+  let primaryNodes = $d.querySelectorAll('.mindbox > grp, root')
   let svgContent = ''
   for (let i = 0; i < primaryNodes.length; i++) {
     let primaryNode = primaryNodes[i]
@@ -46,7 +46,7 @@ function generateSvgDom() {
 }
 
 function createSvg(height, width) {
-  let svg = $d.createElementNS('http://www.w3.org/2000/svg', 'svg')
+  let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   svg.setAttribute('height', height)
   svg.setAttribute('width', width)
   svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
@@ -70,8 +70,8 @@ function RootToSvg() {
   let svg2nd = `<g transform="translate(${imgPadding - maxLeft}, ${
     imgPadding - maxTop
     })">${svg2ndEle.innerHTML}</g>`
-  return (
-    svg2nd +
+  // return (
+    svg2nd +=
     `<g id="root" transform="translate(${rootOffsetX + imgPadding}, ${
     rootOffsetY + imgPadding
     })">
@@ -84,7 +84,14 @@ function RootToSvg() {
         ${nodeObj.topic}
       </text>
   </g>`
-  )
+  // )
+  let topiclinks=$d.querySelector('.topiclinks')
+  if(topiclinks){
+    svg2nd+=`<g transform="translate(${imgPadding - maxLeft}, ${
+      imgPadding - maxTop
+    })">${topiclinks.innerHTML}</g>`
+  }
+  return svg2nd
 }
 
 function PrimaryToSvg(primaryNode) {
@@ -168,10 +175,10 @@ function PrimaryToSvg(primaryNode) {
       ${border}
       ${backgroundColor}
       <foreignObject  x="${topicOffsetLeft}" y="${topicOffsetTopTop}" width="${tpcStyle.width}" height="${tpcStyle.height}">
-      <p xmlns="http://www.w3.org/1999/xhtml" style="padding:0;margin:0;font-family:微软雅黑;font-size:${tpcStyle.fontSize};font-weight:${tpcStyle.fontWeight};color:${tpcStyle.color}">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="padding:0;margin:0;font-family:微软雅黑;font-size:${tpcStyle.fontSize};font-weight:${tpcStyle.fontWeight};color:${tpcStyle.color};word-break: break-all;line-height: 1">
         ${nodeObj.topic}
         ${icons}
-      </p>
+      </div>
       </foreignObject>
       ${tags}
   </g>`
@@ -189,6 +196,14 @@ export let exportSvg = function () {
   a.href = dlUrl
   a.download = 'me-mindmap.svg'
   a.click()
+}
+
+export let exportSvgDom = function (instance=this, fileName='default') {
+  // if (!instance) throw new Error('Mind-elixir instance is not presented. ---> exportSvg(instance, fileName)') 
+  // initVar()
+  $d = instance.container
+  let svgFile = generateSvgDom()
+  return svgFile
 }
 
 export let exportPng = async function () {

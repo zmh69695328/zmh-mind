@@ -4,7 +4,7 @@ let head = `<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//D
 let IMG_PADDING = 40
 let $d = document
 let maxTop, maxBottom, maxLeft, maxRight, svgHeight, svgWidth
-
+const SVG_NS = "http://www.w3.org/2000/svg"
 function initVar() {
   maxTop = 10000
   maxBottom = 10000
@@ -60,6 +60,7 @@ function generateSvgDom() {
     svgContent
   svgFile.innerHTML = svgContent
   // document.body.append(svgFile)
+
   return svgFile
 }
 
@@ -74,6 +75,30 @@ function createSvg(height, width) {
   svg.setAttribute('xlink', 'http://www.w3.org/1999/xlink')
   svg.setAttribute('viewBox',`0 0 ${width} ${height}`)
   return svg
+}
+
+function wrap(textContent, width) {
+  // var text=document.createElementNS(SVG_NS, "text");  
+  // var words = textContent.split(/\s+/).reverse(),
+  //     word,
+  //     line = [],
+  //     lineNumber = 0,
+  //     lineHeight = 1.1, // ems
+  //     y = text.attr("y"),
+  //     dy = parseFloat(text.attr("dy")) || 0,
+  //     tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+  // while (word = words.pop()) {
+  //   line.push(word);
+  //   tspan.text(line.join(" "));
+  //   if (tspan.node().getComputedTextLength() > width) {
+  //     line.pop();
+  //     tspan.text(line.join(" "));
+  //     line = [word];
+  //     tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+  //   }
+  // }
+  // return tspan.innerHTML
+  return textContent
 }
 
 function RootToSvg() {
@@ -102,7 +127,7 @@ function RootToSvg() {
       <text x="${left + 15}" y="${
       top + 35
     }" text-anchor="start" align="top" anchor="start" font-family="微软雅黑" font-size="25px" font-weight="normal" fill="#ffffff">
-        ${nodeObj.topic}
+        <tspan> ${wrap(nodeObj.topic,rect.width)}</tspan>
       </text>
   </g>`
   // )

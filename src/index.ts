@@ -79,7 +79,7 @@ import './plugin/nodeMenu.less'
 import './plugin/sidebar.less'
 import './plugin/mobileMenu.less'
 
-import { exportSvg, exportSvgDom } from '../painter'
+import { exportSvg, exportSvgDom } from '../painter/index.foreignObject'
 
 import './iconfont/iconfont.js'
 
