@@ -19,28 +19,28 @@ export const findEle = (id: string, instance?) => {
   return scope.querySelector(`[data-nodeid=me${id}]`)
 }
 
-function resizeNode(widthControl:HTMLElement,tpc:Topic){
-  widthControl.onpointerdown=eDown=>{
+function resizeNode(widthControll:HTMLElement,tpc:Topic,anotherWidthControll:HTMLElement){
+  widthControll.onpointerdown=eDown=>{
     if(!tpc.classList.contains('selected')) return
     const startX=eDown.clientX
     const width=tpc.clientWidth-Number(getComputedStyle(tpc).paddingLeft.replace('px',''))-Number(getComputedStyle(tpc).paddingRight.replace('px',''))
-    widthControl.onpointermove=eMove=>{
+    widthControll.onpointermove=eMove=>{
       const endX=eMove.clientX
       tpc.style.width=(width+endX-startX).toString()+'px'
-      widthControl.style.height=tpc.clientHeight.toString()+'px'
+      widthControll.style.height=anotherWidthControll.style.height=tpc.clientHeight.toString()+'px'
       //保存样式
       if(!tpc.nodeObj.style) tpc.nodeObj.style={}
       tpc.nodeObj.style.width=tpc.style.width
       //设置宽度控制条的高度
-      tpc.nodeObj.style.controllWidth=widthControl.style.height
+      tpc.nodeObj.style.controllWidth=widthControll.style.height
       eMove.preventDefault()
     }
-    widthControl.setPointerCapture(eDown.pointerId)
+    widthControll.setPointerCapture(eDown.pointerId)
     eDown.preventDefault()
   }
-  widthControl.onpointerup=eUp=>{
-    widthControl.onpointermove=null
-    widthControl.releasePointerCapture(eUp.pointerId)
+  widthControll.onpointerup=eUp=>{
+    widthControll.onpointermove=null
+    widthControll.releasePointerCapture(eUp.pointerId)
     this.linkDiv?.()
   }
 }
@@ -50,8 +50,8 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
   
   const widthControllLeft=$d.createElement('widthControllLeft')
 
-  resizeNode.call(this,widthControllLeft,tpc)
-  resizeNode.call(this,widthControllRight,tpc)
+  resizeNode.call(this,widthControllLeft,tpc,widthControllRight)
+  resizeNode.call(this,widthControllRight,tpc,widthControllLeft)
   tpc.textContent = nodeObj.topic
   //放在textContent之后，因为会清除子节点
   tpc.appendChild(widthControllRight)
@@ -61,7 +61,7 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
     tpc.style.background = nodeObj.style.background?nodeObj.style.background:nodeObj?.parent?.root?'#ffffff':'inherit'
     tpc.style.fontSize = nodeObj.style.fontSize + 'px'
     tpc.style.fontWeight = nodeObj.style.fontWeight || 'normal'
-    tpc.style.width= nodeObj.style.width || 'auto'
+    tpc.style.width= nodeObj.style.width || 'fit-content'
     widthControllLeft.style.height=widthControllRight.style.height=nodeObj.style.controllWidth || '29px'
   }
 
@@ -210,15 +210,16 @@ export function createInputDiv(tpc: Topic) {
     // TODO 优化
     // if (topic === origin) return // 没有修改不做处理
     tpc.childNodes[0].textContent = node.topic
-    this.shapeTpc(tpc,node)
-    this.linkDiv()
     //更新宽度控制条的高度
     const widthControllLeft=tpc.querySelector('widthControllRight') as HTMLElement
     const widthControllRight=tpc.querySelector('widthControllRight') as HTMLElement
     if(!node.style) node.style={}
     node.style.controllWidth=widthControllLeft.style.height=widthControllRight.style.height=tpc.clientHeight.toString()+'px'
     //记录节点宽度
-    node.style.width=tpc.clientWidth-Number(getComputedStyle(tpc).paddingLeft.replace('px',''))-Number(getComputedStyle(tpc).paddingRight.replace('px',''))+1+'px'
+    // node.style.width=tpc.clientWidth-Number(getComputedStyle(tpc).paddingLeft.replace('px',''))-Number(getComputedStyle(tpc).paddingRight.replace('px',''))+1+'px'
+    delete node.style.width
+    this.shapeTpc(tpc,node)
+    this.linkDiv()
     this.bus.fire('operation', {
       name: 'finishEdit',
       obj: node,

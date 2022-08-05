@@ -59,13 +59,55 @@ function RootToSvg() {
   let root = document.querySelector('root')
   let rootTpc = document.querySelector('root > tpc')
   let rect = rootTpc.getBoundingClientRect()
+  let tpcStyle = getComputedStyle(rootTpc)
+  let t = rootTpc.parentNode
   let top = 0
   let left = 0
   let nodeObj = document.querySelector('root > tpc').nodeObj
+  let tStyle = getComputedStyle(t)
   let rootOffsetY = root.offsetTop - maxTop
   let rootOffsetX = root.offsetLeft - maxLeft
-
+  let topicOffsetLeft =
+  left + parseInt(tStyle.paddingLeft) + parseInt(rect.paddingLeft)
+  let topicOffsetTop =
+  top +
+  parseInt(tStyle.paddingTop) +
+  parseInt(rect.paddingTop) +
+  parseInt(rect.fontSize)
+  let topicOffsetTopTop =
+  top +
+  parseInt(tStyle.paddingTop) +
+  parseInt(rect.paddingTop)
   let svg2ndEle = document.querySelector('.svg2nd')
+
+  // render tags
+  let tags = ''
+  if (nodeObj.tags && nodeObj.tags.length) {
+    let tagsEle = rootTpc.querySelectorAll('.tags > span')
+    for (let i = 0; i < tagsEle.length; i++) {
+      let tag = tagsEle[i]
+      let tagRect = tag.getBoundingClientRect()
+      tags += `<rect x="${topicOffsetLeft}" y="${
+        topicOffsetTop + 4
+        }" rx="5px" ry="5px" width="${tagRect.width}" height="${
+        tagRect.height
+        }" style="fill: #d6f0f8;"></rect>
+      <text font-family="微软雅黑" font-size="12px"  fill="#276f86" x="${
+        topicOffsetLeft + 4
+        }" y="${topicOffsetTop + 4 + 12}">${tag.innerHTML}</text>`
+    }
+  }
+  let icons = ''
+  if (nodeObj.icons && nodeObj.icons.length) {
+    let iconsEle = rootTpc.querySelectorAll('.icons > span')
+    for (let i = 0; i < iconsEle.length; i++) {
+      let icon = iconsEle[i]
+      let iconRect = icon.getBoundingClientRect()
+      icons += `
+      <tspan>${icon.innerHTML}</tspan>`
+    }
+  }
+
 
   let svg2nd = `<g transform="translate(${imgPadding - maxLeft}, ${
     imgPadding - maxTop
@@ -78,11 +120,15 @@ function RootToSvg() {
       <rect x="${left}" y="${top}" rx="5px" ry="5px" width="${
     rect.width
     }" height="${rect.height}" style="fill: #00aaff;"></rect>
-      <text x="${left + 15}" y="${
-    top + 35
-    }" text-anchor="start" align="top" anchor="start" font-family="微软雅黑" font-size="25px" font-weight="normal" fill="#ffffff">
+      <foreignObject x="${left + 15}" y="${
+        top + 15
+        }" width="${tpcStyle.width}" height="${tpcStyle.height}" ">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="padding:0;margin:0;font-family:微软雅黑;font-size:${tpcStyle.fontSize};font-weight:${tpcStyle.fontWeight};color:${tpcStyle.color};word-break: break-all;line-height: 1">
         ${nodeObj.topic}
-      </text>
+        ${icons}
+      </div>
+      </foreignObject>
+      ${tags}
   </g>`
   // )
   let topiclinks=$d.querySelector('.topiclinks')
