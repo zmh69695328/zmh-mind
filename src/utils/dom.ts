@@ -1,5 +1,6 @@
 import { LEFT, RIGHT, SIDE } from '../const'
 import MindElixir, { NodeObj } from '../index'
+import { unselectNode } from '../interact'
 import { encodeHTML } from '../utils/index'
 export type Top = HTMLElement
 export type Group = HTMLElement
@@ -149,11 +150,16 @@ export function createInputDiv(tpc: Topic) {
   const origin = tpc.childNodes[0].textContent as string
   tpc.appendChild(div)
   div.id = 'input-box'
-  div.textContent = origin
   // div.innerHTML=origin.replace(/<div(([\s\S])*?)<\/div>/, '').replace('🔗','')
   div.contentEditable = 'true'
   div.spellcheck = false
-  div.style.cssText = `min-width:${tpc.offsetWidth - 8}px;`
+  div.textContent = origin
+  // div.style.removeProperty('width')
+  console.log('div.style',div.style,tpc.offsetWidth)
+  div.style.cssText = `min-width:${tpc.offsetWidth - 22}px;min-height:${tpc.clientHeight-16}px`
+  if(tpc.nodeObj?.style?.width){
+    div.style.width='auto'
+  }
   if(tpc.nodeObj?.style?.color==='#ffffff'||(tpc.nodeObj?.id==='root'&&!tpc.nodeObj?.style?.color)){
     div.style.color='#2c3e50'
   }
