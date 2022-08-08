@@ -18,7 +18,9 @@ const cn = {
   iconsSeparate: '多个图标半角逗号分隔',
   link:'连线',
   hyperlink:'超链接',
-  linkSeparate:'链接地址'
+  linkSeparate:'链接地址',
+  remark:'备注',
+  reamrkSeparate:'内容'
 }
 export default {
   cn,
@@ -60,6 +62,10 @@ export default {
     icon: 'Icon',
     tagsSeparate: 'Separate tags by comma',
     iconsSeparate: 'Separate icons by comma',
+    hyperlink:'hyperlink',
+    linkSeparate:'link address',
+    remark:'remark',
+    reamrkSeparate:'content'
   },
   ja: {
     addChild: '子ノードを追加する',

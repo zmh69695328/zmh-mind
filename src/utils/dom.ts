@@ -1,6 +1,5 @@
 import { LEFT, RIGHT, SIDE } from '../const'
 import MindElixir, { NodeObj } from '../index'
-import { unselectNode } from '../interact'
 import { encodeHTML } from '../utils/index'
 export type Top = HTMLElement
 export type Group = HTMLElement
@@ -99,6 +98,41 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
       .filter(tag=> tag!=='').map(tag => `<span>${encodeHTML(tag)}</span>`)
       .join('')
     tpc.appendChild(tagsContainer)
+  }
+  if (nodeObj.remark) {
+    const content=$d.createElement('div')
+    content.className='content hidden'
+    content.textContent=nodeObj.remark
+    const remarkContainer = $d.createElement('div')
+    remarkContainer.className = 'remark'
+    remarkContainer.innerHTML = `<svg t="1659682144612" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2580" width="200" height="200"><path d="M625.728 57.472c19.264 0 34.688 6.848 48.128 20.16l208.96 207.04c14.272 13.12 21.568 29.568 21.568 49.28v504.576c0 71.808-56.256 127.744-128.576 127.744H252.16c-72.128 0-128.576-55.68-128.576-127.744V184.704c0-71.68 56.256-127.232 128.576-127.232z m-34.304 76.8H252.16c-30.144 0-51.776 21.376-51.776 50.432v653.824c0 29.44 21.888 50.944 51.776 50.944h523.648c30.016 0 51.84-21.632 51.84-50.944l-0.128-464.512H687.488A96 96 0 0 1 591.936 287.36l-0.448-9.216V134.208zM665.6 704a38.4 38.4 0 0 1 0 76.8H294.4a38.4 38.4 0 0 1 0-76.8h371.2z m0-192a38.4 38.4 0 0 1 0 76.8H294.4a38.4 38.4 0 0 1 0-76.8h371.2z m-192-192a38.4 38.4 0 1 1 0 76.8H294.4a38.4 38.4 0 1 1 0-76.8h179.2z m181.824-152.512v110.592a32 32 0 0 0 26.24 31.488l5.76 0.512h111.872L655.424 167.424z" p-id="2581"></path></svg>`
+    let delayTask
+    // 鼠标移入内容
+    content.onmouseover=()=>{
+      clearTimeout(delayTask)
+    }
+    //鼠标移入按钮
+    remarkContainer.onmouseover=()=>{
+      content.classList.remove('hidden')
+    }
+    //鼠标移出内容
+    content.onmouseleave=()=>{
+      delayTask=setTimeout(()=>{
+        if(!content.classList.contains('hidden')){
+          content.classList.add('hidden')
+        }
+      },300)
+    }
+    //鼠标移出按钮
+    remarkContainer.onmouseleave=()=>{
+      delayTask=setTimeout(()=>{
+        if(!content.classList.contains('hidden')){
+          content.classList.add('hidden')
+        }
+      },300)
+    }
+    remarkContainer.appendChild(content)
+    tpc.appendChild(remarkContainer)
   }
 }
 

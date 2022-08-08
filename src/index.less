@@ -10,7 +10,7 @@
 }
 .map-container {
   user-select: none;
-  height: 80%;
+  height: 100%;
   width: 100%;
   overflow: scroll;
   font-size: 15px;
@@ -200,6 +200,28 @@
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;
+  }
+
+  .remark{
+    margin-left: 3px;
+    display: inline-block;
+    .content{
+      user-select: text;
+      cursor:text;
+      padding: 8px;
+      border-radius: 8px;
+      background-color: #F5F5DC;
+      position: absolute;
+      min-width: 200px;
+      z-index: 1;
+      margin-top: 2px;
+      // transform: translateX(-50%);
+      box-shadow: var(--uk-popover-box-shadow, 0 12px 36px rgba(0, 0, 0, 0.3));
+      border-radius: 8px;
+      &.hidden{
+        display:none;
+      }
+    }
   }
   .svg2nd,
   .svg3rd,

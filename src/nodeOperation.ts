@@ -86,6 +86,20 @@ export const updateNodeHyperLink = function(object, hyperLink) {
   })
 }
 
+export const updateNodeRemark = function(object, remark) {
+  if (remark==null||remark==undefined) return
+  const oldVal = object.remark
+  object.remark = remark
+  const nodeEle = findEle(object.id)
+  shapeTpc(nodeEle, object)
+  this.linkDiv()
+  this.bus.fire('operation', {
+    name: 'editRemark',
+    obj: object,
+    origin: oldVal,
+  })
+}
+
 // export const updateNodeImage = function(object, image) {
 //   if (!image) return
 //   const oldVal = object.image

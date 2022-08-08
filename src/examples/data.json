@@ -4,7 +4,6 @@
         "topic": "Mind Elixir",
         "root": true,
         "style": {
-            "width":"500px",
             "color": "#ffffff",
             "background": "#00aaff"
         },
@@ -17,7 +16,8 @@
                 "children": [
                     {
                         "topic": "一个思维导图内核",
-                        "id": "beeb823afd6d2114"
+                        "id": "beeb823afd6d2114",
+                        "remark":"啊啥的饭卡上打飞机拉屎的风景卢卡斯大驾光临看个剧啊"
                     },
                     {
                         "topic": "无框架依赖",

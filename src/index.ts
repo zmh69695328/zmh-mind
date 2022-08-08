@@ -46,6 +46,7 @@ import {
   updateNodeTags,
   updateNodeIcons,
   updateNodeHyperLink,
+  updateNodeRemark,
   // updateNodeImage,
   processPrimaryNode,
   setNodeTopic,
@@ -105,6 +106,7 @@ export interface NodeObj {
   tags?: string[],
   icons?: string[],
   hyperLink?: string,
+  remark?:string,
   image?:{
     url:string,
     width:number,
@@ -321,6 +323,7 @@ MindElixir.prototype = {
   updateNodeTags,
   updateNodeIcons,
   updateNodeHyperLink,
+  updateNodeRemark,
   // updateNodeImage,
   processPrimaryNode,
   setNodeTopic,
