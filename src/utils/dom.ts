@@ -75,6 +75,7 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
       tpc.appendChild(imgContainer)
     })
   }
+  
   if (nodeObj.hyperLink) {
     const linkContainer =$d.createElement('a')
     linkContainer.className = 'hyper-link'
@@ -82,22 +83,6 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
     linkContainer.innerText = '🔗'
     linkContainer.href = nodeObj.hyperLink
     tpc.appendChild(linkContainer)
-  }
-  if (nodeObj.icons) {
-    const iconsContainer = $d.createElement('span')
-    iconsContainer.className = 'icons'
-    iconsContainer.innerHTML = nodeObj.icons
-    .filter(icon=> icon!=='').map(icon => `<span>${encodeHTML(icon)}</span>`)
-      .join('')
-    tpc.appendChild(iconsContainer)
-  }
-  if (nodeObj.tags) {
-    const tagsContainer = $d.createElement('div')
-    tagsContainer.className = 'tags'
-    tagsContainer.innerHTML = nodeObj.tags
-      .filter(tag=> tag!=='').map(tag => `<span>${encodeHTML(tag)}</span>`)
-      .join('')
-    tpc.appendChild(tagsContainer)
   }
   if (nodeObj.remark) {
     const content=$d.createElement('div')
@@ -133,6 +118,22 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
     }
     remarkContainer.appendChild(content)
     tpc.appendChild(remarkContainer)
+  }
+  if (nodeObj.icons) {
+    const iconsContainer = $d.createElement('span')
+    iconsContainer.className = 'icons'
+    iconsContainer.innerHTML = nodeObj.icons
+    .filter(icon=> icon!=='').map(icon => `<span>${encodeHTML(icon)}</span>`)
+      .join('')
+    tpc.appendChild(iconsContainer)
+  }
+  if (nodeObj.tags) {
+    const tagsContainer = $d.createElement('div')
+    tagsContainer.className = 'tags'
+    tagsContainer.innerHTML = nodeObj.tags
+      .filter(tag=> tag!=='').map(tag => `<span>${encodeHTML(tag)}</span>`)
+      .join('')
+    tpc.appendChild(tagsContainer)
   }
 }
 
