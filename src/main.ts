@@ -23,7 +23,8 @@ console.log(mind)
 const haha=document.querySelector('#btn-haha')
 
 haha?.addEventListener('click',e=>{
-    const data=mind.getAllData()
+    const data=mind.getAllDataWithAutoHide()
+    console.log('更新',data)
     mind =new MindElixir({
       el: 'map',
       direction: MindElixir.LEFT,

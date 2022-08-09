@@ -31,7 +31,13 @@
                         "children": [
                             {
                                 "topic": "import MindElixir from 'mind-elixir'",
-                                "id": "c1f1e245b0a89f9b"
+                                "id": "c1f1e245b0a89f9b",
+                                "children":[
+                                    {
+                                        "topic": "两步轻松接入已有项目",
+                                        "id": "c1f1f11a7fbf7550"
+                                    }
+                                ]
                             },
                             {
                                 "topic": "new MindElixir({...}).init()",

@@ -1,3 +1,6 @@
+import { node } from 'canvg/dist/presets'
+import { NodeObj } from '.'
+import { MindElixirData } from './index.lite'
 import { findEle } from './utils/dom'
 /**
  * @exports -
@@ -146,6 +149,42 @@ export const getAllData = function(): object {
     nodeData: getData(this),
     linkData: this.linkData,
   }
+  return JSON.parse(
+    JSON.stringify(data, (k, v) => {
+      if (k === 'parent') return undefined
+      if (k === 'from') return v.nodeObj.id
+      if (k === 'to') return v.nodeObj.id
+      return v
+    })
+  )
+}
+
+/**
+ * @function
+ * @instance
+ * @name getAllDataWithAutoHide
+ * @description Get all the data of automatically hidden third-level nodes
+ * @memberof MapInteraction
+ * @return {Object}
+ */
+
+function autoHide(nodeData:NodeObj,cnt){
+  if(cnt<2){
+    nodeData.expanded=true
+  }else{
+    nodeData.expanded=false
+  }
+  for(const val of (nodeData.children||[])){
+    autoHide(val,cnt+1)
+  }
+}
+ export const getAllDataWithAutoHide = function(): object {
+  const data = {
+    direction:this.direction,
+    nodeData: getData(this),
+    linkData: this.linkData,
+  }
+  autoHide(data.nodeData,0)
   return JSON.parse(
     JSON.stringify(data, (k, v) => {
       if (k === 'parent') return undefined
