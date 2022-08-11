@@ -555,6 +555,7 @@ export const moveNodeBefore = function(from, to) {
   const toGrp = toTop.parentNode
   const toChilren = toTop.parentNode.parentNode
   toChilren.insertBefore(fromGrp, toGrp)
+  this.processPrimaryNode(fromTop.parentElement,fromObj)
   this.linkDiv()
   this.bus.fire('operation', {
     name: 'moveNodeBefore',
@@ -585,6 +586,7 @@ export const moveNodeAfter = function(from, to) {
   const toGrp = toTop.parentNode
   const toChilren = toTop.parentNode.parentNode
   toChilren.insertBefore(fromGrp, toGrp.nextSibling)
+  this.processPrimaryNode(fromTop.parentElement,fromObj)
   this.linkDiv()
   this.bus.fire('operation', {
     name: 'moveNodeAfter',

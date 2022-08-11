@@ -106,6 +106,23 @@ export default function linkDiv(primaryNode) {
       } else {
         currentOffsetL += elOffsetH + primaryNodeVerticalGap
       }
+      // x1 = parentOL + GAP
+      // xMiddle = parentOL
+      // x2 = parentOL - childT.offsetWidth
+
+      // if (
+      //   childTOT + childTOH < parentOT + parentOH / 2 + 50 &&
+      //   childTOT + childTOH > parentOT + parentOH / 2 - 50
+      // ) {
+      //   // 相差+-50内直接直线
+      //   path += `M ${x1} ${y1} H ${xMiddle} V ${y2} H ${x2}`
+      // } else if (childTOT + childTOH >= parentOT + parentOH / 2) {
+      //   // 子底部低于父中点
+      //   path += `M ${x1} ${y1} H ${xMiddle} V ${y2 - TURNPOINT_R} A ${TURNPOINT_R} ${TURNPOINT_R} 0 0 1 ${xMiddle - TURNPOINT_R} ${y2} H ${x2}`
+      // } else {
+      //   // 子底部高于父中点
+      //   path += `M ${x1} ${y1} H ${xMiddle} V ${y2 + TURNPOINT_R} A ${TURNPOINT_R} ${TURNPOINT_R} 0 0 0 ${xMiddle - TURNPOINT_R} ${y2} H ${x2}`
+      // }
     } else {
       el.style.top = base + currentOffsetR + 'px'
       el.style.left = alignLeft + 'px'

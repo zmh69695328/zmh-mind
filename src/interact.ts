@@ -169,7 +169,7 @@ export const getAllData = function(): object {
  */
 
 function autoHide(nodeData:NodeObj,cnt){
-  if(cnt<2){
+  if(cnt<3){
     nodeData.expanded=true
   }else{
     nodeData.expanded=false
