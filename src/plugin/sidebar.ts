@@ -7,9 +7,9 @@ function queryList(nodeData:NodeObj,cnt:number):string{
         res +=`<li class="sidebar-links">${queryList(nodeData.children[i],cnt+1)}</li>`
     }
     if(!nodeData?.children||!nodeData.children.length){
-        return `<p class="sidebar-title"><span>${nodeData.topic}</span></p>`
+        return `<p class="sidebar-title"><span class="arrow "></span><span>${nodeData.topic}</span></p>`
     }else{
-        return `<p class="sidebar-title"><span>${nodeData.topic}</span><span class="arrow ${cnt<2?'down':'right'}"></span></p><ul class="sidebar-heading open ${cnt<2?'':'hidden'}">${res}</ul>`
+        return `<p class="sidebar-title"><span class="arrow ${cnt<2?'down':'right'}"></span><span>${nodeData.topic}</span></p><ul class="sidebar-heading open ${cnt<2?'':'hidden'}">${res}</ul>`
     }
     
 }
