@@ -41,7 +41,7 @@ function resizeNode(widthControll:HTMLElement,tpc:Topic,anotherWidthControll:HTM
   widthControll.onpointerup=eUp=>{
     widthControll.onpointermove=null
     widthControll.releasePointerCapture(eUp.pointerId)
-    this.linkDiv?.()
+    this?.linkDiv?.()
   }
 }
 export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {

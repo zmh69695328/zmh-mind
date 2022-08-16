@@ -98,7 +98,7 @@ export default function linkDiv(primaryNode) {
           primaryPath += `M ${LEFT} 10000 V ${y2 - 20} C ${LEFT} ${y2} ${LEFT} ${y2} ${LEFT - 20} ${y2} H ${x2}`
         }
       } else {
-        primaryPath += `M 10000 10000 C 10000 10000 ${10000 + 2 * primaryNodeHorizontalGap * 0.03} ${y2} ${x2} ${y2}`
+        primaryPath += `M 10000 10000 V 10000 10000 ${10000 + 2 * primaryNodeHorizontalGap * 0.03} ${y2} ${x2} ${y2}`
       }
 
       if (shortSide === 'l') {

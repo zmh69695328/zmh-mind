@@ -49,7 +49,7 @@ export const updateNodeTags = function(object, tags) {
   const oldVal = object.tags
   object.tags = tags
   const nodeEle = findEle(object.id)
-  shapeTpc(nodeEle, object)
+  shapeTpc.call(this,nodeEle, object)
   this.linkDiv()
   this.bus.fire('operation', {
     name: 'editTags',
@@ -63,7 +63,7 @@ export const updateNodeIcons = function(object, icons) {
   const oldVal = object.icons
   object.icons = icons
   const nodeEle = findEle(object.id)
-  shapeTpc(nodeEle, object)
+  shapeTpc.call(this,nodeEle, object)
   this.linkDiv()
   this.bus.fire('operation', {
     name: 'editIcons',
@@ -77,7 +77,7 @@ export const updateNodeHyperLink = function(object, hyperLink) {
   const oldVal = object.hyperLink
   object.hyperLink = hyperLink
   const nodeEle = findEle(object.id)
-  shapeTpc(nodeEle, object)
+  shapeTpc.call(this,nodeEle, object)
   this.linkDiv()
   this.bus.fire('operation', {
     name: 'editHyperLink',
@@ -91,7 +91,7 @@ export const updateNodeRemark = function(object, remark) {
   const oldVal = object.remark
   object.remark = remark
   const nodeEle = findEle(object.id)
-  shapeTpc(nodeEle, object)
+  shapeTpc.call(this,nodeEle, object)
   this.linkDiv()
   this.bus.fire('operation', {
     name: 'editRemark',
