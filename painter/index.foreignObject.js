@@ -92,9 +92,14 @@ function RootToSvg() {
         }" rx="5px" ry="5px" width="${tagRect.width}" height="${
         tagRect.height
         }" style="fill: #d6f0f8;"></rect>
-      <text font-family="微软雅黑" font-size="12px"  fill="#276f86" x="${
-        topicOffsetLeft + 4
-        }" y="${topicOffsetTop + 4 + 12}">${tag.innerHTML}</text>`
+        <foreignObject x="${topicOffsetLeft}" y="${
+          topicOffsetTop + 4
+          }" rx="5px" ry="5px" width="${tagRect.width}" height="${
+          tagRect.height
+          }" > 
+          <div sytle="font-size:12px">${tag.innerHTML}</div>
+        </foreignObject>
+      `
     }
   }
   let icons = ''
@@ -201,9 +206,13 @@ function PrimaryToSvg(primaryNode) {
           }" rx="5px" ry="5px" width="${tagRect.width}" height="${
           tagRect.height
           }" style="fill: #d6f0f8;"></rect>
-        <text font-family="微软雅黑" font-size="12px"  fill="#276f86" x="${
-          topicOffsetLeft + 4
-          }" y="${topicOffsetTop + 4 + 12}">${tag.innerHTML}</text>`
+          <foreignObject x="${topicOffsetLeft}" y="${
+            topicOffsetTop + 4
+            }" rx="5px" ry="5px" width="${tagRect.width}" height="${
+            tagRect.height
+            }" > 
+            <div sytle="font-size:12px">${tag.innerHTML}</div>
+          </foreignObject>`
       }
     }
     let icons = ''
