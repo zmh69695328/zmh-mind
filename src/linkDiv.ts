@@ -74,12 +74,14 @@ export default function linkDiv(primaryNode) {
 
   // 2. layout primary node, generate primary link
   let primaryPath = ''
-  const alignRight = 10000 - root.offsetWidth / 2 - primaryNodeHorizontalGap
-  const alignLeft = 10000 + root.offsetWidth / 2 + primaryNodeHorizontalGap
+  const alignRight = 10000 - root.offsetWidth / 2 - primaryNodeHorizontalGap+60
+  const alignLeft = 10000 + root.offsetWidth / 2 + primaryNodeHorizontalGap-60
   for (let i = 0; i < primaryNodeList.length; i++) {
     let x2, y2
     const el = primaryNodeList[i]
     const elOffsetH = el.offsetHeight
+    let xMiddle=root.offsetLeft-10
+    console.log('xmiddle',xMiddle)
     if (el.className === 'lhs') {
       el.style.top = base + currentOffsetL + 'px'
       el.style.left = alignRight - el.offsetWidth + 'px'
@@ -98,7 +100,7 @@ export default function linkDiv(primaryNode) {
           primaryPath += `M ${LEFT} 10000 V ${y2 - 20} C ${LEFT} ${y2} ${LEFT} ${y2} ${LEFT - 20} ${y2} H ${x2}`
         }
       } else {
-        primaryPath += `M 10000 10000 V 10000 10000 ${10000 + 2 * primaryNodeHorizontalGap * 0.03} ${y2} ${x2} ${y2}`
+        primaryPath += `M 10000 10000 H ${xMiddle} V ${y2} H ${x2}`
       }
 
       if (shortSide === 'l') {
@@ -106,24 +108,8 @@ export default function linkDiv(primaryNode) {
       } else {
         currentOffsetL += elOffsetH + primaryNodeVerticalGap
       }
-      // x1 = parentOL + GAP
-      // xMiddle = parentOL
-      // x2 = parentOL - childT.offsetWidth
-
-      // if (
-      //   childTOT + childTOH < parentOT + parentOH / 2 + 50 &&
-      //   childTOT + childTOH > parentOT + parentOH / 2 - 50
-      // ) {
-      //   // 相差+-50内直接直线
-      //   path += `M ${x1} ${y1} H ${xMiddle} V ${y2} H ${x2}`
-      // } else if (childTOT + childTOH >= parentOT + parentOH / 2) {
-      //   // 子底部低于父中点
-      //   path += `M ${x1} ${y1} H ${xMiddle} V ${y2 - TURNPOINT_R} A ${TURNPOINT_R} ${TURNPOINT_R} 0 0 1 ${xMiddle - TURNPOINT_R} ${y2} H ${x2}`
-      // } else {
-      //   // 子底部高于父中点
-      //   path += `M ${x1} ${y1} H ${xMiddle} V ${y2 + TURNPOINT_R} A ${TURNPOINT_R} ${TURNPOINT_R} 0 0 0 ${xMiddle - TURNPOINT_R} ${y2} H ${x2}`
-      // }
     } else {
+      xMiddle=root.offsetLeft+root.offsetWidth+10
       el.style.top = base + currentOffsetR + 'px'
       el.style.left = alignLeft + 'px'
       x2 = alignLeft + 15 // padding
@@ -140,7 +126,7 @@ export default function linkDiv(primaryNode) {
           primaryPath += `M ${LEFT} 10000 V ${y2 - 20} C ${LEFT} ${y2} ${LEFT} ${y2} ${LEFT + 20} ${y2} H ${x2}`
         }
       } else {
-        primaryPath += `M 10000 10000 C 10000 10000 ${10000 + 2 * primaryNodeHorizontalGap * 0.03} ${y2} ${x2} ${y2}`
+        primaryPath += `M 10000 10000 H ${xMiddle} V ${y2} H ${x2}`
       }
       if (shortSide === 'r') {
         currentOffsetR += elOffsetH + shortSideGap
@@ -232,10 +218,10 @@ function loopChildren(children: HTMLCollection, parent: HTMLElement, first?: boo
         path += `M ${x1} ${y1} H ${xMiddle} V ${y2} H ${x2}`
       } else if (childTOT + childTOH >= parentOT + parentOH / 2) {
         // 子底部低于父中点
-        path += `M ${x1} ${y1} H ${xMiddle} V ${y2 - TURNPOINT_R} A ${TURNPOINT_R} ${TURNPOINT_R} 0 0 1 ${xMiddle - TURNPOINT_R} ${y2} H ${x2}`
+        path += `M ${x1} ${y1} H ${xMiddle} V ${y2 } H ${x2}`
       } else {
         // 子底部高于父中点
-        path += `M ${x1} ${y1} H ${xMiddle} V ${y2 + TURNPOINT_R} A ${TURNPOINT_R} ${TURNPOINT_R} 0 0 0 ${xMiddle - TURNPOINT_R} ${y2} H ${x2}`
+        path += `M ${x1} ${y1} H ${xMiddle} V ${y2 } H ${x2}`
       }
     } else if (direction === 'rhs') {
       x1 = parentOL + parentOW - GAP
@@ -248,9 +234,9 @@ function loopChildren(children: HTMLCollection, parent: HTMLElement, first?: boo
       ) {
         path += `M ${x1} ${y1} H ${xMiddle} V ${y2} H ${x2}`
       } else if (childTOT + childTOH >= parentOT + parentOH / 2) {
-        path += `M ${x1} ${y1} H ${xMiddle} V ${y2 - TURNPOINT_R} A ${TURNPOINT_R} ${TURNPOINT_R} 0 0 0 ${xMiddle + TURNPOINT_R} ${y2} H ${x2}`
+        path += `M ${x1} ${y1} H ${xMiddle} V ${y2 } H ${x2}`
       } else {
-        path += `M ${x1} ${y1} H ${xMiddle} V ${y2 + TURNPOINT_R} A ${TURNPOINT_R} ${TURNPOINT_R} 0 0 1 ${xMiddle + TURNPOINT_R} ${y2} H ${x2}`
+        path += `M ${x1} ${y1} H ${xMiddle} V ${y2 } H ${x2}`
       }
     }
 

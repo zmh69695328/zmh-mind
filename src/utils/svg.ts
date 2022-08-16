@@ -5,7 +5,9 @@ export const createMainPath = function(d: string) {
   path.setAttribute('d', d)
   path.setAttribute('stroke', '#666')
   path.setAttribute('fill', 'none')
-  path.setAttribute('stroke-width', '2')
+  path.setAttribute('stroke-width', '1')
+  path.setAttribute('stroke-linecap', 'square')
+  path.setAttribute('transform', 'translate(0.5,-0.5)')
   return path
 }
 
