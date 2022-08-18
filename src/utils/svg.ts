@@ -3,7 +3,7 @@ const svgNS = 'http://www.w3.org/2000/svg'
 export const createMainPath = function(d: string) {
   const path = $d.createElementNS(svgNS, 'path')
   path.setAttribute('d', d)
-  path.setAttribute('stroke', '#666')
+  path.setAttribute('stroke', '#555')
   path.setAttribute('fill', 'none')
   path.setAttribute('stroke-width', '1')
   path.setAttribute('stroke-linecap', 'square')
@@ -52,9 +52,6 @@ export const createWidthControll = function(d: string) {
   left.setAttribute('x','22')
   g.appendChild(right)
   g.appendChild(left)
-  left.onmouseover=()=>{
-    console.log('2222222')
-  }
   // adding translate(0.5,-0.5) can fix render error on windows, but i still dunno why
   return g
 }

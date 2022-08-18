@@ -31,7 +31,7 @@
     height: 20000px;
     width: 20000px;
     position: relative;
-    user-select: none;
+    user-select: text;
     transition: all 0.3s;
     transform: scale(1);
     background: #f6f6f6;
@@ -186,7 +186,7 @@
         z-index: 9;
         &.minus {
           transition: all 0.3s;
-          opacity: 0;
+          // opacity: 0; //让缩小按钮常显
           &:hover {
             opacity: 1;
           }
@@ -205,7 +205,8 @@
 
   .remark{
     margin-left: 3px;
-    display: inline-flex;
+    display: inline-block;
+    // align-items: flex-end;
     .content{
       user-select: text;
       cursor:text;
@@ -213,9 +214,9 @@
       border-radius: 8px;
       background-color: #F5F5DC;
       position: absolute;
-      left: 145px;
+      // left: 145px;
       min-width: 200px;
-      z-index: 1;
+      z-index: 10;
       margin-top: 2px;
       // transform: translateX(-50%);
       box-shadow: var(--uk-popover-box-shadow, 0 12px 36px rgba(0, 0, 0, 0.3));

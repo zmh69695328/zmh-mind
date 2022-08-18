@@ -55,4 +55,8 @@ export default function(mind) {
   mind.map.addEventListener('mouseup', e => {
     dragMoveHelper.clear()
   })
+
+  mind.map.addEventListener('wheel', e => {
+    e.preventDefault()
+  })
 }

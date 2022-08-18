@@ -72,6 +72,7 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
       const imgContainer = $d.createElement('img')
       imgContainer.src = val.url
       imgContainer.style.width = val.width + 'px'
+      imgContainer.style.display = 'block'
       tpc.appendChild(imgContainer)
     })
   }
@@ -189,7 +190,16 @@ export function createInputDiv(tpc: Topic) {
   div.contentEditable = 'true'
   div.spellcheck = false
   div.textContent = origin
-  // div.style.removeProperty('width')
+  if(tpc.nodeObj.image){
+    const images=tpc.nodeObj.image
+    images.forEach(val=>{
+      const imgContainer = $d.createElement('img')
+      imgContainer.src = val.url
+      imgContainer.style.width = val.width + 'px'
+      imgContainer.style.display = 'block'
+      div.appendChild(imgContainer)
+    })
+  }
   console.log('div.style',div.style,tpc.offsetWidth)
   div.style.cssText = `min-width:${tpc.offsetWidth - 22}px;min-height:${tpc.clientHeight-16}px`
   if(tpc.nodeObj?.style?.width){
@@ -237,9 +247,10 @@ export function createInputDiv(tpc: Topic) {
     else node.topic = topic
     //添加图片支持
     //去除节点缩放鼠标移动的监听
+    node.image=[]
     div.childNodes.forEach((val)=>{
       if(val.nodeName==='IMG'){
-          if(!node.image) node.image=[]
+          // console.log('宽度  ',div.clientWidth)
           node.image.push({
             url:(val as HTMLImageElement).src,
             width:(val as HTMLImageElement).width
