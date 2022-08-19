@@ -57,6 +57,6 @@ export default function(mind) {
   })
 
   mind.map.addEventListener('wheel', e => {
-    e.preventDefault()
+    // e.preventDefault()
   })
 }

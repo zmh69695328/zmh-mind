@@ -177,7 +177,12 @@
                         "style": {
                             "fontSize": "32",
                             "color": "#3298db"
-                        }
+                        },
+                        "image":[{
+                            "url": "https://cdn.jsdelivr.net/gh/ssshooter/mind-elixir-core/logo.png",
+                            "width": 200,
+                            "height":60
+                          }]
                     },
                     {
                         "topic": "字体颜色",

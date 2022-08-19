@@ -72,6 +72,7 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
       const imgContainer = $d.createElement('img')
       imgContainer.src = val.url
       imgContainer.style.width = val.width + 'px'
+      imgContainer.style.height = val.height + 'px'
       imgContainer.style.display = 'block'
       tpc.appendChild(imgContainer)
     })
@@ -253,7 +254,8 @@ export function createInputDiv(tpc: Topic) {
           // console.log('宽度  ',div.clientWidth)
           node.image.push({
             url:(val as HTMLImageElement).src,
-            width:(val as HTMLImageElement).width
+            width:(val as HTMLImageElement).width,
+            height:(val as HTMLImageElement).height,
           })
       }
     })

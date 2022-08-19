@@ -1,5 +1,6 @@
 import { node } from 'canvg/dist/presets'
 import { NodeObj } from '.'
+import { getHeightAndWidth } from '../painter/index.foreignObject'
 import { MindElixirData } from './index.lite'
 import { findEle } from './utils/dom'
 /**
@@ -183,6 +184,7 @@ function autoHide(nodeData:NodeObj,cnt){
     direction:this.direction,
     nodeData: getData(this),
     linkData: this.linkData,
+    height:getHeightAndWidth()
   }
   autoHide(data.nodeData,0)
   return JSON.parse(

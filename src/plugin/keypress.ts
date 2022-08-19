@@ -90,7 +90,7 @@ export default function(mind) {
   }
   mind.map.onkeydown = e => {
     // console.log(e)
-    e.preventDefault()
+    // e.preventDefault()
     if (!mind.editable) return
     // console.log(e, e.target)
     if (e.target !== e.currentTarget) {

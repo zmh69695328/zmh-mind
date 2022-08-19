@@ -45,6 +45,37 @@ function generateSvgDom() {
   return svgFile
 }
 
+export function getHeightAndWidth() {
+  let primaryNodes = $d.querySelectorAll('.mindbox > grp, root')
+  let svgContent = ''
+  for (let i = 0; i < primaryNodes.length; i++) {
+    let primaryNode = primaryNodes[i]
+    let rect = primaryNode.getBoundingClientRect()
+    let top = primaryNode.offsetTop
+    let bottom = top + rect.height
+    let left = primaryNode.offsetLeft
+    let right = left + rect.width
+    // console.log(top, bottom, left, right)
+    if (top < maxTop) {
+      maxTop = top
+    }
+    if (bottom > maxBottom) {
+      maxBottom = bottom
+    }
+    if (left < maxLeft) {
+      maxLeft = left
+    }
+    if (right > maxRight) {
+      maxRight = right
+    }
+    svgContent += PrimaryToSvg(primaryNode)
+  }
+  console.log(maxTop, maxBottom, maxLeft, maxRight)
+  let svgHeight = maxBottom - maxTop + imgPadding * 2
+  let svgWidth = maxRight - maxLeft + imgPadding * 2
+  return [svgHeight,svgWidth]
+}
+
 function createSvg(height, width) {
   let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   svg.setAttribute('height', height)
