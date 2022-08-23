@@ -30,6 +30,15 @@ export default function(mind) {
       e.target.parentElement.nodeName === 'ROOT'
     ) {
       mind.beginEdit(e.target)
+    }else{
+      let node = e.target
+      while(node.parentElement){
+        node=node.parentElement
+        if(node.nodeName === 'TPC'){
+          mind.beginEdit(node)
+          break
+        }
+      }
     }
   })
 

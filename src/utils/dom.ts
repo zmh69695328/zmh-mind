@@ -33,6 +33,7 @@ function resizeNode(widthControll:HTMLElement,tpc:Topic,anotherWidthControll:HTM
       tpc.nodeObj.style.width=tpc.style.width
       //设置宽度控制条的高度
       tpc.nodeObj.style.controllWidth=widthControll.style.height
+      //更新图片的宽度和高度 
       eMove.preventDefault()
     }
     widthControll.setPointerCapture(eDown.pointerId)
@@ -243,9 +244,6 @@ export function createInputDiv(tpc: Topic) {
     if (!div) return // 防止重复blur
     const node = tpc.nodeObj
     const topic = div.textContent!.trim()
-    console.log(topic)
-    if (topic === '') node.topic = origin
-    else node.topic = topic
     //添加图片支持
     //去除节点缩放鼠标移动的监听
     node.image=[]
@@ -259,6 +257,8 @@ export function createInputDiv(tpc: Topic) {
           })
       }
     })
+    if (topic === ''&&node.image.length===0) node.topic = origin
+    else node.topic = topic
     div.remove()
     this.inputDiv = div = null
     // TODO 优化
