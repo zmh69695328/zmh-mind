@@ -276,7 +276,7 @@ function getHeightDistance(a:HTMLElement,b:HTMLElement){
 
 function getHeightFromRootToChild(node:HTMLElement){
   const tpc=node.querySelector('root')as HTMLElement
-  const childTpc=node.querySelector('.map-canvas children t')as HTMLElement
+  const childTpc=node.querySelector('.map-canvas children grp')as HTMLElement
   return getHeightDistance(tpc,childTpc)
 }
 /**
@@ -290,7 +290,7 @@ export const toCenter = function() {
   //默认在左侧，此方法名具有误导性
   this.container.scrollTo(
     10000 - getRootWidth(this.container)/2-10,
-    10000 - getRootHeight(this.container)/2-getHeightFromRootToChild(this.container)-10
+    10000 - getRootHeight(this.container)/2-getHeightFromRootToChild(this.container)-5
   )
 }
 export const install = function(plugin) {
