@@ -1,11 +1,12 @@
 import './style.css'
 import MindElixir from './index'
 import data from './examples/data.json'
+import data1 from './exampleData/2'
 let mind = new MindElixir({
   el: 'map',
   direction: MindElixir.RIGHT,
   // create new map data
-  data:data,
+  data:data1,
   // data: MindElixir.new('new topic'), 
   // or set as data that is return from `.getAllData()`
   // data: {...},

@@ -81,7 +81,6 @@ export default function linkDiv(primaryNode) {
     const el = primaryNodeList[i]
     const elOffsetH = el.offsetHeight
     let xMiddle=root.offsetLeft-10
-    console.log('xmiddle',xMiddle)
     if (el.className === 'lhs') {
       el.style.top = base + currentOffsetL + 'px'
       el.style.left = alignRight - el.offsetWidth + 'px'

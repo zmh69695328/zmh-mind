@@ -1,5 +1,5 @@
 import { node } from 'canvg/dist/presets'
-import { NodeObj } from '.'
+import { MindElixirInstance, NodeObj } from '.'
 import { getHeightAndWidth } from '../painter/index.foreignObject'
 import { MindElixirData } from './index.lite'
 import { findEle } from './utils/dom'
@@ -257,6 +257,28 @@ export const scale = function(scaleVal) {
   this.scaleVal = scaleVal
   this.map.style.transform = 'scale(' + scaleVal + ')'
 }
+
+function getRootWidth(node:HTMLElement){
+  const root=node.querySelector('root')as HTMLElement
+  return root.offsetWidth||150
+}
+function getRootHeight(node:HTMLElement){
+  const root=node.querySelector('root')as HTMLElement
+  return root.offsetHeight||150
+}
+
+function getHeightDistance(a:HTMLElement,b:HTMLElement){
+  const aHeight=a?.getBoundingClientRect()?.top||0
+  const bHeight=b?.getBoundingClientRect()?.top||0
+  console.log(aHeight,bHeight)
+  return Math.abs(aHeight-bHeight)
+}
+
+function getHeightFromRootToChild(node:HTMLElement){
+  const tpc=node.querySelector('root')as HTMLElement
+  const childTpc=node.querySelector('.map-canvas children t')as HTMLElement
+  return getHeightDistance(tpc,childTpc)
+}
 /**
  * @function
  * @instance
@@ -265,9 +287,10 @@ export const scale = function(scaleVal) {
  * @memberof MapInteraction
  */
 export const toCenter = function() {
+  //默认在左侧，此方法名具有误导性
   this.container.scrollTo(
-    10000 - this.container.offsetWidth / 2,
-    10000 - this.container.offsetHeight / 2
+    10000 - getRootWidth(this.container)/2-10,
+    10000 - getRootHeight(this.container)/2-getHeightFromRootToChild(this.container)-10
   )
 }
 export const install = function(plugin) {

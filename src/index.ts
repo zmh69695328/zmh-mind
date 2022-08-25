@@ -432,9 +432,10 @@ MindElixir.prototype = {
     }
     this.draggable && nodeDraggable(this)
 
-    this.toCenter()
+    
     this.layout()
     this.linkDiv()
+    this.toCenter()
     if (!this.overflowHidden) initMouseEvent(this)
   },
 }

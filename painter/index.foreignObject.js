@@ -71,8 +71,9 @@ export function getHeightAndWidth() {
     svgContent += PrimaryToSvg(primaryNode)
   }
   console.log(maxTop, maxBottom, maxLeft, maxRight)
-  let svgHeight = maxBottom - maxTop + imgPadding * 2
-  let svgWidth = maxRight - maxLeft + imgPadding * 2
+  let svgHeight = maxBottom - maxTop
+  let svgWidth = maxRight - maxLeft
+  console.log('svgHeight',svgHeight)
   return [svgHeight,svgWidth]
 }
 
