@@ -269,7 +269,7 @@ function getRootHeight(node:HTMLElement){
 
 function getHeightDistance(a:HTMLElement,b:HTMLElement){
   const aHeight=a?.getBoundingClientRect()?.top||0
-  const bHeight=b?.getBoundingClientRect()?.top||0
+  const bHeight=b?.getBoundingClientRect()?.top||aHeight
   console.log(aHeight,bHeight)
   return Math.abs(aHeight-bHeight)
 }
@@ -288,10 +288,18 @@ function getHeightFromRootToChild(node:HTMLElement){
  */
 export const toCenter = function() {
   //默认在左侧，此方法名具有误导性
-  this.container.scrollTo(
-    10000 - getRootWidth(this.container)/2-10,
-    10000 - getRootHeight(this.container)/2-getHeightFromRootToChild(this.container)-5
-  )
+  if(this.nodeData?.children.length>0){
+    this.container.scrollTo(
+      10000 - getRootWidth(this.container)/2-10,
+      10000 - getRootHeight(this.container)/2-getHeightFromRootToChild(this.container)-5
+    )
+  }else{
+    this.container.scrollTo(
+      10000 - this.container.offsetWidth / 2,
+      10000 - this.container.offsetHeight / 2
+    )
+  }
+  
 }
 export const install = function(plugin) {
   plugin(this)

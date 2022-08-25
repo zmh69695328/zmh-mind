@@ -144,7 +144,17 @@ function RootToSvg() {
       <tspan>${icon.innerHTML}</tspan>`
     }
   }
-
+  //render images
+  let images = ''
+  if (nodeObj.icons && nodeObj.icons.length) {
+    let iconsEle = rootTpc.querySelectorAll('.icons > span')
+    for (let i = 0; i < iconsEle.length; i++) {
+      let icon = iconsEle[i]
+      let iconRect = icon.getBoundingClientRect()
+      icons += `
+      <tspan>${icon.innerHTML}</tspan>`
+    }
+  }
 
   let svg2nd = `<g transform="translate(${imgPadding - maxLeft}, ${
     imgPadding - maxTop

@@ -6,8 +6,8 @@ let mind = new MindElixir({
   el: 'map',
   direction: MindElixir.RIGHT,
   // create new map data
-  data:data,
-  // data: MindElixir.new('new topic'), 
+  // data:data1,
+  data: MindElixir.new('new topic'), 
   // or set as data that is return from `.getAllData()`
   // data: {...},
   draggable: true, // default true

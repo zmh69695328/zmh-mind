@@ -30,7 +30,7 @@ export default function(mind) {
       e.target.parentElement.nodeName === 'ROOT'
     ) {
       mind.beginEdit(e.target)
-    }else{
+    }else if(e.target.className!=='content'){
       let node = e.target
       while(node.parentElement){
         node=node.parentElement
