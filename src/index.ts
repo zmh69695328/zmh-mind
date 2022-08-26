@@ -113,6 +113,10 @@ export interface NodeObj {
     width:number,
     height?:number,
   }[],
+  linkJump?:{
+    toId:string,
+    title:string
+  }[]
   expanded?: boolean,
   direction?: number,
   root?: boolean

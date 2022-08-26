@@ -17,8 +17,9 @@ const cn = {
   tagsSeparate: '多个标签半角逗号分隔',
   iconsSeparate: '多个图标半角逗号分隔',
   link:'连线',
+  nodeLink:'主题内超链接',
   hyperlink:'超链接',
-  linkSeparate:'链接地址',
+  linkSeparate:'链接地址,多个链接半角逗号分隔',
   remark:'备注',
   reamrkSeparate:'内容'
 }

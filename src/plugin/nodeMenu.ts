@@ -230,7 +230,7 @@ export default function(mind) {
     } else {
       iconInput.value = ''
     }
-    if (nodeObj.hyperLink) {
+    if (nodeObj.hyperLink||nodeObj.nodeLink) {
       linkInput.value = nodeObj.hyperLink
     } else {
       linkInput.value = ''

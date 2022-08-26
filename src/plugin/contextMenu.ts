@@ -1,4 +1,6 @@
 import i18n from '../i18n'
+import linkDiv from '../linkDiv'
+import { shapeTpc } from '../utils/dom'
 import { encodeHTML } from '../utils/index'
 
 export default function(mind, option) {
@@ -29,6 +31,7 @@ export default function(mind, option) {
   const up = createLi('cm-up', i18n[locale].moveUp, 'PgUp')
   const down = createLi('cm-down', i18n[locale].moveDown, 'Pgdn')
   const link = createLi('cm-down', i18n[locale].link, '')
+  const nodeLink = createLi('cm-down', i18n[locale].nodeLink, '')
 
   const menuUl = document.createElement('ul')
   menuUl.className = 'menu-list'
@@ -44,6 +47,7 @@ export default function(mind, option) {
   menuUl.appendChild(down)
   if (!option || option.link) {
     menuUl.appendChild(link)
+    menuUl.appendChild(nodeLink)
   }
   if (option && option.extend) {
     for (let i = 0; i < option.extend.length; i++) {
@@ -161,7 +165,40 @@ export default function(mind, option) {
           e.target.parentElement.nodeName === 'T' ||
           e.target.parentElement.nodeName === 'ROOT'
         ) {
-          mind.createLink(from, mind.currentNode)
+          const to =mind.currentNode
+          mind.createLink(from,to)
+        } else {
+          console.log('取消连接')
+        }
+      },
+      {
+        once: true,
+      }
+    )
+  }
+  nodeLink.onclick = e => {
+    menuContainer.hidden = true
+    const from = mind.currentNode
+    const tips = createTips(i18n[locale].clickTips)
+    mind.container.appendChild(tips)
+    mind.map.addEventListener(
+      'click',
+      e => {
+        e.preventDefault()
+        tips.remove()
+        if (
+          e.target.parentElement.nodeName === 'T' ||
+          e.target.parentElement.nodeName === 'ROOT'
+        ) {
+          const to =mind.currentNode
+          if(!from.nodeObj.linkJump) from.nodeObj.linkJump=[]
+          from.nodeObj.linkJump.push({
+              toId:to.nodeObj.id,
+              title:to.nodeObj.topic
+            }
+          )
+          mind.shapeTpc(from,from.nodeObj)
+          mind.linkDiv()
         } else {
           console.log('取消连接')
         }

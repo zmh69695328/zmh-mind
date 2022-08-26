@@ -274,6 +274,23 @@ function getHeightDistance(a:HTMLElement,b:HTMLElement){
   return Math.abs(aHeight-bHeight)
 }
 
+function getWidthDistance(a:HTMLElement,b:HTMLElement){
+  const aWidth=a?.getBoundingClientRect()?.left||0
+  const bWidth=b?.getBoundingClientRect()?.left||aWidth
+  console.log(aWidth,bWidth)
+  return Math.abs(aWidth-bWidth)
+}
+
+export function getHeightFromRootToAnotherNode(node:HTMLElement,anotherNode:HTMLElement){
+  const tpc=node.querySelector('root')as HTMLElement
+  return getHeightDistance(tpc,anotherNode)
+}
+
+export function getWidthFromRootToAnotherNode(node:HTMLElement,anotherNode:HTMLElement){
+  const tpc=node.querySelector('root')as HTMLElement
+  return getWidthDistance(tpc,anotherNode)
+}
+
 function getHeightFromRootToChild(node:HTMLElement){
   const tpc=node.querySelector('root')as HTMLElement
   const childTpc=node.querySelector('.map-canvas children grp')as HTMLElement
