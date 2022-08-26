@@ -71,6 +71,7 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
     const images=nodeObj.image
     images.forEach(val=>{
       const imgContainer = $d.createElement('img')
+      imgContainer.className='image'
       imgContainer.src = val.url
       imgContainer.style.width = val.width + 'px'
       imgContainer.style.height = val.height + 'px'

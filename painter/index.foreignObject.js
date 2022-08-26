@@ -146,13 +146,12 @@ function RootToSvg() {
   }
   //render images
   let images = ''
-  if (nodeObj.icons && nodeObj.icons.length) {
-    let iconsEle = rootTpc.querySelectorAll('.icons > span')
-    for (let i = 0; i < iconsEle.length; i++) {
-      let icon = iconsEle[i]
-      let iconRect = icon.getBoundingClientRect()
-      icons += `
-      <tspan>${icon.innerHTML}</tspan>`
+  if (nodeObj.image && nodeObj.image.length) {
+    let imagesEle = tpc.querySelectorAll('.image')
+    for (let i = 0; i < imagesEle.length; i++) {
+      let image = imagesEle[i]
+      let imageRect = image.getBoundingClientRect()
+      images += `${image.outerHTML}`
     }
   }
 
@@ -173,6 +172,7 @@ function RootToSvg() {
         <div xmlns="http://www.w3.org/1999/xhtml" style="padding:0;margin:0;font-family:微软雅黑;font-size:${tpcStyle.fontSize};font-weight:${tpcStyle.fontWeight};color:${tpcStyle.color};word-break: break-all;line-height: 1">
         ${nodeObj.topic}
         ${icons}
+        ${images}
       </div>
       </foreignObject>
       ${tags}
@@ -267,6 +267,16 @@ function PrimaryToSvg(primaryNode) {
         <tspan>${icon.innerHTML}</tspan>`
       }
     }
+      //render images
+    let images = ''
+    if (nodeObj.image && nodeObj.image.length) {
+      let imagesEle = tpc.querySelectorAll('.image')
+      for (let i = 0; i < imagesEle.length; i++) {
+        let image = imagesEle[i]
+        let imageRect = image.getBoundingClientRect()
+        images += `${image.outerHTML}`
+      }
+    }
     // render every single node
     svg += `<g id="${nodeObj.id}">
       ${border}
@@ -275,6 +285,7 @@ function PrimaryToSvg(primaryNode) {
       <div xmlns="http://www.w3.org/1999/xhtml" style="padding:0;margin:0;font-family:微软雅黑;font-size:${tpcStyle.fontSize};font-weight:${tpcStyle.fontWeight};color:${tpcStyle.color};word-break: break-all;line-height: 1">
         ${nodeObj.topic}
         ${icons}
+        ${images}
       </div>
       </foreignObject>
       ${tags}
