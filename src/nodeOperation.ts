@@ -75,6 +75,10 @@ export const updateNodeIcons = function(object, icons) {
 export const updateNodeHyperLink = function(object, hyperLink) {
   if (hyperLink==null||hyperLink==undefined) return
   const oldVal = object.hyperLink
+  const hyperLinkArr=hyperLink.split(',')
+  object.linkJump=object.linkJump.filter(link=>{
+    return hyperLinkArr.find(val=>val===link.title)?true:false
+  })
   object.hyperLink = hyperLink
   const nodeEle = findEle(object.id)
   shapeTpc.call(this,nodeEle, object)
