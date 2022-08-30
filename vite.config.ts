@@ -16,6 +16,7 @@ export default defineConfig({
             exports:'default',
             name:'ZmhMind'
         }
-    }
+    },
+    sourcemap:true
   }
 })
