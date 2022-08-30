@@ -1,3 +1,4 @@
+import { getAllDataWithAutoHide } from "../interact"
 import { updateSidebar } from "./sidebar"
 
 const createButton = (id, name) => {
@@ -7,6 +8,20 @@ const createButton = (id, name) => {
     <use xlink:href="#icon-${name}"></use>
   </svg>`
   return button
+}
+
+let timer = null;
+function debounce (fun,wait) {
+  return function () {
+  	const argu = arguments;
+  	// 事件触发，如果之前有等待的事件，则清空计时，重新进行事件等待执行
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(function () {
+      fun.apply(this, argu);
+    }, wait);
+  }
 }
 
 function createToolBarRBContainer(mind) {
@@ -22,6 +37,12 @@ function createToolBarRBContainer(mind) {
   numberSelection.max='100'
   numberSelection.step='1'
   numberSelection.value=mind?.expandDeep?.toString()||'3'
+  numberSelection.oninput=debounce(()=>{
+    const data=mind.getAllDataWithAutoHide()
+    mind.init(data?.nodeData,data?.expandDeep)
+  },500)
+
+  
   const percentage = document.createElement('span')
   percentage.innerText = '100%'
   toolBarRBContainer.appendChild(numberSelection)

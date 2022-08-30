@@ -179,7 +179,12 @@ function autoHide(nodeData:NodeObj,cnt,deep){
     autoHide(val,cnt+1,deep)
   }
 }
- export const getAllDataWithAutoHide = function(): object {
+type data = {
+  [key: string]: any;
+  nodeData: string;
+};
+
+export const getAllDataWithAutoHide = function(): data {
   const expandDeep=Number(this.container.querySelector('.numberSelection').value)||3
   const data = {
     direction:this.direction,

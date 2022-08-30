@@ -148,10 +148,15 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
       button.innerHTML='<svg t="1661493526135" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2220" width="16" height="16"><path d="M1001.175714 593.762001L700.806246 293.324796a76.091491 76.091491 0 0 0-107.566725 0 76.023754 76.023754 0 0 0 0 107.544146l171.713884 171.826779H152.653982v-115.288769a76.046333 76.046333 0 0 0-152.115245 0v152.092666c0 6.931777 2.145012 13.253918 3.951338 19.621218-1.806326 6.389879-3.951339 12.644283-3.951338 19.621218a76.068912 76.068912 0 0 0 76.046333 76.068912h686.020111L593.239521 894.131468a76.046333 76.046333 0 1 0 107.566725 107.566726L1001.175714 701.328726a76.091491 76.091491 0 0 0 0-107.566725z" fill="#1296db" p-id="2221"></path></svg>'
       button.onclick=()=>{  
         const toNode=this.container.querySelector(`tpc[data-nodeid=me${val.toId}]`)
-        this.container.scrollTo(
-          10000 - this.container.offsetWidth / 2 + getWidthFromRootToAnotherNode(this.container,toNode),
-          10000 - this.container.offsetHeight / 2 - getHeightFromRootToAnotherNode(this.container,toNode)
-        )
+        // this.container.scrollTo(
+        //   10000 - this.container.offsetWidth / 2 + getWidthFromRootToAnotherNode(this.container,toNode),
+        //   10000 - this.container.offsetHeight / 2 - getHeightFromRootToAnotherNode(this.container,toNode)
+        // )
+        toNode.scrollIntoView()
+        toNode.className='blink'
+        setTimeout(() => {
+          toNode.classList.remove('blink')
+        }, 3000);
       }
       tpc.appendChild(button)
     });

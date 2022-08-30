@@ -84,6 +84,7 @@ import './plugin/mobileMenu.less'
 import { exportSvg, exportSvgDom } from '../painter/index.foreignObject'
 
 import './iconfont/iconfont.js'
+import { node } from 'canvg/dist/presets'
 
 // TODO show up animation
 const E = findEle
@@ -372,7 +373,7 @@ MindElixir.prototype = {
   refresh,
   exportSvg,
   exportSvgDom,
-  init: function() {
+  init: function(nodeData?:NodeObj,expandDeep?:number) {
     /**
      * @function
      * @global
@@ -381,7 +382,9 @@ MindElixir.prototype = {
      * @return {TargetElement} Target element.
      * @example
      * E('bd4313fbac40284b')
-     */
+     */  
+    if(nodeData) this.nodeData=nodeData
+    if(expandDeep)this.expandDeep=expandDeep
     addParentLink(this.nodeData)
     console.log('ME_version ' + MindElixir.version)
     console.log(this)

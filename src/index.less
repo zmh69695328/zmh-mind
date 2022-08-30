@@ -95,6 +95,12 @@
       padding: 0 @GAP;
       margin-top: 10px;
       tpc {
+        @keyframes blink { 
+          50% { border: 2px solid #ff0000;border-radius: 5px; } 
+        }
+        &.blink{ /*or other element you want*/
+            animation: blink .5s step-end infinite alternate;
+        }
         position: relative;
         display: block;
         padding: 5px;

@@ -230,11 +230,12 @@ export default function(mind) {
     } else {
       iconInput.value = ''
     }
+    linkInput.value=''
     if (nodeObj.hyperLink) {
       linkInput.value = nodeObj.hyperLink
     } else if(nodeObj.linkJump){
       if(linkInput.value.length>0) linkInput.value+=','
-      linkInput.value += nodeObj.linkJump.map(val=>val.title).reduce((preVal,curVal)=>preVal+curVal,'')
+      linkInput.value += nodeObj.linkJump.map(val=>val.title).reduce((preVal,curVal,index)=>preVal+(index?',':'')+curVal,'')
     } else{
       linkInput.value = ''
     }
