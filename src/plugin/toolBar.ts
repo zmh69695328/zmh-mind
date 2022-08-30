@@ -15,12 +15,21 @@ function createToolBarRBContainer(mind) {
   const gc = createButton('toCenter', 'living')
   const zo = createButton('zoomout', 'move')
   const zi = createButton('zoomin', 'add')
+  const numberSelection=document.createElement('input')
+  numberSelection.className='numberSelection'
+  numberSelection.type='number'
+  numberSelection.min='3'
+  numberSelection.max='100'
+  numberSelection.step='1'
+  numberSelection.value=mind?.expandDeep?.toString()||'3'
   const percentage = document.createElement('span')
   percentage.innerText = '100%'
+  toolBarRBContainer.appendChild(numberSelection)
   toolBarRBContainer.appendChild(fc)
   toolBarRBContainer.appendChild(gc)
   toolBarRBContainer.appendChild(zo)
   toolBarRBContainer.appendChild(zi)
+  
   // toolBarRBContainer.appendChild(percentage)
   toolBarRBContainer.className = 'rb'
   fc.onclick = () => {

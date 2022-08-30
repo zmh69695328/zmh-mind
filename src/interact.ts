@@ -169,24 +169,26 @@ export const getAllData = function(): object {
  * @return {Object}
  */
 
-function autoHide(nodeData:NodeObj,cnt){
-  if(cnt<3){
+function autoHide(nodeData:NodeObj,cnt,deep){
+  if(cnt<deep){
     nodeData.expanded=true
   }else{
     nodeData.expanded=false
   }
   for(const val of (nodeData.children||[])){
-    autoHide(val,cnt+1)
+    autoHide(val,cnt+1,deep)
   }
 }
  export const getAllDataWithAutoHide = function(): object {
+  const expandDeep=Number(this.container.querySelector('.numberSelection').value)||3
   const data = {
     direction:this.direction,
     nodeData: getData(this),
     linkData: this.linkData,
-    height:getHeightAndWidth()
+    height:getHeightAndWidth(),
+    expandDeep
   }
-  autoHide(data.nodeData,0)
+  autoHide(data.nodeData,0,expandDeep)
   return JSON.parse(
     JSON.stringify(data, (k, v) => {
       if (k === 'parent') return undefined

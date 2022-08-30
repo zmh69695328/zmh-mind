@@ -128,12 +128,14 @@ export interface NodeElement extends HTMLElement {
 export interface MindElixirData {
   nodeData: NodeObj,
   linkData?: LinkObj,
+  expandDeep?:number|null
   direction?:number
 }
 export interface MindElixirInstance {
   mindElixirBox: HTMLElement,
   nodeData: NodeObj,
   linkData: LinkObj,
+  expandDeep:number|null
   currentNode: Topic | null,
   currentLink: SVGElement | null,
   inputDiv: HTMLElement | null,
@@ -230,6 +232,7 @@ function MindElixir(this: MindElixirInstance, {
   this.before = before || {}
   this.nodeData = data.nodeData
   this.linkData = data.linkData || {}
+  this.expandDeep=data?.expandDeep
   this.locale = locale
   this.contextMenuOption = contextMenuOption
   this.contextMenu = contextMenu === undefined ? true : contextMenu
