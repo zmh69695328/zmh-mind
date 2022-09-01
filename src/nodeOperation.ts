@@ -76,9 +76,10 @@ export const updateNodeHyperLink = function(object, hyperLink) {
   if (hyperLink==null||hyperLink==undefined) return
   const oldVal = object.hyperLink
   const hyperLinkArr=hyperLink.split(',')
-  object.linkJump=object.linkJump.filter(link=>{
+  object.linkJump=object.linkJump?.filter(link=>{
     return hyperLinkArr.find(val=>val===link.title)?true:false
   })
+  if(object.linkJump?.length===0) delete object.linkJump
   object.hyperLink = hyperLink
   const nodeEle = findEle(object.id)
   shapeTpc.call(this,nodeEle, object)

@@ -103,7 +103,17 @@ function createToolBarLTContainer(mind) {
   return toolBarLTContainer
 }
 
+function createCloseButton(mind){
+  const close = createButton('close','close')
+  close.onclick=()=>{
+    console.log('关闭')
+    mind.bus.fire('close',{})
+  }
+  return close
+}
+
 export default function(mind) {
   mind.container.append(createToolBarRBContainer(mind))
   mind.container.append(createToolBarLTContainer(mind))
+  mind.closeButton && mind.container.append(createCloseButton(mind))
 }

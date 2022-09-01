@@ -166,6 +166,7 @@ export interface MindElixirInstance {
   primaryNodeHorizontalGap: number,
   primaryNodeVerticalGap: number,
   mobileMenu: boolean,
+  closeButton:boolean
 }
 export interface Options {
   el: string,
@@ -187,6 +188,7 @@ export interface Options {
   primaryNodeHorizontalGap?: number,
   primaryNodeVerticalGap?: number,
   mobileMenu?: boolean,
+  closeButton?:boolean
 }
 const $d = document
 /**
@@ -226,6 +228,7 @@ function MindElixir(this: MindElixirInstance, {
   primaryNodeHorizontalGap,
   primaryNodeVerticalGap,
   mobileMenu,
+  closeButton
 }: Options) {
   const box = document.getElementById(el) as HTMLElement
   if (!box) return
@@ -240,6 +243,7 @@ function MindElixir(this: MindElixirInstance, {
   this.toolBar = toolBar === undefined ? true : toolBar
   this.nodeMenu = nodeMenu === undefined ? true : nodeMenu
   this.keypress = keypress === undefined ? true : keypress
+  this.closeButton = closeButton === undefined ? false : closeButton
   this.mobileMenu = mobileMenu
   // record the direction before enter focus mode, must true in focus mode, reset to null after exit focus
   // todo move direction to data

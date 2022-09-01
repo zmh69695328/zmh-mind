@@ -223,7 +223,7 @@ export default function(mind) {
     if (nodeObj.tags) {
       tagInput.value = nodeObj.tags.join(',')
     } else {
-      tagInput.value = ''
+      tagInput.value = '' 
     }
     if (nodeObj.icons) {
       iconInput.value = nodeObj.icons.join(',')
@@ -233,11 +233,10 @@ export default function(mind) {
     linkInput.value=''
     if (nodeObj.hyperLink) {
       linkInput.value = nodeObj.hyperLink
-    } else if(nodeObj.linkJump){
+    } 
+    if(nodeObj.linkJump){
       if(linkInput.value.length>0) linkInput.value+=','
       linkInput.value += nodeObj.linkJump.map(val=>val.title).reduce((preVal,curVal,index)=>preVal+(index?',':'')+curVal,'')
-    } else{
-      linkInput.value = ''
     }
     if (nodeObj.remark) {
       remarkInput.value = nodeObj.remark
