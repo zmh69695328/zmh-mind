@@ -419,6 +419,7 @@ export const expandNode = function(el, isExpand) {
     node.expanded = false
   } else {
     node.expanded = true
+    expandNodeChild(node)
   }
   // TODO 在此函数构造 html 结构，而非调用 layout
   this.layout()
@@ -441,4 +442,15 @@ export const refresh = function() {
   this.layout()
   // generate links between nodes
   this.linkDiv()
+}
+
+/**
+ * 一键展开子主题
+ * @param nodeData 
+ */
+ function expandNodeChild(nodeData:NodeObj){
+  nodeData.expanded=true
+  for(const val of (nodeData.children||[])){
+    expandNodeChild(val)
+  }
 }
