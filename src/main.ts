@@ -39,7 +39,8 @@ haha?.addEventListener('click',e=>{
       toolBar: true, // default true
       nodeMenu: true, // default true
       keypress: true, // default true
-      locale: 'zh_CN'
+      locale: 'zh_CN',
+      overflowHidden:true
     })
 
     mind.init()

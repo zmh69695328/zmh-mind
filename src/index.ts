@@ -450,7 +450,8 @@ MindElixir.prototype = {
     this.layout()
     this.linkDiv()
     this.toCenter()
-    if (!this.overflowHidden) initMouseEvent(this)
+    // if (!this.overflowHidden) initMouseEvent(this)
+    initMouseEvent(this)
   },
 }
 
