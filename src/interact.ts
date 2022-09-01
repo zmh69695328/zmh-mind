@@ -190,7 +190,7 @@ export const getAllDataWithAutoHide = function(): data {
     direction:this.direction,
     nodeData: getData(this),
     linkData: this.linkData,
-    height:getHeightAndWidth(),
+    height:getHeightAndWidth.call(this),
     expandDeep
   }
   autoHide(data.nodeData,0,expandDeep)

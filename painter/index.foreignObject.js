@@ -46,6 +46,7 @@ function generateSvgDom() {
 }
 
 export function getHeightAndWidth() {
+  $d=this.container
   let primaryNodes = $d.querySelectorAll('.mindbox > grp, root')
   let svgContent = ''
   for (let i = 0; i < primaryNodes.length; i++) {
@@ -74,7 +75,7 @@ export function getHeightAndWidth() {
   let svgHeight = maxBottom - maxTop
   let svgWidth = maxRight - maxLeft
   console.log('svgHeight',svgHeight)
-  return [svgHeight,svgWidth]
+  return [svgHeight+5,svgWidth+5]
 }
 
 function createSvg(height, width) {
