@@ -60,7 +60,7 @@ function createToolBarRBContainer(mind) {
     mind.container.requestFullscreen()
   }
   gc.onclick = () => {
-    mind.toCenter()
+    mind.toTopLeft()
   }
   zo.onclick = () => {
     if (mind.scaleVal < 0.6) return

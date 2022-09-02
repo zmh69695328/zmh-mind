@@ -316,7 +316,20 @@ function getHeightFromRootToChild(node:HTMLElement){
  * @memberof MapInteraction
  */
 export const toCenter = function() {
-  //默认在左侧，此方法名具有误导性
+  this.container.scrollTo(
+    10000 - this.container.offsetWidth / 2,
+    10000 - this.container.offsetHeight / 2
+  )
+}
+
+/**
+ * @function
+ * @instance
+ * @name toCenter
+ * @description Reset position of the map to top left.
+ * @memberof MapInteraction
+ */
+ export const toTopLeft = function() {
   if(this.nodeData?.children.length>0){
     this.container.scrollTo(
       10000 - getRootWidth(this.container)/2-10,
@@ -330,6 +343,7 @@ export const toCenter = function() {
   }
   
 }
+
 export const install = function(plugin) {
   plugin(this)
 }

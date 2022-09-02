@@ -31,6 +31,7 @@ import {
   disableEdit,
   expandNode,
   refresh,
+  toTopLeft,
 } from './interact'
 import {
   insertSibling,
@@ -370,6 +371,7 @@ MindElixir.prototype = {
   getAllDataMd,
   scale,
   toCenter,
+  toTopLeft,
   focusNode,
   cancelFocus,
   initLeft,
@@ -454,7 +456,13 @@ MindElixir.prototype = {
     
     this.layout()
     this.linkDiv()
-    this.toCenter()
+    if(this.direction===1){
+      this.toTopLeft()
+    }else{
+      this.toCenter()
+    }
+    
+
     // if (!this.overflowHidden) initMouseEvent(this)
     initMouseEvent(this)
   },
