@@ -456,13 +456,7 @@ MindElixir.prototype = {
     
     this.layout()
     this.linkDiv()
-    if(this.direction===1){
-      this.toTopLeft()
-    }else{
-      this.toCenter()
-    }
-    
-
+    this.toTopLeft()
     // if (!this.overflowHidden) initMouseEvent(this)
     initMouseEvent(this)
   },
