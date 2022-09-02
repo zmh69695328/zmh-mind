@@ -16,6 +16,7 @@ let mind = new MindElixir({
   nodeMenu: true, // default true
   keypress: true, // default true
   locale: 'zh_CN',
+  widthControll:true
   // primaryLinkStyle:2
 })
 mind.init()
@@ -40,7 +41,6 @@ haha?.addEventListener('click',e=>{
       nodeMenu: true, // default true
       keypress: true, // default true
       locale: 'zh_CN',
-      overflowHidden:true
     })
 
     mind.init()

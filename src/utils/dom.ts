@@ -49,15 +49,17 @@ function resizeNode(widthControll:HTMLElement,tpc:Topic,anotherWidthControll:HTM
 export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
   
   const widthControllRight=$d.createElement('widthControllRight')
-  
   const widthControllLeft=$d.createElement('widthControllLeft')
 
-  resizeNode.call(this,widthControllLeft,tpc,widthControllRight)
-  resizeNode.call(this,widthControllRight,tpc,widthControllLeft)
   tpc.textContent = nodeObj.topic
   //放在textContent之后，因为会清除子节点
-  tpc.appendChild(widthControllRight)
-  tpc.appendChild(widthControllLeft)
+  if(this?.widthControll){
+    resizeNode.call(this,widthControllLeft,tpc,widthControllRight)
+    resizeNode.call(this,widthControllRight,tpc,widthControllLeft)
+    tpc.appendChild(widthControllRight)
+    tpc.appendChild(widthControllLeft)
+  }
+  
   if (nodeObj.style) {
     tpc.style.color = nodeObj.style.color || '#2c3e50'
     tpc.style.background = nodeObj.style.background?nodeObj.style.background:nodeObj?.parent?.root?'#ffffff':'inherit'
@@ -367,7 +369,7 @@ export function layout() {
   this.root.innerHTML = ''
   this.box.innerHTML = ''
   const tpc = this.createTopic(this.nodeData)
-  shapeTpc(tpc, this.nodeData) // shape root tpc
+  shapeTpc.call(this,tpc, this.nodeData) // shape root tpc
   tpc.draggable = false
   this.root.appendChild(tpc)
 
