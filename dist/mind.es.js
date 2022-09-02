@@ -538,6 +538,8 @@ function createInputDiv(tpc2) {
       node.topic = topic;
     div.remove();
     this.inputDiv = div = null;
+    if (topic === origin)
+      return;
     tpc2.childNodes[0].textContent = node.topic;
     const widthControllLeft = tpc2.querySelector("widthControllRight");
     const widthControllRight = tpc2.querySelector("widthControllRight");
@@ -1139,6 +1141,9 @@ function getHeightFromRootToChild(node2) {
   return getHeightDistance(tpc2, childTpc);
 }
 const toCenter = function() {
+  this.container.scrollTo(1e4 - this.container.offsetWidth / 2, 1e4 - this.container.offsetHeight / 2);
+};
+const toTopLeft = function() {
   var _a;
   if (((_a = this.nodeData) == null ? void 0 : _a.children.length) > 0) {
     this.container.scrollTo(1e4 - getRootWidth(this.container) / 2 - 10, 1e4 - getRootHeight(this.container) / 2 - getHeightFromRootToChild(this.container) - 5);
@@ -2496,7 +2501,7 @@ function createToolBarRBContainer(mind) {
     mind.container.requestFullscreen();
   };
   gc.onclick = () => {
-    mind.toCenter();
+    mind.toTopLeft();
   };
   zo.onclick = () => {
     if (mind.scaleVal < 0.6)
@@ -3264,6 +3269,7 @@ MindElixir.prototype = {
   getAllDataMd,
   scale,
   toCenter,
+  toTopLeft,
   focusNode,
   cancelFocus,
   initLeft,
@@ -3328,7 +3334,11 @@ MindElixir.prototype = {
     this.draggable && nodeDraggable(this);
     this.layout();
     this.linkDiv();
-    this.toCenter();
+    if (this.direction === 1) {
+      this.toTopLeft();
+    } else {
+      this.toCenter();
+    }
     initMouseEvent(this);
   }
 };
