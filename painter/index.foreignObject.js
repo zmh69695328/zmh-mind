@@ -6,6 +6,15 @@ let maxLeft = 10000
 let maxRight = 10000
 let imgPadding = 40
 let head = `<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">`
+
+function init(){
+  maxTop = 10000
+  maxBottom = 10000
+  maxLeft = 10000
+  maxRight = 10000
+  imgPadding = 40
+}
+
 function generateSvgDom() {
   let primaryNodes = $d.querySelectorAll('.mindbox > grp, root')
   let svgContent = ''
@@ -47,6 +56,7 @@ function generateSvgDom() {
 
 export function getHeightAndWidth() {
   $d=this.container
+  init()
   let primaryNodes = $d.querySelectorAll('.mindbox > grp, root')
   let svgContent = ''
   for (let i = 0; i < primaryNodes.length; i++) {

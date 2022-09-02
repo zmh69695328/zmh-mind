@@ -245,7 +245,6 @@ export function createInputDiv(tpc: Topic) {
       div.appendChild(imgContainer)
     })
   }
-  console.log('div.style',div.style,tpc.offsetWidth)
   div.style.cssText = `min-width:${tpc.offsetWidth - 22}px;min-height:${tpc.clientHeight-16}px`
   if(tpc.nodeObj?.style?.width){
     div.style.width='auto'
@@ -254,14 +253,7 @@ export function createInputDiv(tpc: Topic) {
     div.style.color='#2c3e50'
   }
   if (this.direction === LEFT) div.style.right = '0'
-  // tpc.childNodes.forEach((child:ChildNode)=>{
-  //   if(child.nodeName==='IMG'){
-  //     div.appendChild(child)
-  //   }
-  //   //div.appendChild(child)
-  // })
   div.focus()
-
   selectText(div)
   this.inputDiv = div
 
@@ -300,12 +292,12 @@ export function createInputDiv(tpc: Topic) {
           })
       }
     })
-    if (topic === ''&&node.image.length===0) node.topic = origin
+    if (topic === '' && node.image.length===0) node.topic = origin
     else node.topic = topic
     div.remove()
     this.inputDiv = div = null
     // TODO 优化
-    if (topic === origin) return // 没有修改不做处理
+    if (topic === origin && node.image.length===0) return // 没有修改不做处理
     tpc.childNodes[0].textContent = node.topic
     //更新宽度控制条的高度
     const widthControllLeft=tpc.querySelector('widthControllRight') as HTMLElement

@@ -508,7 +508,6 @@ function createInputDiv(tpc2) {
       div.appendChild(imgContainer);
     });
   }
-  console.log("div.style", div.style, tpc2.offsetWidth);
   div.style.cssText = `min-width:${tpc2.offsetWidth - 22}px;min-height:${tpc2.clientHeight - 16}px`;
   if ((_b = (_a = tpc2.nodeObj) == null ? void 0 : _a.style) == null ? void 0 : _b.width) {
     div.style.width = "auto";
@@ -557,7 +556,7 @@ function createInputDiv(tpc2) {
       node.topic = topic;
     div.remove();
     this.inputDiv = div = null;
-    if (topic === origin)
+    if (topic === origin && node.image.length === 0)
       return;
     tpc2.childNodes[0].textContent = node.topic;
     const widthControllLeft = tpc2.querySelector("widthControllRight");
@@ -731,6 +730,13 @@ let maxLeft = 1e4;
 let maxRight = 1e4;
 let imgPadding = 40;
 let head = `<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">`;
+function init() {
+  maxTop = 1e4;
+  maxBottom = 1e4;
+  maxLeft = 1e4;
+  maxRight = 1e4;
+  imgPadding = 40;
+}
 function generateSvgDom() {
   let primaryNodes = $d$3.querySelectorAll(".mindbox > grp, root");
   let svgContent = "";
@@ -766,6 +772,7 @@ function generateSvgDom() {
 }
 function getHeightAndWidth() {
   $d$3 = this.container;
+  init();
   let primaryNodes = $d$3.querySelectorAll(".mindbox > grp, root");
   let svgContent = "";
   for (let i = 0; i < primaryNodes.length; i++) {
