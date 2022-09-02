@@ -162,7 +162,6 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
       }
       tpc.appendChild(button)
     });
-    
   }
 }
 
@@ -288,7 +287,7 @@ export function createInputDiv(tpc: Topic) {
     div.remove()
     this.inputDiv = div = null
     // TODO 优化
-    // if (topic === origin) return // 没有修改不做处理
+    if (topic === origin) return // 没有修改不做处理
     tpc.childNodes[0].textContent = node.topic
     //更新宽度控制条的高度
     const widthControllLeft=tpc.querySelector('widthControllRight') as HTMLElement
@@ -300,6 +299,7 @@ export function createInputDiv(tpc: Topic) {
     delete node.style.width
     this.shapeTpc(tpc,node)
     this.linkDiv()
+
     this.bus.fire('operation', {
       name: 'finishEdit',
       obj: node,
