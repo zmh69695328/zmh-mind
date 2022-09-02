@@ -190,7 +190,7 @@ type data = {
 };
 
 export const getAllDataWithAutoHide = function(): data {
-  const expandDeep=Number(this.container.querySelector('.numberSelection').value)||3
+  const expandDeep=Number(this.container.querySelector('.numberSelection').value)||2
   const data = {
     direction:this.direction,
     nodeData: getData(this),
@@ -453,7 +453,7 @@ export const refresh = function() {
  * 一键展开子主题
  * @param nodeData 
  */
- function expandNodeChild(nodeData:NodeObj){
+ export function expandNodeChild(nodeData:NodeObj){
   nodeData.expanded=true
   for(const val of (nodeData.children||[])){
     expandNodeChild(val)

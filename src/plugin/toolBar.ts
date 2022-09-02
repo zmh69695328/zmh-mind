@@ -1,4 +1,4 @@
-import { getAllDataWithAutoHide } from "../interact"
+import { expandNodeChild, getAllDataWithAutoHide } from "../interact"
 import { updateSidebar } from "./sidebar"
 
 const createButton = (id, name) => {
@@ -33,13 +33,16 @@ function createToolBarRBContainer(mind) {
   const numberSelection=document.createElement('input')
   numberSelection.className='numberSelection'
   numberSelection.type='number'
-  numberSelection.min='3'
+  numberSelection.min='2'
   numberSelection.max='100'
   numberSelection.step='1'
-  numberSelection.value=mind?.expandDeep?.toString()||'3'
+  numberSelection.value=mind?.expandDeep?.toString()||'2'
   numberSelection.oninput=debounce(()=>{
     const data=mind.getAllDataWithAutoHide()
-    mind.init(data?.nodeData,data?.expandDeep)
+    // mind.init(data?.nodeData,data?.expandDeep)
+    expandNodeChild(data?.nodeData)
+    mind.layout()
+    mind.linkDiv()
   },500)
 
   

@@ -335,11 +335,13 @@ const shapeTpc = function(tpc2, nodeObj) {
   var _a;
   const widthControllRight = $d$5.createElement("widthControllRight");
   const widthControllLeft = $d$5.createElement("widthControllLeft");
-  resizeNode.call(this, widthControllLeft, tpc2, widthControllRight);
-  resizeNode.call(this, widthControllRight, tpc2, widthControllLeft);
   tpc2.textContent = nodeObj.topic;
-  tpc2.appendChild(widthControllRight);
-  tpc2.appendChild(widthControllLeft);
+  if (this == null ? void 0 : this.widthControll) {
+    resizeNode.call(this, widthControllLeft, tpc2, widthControllRight);
+    resizeNode.call(this, widthControllRight, tpc2, widthControllLeft);
+    tpc2.appendChild(widthControllRight);
+    tpc2.appendChild(widthControllLeft);
+  }
   if (nodeObj.style) {
     tpc2.style.color = nodeObj.style.color || "#2c3e50";
     tpc2.style.background = nodeObj.style.background ? nodeObj.style.background : ((_a = nodeObj == null ? void 0 : nodeObj.parent) == null ? void 0 : _a.root) ? "#ffffff" : "inherit";
@@ -601,7 +603,7 @@ function layout() {
   this.root.innerHTML = "";
   this.box.innerHTML = "";
   const tpc2 = this.createTopic(this.nodeData);
-  shapeTpc(tpc2, this.nodeData);
+  shapeTpc.call(this, tpc2, this.nodeData);
   tpc2.draggable = false;
   this.root.appendChild(tpc2);
   const primaryNodes = this.nodeData.children;
@@ -937,10 +939,12 @@ const selectNode = function(targetElement, isNewNode, clickEvent) {
   if (this.currentNode)
     this.currentNode.className = "";
   targetElement.className = "selected";
-  const widthControllRight = targetElement.querySelector("widthControllRight");
-  widthControllRight.className = "width-controll-right";
-  const widthControllLeft = targetElement.querySelector("widthControllLeft");
-  widthControllLeft.className = "width-controll-left";
+  if (this == null ? void 0 : this.widthControll) {
+    const widthControllRight = targetElement.querySelector("widthControllRight");
+    widthControllRight.className = "width-controll-right";
+    const widthControllLeft = targetElement.querySelector("widthControllLeft");
+    widthControllLeft.className = "width-controll-left";
+  }
   this.currentNode = targetElement;
   if (isNewNode) {
     this.bus.fire("selectNewNode", targetElement.nodeObj, clickEvent);
@@ -952,10 +956,12 @@ const selectNode = function(targetElement, isNewNode, clickEvent) {
 const unselectNode = function() {
   if (this.currentNode) {
     this.currentNode.className = "";
-    const widthControllRight = this.currentNode.querySelector("widthControllRight");
-    widthControllRight.className = "";
-    const widthControllLeft = this.currentNode.querySelector("widthControllLeft");
-    widthControllLeft.className = "";
+    if (this.widthControll) {
+      const widthControllRight = this.currentNode.querySelector("widthControllRight");
+      widthControllRight.className = "";
+      const widthControllLeft = this.currentNode.querySelector("widthControllLeft");
+      widthControllLeft.className = "";
+    }
   }
   this.currentNode = null;
   this.bus.fire("unselectNode");
@@ -1065,7 +1071,7 @@ function autoHide(nodeData, cnt, deep) {
   }
 }
 const getAllDataWithAutoHide = function() {
-  const expandDeep = Number(this.container.querySelector(".numberSelection").value) || 3;
+  const expandDeep = Number(this.container.querySelector(".numberSelection").value) || 2;
   const data = {
     direction: this.direction,
     nodeData: getData(this),
@@ -1188,6 +1194,7 @@ const expandNode = function(el, isExpand) {
     node2.expanded = false;
   } else {
     node2.expanded = true;
+    expandNodeChild(node2);
   }
   this.layout();
   this.linkDiv();
@@ -1198,6 +1205,12 @@ const refresh = function() {
   this.layout();
   this.linkDiv();
 };
+function expandNodeChild(nodeData) {
+  nodeData.expanded = true;
+  for (const val of nodeData.children || []) {
+    expandNodeChild(val);
+  }
+}
 const $d$2 = document;
 const updateNodeStyle = function(object) {
   if (!object.style)
@@ -2461,13 +2474,15 @@ function createToolBarRBContainer(mind) {
   const numberSelection = document.createElement("input");
   numberSelection.className = "numberSelection";
   numberSelection.type = "number";
-  numberSelection.min = "3";
+  numberSelection.min = "2";
   numberSelection.max = "100";
   numberSelection.step = "1";
-  numberSelection.value = ((_a = mind == null ? void 0 : mind.expandDeep) == null ? void 0 : _a.toString()) || "3";
+  numberSelection.value = ((_a = mind == null ? void 0 : mind.expandDeep) == null ? void 0 : _a.toString()) || "2";
   numberSelection.oninput = debounce(() => {
     const data = mind.getAllDataWithAutoHide();
-    mind.init(data == null ? void 0 : data.nodeData, data == null ? void 0 : data.expandDeep);
+    expandNodeChild(data == null ? void 0 : data.nodeData);
+    mind.layout();
+    mind.linkDiv();
   }, 500);
   const percentage = document.createElement("span");
   percentage.innerText = "100%";
@@ -3126,7 +3141,8 @@ function MindElixir({
   primaryNodeHorizontalGap,
   primaryNodeVerticalGap,
   mobileMenu: mobileMenu2,
-  closeButton
+  closeButton,
+  widthControll
 }) {
   const box = document.getElementById(el);
   if (!box)
@@ -3143,6 +3159,7 @@ function MindElixir({
   this.nodeMenu = nodeMenu2 === void 0 ? true : nodeMenu2;
   this.keypress = keypress2 === void 0 ? true : keypress2;
   this.closeButton = closeButton === void 0 ? false : closeButton;
+  this.widthControll = widthControll === void 0 ? true : widthControll;
   this.mobileMenu = mobileMenu2;
   this.direction = data.direction !== void 0 ? data.direction : typeof direction === "number" ? direction : 1;
   this.draggable = draggable === void 0 ? true : draggable;
