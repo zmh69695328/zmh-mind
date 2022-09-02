@@ -297,9 +297,11 @@ export function createInputDiv(tpc: Topic) {
     //记录节点宽度
     // node.style.width=tpc.clientWidth-Number(getComputedStyle(tpc).paddingLeft.replace('px',''))-Number(getComputedStyle(tpc).paddingRight.replace('px',''))+1+'px'
     delete node.style.width
+
     this.shapeTpc(tpc,node)
     this.linkDiv()
-
+    //时间分片，待优化
+    updateLinkJumpTitle.call(this,this.nodeData,node.id,node.topic)
     this.bus.fire('operation', {
       name: 'finishEdit',
       obj: node,
@@ -307,6 +309,20 @@ export function createInputDiv(tpc: Topic) {
     })
   })
   console.timeEnd('createInputDiv')
+}
+
+
+function updateLinkJumpTitle(node:NodeObj,id,topic){
+  node?.linkJump?.forEach(({toId},index)=>{
+    if(toId===id){
+      node.linkJump[index].title=topic
+      const button=this.container.querySelector(`tpc[data-nodeid=me${node.id}] .linkJump`)
+      button.title=topic
+    }
+  })
+  for(const val of (node.children||[])){
+    updateLinkJumpTitle.call(this,val,id,topic)
+  }
 }
 
 export const createExpander = function(expanded: boolean | undefined): Expander {

@@ -549,6 +549,7 @@ function createInputDiv(tpc2) {
     delete node.style.width;
     this.shapeTpc(tpc2, node);
     this.linkDiv();
+    updateLinkJumpTitle.call(this, this.nodeData, node.id, node.topic);
     this.bus.fire("operation", {
       name: "finishEdit",
       obj: node,
@@ -556,6 +557,19 @@ function createInputDiv(tpc2) {
     });
   });
   console.timeEnd("createInputDiv");
+}
+function updateLinkJumpTitle(node, id, topic) {
+  var _a;
+  (_a = node == null ? void 0 : node.linkJump) == null ? void 0 : _a.forEach(({ toId }, index2) => {
+    if (toId === id) {
+      node.linkJump[index2].title = topic;
+      const button = this.container.querySelector(`tpc[data-nodeid=me${node.id}] .linkJump`);
+      button.title = topic;
+    }
+  });
+  for (const val of node.children || []) {
+    updateLinkJumpTitle.call(this, val, id, topic);
+  }
 }
 const createExpander = function(expanded) {
   const expander = $d$5.createElement("epd");
