@@ -16,6 +16,7 @@ function init(){
 }
 
 function generateSvgDom() {
+  init()
   let primaryNodes = $d.querySelectorAll('.mindbox > grp, root')
   let svgContent = ''
   for (let i = 0; i < primaryNodes.length; i++) {

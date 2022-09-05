@@ -738,6 +738,7 @@ function init() {
   imgPadding = 40;
 }
 function generateSvgDom() {
+  init();
   let primaryNodes = $d$3.querySelectorAll(".mindbox > grp, root");
   let svgContent = "";
   for (let i = 0; i < primaryNodes.length; i++) {
