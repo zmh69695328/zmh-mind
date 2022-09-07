@@ -168,7 +168,8 @@ export interface MindElixirInstance {
   primaryNodeVerticalGap: number,
   mobileMenu: boolean,
   closeButton:boolean,
-  widthControll:boolean
+  widthControll:boolean,
+  uploadButton:boolean
 }
 export interface Options {
   el: string,
@@ -192,7 +193,9 @@ export interface Options {
   mobileMenu?: boolean,
   closeButton?:boolean,
   //节点宽度调整
-  widthControll?:boolean
+  widthControll?:boolean,
+  //导入XMind文件
+  uploadButton?:boolean
 }
 const $d = document
 /**
