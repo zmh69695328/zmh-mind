@@ -14,6 +14,10 @@ import { findEle } from './utils/dom'
 function getData(instance) {
   return instance.isFocusMode ? instance.nodeDataBackup : instance.nodeData
 }
+
+interface ISummaryNode{
+  NodeObj
+}
 /**
  * @function
  * @instance
@@ -28,15 +32,35 @@ export const selectNode = function(targetElement, isNewNode, clickEvent) {
   if (typeof targetElement === 'string') {
     return this.selectNode(findEle(targetElement))
   }
-  if (this.currentNode) this.currentNode.className = ''
-  targetElement.className = 'selected'
+  // if ((this.currentNode&&!this.ctrlRepeat)||this.currentNode?.nodeObj.id===targetElement?.nodeObj.id) this.currentNode.className = ''
+  // else targetElement.className = 'selected'
+  if(this.ctrlRepeat){
+    let flag=false
+    this.currentSummaryNodeArr=this.currentSummaryNodeArr??[]
+    this.currentSummaryNodeArr=this.currentSummaryNodeArr.filter(node=>{
+      if(node.nodeObj.id===targetElement.nodeObj.id){
+        flag=true
+        return false
+      }else{
+        return true
+      }
+    })
+    if(!flag){
+      this.currentSummaryNodeArr.push(targetElement)
+      targetElement.className='selected'
+    }else{
+      targetElement.className=''
+    }
+  }else{
+    if (this.currentNode) this.currentNode.className = ''
+    targetElement.className = 'selected'
+  }
   if(this?.widthControll){
     const widthControllRight=targetElement.querySelector('widthControllRight')
     widthControllRight.className='width-controll-right'
     const widthControllLeft=targetElement.querySelector('widthControllLeft')
     widthControllLeft.className='width-controll-left'
   }
-  
   this.currentNode = targetElement
   if (isNewNode) {
     this.bus.fire('selectNewNode', targetElement.nodeObj, clickEvent)

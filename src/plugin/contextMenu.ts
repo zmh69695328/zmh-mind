@@ -30,8 +30,9 @@ export default function(mind, option) {
   const unfocus = createLi('cm-unfucus', i18n[locale].cancelFocus, '')
   const up = createLi('cm-up', i18n[locale].moveUp, 'PgUp')
   const down = createLi('cm-down', i18n[locale].moveDown, 'Pgdn')
-  const link = createLi('cm-down', i18n[locale].link, '')
-  const nodeLink = createLi('cm-down', i18n[locale].nodeLink, '')
+  const link = createLi('cm-link', i18n[locale].link, '')
+  const nodeLink = createLi('cm-nodelink', i18n[locale].nodeLink, '')
+  const summary = createLi('cm-summary', i18n[locale].summary, '')
 
   const menuUl = document.createElement('ul')
   menuUl.className = 'menu-list'
@@ -49,6 +50,7 @@ export default function(mind, option) {
     menuUl.appendChild(link)
     menuUl.appendChild(nodeLink)
   }
+  menuUl.appendChild(summary)
   if (option && option.extend) {
     for (let i = 0; i < option.extend.length; i++) {
       const item = option.extend[i]

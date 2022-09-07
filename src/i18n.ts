@@ -21,7 +21,8 @@ const cn = {
   hyperlink:'超链接',
   linkSeparate:'链接地址,多个链接半角逗号分隔',
   remark:'备注',
-  reamrkSeparate:'内容'
+  reamrkSeparate:'内容' ,
+  summary:'概要'
 }
 export default {
   cn,
@@ -66,7 +67,9 @@ export default {
     hyperlink:'hyperlink',
     linkSeparate:'link address',
     remark:'remark',
-    reamrkSeparate:'content'
+    reamrkSeparate:'content',
+    summary:'summary',
+    nodeLink:'inner link'
   },
   ja: {
     addChild: '子ノードを追加する',

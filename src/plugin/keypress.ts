@@ -8,6 +8,16 @@ export default function(mind) {
       // tab
       mind.addChild()
     },
+    17: e => {
+      // controll
+      mind.ctrlRepeat=true
+      console.log('按下controll')
+    },
+    91: e => {
+      // command
+      mind.ctrlRepeat=true
+      console.log('按下command')
+    },
     113: () => {
       // f2
       mind.beginEdit()
@@ -103,6 +113,11 @@ export default function(mind) {
       else mind.removeNode()
     } else {
       key2func[e.keyCode] && key2func[e.keyCode](e)
+    }
+  }
+  mind.map.onkeyup = e => {
+    if (e.keyCode === 17 || e.keyCode === 91) {
+      mind.ctrlRepeat=false
     }
   }
 }
