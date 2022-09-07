@@ -5,8 +5,9 @@ import {
   getObjById,
   generateUUID,
   generateNewObj,
+  generateNewSummaryObj,
 } from './utils/index'
-import { findEle, createInputDiv, layout, Topic, createChildren, createGroup, createTop, createTopic, shapeTpc } from './utils/dom'
+import { findEle, createInputDiv, layout, Topic, createChildren, createGroup, createTop, createTopic, shapeTpc, createSummary } from './utils/dom'
 import { createLinkSvg, createLine } from './utils/svg'
 import {
   selectNode,
@@ -54,6 +55,7 @@ import {
   setNodeTopic,
   moveNodeBefore,
   moveNodeAfter,
+  addSummary,
 } from './nodeOperation'
 import {
   createLink,
@@ -121,7 +123,8 @@ export interface NodeObj {
   }[]
   expanded?: boolean,
   direction?: number,
-  root?: boolean
+  root?: boolean,
+  type?:string
 }
 
 export interface NodeElement extends HTMLElement {
@@ -328,10 +331,12 @@ MindElixir.prototype = {
   addParentLink,
   getObjById,
   generateNewObj,
+  generateNewSummaryObj,
   // node operation
   insertSibling: beforeHook(insertSibling),
   insertBefore: beforeHook(insertBefore),
   insertParent: beforeHook(insertParent),
+  addSummary:beforeHook(addSummary),
   addChild: beforeHook(addChild),
   copyNode: beforeHook(copyNode),
   moveNode: beforeHook(moveNode),
@@ -360,7 +365,7 @@ MindElixir.prototype = {
   linkDiv,
   createInputDiv,
   shapeTpc,
-  createChildren, createGroup, createTop, createTopic,
+  createChildren, createGroup, createTop, createTopic,createSummary,
 
   selectNode,
   unselectNode,

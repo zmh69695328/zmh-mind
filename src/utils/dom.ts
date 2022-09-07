@@ -198,6 +198,20 @@ export const createGroup = function(nodeObj: NodeObj, omitChildren?: boolean) {
   return { grp, top }
 }
 
+export const createSummary = function(nodeObj: NodeObj, omitChildren?: boolean) {
+  const smy:HTMLElement = $d.createElement('SMY')
+  const top: Top = this.createTop(nodeObj)
+  smy.appendChild(top)
+  if (!omitChildren && nodeObj.children && nodeObj.children.length > 0) {
+    top.appendChild(createExpander(nodeObj.expanded))
+    if (nodeObj.expanded !== false) {
+      const children = this.createChildren(nodeObj.children)
+      smy.appendChild(children)
+    }
+  }
+  return { smy, top }
+}
+
 export const createTop = function(nodeObj: NodeObj): Top {
   const top = $d.createElement('t')
   const tpc = this.createTopic(nodeObj)

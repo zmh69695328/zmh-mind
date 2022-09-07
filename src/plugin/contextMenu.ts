@@ -120,6 +120,10 @@ export default function(mind, option) {
     mind.addChild()
     menuContainer.hidden = true
   }
+  summary.onclick = e => {
+    mind.addSummary()
+    menuContainer.hidden = true
+  }
   add_parent.onclick = e => {
     mind.insertParent()
     menuContainer.hidden = true

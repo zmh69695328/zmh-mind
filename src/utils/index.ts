@@ -157,6 +157,15 @@ export function generateNewObj(): NodeObj {
   }
 }
 
+export function generateNewSummaryObj(): NodeObj {
+  const id = generateUUID()
+  return {
+    topic: this.newTopicName || 'new node',
+    id,
+    type:'summary'
+  }
+}
+
 export function generateNewLink(from, to) {
   const id = generateUUID()
   return {

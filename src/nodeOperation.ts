@@ -269,7 +269,46 @@ export const insertParent = function(el, node) {
   })
 }
 
-export const addChildFunction = function(nodeEle, node) {
+export const addSummaryFunction = function(nodeEle,node){
+  if (!nodeEle) return undefined
+  const nodeObj = nodeEle.nodeObj
+  // if (nodeObj.expanded === false) {
+  //   this.expandNode(nodeEle, true)
+  //   // dom had resetted
+  //   nodeEle = findEle(nodeObj.id)
+  // }
+  const newNodeObj = node || this.generateNewSummaryObj()
+  // if (nodeObj.children) nodeObj.children.push(newNodeObj)
+  // else nodeObj.children = [newNodeObj]
+  nodeObj.parent.children.push(newNodeObj)
+  addParentLink(this.nodeData)
+
+  const top = nodeEle.parentNode.parentNode.parentNode.parentNode
+
+  const { smy, top: newTop } = this.createSummary(newNodeObj)
+  // const { grp, top: newTop } = this.createGroup(newNodeObj)
+  top.appendChild(smy) 
+  this.linkDiv()
+  // if (top.tagName === 'T') {
+  //   if (top.children[1]) {
+  //     top.nextSibling.appendChild(grp)
+  //   } else {
+  //     const c = $d.createElement('children')
+  //     c.appendChild(grp)
+  //     top.appendChild(createExpander(true))
+  //     top.insertAdjacentElement('afterend', c)
+  //   }
+  //   this.linkDiv(grp.offsetParent)
+  // } else if (top.tagName === 'ROOT') {
+  //   this.processPrimaryNode(grp, newNodeObj)
+  //   top.nextSibling.appendChild(grp)
+  //   this.linkDiv()
+  // }
+
+  return { newTop, newNodeObj }
+}
+
+export const addChildFunction = function(nodeEle, node) { 
   if (!nodeEle) return undefined
   const nodeObj = nodeEle.nodeObj
   if (nodeObj.expanded === false) {
@@ -302,6 +341,22 @@ export const addChildFunction = function(nodeEle, node) {
     this.linkDiv()
   }
   return { newTop, newNodeObj }
+}
+
+export const addSummary = function(el: NodeElement, node: NodeObj) {
+  console.time('addSummary')
+  const nodeEle = el || this.currentNode
+  if (!nodeEle) return
+  const { newTop, newNodeObj } = addSummaryFunction.call(this, nodeEle, node)
+  console.timeEnd('addSummary')
+  if (!node) {
+    this.createInputDiv(newTop.children[0])
+  }
+  this.selectNode(newTop.children[0], true)
+  this.bus.fire('operation', {
+    name: 'addSummary',
+    obj: newNodeObj,
+  })
 }
 
 /**
