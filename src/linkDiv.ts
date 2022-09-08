@@ -155,11 +155,16 @@ export default function linkDiv(primaryNode) {
     }
     if (el.childElementCount) {
       const svg = createLinkSvg('svg3rd')
+      const svgSMY = createLinkSvg('svg3rd')
       // svg tag name is lower case
       if (el.lastChild.tagName === 'svg') el.lastChild.remove()
       el.appendChild(svg)
       const parent = el.children[0]
-      const children = el.children[1].children
+      let children
+      if(el.children[3]?.tagName==='SMY')
+        children = [...el.children[1].children,el.children[3]]
+      else
+        children = el.children[1].children
       path = ''
       loopChildren(children, parent, true)
       svg.appendChild(createPath(path))
@@ -185,7 +190,7 @@ export default function linkDiv(primaryNode) {
 }
 
 let path = ''
-function loopChildren(children: HTMLCollection, parent: HTMLElement, first?: boolean) {
+function loopChildren(children:HTMLElement[]|HTMLCollection, parent: HTMLElement, first?: boolean) {
   const parentOT = parent.offsetTop
   const parentOL = parent.offsetLeft
   const parentOW = parent.offsetWidth
@@ -231,7 +236,12 @@ function loopChildren(children: HTMLCollection, parent: HTMLElement, first?: boo
         childTOT + childTOH < parentOT + parentOH / 2 + 50 &&
         childTOT + childTOH > parentOT + parentOH / 2 - 50
       ) {
-        path += `M ${x1} ${y1} H ${xMiddle} V ${y2} H ${x2}`
+        if(child.tagName==='SMY'){
+          console.log('1111')
+        }else{
+          path += `M ${x1} ${y1} H ${xMiddle} V ${y2} H ${x2}`
+        }
+        
       } else if (childTOT + childTOH >= parentOT + parentOH / 2) {
         path += `M ${x1} ${y1} H ${xMiddle} V ${y2 } H ${x2}`
       } else {
