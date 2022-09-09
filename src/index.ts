@@ -239,7 +239,8 @@ function MindElixir(this: MindElixirInstance, {
   primaryNodeVerticalGap,
   mobileMenu,
   closeButton,
-  widthControll
+  widthControll,
+  uploadButton
 }: Options) {
   const box = document.getElementById(el) as HTMLElement
   if (!box) return
@@ -274,6 +275,7 @@ function MindElixir(this: MindElixirInstance, {
   this.overflowHidden = overflowHidden
   this.primaryNodeHorizontalGap = primaryNodeHorizontalGap
   this.primaryNodeVerticalGap = primaryNodeVerticalGap
+  this.uploadButton = uploadButton === undefined ? true : uploadButton
 
   this.bus = new Bus()
   ;(this.bus as any).addListener('operation', (operation: operation) => {
