@@ -16,8 +16,7 @@ let mind = new MindElixir({
   nodeMenu: true, // default true
   keypress: true, // default true
   locale: 'zh_CN',
-  widthControll:true
-  // primaryLinkStyle:2
+  widthControll:true  // primaryLinkStyle:2
 })
 mind.init()
 window.mind=mind

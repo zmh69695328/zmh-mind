@@ -158,7 +158,11 @@ export default function(mind) {
   tagInput.onchange = (e:InputEvent & { target: HTMLInputElement}) => {
     if (!mind.currentNode) return
     if (e.target.value!==null||e.target.value!==undefined) {
-      const newTags = e.target.value.split(',')
+      let newTags
+      if(e.target.value==='')
+        newTags=[]
+      else
+        newTags = e.target.value.split(',')
       mind.updateNodeTags(mind.currentNode.nodeObj, newTags)
     }
   }

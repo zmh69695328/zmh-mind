@@ -47,7 +47,10 @@ export const updateNodeStyle = function(object) {
 export const updateNodeTags = function(object, tags) {
   if (!tags) return
   const oldVal = object.tags
-  object.tags = tags
+  if(tags.length===0)
+    delete object.tags
+  else
+    object.tags = tags
   const nodeEle = findEle(object.id)
   shapeTpc.call(this,nodeEle, object)
   this.linkDiv()
@@ -80,7 +83,10 @@ export const updateNodeHyperLink = function(object, hyperLink) {
     return hyperLinkArr.find(val=>val===link.title)?true:false
   })
   if(object.linkJump?.length===0) delete object.linkJump
-  object.hyperLink = hyperLink
+  object.hyperLink = hyperLinkArr.filter(link=>{
+    return link!==''&&!object.linkJump?.find(val=>val.title===link)
+  })
+  if(object.hyperLink?.length===0) delete object.hyperLink
   const nodeEle = findEle(object.id)
   shapeTpc.call(this,nodeEle, object)
   this.linkDiv()

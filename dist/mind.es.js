@@ -415,12 +415,6 @@ const shapeTpc = function(tpc2, nodeObj) {
     iconsContainer.innerHTML = nodeObj.icons.filter((icon) => icon !== "").map((icon) => `<span>${encodeHTML(icon)}</span>`).join("");
     tpc2.appendChild(iconsContainer);
   }
-  if (nodeObj.tags) {
-    const tagsContainer = $d$5.createElement("div");
-    tagsContainer.className = "tags";
-    tagsContainer.innerHTML = nodeObj.tags.filter((tag) => tag !== "").map((tag) => `<span>${encodeHTML(tag)}</span>`).join("");
-    tpc2.appendChild(tagsContainer);
-  }
   if (nodeObj.linkJump) {
     nodeObj.linkJump.forEach((val) => {
       const button = document.createElement("a");
@@ -432,6 +426,12 @@ const shapeTpc = function(tpc2, nodeObj) {
       };
       tpc2.appendChild(button);
     });
+  }
+  if (nodeObj.tags) {
+    const tagsContainer = $d$5.createElement("div");
+    tagsContainer.className = "tags";
+    tagsContainer.innerHTML = nodeObj.tags.filter((tag) => tag !== "").map((tag) => `<span>${encodeHTML(tag)}</span>`).join("");
+    tpc2.appendChild(tagsContainer);
   }
 };
 function moveToNode(id) {
@@ -448,17 +448,17 @@ function moveToNode(id) {
     toNode.classList.remove("blink");
   }, 3e3);
 }
-function findUnExpandedParent(node, toId) {
-  if (node.id === toId) {
+function findUnExpandedParent(node2, toId) {
+  if (node2.id === toId) {
     return true;
   }
   let flag = false;
-  for (const val of node.children || []) {
+  for (const val of node2.children || []) {
     if (findUnExpandedParent(val, toId))
       flag = true;
   }
   if (flag)
-    node.expanded = true;
+    node2.expanded = true;
   return flag;
 }
 const createGroup = function(nodeObj, omitChildren) {
@@ -562,54 +562,54 @@ function createInputDiv(tpc2) {
   div.addEventListener("blur", () => {
     if (!div)
       return;
-    const node = tpc2.nodeObj;
+    const node2 = tpc2.nodeObj;
     const topic = div.textContent.trim();
-    node.image = [];
+    node2.image = [];
     div.childNodes.forEach((val) => {
       if (val.nodeName === "IMG") {
-        node.image.push({
+        node2.image.push({
           url: val.src,
           width: val.width,
           height: val.height
         });
       }
     });
-    if (topic === "" && node.image.length === 0)
-      node.topic = origin;
+    if (topic === "" && node2.image.length === 0)
+      node2.topic = origin;
     else
-      node.topic = topic;
+      node2.topic = topic;
     div.remove();
     this.inputDiv = div = null;
-    if (topic === origin && node.image.length === 0)
+    if (topic === origin && node2.image.length === 0)
       return;
-    tpc2.childNodes[0].textContent = node.topic;
+    tpc2.childNodes[0].textContent = node2.topic;
     const widthControllLeft = tpc2.querySelector("widthControllRight");
     const widthControllRight = tpc2.querySelector("widthControllRight");
-    if (!node.style)
-      node.style = {};
-    node.style.controllWidth = widthControllLeft.style.height = widthControllRight.style.height = tpc2.clientHeight.toString() + "px";
-    delete node.style.width;
-    this.shapeTpc(tpc2, node);
+    if (!node2.style)
+      node2.style = {};
+    node2.style.controllWidth = widthControllLeft.style.height = widthControllRight.style.height = tpc2.clientHeight.toString() + "px";
+    delete node2.style.width;
+    this.shapeTpc(tpc2, node2);
     this.linkDiv();
-    updateLinkJumpTitle.call(this, this.nodeData, node.id, node.topic);
+    updateLinkJumpTitle.call(this, this.nodeData, node2.id, node2.topic);
     this.bus.fire("operation", {
       name: "finishEdit",
-      obj: node,
+      obj: node2,
       origin
     });
   });
   console.timeEnd("createInputDiv");
 }
-function updateLinkJumpTitle(node, id, topic) {
+function updateLinkJumpTitle(node2, id, topic) {
   var _a;
-  (_a = node == null ? void 0 : node.linkJump) == null ? void 0 : _a.forEach(({ toId }, index2) => {
+  (_a = node2 == null ? void 0 : node2.linkJump) == null ? void 0 : _a.forEach(({ toId }, index2) => {
     if (toId === id) {
-      node.linkJump[index2].title = topic;
-      const button = this.container.querySelector(`tpc[data-nodeid=me${node.id}] .linkJump`);
+      node2.linkJump[index2].title = topic;
+      const button = this.container.querySelector(`tpc[data-nodeid=me${node2.id}] .linkJump`);
       button.title = topic;
     }
   });
-  for (const val of node.children || []) {
+  for (const val of node2.children || []) {
     updateLinkJumpTitle.call(this, val, id, topic);
   }
 }
@@ -670,17 +670,17 @@ function layout() {
   if (this.direction === SIDE) {
     let lcount = 0;
     let rcount = 0;
-    primaryNodes.map((node) => {
-      if (node.direction === void 0) {
+    primaryNodes.map((node2) => {
+      if (node2.direction === void 0) {
         if (lcount <= rcount) {
-          node.direction = LEFT;
+          node2.direction = LEFT;
           lcount += 1;
         } else {
-          node.direction = RIGHT;
+          node2.direction = RIGHT;
           rcount += 1;
         }
       } else {
-        if (node.direction === LEFT) {
+        if (node2.direction === LEFT) {
           lcount += 1;
         } else {
           rcount += 1;
@@ -1327,7 +1327,10 @@ const updateNodeTags = function(object, tags) {
   if (!tags)
     return;
   const oldVal = object.tags;
-  object.tags = tags;
+  if (tags.length === 0)
+    delete object.tags;
+  else
+    object.tags = tags;
   const nodeEle = findEle(object.id);
   shapeTpc.call(this, nodeEle, object);
   this.linkDiv();
@@ -1352,7 +1355,7 @@ const updateNodeIcons = function(object, icons) {
   });
 };
 const updateNodeHyperLink = function(object, hyperLink) {
-  var _a, _b;
+  var _a, _b, _c;
   if (hyperLink == null || hyperLink == void 0)
     return;
   const oldVal = object.hyperLink;
@@ -1362,7 +1365,12 @@ const updateNodeHyperLink = function(object, hyperLink) {
   });
   if (((_b = object.linkJump) == null ? void 0 : _b.length) === 0)
     delete object.linkJump;
-  object.hyperLink = hyperLink;
+  object.hyperLink = hyperLinkArr.filter((link) => {
+    var _a2;
+    return link !== "" && !((_a2 = object.linkJump) == null ? void 0 : _a2.find((val) => val.title === link));
+  });
+  if (((_c = object.hyperLink) == null ? void 0 : _c.length) === 0)
+    delete object.hyperLink;
   const nodeEle = findEle(object.id);
   shapeTpc.call(this, nodeEle, object);
   this.linkDiv();
@@ -2876,7 +2884,11 @@ function nodeMenu$1(mind) {
     if (!mind.currentNode)
       return;
     if (e.target.value !== null || e.target.value !== void 0) {
-      const newTags = e.target.value.split(",");
+      let newTags;
+      if (e.target.value === "")
+        newTags = [];
+      else
+        newTags = e.target.value.split(",");
       mind.updateNodeTags(mind.currentNode.nodeObj, newTags);
     }
   };

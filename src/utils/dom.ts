@@ -1,3 +1,4 @@
+import { node } from 'canvg/dist/presets'
 import { LEFT, RIGHT, SIDE } from '../const'
 import MindElixir, { NodeObj } from '../index'
 import { expandNodeChild, getHeightFromRootToAnotherNode, getWidthFromRootToAnotherNode } from '../interact'
@@ -135,14 +136,7 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
       .join('')
     tpc.appendChild(iconsContainer)
   }
-  if (nodeObj.tags) {
-    const tagsContainer = $d.createElement('div')
-    tagsContainer.className = 'tags'
-    tagsContainer.innerHTML = nodeObj.tags
-      .filter(tag=> tag!=='').map(tag => `<span>${encodeHTML(tag)}</span>`)
-      .join('')
-    tpc.appendChild(tagsContainer)
-  }
+
   if (nodeObj.linkJump) {
     nodeObj.linkJump.forEach(val => {
       const button = document.createElement('a')
@@ -154,6 +148,14 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
       }
       tpc.appendChild(button)
     });
+  }
+  if (nodeObj.tags) {
+    const tagsContainer = $d.createElement('div')
+    tagsContainer.className = 'tags'
+    tagsContainer.innerHTML = nodeObj.tags
+      .filter(tag=> tag!=='').map(tag => `<span>${encodeHTML(tag)}</span>`)
+      .join('')
+    tpc.appendChild(tagsContainer)
   }
 }
 
