@@ -45,7 +45,7 @@ function createToolBarRBContainer(mind) {
     expandNodeChild(data?.nodeData)
     mind.layout()
     mind.linkDiv()
-  },500)
+  },300)
 
   
   const percentage = document.createElement('span')
