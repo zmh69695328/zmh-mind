@@ -56,3 +56,7 @@ haha2?.addEventListener('click',e=>{
   map2.textContent=''
   map2.appendChild(mind.exportSvgDom())
 })
+
+// document.onwheel=e=>{
+//   mind.bus.fire('wheel',e)
+// }

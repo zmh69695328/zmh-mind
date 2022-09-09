@@ -74,8 +74,22 @@ function createToolBarRBContainer(mind) {
     if (mind.scaleVal > 1.6) return
     mind.scale((mind.scaleVal += 0.2))
   }
+  mind.bus.addListener('wheel',e=>{
+    console.log('viewheight',document.documentElement.clientHeight)
+    const viewBTop=e.pageY-e.clientY+document.documentElement.clientHeight
+    const mindBTop = mind.container.getBoundingClientRect().top+window.scrollY-mind.container.clientTop+mind.container.clientHeight
+    console.log('bb',viewBTop,mindBTop)
+    //bottom 20
+    const offsetTop= mindBTop-viewBTop>0?mindBTop-viewBTop:0
+    const offset=offsetTop+toolBarRBContainer.clientHeight-20
+    console.log(offset)
+    if(offset>20&&offset<mind.container.clientHeight-toolBarRBContainer.clientHeight-20)
+      toolBarRBContainer.style.bottom=offset+'px'
+  })
   return toolBarRBContainer
 }
+
+
 function createToolBarLTContainer(mind) {
   const toolBarLTContainer = document.createElement('toolbar')
   const menu  = createButton('sidebar', 'menu')
@@ -107,6 +121,14 @@ function createToolBarLTContainer(mind) {
   s.onclick = () => {
     mind.initSide()
   }
+  mind.bus.addListener('wheel',e=>{
+    const viewTop=e.pageY-e.clientY
+    const mindTop = mind.container.getBoundingClientRect().top+window.scrollY-mind.container.clientTop
+    // console.log(mind.container.clientHeight)
+    const offset=viewTop-mindTop+20
+    if(offset>20&&offset<mind.container.clientHeight-toolBarLTContainer.clientHeight-20)
+      toolBarLTContainer.style.top=offset+'px'
+  })
   return toolBarLTContainer
 }
 

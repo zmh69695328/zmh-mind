@@ -155,22 +155,14 @@ export default function linkDiv(primaryNode) {
     }
     if (el.childElementCount) {
       const svg = createLinkSvg('svg3rd')
-      const svgSMY = createLinkSvg('svg3rd')
       // svg tag name is lower case
       if (el.lastChild.tagName === 'svg') el.lastChild.remove()
       el.appendChild(svg)
-      el.appendChild(svgSMY)
       const parent = el.children[0]
-      let children
-      if(el.children[3]?.tagName==='SMY')
-        children = [...el.children[1].children,el.children[3]]
-      else
-        children = el.children[1].children
+      const children = el.children[1].children
       path = ''
-      smypath = ''
       loopChildren(children, parent, true)
       svg.appendChild(createPath(path))
-      svgSMY.appendChild(createPath(smypath))
     }
   }
 
@@ -193,8 +185,7 @@ export default function linkDiv(primaryNode) {
 }
 
 let path = ''
-let smypath = ''
-function loopChildren(children:HTMLElement[]|HTMLCollection, parent: HTMLElement, first?: boolean) {
+function loopChildren(children: HTMLCollection, parent: HTMLElement, first?: boolean) {
   const parentOT = parent.offsetTop
   const parentOL = parent.offsetLeft
   const parentOW = parent.offsetWidth
@@ -242,7 +233,7 @@ function loopChildren(children:HTMLElement[]|HTMLCollection, parent: HTMLElement
       ) {
         if(child.tagName==='SMY'){
           console.log('1111')
-          smypath+=`M ${x1} ${y1} H ${xMiddle} V ${y2} H ${x2}`
+          // smypath+=`M ${x1} ${y1} H ${xMiddle} V ${y2} H ${x2}`
         }else{
           path += `M ${x1} ${y1} H ${xMiddle} V ${y2} H ${x2}`
         }
