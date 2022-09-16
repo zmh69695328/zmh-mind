@@ -197,7 +197,7 @@ export const createGroup = function(nodeObj: NodeObj, omitChildren?: boolean) {
   if (!omitChildren && nodeObj.children && nodeObj.children.length > 0) {
     top.appendChild(createExpander(nodeObj.expanded))
     if (nodeObj.expanded !== false) {
-      const children = this.createChildren(nodeObj.children)
+      const [children] = this.createChildren(nodeObj.children)
       grp.appendChild(children)
     }
   }
@@ -211,7 +211,7 @@ export const createSummary = function(nodeObj: NodeObj, omitChildren?: boolean) 
   if (!omitChildren && nodeObj.children && nodeObj.children.length > 0) {
     top.appendChild(createExpander(nodeObj.expanded))
     if (nodeObj.expanded !== false) {
-      const children = this.createChildren(nodeObj.children)
+      const [children] = this.createChildren(nodeObj.children)
       smy.appendChild(children)
     }
   }
@@ -380,8 +380,13 @@ export function createChildren(data: NodeObj[], container?: HTMLElement, directi
   } else {
     chldr = $d.createElement('children')
   }
+  const smyArr=[]
   for (let i = 0; i < data.length; i++) {
     const nodeObj = data[i]
+    if(nodeObj?.type==='summary'){
+      smyArr.push(nodeObj)
+      continue
+    }
     const grp = $d.createElement('GRP')
     if (direction === LEFT) {
       grp.className = 'lhs'
@@ -399,15 +404,19 @@ export function createChildren(data: NodeObj[], container?: HTMLElement, directi
       top.appendChild(createExpander(nodeObj.expanded))
       grp.appendChild(top)
       if (nodeObj.expanded !== false) {
-        const children = this.createChildren(nodeObj.children)
+        const [children,smyChildArr] = this.createChildren(nodeObj.children)
         grp.appendChild(children)
+        smyChildArr.forEach(v=>{
+          const {smy}=this.createSummary(v)
+          grp.appendChild(smy)
+        })
       }
     } else {
       grp.appendChild(top)
     }
     chldr.appendChild(grp)
   }
-  return chldr
+  return [chldr,smyArr]
 }
 
 // Set primary nodes' direction and invoke createChildren()

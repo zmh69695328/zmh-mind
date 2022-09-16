@@ -1,4 +1,4 @@
-import { createPath, createMainPath, createLinkSvg } from './utils/svg'
+import { createPath, createMainPath, createLinkSvg, createSvgPath } from './utils/svg'
 import { findEle, Expander } from './utils/dom'
 import {
   SIDE,
@@ -155,14 +155,25 @@ export default function linkDiv(primaryNode) {
     }
     if (el.childElementCount) {
       const svg = createLinkSvg('svg3rd')
+      const svgSMY = createLinkSvg('svg3rd')
       // svg tag name is lower case
       if (el.lastChild.tagName === 'svg') el.lastChild.remove()
-      el.appendChild(svg)
+      el.appendChild(svg)     
       const parent = el.children[0]
-      const children = el.children[1].children
+      let children
+      if(el.children?.[2]?.tagName==='SMY'){
+        children = [...el.children[1].children,el.children[2]]
+      }   
+      else
+        children = el.children[1].children
       path = ''
+      smypath = ''
       loopChildren(children, parent, true)
       svg.appendChild(createPath(path))
+      if(smypath.length>0){
+        el.appendChild(svgSMY)
+        svgSMY.appendChild(createSvgPath(smypath))
+      }  
     }
   }
 
@@ -185,13 +196,24 @@ export default function linkDiv(primaryNode) {
 }
 
 let path = ''
-function loopChildren(children: HTMLCollection, parent: HTMLElement, first?: boolean) {
+let smypath = ''
+
+function loopChildren(children: HTMLElement[], parent: HTMLElement, first?: boolean) {
   const parentOT = parent.offsetTop
   const parentOL = parent.offsetLeft
   const parentOW = parent.offsetWidth
   const parentOH = parent.offsetHeight
   for (let i = 0; i < children.length; i++) {
     const child: HTMLElement = children[i] as HTMLElement
+    if(child?.tagName==='SMY'){
+      const firstEl=children[0] as HTMLElement
+      const lastEl=children[i-1] as HTMLElement
+      const xfirst=firstEl.offsetLeft+firstEl.offsetWidth+8
+      const yfirst=firstEl.offsetTop+firstEl.offsetHeight*0.7
+      const ylast=lastEl.offsetTop+lastEl.offsetHeight*0.75
+      const xlast=lastEl.offsetLeft+lastEl.offsetWidth+8
+      smypath+=`M ${xfirst} ${yfirst} H ${xfirst+10} V ${ylast} H${xlast}`
+    }
     const childT: HTMLElement = child.children[0] as HTMLElement // t tag inside the child dom
     const childTOT = childT.offsetTop
     const childTOH = childT.offsetHeight
@@ -204,7 +226,7 @@ function loopChildren(children: HTMLCollection, parent: HTMLElement, first?: boo
     const y2 = childTOT + childTOH
     let x1: number, x2: number, xMiddle: number
     const direction = child.offsetParent.className
-    if (direction === 'lhs') {
+    if (direction === 'lhs'&&child?.tagName!=='SMY') {
       x1 = parentOL + GAP
       xMiddle = parentOL
       x2 = parentOL - childT.offsetWidth
@@ -222,21 +244,15 @@ function loopChildren(children: HTMLCollection, parent: HTMLElement, first?: boo
         // 子底部高于父中点
         path += `M ${x1} ${y1} H ${xMiddle} V ${y2 } H ${x2}`
       }
-    } else if (direction === 'rhs') {
+    } else if (direction === 'rhs'&&child?.tagName!=='SMY') {
       x1 = parentOL + parentOW - GAP
       xMiddle = parentOL + parentOW
       x2 = parentOL + parentOW + childT.offsetWidth
-
       if (
         childTOT + childTOH < parentOT + parentOH / 2 + 50 &&
         childTOT + childTOH > parentOT + parentOH / 2 - 50
       ) {
-        if(child.tagName==='SMY'){
-          console.log('1111')
-          // smypath+=`M ${x1} ${y1} H ${xMiddle} V ${y2} H ${x2}`
-        }else{
-          path += `M ${x1} ${y1} H ${xMiddle} V ${y2} H ${x2}`
-        }
+        path += `M ${x1} ${y1} H ${xMiddle} V ${y2} H ${x2}`
         
       } else if (childTOT + childTOH >= parentOT + parentOH / 2) {
         path += `M ${x1} ${y1} H ${xMiddle} V ${y2 } H ${x2}`
@@ -261,7 +277,12 @@ function loopChildren(children: HTMLCollection, parent: HTMLElement, first?: boo
       continue
     }
     // traversal
-    const nextChildren = child.children[1].children
+    let nextChildren
+    if(child.children?.[2]?.tagName==='SMY'){
+      nextChildren=[...child.children[1].children,child.children[2]]
+    }else{
+      nextChildren=[...child.children[1].children]
+    }
     if (nextChildren.length > 0) loopChildren(nextChildren, childT)
   }
 }

@@ -17,6 +17,17 @@ export const createLinkSvg = function(klass: string) {
   return svg
 }
 
+export const createSvgPath = function(d: string) {
+  const path = $d.createElementNS(svgNS, 'path')
+  path.setAttribute('d', d)
+  path.setAttribute('fill', 'none')
+  path.setAttribute('stroke-linecap', 'square')
+  path.setAttribute('stroke', '#F6A04D')
+  path.setAttribute('stroke-width', '3')
+  path.setAttribute('transform', 'translate(0.5,-0.5)')
+  return path
+}
+
 export const createLine = function(x1: number, y1: number, x2: number, y2: number) {
   const line = $d.createElementNS(svgNS, 'line')
   line.setAttribute('x1', x1.toString())

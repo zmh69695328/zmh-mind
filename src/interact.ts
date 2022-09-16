@@ -306,14 +306,12 @@ function getRootHeight(node:HTMLElement){
 function getHeightDistance(a:HTMLElement,b:HTMLElement){
   const aHeight=a?.getBoundingClientRect()?.top||0
   const bHeight=b?.getBoundingClientRect()?.top||aHeight
-  console.log(aHeight,bHeight)
   return Math.abs(aHeight-bHeight)
 }
 
 function getWidthDistance(a:HTMLElement,b:HTMLElement){
   const aWidth=a?.getBoundingClientRect()?.left||0
   const bWidth=b?.getBoundingClientRect()?.left||aWidth
-  console.log(aWidth,bWidth)
   return Math.abs(aWidth-bWidth)
 }
 

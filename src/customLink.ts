@@ -126,10 +126,8 @@ export const removeLink = function(linkSvg) {
     link = this.currentLink
   }
   if (!link) return
-  console.log(link)
   this.hideLinkController()
   const id = link.linkObj.id
-  console.log(id)
   delete this.linkData[id]
   link.remove()
   link = null
