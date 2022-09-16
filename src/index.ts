@@ -172,7 +172,8 @@ export interface MindElixirInstance {
   mobileMenu: boolean,
   closeButton:boolean,
   widthControll:boolean,
-  uploadButton:boolean
+  uploadButton:boolean,
+  nodeDraggable:boolean
 }
 export interface Options {
   el: string,
@@ -198,7 +199,9 @@ export interface Options {
   //节点宽度调整
   widthControll?:boolean,
   //导入XMind文件
-  uploadButton?:boolean
+  uploadButton?:boolean,
+  //配置节点拖拽
+  nodeDraggable?:boolean
 }
 const $d = document
 /**
@@ -240,7 +243,8 @@ function MindElixir(this: MindElixirInstance, {
   mobileMenu,
   closeButton,
   widthControll,
-  uploadButton
+  uploadButton,
+  nodeDraggable
 }: Options) {
   const box = document.getElementById(el) as HTMLElement
   if (!box) return
@@ -276,6 +280,7 @@ function MindElixir(this: MindElixirInstance, {
   this.primaryNodeHorizontalGap = primaryNodeHorizontalGap
   this.primaryNodeVerticalGap = primaryNodeVerticalGap
   this.uploadButton = uploadButton === undefined ? true : uploadButton
+  this.nodeDraggable = nodeDraggable === undefined ? false : nodeDraggable
 
   this.bus = new Bus()
   ;(this.bus as any).addListener('operation', (operation: operation) => {

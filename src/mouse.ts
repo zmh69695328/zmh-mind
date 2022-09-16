@@ -46,6 +46,14 @@ export default function(mind) {
    * drag and move
    */
   mind.map.addEventListener('mousemove', e => {
+    if (!mind.nodeDraggable) {
+      if (e && e.target.className === 'selected') {
+        dragMoveHelper.clear()
+        e.target.draggable = false
+        return
+      }
+    }
+
     // click trigger mousemove in windows chrome
     // the 'true' is a string
     if (e.target.contentEditable !== 'true') {
