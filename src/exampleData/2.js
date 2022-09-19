@@ -212,7 +212,7 @@ export default {
                         "topic": "字体大小",
                         "id": "bd1c24420cd2c2f5",
                         "style": {
-                            "fontSize": "32",
+                            "fontSize": "200pt",
                             "color": "#3298db"
                         },
                         "image": [

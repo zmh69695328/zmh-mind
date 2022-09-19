@@ -64,7 +64,10 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
   if (nodeObj.style) {
     tpc.style.color = nodeObj.style.color || '#2c3e50'
     tpc.style.background = nodeObj.style.background?nodeObj.style.background:nodeObj?.parent?.root?'#ffffff':'inherit'
-    tpc.style.fontSize = nodeObj.style.fontSize + 'px'
+    if(/[a-z]/i.test(nodeObj.style.fontSize))
+      tpc.style.fontSize = nodeObj.style.fontSize
+    else
+      tpc.style.fontSize = nodeObj.style.fontSize + 'px'
     tpc.style.fontWeight = nodeObj.style.fontWeight || 'normal'
     tpc.style.width= nodeObj.style.width || 'fit-content'
     widthControllLeft.style.height=widthControllRight.style.height=nodeObj.style.controllWidth || '29px'

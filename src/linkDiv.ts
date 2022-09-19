@@ -157,7 +157,10 @@ export default function linkDiv(primaryNode) {
       const svg = createLinkSvg('svg3rd')
       const svgSMY = createLinkSvg('svg3rd')
       // svg tag name is lower case
-      if (el.lastChild.tagName === 'svg') el.lastChild.remove()
+      // if (el.lastChild.tagName === 'svg') el.lastChild.remove()
+      el.querySelectorAll('.svg3rd').forEach(val => {
+        val.remove()
+      });
       el.appendChild(svg)     
       const parent = el.children[0]
       let children
