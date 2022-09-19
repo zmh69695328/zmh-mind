@@ -353,7 +353,10 @@ const shapeTpc = function(tpc2, nodeObj) {
   if (nodeObj.style) {
     tpc2.style.color = nodeObj.style.color || "#2c3e50";
     tpc2.style.background = nodeObj.style.background ? nodeObj.style.background : ((_a = nodeObj == null ? void 0 : nodeObj.parent) == null ? void 0 : _a.root) ? "#ffffff" : "inherit";
-    tpc2.style.fontSize = nodeObj.style.fontSize + "px";
+    if (/[a-z]/i.test(nodeObj.style.fontSize))
+      tpc2.style.fontSize = nodeObj.style.fontSize;
+    else
+      tpc2.style.fontSize = nodeObj.style.fontSize + "px";
     tpc2.style.fontWeight = nodeObj.style.fontWeight || "normal";
     tpc2.style.width = nodeObj.style.width || "fit-content";
     widthControllLeft.style.height = widthControllRight.style.height = nodeObj.style.controllWidth || "29px";
@@ -2131,8 +2134,9 @@ function linkDiv(primaryNode) {
     if (el.childElementCount) {
       const svg = createLinkSvg("svg3rd");
       const svgSMY = createLinkSvg("svg3rd");
-      if (el.lastChild.tagName === "svg")
-        el.lastChild.remove();
+      el.querySelectorAll(".svg3rd").forEach((val) => {
+        val.remove();
+      });
       el.appendChild(svg);
       const parent = el.children[0];
       let children;
