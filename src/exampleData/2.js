@@ -59,9 +59,14 @@ export default {
                             {
                                 "topic": "操作手感类似其他主流思维导图应用",
                                 "id": "c1f09612fd89920d",
-                                "expanded": false
+                                "expanded": true
                             }
                         ]
+                    },
+                    {
+                        "topic": "new node",
+                        "id": "35361d2879cb8a7e",
+                        "type": "summary"
                     }
                 ],
                 "linkJump": [
@@ -69,7 +74,11 @@ export default {
                         "toId": "beeb823afd6d2114",
                         "title": "一个思维导图内核"
                     }
-                ]
+                ],
+                "style": {
+                    "width": "95.5195px",
+                    "controllWidth": "46px"
+                }
             },
             {
                 "topic": "基本操作",
@@ -390,10 +399,5 @@ export default {
         ],
         "expanded": true
     },
-    "linkData": {},
-    "height": [
-        1830,
-        830.8203125
-    ],
-    "expandDeep": 2
+    "linkData": {}
 }
