@@ -162,7 +162,11 @@ export function generateNewSummaryObj(): NodeObj {
   return {
     topic: this.newTopicName || 'new node',
     id,
-    type:'summary'
+    type:'summary',
+    summary:{
+      topicId:id,
+      range:this.currentSummaryNodeArr.map(val=>val.nodeObj.id)
+    }
   }
 }
 

@@ -17,9 +17,14 @@ export default function(mind) {
     } else if (e.target.className === 'circle') {
       // skip circle
     } else {
-      mind.unselectNode()
+      mind.unselectNode()    
+      //unselect all nodes
+      mind.container.querySelectorAll('tpc.selected').forEach(element => {
+      element.className=''
+    });
       mind.hideLinkController()
     }
+
   })
 
   mind.map.addEventListener('dblclick', e => {

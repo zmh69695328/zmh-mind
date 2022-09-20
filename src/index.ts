@@ -125,6 +125,10 @@ export interface NodeObj {
   direction?: number,
   root?: boolean,
   type?:string
+  summary?:{
+    range:string [],
+    topicId:string
+  }
 }
 
 export interface NodeElement extends HTMLElement {

@@ -330,19 +330,31 @@ export const addChildFunction = function(nodeEle, node) {
 
 export const addSummary = function(el: NodeElement, node: NodeObj) {
   console.time('addSummary')
-  const nodeEle = el || this.currentNode
-  if (!nodeEle) return
-  if(nodeEle?.parentElement?.parentElement?.parentElement?.className=='mindbox') return
-  const { newTop, newNodeObj } = addSummaryFunction.call(this, nodeEle, node)
-  console.timeEnd('addSummary')
-  if (!node) {
-    this.createInputDiv(newTop.children[0])
-  }
-  this.selectNode(newTop.children[0], true)
-  this.bus.fire('operation', {
-    name: 'addSummary',
-    obj: newNodeObj,
+  const parentIndex={}
+  const selectedArr=[]
+  this.container.querySelectorAll('tpc.selected').forEach(value=>{
+    parentIndex[value.nodeObj.parent.id]??(parentIndex[value.nodeObj.parent.id]=selectedArr.length)
+    selectedArr[parentIndex[value.nodeObj.parent.id]]=selectedArr[parentIndex[value.nodeObj.parent.id]]??[]
+    selectedArr[parentIndex[value.nodeObj.parent.id]].push(value)
   })
+  console.log(selectedArr)
+  selectedArr.forEach(val=>{
+    const nodeEle = val[0] || this.currentNode
+    this.currentSummaryNodeArr=val
+    if (!nodeEle) return
+    if(nodeEle?.parentElement?.parentElement?.parentElement?.className=='mindbox') return
+    const { newTop, newNodeObj } = addSummaryFunction.call(this, nodeEle, node)
+    console.timeEnd('addSummary')
+    if (!node) {
+      this.createInputDiv(newTop.children[0])
+    }
+    this.selectNode(newTop.children[0], true)
+    this.bus.fire('operation', {
+      name: 'addSummary',
+      obj: newNodeObj,
+    })
+  })
+
 }
 
 /**

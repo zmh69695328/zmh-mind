@@ -63,11 +63,11 @@ export default {
                             }
                         ]
                     },
-                    {
-                        "topic": "new node",
-                        "id": "35361d2879cb8a7e",
-                        "type": "summary"
-                    }
+                    // {
+                    //     "topic": "new node",
+                    //     "id": "35361d2879cb8a7e",
+                    //     "type": "summary"
+                    // }
                 ],
                 "linkJump": [
                     {
