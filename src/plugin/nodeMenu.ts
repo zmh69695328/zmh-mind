@@ -213,15 +213,20 @@ export default function(mind) {
     fontBtn.nextElementSibling.className = 'background'
     if (nodeObj.style) {
       if (nodeObj.style.fontSize) {
-        menuContainer.querySelector(
+        const dataSize = menuContainer.querySelector(
           '.size[data-size="' + nodeObj.style.fontSize + '"]'
-        ).className = 'size size-selected'
+        )
+        if(dataSize) dataSize.className = 'size size-selected'
       }
-      if (nodeObj.style.fontWeight) { menuContainer.querySelector('.bold').className = 'bold size-selected' }
+      if (nodeObj.style.fontWeight) { 
+        const dataWeight = menuContainer.querySelector('.bold')
+        if(dataWeight) dataWeight.className = 'bold size-selected' 
+      }
       if (nodeObj.style.color) {
-        menuContainer.querySelector(
+        const dataColor=menuContainer.querySelector(
           '.palette[data-color="' + nodeObj.style.color + '"]'
-        ).className = 'palette nmenu-selected'
+        )
+        if(dataColor) dataColor.className = 'palette nmenu-selected'
       }
     }
     if (nodeObj.tags) {

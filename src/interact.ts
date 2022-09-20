@@ -51,6 +51,7 @@ export const selectNode = function(targetElement, isNewNode, clickEvent) {
     }else{
       targetElement.className=''
     }
+    console.log(this.currentSummaryNodeArr)
   }else{
     if (this.currentNode) this.currentNode.className = ''
     targetElement.className = 'selected'
