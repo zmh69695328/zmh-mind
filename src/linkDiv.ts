@@ -7,7 +7,12 @@ import {
   PRIMARY_NODE_HORIZONTAL_GAP,
   PRIMARY_NODE_VERTICAL_GAP,
 } from './const'
+import { NodeObj } from '.'
+import { node } from 'canvg/dist/presets'
 
+interface rangeMapI{
+  [propName: string]: boolean;
+}
 /**
  * Link nodes with svg,
  * only link specific node if `primaryNode` is present
@@ -164,14 +169,14 @@ export default function linkDiv(primaryNode) {
       el.appendChild(svg)     
       const parent = el.children[0]
       let children
-      if(el.children?.[2]?.tagName==='SMY'){
-        children = [...el.children[1].children,el.children[2]]
+      if(el.children?.[2]?.tagName==='SMYCHILDREN'){
+        children = [...el.children[1].children,...el.children[2].children]
       }   
       else
         children = el.children[1].children
       path = ''
       smypath = ''
-      loopChildren(children, parent, true)
+      loopChildren(children, parent,this.nodeData.children[i], true)
       svg.appendChild(createPath(path))
       if(smypath.length>0){
         el.appendChild(svgSMY)
@@ -201,7 +206,7 @@ export default function linkDiv(primaryNode) {
 let path = ''
 let smypath = ''
 
-function loopChildren(children: HTMLElement[], parent: HTMLElement, first?: boolean) {
+function loopChildren(children: HTMLElement[], parent: HTMLElement,nodeData:NodeObj, first?: boolean) {
   const parentOT = parent.offsetTop
   const parentOL = parent.offsetLeft
   const parentOW = parent.offsetWidth
@@ -209,12 +214,32 @@ function loopChildren(children: HTMLElement[], parent: HTMLElement, first?: bool
   for (let i = 0; i < children.length; i++) {
     const child: HTMLElement = children[i] as HTMLElement
     if(child?.tagName==='SMY'){
-      const firstEl=children[0] as HTMLElement
-      const lastEl=children[i-1] as HTMLElement
+      let firstEl=children[0] as HTMLElement
+      let lastEl=children[i-1] as HTMLElement
+
+      const rangeMap:rangeMapI={}
+      nodeData.children[i].summary.range.forEach(val=>{
+        rangeMap[val]=true
+      })
+      let flag=true
+      for(let j=0;j<i;j++){
+          const key=children[j].children[0].children[0].getAttribute('data-nodeid').slice(2)
+          if(rangeMap[key]){
+            if(flag){
+              flag=false
+              firstEl=children[j]
+            }
+            lastEl=children[j]
+          }
+      }
       const xfirst=firstEl.offsetLeft+firstEl.offsetWidth+8
       const yfirst=firstEl.offsetTop+firstEl.offsetHeight*0.7
-      const ylast=lastEl.offsetTop+lastEl.offsetHeight*0.75
+      const ylast=lastEl.offsetTop+lastEl.offsetHeight*0.7
       const xlast=lastEl.offsetLeft+lastEl.offsetWidth+8
+      const y=child.offsetTop+child.offsetHeight*0.7
+      let top=child.style.top??0
+      if(typeof top ==='string') top=Number(top.replace('px',''))
+      child.style.top=top+(ylast+yfirst)/2-y+'px'
       smypath+=`M ${xfirst} ${yfirst} H ${xfirst+10} V ${ylast} H${xlast}`
     }
     const childT: HTMLElement = child.children[0] as HTMLElement // t tag inside the child dom
@@ -281,11 +306,11 @@ function loopChildren(children: HTMLElement[], parent: HTMLElement, first?: bool
     }
     // traversal
     let nextChildren
-    if(child.children?.[2]?.tagName==='SMY'){
-      nextChildren=[...child.children[1].children,child.children[2]]
+    if(child.children?.[2]?.tagName==='SMYCHILDREN'){
+      nextChildren=[...child.children[1].children,...child.children[2].children]
     }else{
       nextChildren=[...child.children[1].children]
     }
-    if (nextChildren.length > 0) loopChildren(nextChildren, childT)
+    if (nextChildren.length > 0) loopChildren(nextChildren, childT,nodeData.children[i])
   }
 }

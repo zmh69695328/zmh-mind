@@ -105,11 +105,16 @@
       display: inline-block;
       vertical-align: middle;
     }
-    smy{
-      display: inline-block;
-      vertical-align: middle;
-      >t{
-        margin-left: 8px;
+    smychildren{
+      display: inline-flex;
+      flex-direction: column;
+      smy{
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        >t{
+          margin-left: 8px;
+        }
       }
     }
     t {

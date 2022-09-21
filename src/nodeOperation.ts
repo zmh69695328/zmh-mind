@@ -286,7 +286,12 @@ export const addSummaryFunction = function(nodeEle,node){
   addParentLink(this.nodeData)
   const top = nodeEle.parentNode.parentNode.parentNode.parentNode
   const { smy, top: newTop } = this.createSummary(newNodeObj)
-  top.appendChild(smy)  
+  if(!top.children?.['smychildren']){
+    const smychildren=$d.createElement('smychildren')
+    smychildren.setAttribute('name','smychildren')
+    top.appendChild(smychildren)
+  }
+  top.children['smychildren'].appendChild(smy)
   this.layout()
   this.linkDiv()
   return { newTop, newNodeObj }

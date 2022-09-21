@@ -411,7 +411,11 @@ export function createChildren(data: NodeObj[], container?: HTMLElement, directi
         grp.appendChild(children)
         smyChildArr.forEach(v=>{
           const {smy}=this.createSummary(v)
-          grp.appendChild(smy)
+          if(!grp.children?.[2]){
+            grp.appendChild($d.createElement('smychildren'))
+          }
+          grp.children[2].appendChild(smy)
+          // grp.appendChild(smy)
         })
       }
     } else {
