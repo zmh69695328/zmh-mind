@@ -258,7 +258,7 @@ function loopChildren(children: HTMLElement[], parent: HTMLElement,nodeData:Node
       // childTOH=(childT.offsetParent as HTMLElement).offsetHeight
     }
     let y1: number
-    if (first) {
+    if (first||isSmyChild) {
       y1 = parentOT + parentOH / 2
     } else {
       y1 = parentOT + parentOH
@@ -285,6 +285,7 @@ function loopChildren(children: HTMLElement[], parent: HTMLElement,nodeData:Node
       }
     } else if (direction === 'rhs'&&child?.tagName!=='SMY') {
       x1 = parentOL + parentOW - GAP
+      if(isSmyChild) x1+=GAP
       xMiddle = parentOL + parentOW
       x2 = parentOL + parentOW + childT.offsetWidth
       if (
