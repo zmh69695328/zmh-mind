@@ -2,7 +2,8 @@ import { node } from 'canvg/dist/presets'
 import { LEFT, RIGHT, SIDE } from '../const'
 import MindElixir, { NodeObj } from '../index'
 import { expandNodeChild, getHeightFromRootToAnotherNode, getWidthFromRootToAnotherNode } from '../interact'
-import { encodeHTML } from '../utils/index'
+import { addChild } from '../nodeOperation'
+import { encodeHTML, getArrowPoints } from '../utils/index'
 export type Top = HTMLElement
 export type Group = HTMLElement
 
@@ -200,8 +201,13 @@ export const createGroup = function(nodeObj: NodeObj, omitChildren?: boolean) {
   if (!omitChildren && nodeObj.children && nodeObj.children.length > 0) {
     top.appendChild(createExpander(nodeObj.expanded))
     if (nodeObj.expanded !== false) {
-      const [children] = this.createChildren(nodeObj.children)
+      const [children,smyChild] = this.createChildren(nodeObj.children)
       grp.appendChild(children)
+      // if(smyChild){
+      //   smyChild.forEach(val => {
+      //     grp.appendChild(val)
+      //   });
+      // }
     }
   }
   return { grp, top }
@@ -214,8 +220,12 @@ export const createSummary = function(nodeObj: NodeObj, omitChildren?: boolean) 
   if (!omitChildren && nodeObj.children && nodeObj.children.length > 0) {
     top.appendChild(createExpander(nodeObj.expanded))
     if (nodeObj.expanded !== false) {
-      const [children] = this.createChildren(nodeObj.children)
-      smy.appendChild(children)
+      const [children,smyChild] = this.createChildren(nodeObj.children)
+      // if(smyChild){
+      //   smyChild.forEach(val => {
+      //     smy.appendChild(val)
+      //   });
+      // }
     }
   }
   return { smy, top }
@@ -383,11 +393,24 @@ export function createChildren(data: NodeObj[], container?: HTMLElement, directi
   } else {
     chldr = $d.createElement('children')
   }
-  const smyArr=[]
+  let smyEle=[]
   for (let i = 0; i < data.length; i++) {
     const nodeObj = data[i]
     if(nodeObj?.type==='summary'){
-      smyArr.push(nodeObj)
+      const {smy} =this.createSummary(nodeObj)
+      if (nodeObj.children && nodeObj.children.length > 0) {
+        if(nodeObj.expanded !== false){
+          const [children,smyChild]= this.createChildren(nodeObj.children)
+          smy.appendChild(children)
+          if(smyChild){
+            smyChild.forEach(val => {
+              smy.appendChild(val)
+          });
+        }
+        }
+        
+      }
+      smyEle.push(smy)
       continue
     }
     const grp = $d.createElement('GRP')
@@ -407,23 +430,23 @@ export function createChildren(data: NodeObj[], container?: HTMLElement, directi
       top.appendChild(createExpander(nodeObj.expanded))
       grp.appendChild(top)
       if (nodeObj.expanded !== false) {
-        const [children,smyChildArr] = this.createChildren(nodeObj.children)
+        const [children,smy] = this.createChildren(nodeObj.children)
         grp.appendChild(children)
-        smyChildArr.forEach(v=>{
-          const {smy}=this.createSummary(v)
-          if(!grp.children?.[2]){
-            grp.appendChild($d.createElement('smychildren'))
-          }
-          grp.children[2].appendChild(smy)
-          // grp.appendChild(smy)
-        })
+        if(smy){
+          smy.forEach(val => {
+            if(!grp.children?.[2]){
+              grp.appendChild($d.createElement('smychildren'))
+            }
+            grp.children[2].appendChild(val)
+          });
+        }
       }
     } else {
       grp.appendChild(top)
     }
     chldr.appendChild(grp)
   }
-  return [chldr,smyArr]
+  return [chldr,smyEle]    
 }
 
 // Set primary nodes' direction and invoke createChildren()

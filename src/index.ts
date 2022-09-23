@@ -284,7 +284,7 @@ function MindElixir(this: MindElixirInstance, {
   this.primaryNodeHorizontalGap = primaryNodeHorizontalGap
   this.primaryNodeVerticalGap = primaryNodeVerticalGap
   this.uploadButton = uploadButton === undefined ? true : uploadButton
-  this.nodeDraggable = nodeDraggable === undefined ? false : nodeDraggable
+  this.nodeDraggable = nodeDraggable === undefined ? true : nodeDraggable
 
   this.bus = new Bus()
   ;(this.bus as any).addListener('operation', (operation: operation) => {

@@ -176,7 +176,7 @@ export default function linkDiv(primaryNode) {
         children = el.children[1].children
       path = ''
       smypath = ''
-      loopChildren(children, parent,this.nodeData.children[i], true)
+      loopChildren(children, parent,this.nodeData.children[i],true)
       svg.appendChild(createPath(path))
       if(smypath.length>0){
         el.appendChild(svgSMY)
@@ -206,11 +206,19 @@ export default function linkDiv(primaryNode) {
 let path = ''
 let smypath = ''
 
-function loopChildren(children: HTMLElement[], parent: HTMLElement,nodeData:NodeObj, first?: boolean) {
-  const parentOT = parent.offsetTop
-  const parentOL = parent.offsetLeft
-  const parentOW = parent.offsetWidth
-  const parentOH = parent.offsetHeight
+function loopChildren(children: HTMLElement[], parent: HTMLElement,nodeData:NodeObj,first?: boolean) {
+  let parentOT = parent.offsetTop
+  let parentOL = parent.offsetLeft
+  let parentOW = parent.offsetWidth
+  let parentOH = parent.offsetHeight
+  let isSmyChild=false
+  if(parent.offsetParent.tagName==='SMY'){
+    isSmyChild=true
+    parentOT+=(parent.offsetParent as HTMLElement).offsetTop
+    parentOL+=(parent.offsetParent as HTMLElement).offsetLeft
+    // parentOW+=(parent.offsetParent as HTMLElement).offsetWidth
+    // parentOH+=(parent.offsetParent as HTMLElement).offsetHeight
+  }
   for (let i = 0; i < children.length; i++) {
     const child: HTMLElement = children[i] as HTMLElement
     if(child?.tagName==='SMY'){
@@ -233,18 +241,22 @@ function loopChildren(children: HTMLElement[], parent: HTMLElement,nodeData:Node
           }
       }
       const xfirst=firstEl.offsetLeft+firstEl.offsetWidth+8
-      const yfirst=firstEl.offsetTop+firstEl.offsetHeight*0.7
-      const ylast=lastEl.offsetTop+lastEl.offsetHeight*0.7
+      const yfirst=firstEl.offsetTop+15
+      const ylast=lastEl.offsetTop+lastEl.offsetHeight-5
       const xlast=lastEl.offsetLeft+lastEl.offsetWidth+8
-      const y=child.offsetTop+child.offsetHeight*0.7
+      const y=child.offsetTop+(child.children[0] as HTMLElement).offsetTop+(child.children[0] as HTMLElement).offsetHeight
       let top=child.style.top??0
       if(typeof top ==='string') top=Number(top.replace('px',''))
-      child.style.top=top+(ylast+yfirst)/2-y+'px'
+      child.style.top=top+(ylast+yfirst+20)/2-y+'px'
       smypath+=`M ${xfirst} ${yfirst} H ${xfirst+10} V ${ylast} H${xlast}`
     }
     const childT: HTMLElement = child.children[0] as HTMLElement // t tag inside the child dom
-    const childTOT = childT.offsetTop
-    const childTOH = childT.offsetHeight
+    let childTOT = childT.offsetTop
+    let childTOH = childT.offsetHeight
+    if(isSmyChild){
+      childTOT+=(childT.offsetParent as HTMLElement).offsetTop
+      // childTOH=(childT.offsetParent as HTMLElement).offsetHeight
+    }
     let y1: number
     if (first) {
       y1 = parentOT + parentOH / 2
@@ -253,12 +265,11 @@ function loopChildren(children: HTMLElement[], parent: HTMLElement,nodeData:Node
     }
     const y2 = childTOT + childTOH
     let x1: number, x2: number, xMiddle: number
-    const direction = child.offsetParent.className
+    const direction = child.offsetParent.className||(child.offsetParent as HTMLElement).offsetParent.className
     if (direction === 'lhs'&&child?.tagName!=='SMY') {
       x1 = parentOL + GAP
       xMiddle = parentOL
       x2 = parentOL - childT.offsetWidth
-
       if (
         childTOT + childTOH < parentOT + parentOH / 2 + 50 &&
         childTOT + childTOH > parentOT + parentOH / 2 - 50

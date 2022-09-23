@@ -475,7 +475,7 @@ const createGroup = function(nodeObj, omitChildren) {
   if (!omitChildren && nodeObj.children && nodeObj.children.length > 0) {
     top.appendChild(createExpander(nodeObj.expanded));
     if (nodeObj.expanded !== false) {
-      const [children] = this.createChildren(nodeObj.children);
+      const [children, smyChild] = this.createChildren(nodeObj.children);
       grp.appendChild(children);
     }
   }
@@ -488,8 +488,7 @@ const createSummary = function(nodeObj, omitChildren) {
   if (!omitChildren && nodeObj.children && nodeObj.children.length > 0) {
     top.appendChild(createExpander(nodeObj.expanded));
     if (nodeObj.expanded !== false) {
-      const [children] = this.createChildren(nodeObj.children);
-      smy.appendChild(children);
+      this.createChildren(nodeObj.children);
     }
   }
   return { smy, top };
@@ -634,11 +633,23 @@ function createChildren(data, container, direction) {
   } else {
     chldr = $d$5.createElement("children");
   }
-  const smyArr = [];
+  let smyEle = [];
   for (let i = 0; i < data.length; i++) {
     const nodeObj = data[i];
     if ((nodeObj == null ? void 0 : nodeObj.type) === "summary") {
-      smyArr.push(nodeObj);
+      const { smy } = this.createSummary(nodeObj);
+      if (nodeObj.children && nodeObj.children.length > 0) {
+        if (nodeObj.expanded !== false) {
+          const [children, smyChild] = this.createChildren(nodeObj.children);
+          smy.appendChild(children);
+          if (smyChild) {
+            smyChild.forEach((val) => {
+              smy.appendChild(val);
+            });
+          }
+        }
+      }
+      smyEle.push(smy);
       continue;
     }
     const grp = $d$5.createElement("GRP");
@@ -658,23 +669,24 @@ function createChildren(data, container, direction) {
       top.appendChild(createExpander(nodeObj.expanded));
       grp.appendChild(top);
       if (nodeObj.expanded !== false) {
-        const [children, smyChildArr] = this.createChildren(nodeObj.children);
+        const [children, smy] = this.createChildren(nodeObj.children);
         grp.appendChild(children);
-        smyChildArr.forEach((v) => {
-          var _a;
-          const { smy } = this.createSummary(v);
-          if (!((_a = grp.children) == null ? void 0 : _a[2])) {
-            grp.appendChild($d$5.createElement("smychildren"));
-          }
-          grp.children[2].appendChild(smy);
-        });
+        if (smy) {
+          smy.forEach((val) => {
+            var _a;
+            if (!((_a = grp.children) == null ? void 0 : _a[2])) {
+              grp.appendChild($d$5.createElement("smychildren"));
+            }
+            grp.children[2].appendChild(val);
+          });
+        }
       }
     } else {
       grp.appendChild(top);
     }
     chldr.appendChild(grp);
   }
-  return [chldr, smyArr];
+  return [chldr, smyEle];
 }
 function layout() {
   console.time("layout");
@@ -2184,10 +2196,16 @@ let path = "";
 let smypath = "";
 function loopChildren(children, parent, nodeData, first) {
   var _a, _b, _c;
-  const parentOT = parent.offsetTop;
-  const parentOL = parent.offsetLeft;
-  const parentOW = parent.offsetWidth;
-  const parentOH = parent.offsetHeight;
+  let parentOT = parent.offsetTop;
+  let parentOL = parent.offsetLeft;
+  let parentOW = parent.offsetWidth;
+  let parentOH = parent.offsetHeight;
+  let isSmyChild = false;
+  if (parent.offsetParent.tagName === "SMY") {
+    isSmyChild = true;
+    parentOT += parent.offsetParent.offsetTop;
+    parentOL += parent.offsetParent.offsetLeft;
+  }
   for (let i = 0; i < children.length; i++) {
     const child = children[i];
     if ((child == null ? void 0 : child.tagName) === "SMY") {
@@ -2209,19 +2227,22 @@ function loopChildren(children, parent, nodeData, first) {
         }
       }
       const xfirst = firstEl.offsetLeft + firstEl.offsetWidth + 8;
-      const yfirst = firstEl.offsetTop + firstEl.offsetHeight * 0.7;
-      const ylast = lastEl.offsetTop + lastEl.offsetHeight * 0.7;
+      const yfirst = firstEl.offsetTop + 15;
+      const ylast = lastEl.offsetTop + lastEl.offsetHeight - 5;
       const xlast = lastEl.offsetLeft + lastEl.offsetWidth + 8;
-      const y = child.offsetTop + child.offsetHeight * 0.7;
+      const y = child.offsetTop + child.children[0].offsetTop + child.children[0].offsetHeight;
       let top = (_a = child.style.top) != null ? _a : 0;
       if (typeof top === "string")
         top = Number(top.replace("px", ""));
-      child.style.top = top + (ylast + yfirst) / 2 - y + "px";
+      child.style.top = top + (ylast + yfirst + 20) / 2 - y + "px";
       smypath += `M ${xfirst} ${yfirst} H ${xfirst + 10} V ${ylast} H${xlast}`;
     }
     const childT = child.children[0];
-    const childTOT = childT.offsetTop;
-    const childTOH = childT.offsetHeight;
+    let childTOT = childT.offsetTop;
+    let childTOH = childT.offsetHeight;
+    if (isSmyChild) {
+      childTOT += childT.offsetParent.offsetTop;
+    }
     let y1;
     if (first) {
       y1 = parentOT + parentOH / 2;
@@ -2230,7 +2251,7 @@ function loopChildren(children, parent, nodeData, first) {
     }
     const y2 = childTOT + childTOH;
     let x1, x2, xMiddle;
-    const direction = child.offsetParent.className;
+    const direction = child.offsetParent.className || child.offsetParent.offsetParent.className;
     if (direction === "lhs" && (child == null ? void 0 : child.tagName) !== "SMY") {
       x1 = parentOL + GAP;
       xMiddle = parentOL;
@@ -3475,7 +3496,7 @@ function MindElixir({
   this.primaryNodeHorizontalGap = primaryNodeHorizontalGap;
   this.primaryNodeVerticalGap = primaryNodeVerticalGap;
   this.uploadButton = uploadButton === void 0 ? true : uploadButton;
-  this.nodeDraggable = nodeDraggable2 === void 0 ? false : nodeDraggable2;
+  this.nodeDraggable = nodeDraggable2 === void 0 ? true : nodeDraggable2;
   this.bus = new Bus();
   this.bus.addListener("operation", (operation) => {
     if (this.isUndo) {
