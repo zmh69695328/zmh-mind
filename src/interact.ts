@@ -205,7 +205,7 @@ export const getAllData = function(): object {
  * @return {Object}
  */
 
-function autoHide(nodeData:NodeObj,cnt,deep){
+export function autoHide(nodeData:NodeObj,cnt,deep){
   if(cnt<deep){
     nodeData.expanded=true
   }else{

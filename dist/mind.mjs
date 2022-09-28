@@ -3,17 +3,17 @@ function ne(e) {
 }
 const Re = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
   navigator.userAgent
-), ye = (e) => e.replace(
+), ve = (e) => e.replace(
   /\brgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/g,
   function(t, n, i, o) {
     return "#" + ("0" + Number(n).toString(16)).substr(-2) + ("0" + Number(i).toString(16)).substr(-2) + ("0" + Number(o).toString(16)).substr(-2);
   }
-), ke = function(e, t) {
+), we = function(e, t) {
   if (t = t || this.nodeData, t.id === e)
     return t;
   if (t.children && t.children.length)
     for (let n = 0; n < t.children.length; n++) {
-      const i = ke(e, t.children[n]);
+      const i = we(e, t.children[n]);
       if (i)
         return i;
     }
@@ -24,10 +24,10 @@ const Re = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/
     for (let n = 0; n < e.children.length; n++)
       H(e.children[n], e);
 };
-function we(e) {
+function Ee(e) {
   if (e.id = Q(), e.children)
     for (let t = 0; t < e.children.length; t++)
-      we(e.children[t]);
+      Ee(e.children[t]);
 }
 const Ie = (e, t) => {
   var n = Date.now();
@@ -36,7 +36,7 @@ const Ie = (e, t) => {
     s - n >= t && (e.apply(i, o), n = Date.now());
   };
 };
-function Ee(e, t, n, i) {
+function Se(e, t, n, i) {
   const o = i - t, s = e - n;
   let l = Math.atan(Math.abs(o) / Math.abs(s)) / 3.14 * 180;
   s < 0 && o > 0 && (l = 180 - l), s < 0 && o < 0 && (l = 180 + l), s > 0 && o < 0 && (l = 360 - l);
@@ -196,7 +196,7 @@ K.prototype.clear = function() {
   this.mousedown = !1, this.lastX = null, this.lastY = null;
 };
 const L = document, $ = (e, t) => (t ? t.mindElixirBox : L).querySelector(`[data-nodeid=me${e}]`);
-function ve(e, t, n) {
+function be(e, t, n) {
   e.onpointerdown = (i) => {
     if (!t.classList.contains("selected"))
       return;
@@ -213,7 +213,7 @@ function ve(e, t, n) {
 const _ = function(e, t) {
   var o;
   const n = L.createElement("widthControllRight"), i = L.createElement("widthControllLeft");
-  if (e.textContent = t.topic, this != null && this.widthControll && (ve.call(this, i, e, n), ve.call(this, n, e, i), e.appendChild(n), e.appendChild(i)), t.style && (e.style.color = t.style.color || "#2c3e50", e.style.background = t.style.background ? t.style.background : (o = t == null ? void 0 : t.parent) != null && o.root ? "#ffffff" : "inherit", /[a-z]/i.test(t.style.fontSize) ? e.style.fontSize = t.style.fontSize : e.style.fontSize = t.style.fontSize + "px", e.style.fontWeight = t.style.fontWeight || "normal", e.style.width = t.style.width || "fit-content", i.style.height = n.style.height = t.style.controllWidth || "29px"), t.image && t.image.forEach((l) => {
+  if (e.textContent = t.topic, this != null && this.widthControll && (be.call(this, i, e, n), be.call(this, n, e, i), e.appendChild(n), e.appendChild(i)), t.style && (e.style.color = t.style.color || "#2c3e50", e.style.background = t.style.background ? t.style.background : (o = t == null ? void 0 : t.parent) != null && o.root ? "#ffffff" : "inherit", /[a-z]/i.test(t.style.fontSize) ? e.style.fontSize = t.style.fontSize : e.style.fontSize = t.style.fontSize + "px", e.style.fontWeight = t.style.fontWeight || "normal", e.style.width = t.style.width || "fit-content", i.style.height = n.style.height = t.style.controllWidth || "29px"), t.image && t.image.forEach((l) => {
     const r = L.createElement("img");
     r.className = "image", r.src = l.url, r.style.width = l.width + "px", r.style.height = l.height + "px", r.style.display = "block", e.appendChild(r);
   }), t.hyperLink) {
@@ -247,25 +247,25 @@ const _ = function(e, t) {
   if (t.linkJump && t.linkJump.forEach((s) => {
     const l = document.createElement("a");
     l.className = "linkJump", l.title = s.title, l.innerHTML = '<svg t="1661493526135" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2220" width="16" height="16"><path d="M1001.175714 593.762001L700.806246 293.324796a76.091491 76.091491 0 0 0-107.566725 0 76.023754 76.023754 0 0 0 0 107.544146l171.713884 171.826779H152.653982v-115.288769a76.046333 76.046333 0 0 0-152.115245 0v152.092666c0 6.931777 2.145012 13.253918 3.951338 19.621218-1.806326 6.389879-3.951339 12.644283-3.951338 19.621218a76.068912 76.068912 0 0 0 76.046333 76.068912h686.020111L593.239521 894.131468a76.046333 76.046333 0 1 0 107.566725 107.566726L1001.175714 701.328726a76.091491 76.091491 0 0 0 0-107.566725z" fill="#1296db" p-id="2221"></path></svg>', l.onclick = () => {
-      Se.call(this, s.toId);
+      Le.call(this, s.toId);
     }, e.appendChild(l);
   }), t.tags) {
     const s = L.createElement("div");
     s.className = "tags", s.innerHTML = t.tags.filter((l) => l !== "").map((l) => `<span>${ne(l)}</span>`).join(""), e.appendChild(s);
   }
 };
-function Se(e) {
+function Le(e) {
   let t = this.container.querySelector(`tpc[data-nodeid=me${e}]`);
-  t || (Le(this.nodeData, e), this.layout(), this.linkDiv(), t = this.container.querySelector(`tpc[data-nodeid=me${e}]`)), t.scrollIntoView({ block: "center", behavior: "smooth" }), t.className = "blink", setTimeout(() => {
+  t || ($e(this.nodeData, e), this.layout(), this.linkDiv(), t = this.container.querySelector(`tpc[data-nodeid=me${e}]`)), t.scrollIntoView({ block: "center", behavior: "smooth" }), t.className = "blink", setTimeout(() => {
     t.classList.remove("blink");
   }, 3e3);
 }
-function Le(e, t) {
+function $e(e, t) {
   if (e.id === t)
     return !0;
   let n = !1;
   for (const i of e.children || [])
-    Le(i, t) && (n = !0);
+    $e(i, t) && (n = !0);
   return n && (e.expanded = !0), n;
 }
 const Ze = function(e, t) {
@@ -325,14 +325,14 @@ function it(e) {
       return;
     e.childNodes[0].textContent = u.topic;
     const f = e.querySelector("widthControllRight"), p = e.querySelector("widthControllRight");
-    u.style || (u.style = {}), u.style.controllWidth = f.style.height = p.style.height = e.clientHeight.toString() + "px", delete u.style.width, this.shapeTpc(e, u), this.linkDiv(), $e.call(this, this.nodeData, u.id, u.topic), this.bus.fire("operation", {
+    u.style || (u.style = {}), u.style.controllWidth = f.style.height = p.style.height = e.clientHeight.toString() + "px", delete u.style.width, this.shapeTpc(e, u), this.linkDiv(), Te.call(this, this.nodeData, u.id, u.topic), this.bus.fire("operation", {
       name: "finishEdit",
       obj: u,
       origin: n
     });
   }), console.timeEnd("createInputDiv");
 }
-function $e(e, t, n) {
+function Te(e, t, n) {
   var i;
   (i = e == null ? void 0 : e.linkJump) == null || i.forEach(({ toId: o }, s) => {
     if (o === t) {
@@ -342,7 +342,7 @@ function $e(e, t, n) {
     }
   });
   for (const o of e.children || [])
-    $e.call(this, o, t, n);
+    Te.call(this, o, t, n);
 }
 const X = function(e) {
   const t = L.createElement("epd");
@@ -406,7 +406,7 @@ const R = document, I = "http://www.w3.org/2000/svg", lt = function(e) {
 }, rt = function(e) {
   const t = R.createElementNS(I, "path");
   return t.setAttribute("d", e), t.setAttribute("fill", "none"), t.setAttribute("stroke-linecap", "square"), t.setAttribute("stroke", "#F6A04D"), t.setAttribute("stroke-width", "3"), t.setAttribute("transform", "translate(0.5,-0.5)"), t;
-}, be = function(e, t, n, i) {
+}, Ne = function(e, t, n, i) {
   const o = R.createElementNS(I, "line");
   return o.setAttribute("x1", e.toString()), o.setAttribute("y1", t.toString()), o.setAttribute("x2", n.toString()), o.setAttribute("y2", i.toString()), o.setAttribute("stroke", "#bbb"), o.setAttribute("fill", "none"), o.setAttribute("stroke-width", "2"), o;
 }, ct = function(e) {
@@ -417,26 +417,26 @@ const R = document, I = "http://www.w3.org/2000/svg", lt = function(e) {
   return o.setAttribute("d", t), o.setAttribute("stroke", "rgb(235, 95, 82)"), o.setAttribute("fill", "none"), o.setAttribute("stroke-linecap", "cap"), o.setAttribute("stroke-width", "2"), i.setAttribute("d", e), i.setAttribute("stroke", "rgb(235, 95, 82)"), i.setAttribute("fill", "none"), i.setAttribute("stroke-linecap", "cap"), i.setAttribute("stroke-width", "2"), n.appendChild(i), n.appendChild(o), n;
 };
 let Z = document, A = 1e4, O = 1e4, M = 1e4, P = 1e4, D = 40, dt = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
-function Te() {
+function Ae() {
   A = 1e4, O = 1e4, M = 1e4, P = 1e4, D = 40;
 }
-function Ae() {
-  Te();
+function Me() {
+  Ae();
   let e = Z.querySelectorAll(".mindbox > grp, root"), t = "";
   for (let s = 0; s < e.length; s++) {
     let l = e[s], r = l.getBoundingClientRect(), a = l.offsetTop, h = a + r.height, u = l.offsetLeft, m = u + r.width;
-    a < A && (A = a), h > O && (O = h), u < M && (M = u), m > P && (P = m), t += Me(l);
+    a < A && (A = a), h > O && (O = h), u < M && (M = u), m > P && (P = m), t += De(l);
   }
   console.log(A, O, M, P), t += ft();
   let n = O - A + D * 2, i = P - M + D * 2, o = ut(n, i);
   return t = `<rect x="0" y="0" width="${i}" height="${n}" fill="#f6f6f6"></rect>` + t, o.innerHTML = t, o;
 }
 function ht() {
-  Z = this.container, Te();
+  Z = this.container, Ae();
   let e = Z.querySelectorAll(".mindbox > grp, root"), t = "";
   for (let o = 0; o < e.length; o++) {
     let s = e[o], l = s.getBoundingClientRect(), r = s.offsetTop, a = r + l.height, h = s.offsetLeft, u = h + l.width;
-    r < A && (A = r), a > O && (O = a), h < M && (M = h), u > P && (P = u), t += Me(s);
+    r < A && (A = r), a > O && (O = a), h < M && (M = h), u > P && (P = u), t += De(s);
   }
   console.log(A, O, M, P);
   let n = O - A, i = P - M;
@@ -493,7 +493,7 @@ function ft() {
   let C = Z.querySelector(".topiclinks");
   return C && (x += `<g transform="translate(${D - M}, ${D - A})">${C.innerHTML}</g>`), x;
 }
-function Me(e) {
+function De(e) {
   let t = e.querySelectorAll("tpc"), n = e.offsetTop - A, i = e.offsetLeft - M, o = "", s = e.querySelector(".svg3rd");
   o += `<g transform="translate(${i + D}, ${n + D})">`, o += s ? s.innerHTML : "";
   for (let l = 0; l < t.length; l++) {
@@ -548,12 +548,12 @@ function Me(e) {
   return o += "</g>", o;
 }
 let pt = function() {
-  let e = Ae(), t = URL.createObjectURL(
+  let e = Me(), t = URL.createObjectURL(
     new Blob([dt + e.outerHTML.replace(/&nbsp;/g, " ")])
   ), n = document.createElement("a");
   n.href = t, n.download = "me-mindmap.svg", n.click();
 }, gt = function(e = this, t = "default") {
-  return Z = e.container, Ae();
+  return Z = e.container, Me();
 };
 function oe(e) {
   return e.isFocusMode ? e.nodeDataBackup : e.nodeData;
@@ -651,10 +651,10 @@ const mt = function(e, t, n) {
     })
   );
 };
-function De(e, t, n) {
+function de(e, t, n) {
   t < n ? e.expanded = !0 : e.expanded = !1;
   for (const i of e.children || [])
-    De(i, t + 1, n);
+    de(i, t + 1, n);
 }
 const wt = function() {
   const e = Number(this.container.querySelector(".numberSelection").value) || 2, t = {
@@ -664,7 +664,7 @@ const wt = function() {
     height: ht.call(this),
     expandDeep: e
   };
-  return De(t.nodeData, 0, e), JSON.parse(
+  return de(t.nodeData, 0, e), JSON.parse(
     JSON.stringify(t, (n, i) => {
       if (n !== "parent")
         return n === "from" || n === "to" ? i.nodeObj.id : i;
@@ -733,21 +733,21 @@ const Ht = function() {
   this.locale = e, this.init();
 }, qt = function(e, t) {
   const n = e.nodeObj;
-  typeof t == "boolean" ? n.expanded = t : n.expanded !== !1 ? n.expanded = !1 : (n.expanded = !0, de(n)), this.layout(), this.linkDiv(), this.bus.fire("expandNode", n);
+  typeof t == "boolean" ? n.expanded = t : n.expanded !== !1 ? n.expanded = !1 : (n.expanded = !0, he(n)), this.layout(), this.linkDiv(), this.bus.fire("expandNode", n);
 }, jt = function() {
   this.addParentLink(this.nodeData), this.layout(), this.linkDiv();
 };
-function de(e) {
+function he(e) {
   e.expanded = !0;
   for (const t of e.children || [])
-    de(t);
+    he(t);
 }
 const G = document, Vt = function(e) {
   if (!e.style)
     return;
   const t = $(e.id, this), n = {
-    color: t.style.color && ye(t.style.color),
-    background: t.style.background && ye(t.style.background),
+    color: t.style.color && ve(t.style.color),
+    background: t.style.background && ve(t.style.background),
     fontSize: t.style.fontSize && t.style.fontSize + "px",
     fontWeight: t.style.fontWeight
   };
@@ -926,7 +926,7 @@ const G = document, Vt = function(e) {
         return s;
     })
   );
-  we(n);
+  Ee(n);
   const { newNodeObj: i } = He.call(this, t, n);
   console.timeEnd("copyNode"), this.bus.fire("operation", {
     name: "copyNode",
@@ -1049,7 +1049,7 @@ const hn = function(e, t, n, i) {
     cy: u,
     w: l.width,
     h: l.height
-  }, x = le(E, m, f), C = x.x, c = x.y, d = re(y, p, v), g = d.x, N = d.y, k = Ee(p, v, g, N), b = at(
+  }, x = le(E, m, f), C = x.x, c = x.y, d = re(y, p, v), g = d.x, N = d.y, k = Se(p, v, g, N), b = at(
     `M ${C} ${c} C ${m} ${f} ${p} ${v} ${g} ${N}`,
     `M ${k.x1} ${k.y1} L ${g} ${N} L ${k.x2} ${k.y2}`
   );
@@ -1121,7 +1121,7 @@ const hn = function(e, t, n, i) {
     n = n - p / this.scaleVal, i = i - v / this.scaleVal;
     const E = re(l, n, i);
     m = E.x, f = E.y;
-    const y = Ee(n, i, m, f);
+    const y = Se(n, i, m, f);
     this.P3.style.top = i + "px", this.P3.style.left = n + "px", this.currentLink.children[0].setAttribute(
       "d",
       `M ${a} ${h} C ${e} ${t} ${n} ${i} ${m} ${f}`
@@ -1204,18 +1204,18 @@ function Be(e, t, n, i) {
     const p = e[f];
     if ((p == null ? void 0 : p.tagName) === "SMY") {
       let w = e[0], B = e[f - 1];
-      const ue = {};
+      const fe = {};
       n.children[f].summary.range.forEach((j) => {
-        ue[j] = !0;
+        fe[j] = !0;
       });
-      let fe = !0;
+      let pe = !0;
       for (let j = 0; j < f; j++) {
         const Fe = e[j].children[0].children[0].getAttribute("data-nodeid").slice(2);
-        ue[Fe] && (fe && (fe = !1, w = e[j]), B = e[j]);
+        fe[Fe] && (pe && (pe = !1, w = e[j]), B = e[j]);
       }
-      const pe = w.offsetLeft + w.offsetWidth + 8, ge = w.offsetTop + 15, me = B.offsetTop + B.offsetHeight - 5, Pe = B.offsetLeft + B.offsetWidth + 8, ze = p.offsetTop + p.children[0].offsetTop + p.children[0].offsetHeight;
+      const ge = w.offsetLeft + w.offsetWidth + 8, me = w.offsetTop + 15, ye = B.offsetTop + B.offsetHeight - 5, Pe = B.offsetLeft + B.offsetWidth + 8, ze = p.offsetTop + p.children[0].offsetTop + p.children[0].offsetHeight;
       let ee = (h = p.style.top) != null ? h : 0;
-      typeof ee == "string" && (ee = Number(ee.replace("px", ""))), p.style.top = ee + (me + ge + 20) / 2 - ze + "px", te += `M ${pe} ${ge} H ${pe + 10} V ${me} H${Pe}`;
+      typeof ee == "string" && (ee = Number(ee.replace("px", ""))), p.style.top = ee + (ye + me + 20) / 2 - ze + "px", te += `M ${ge} ${me} H ${ge + 10} V ${ye} H${Pe}`;
     }
     const v = p.children[0];
     let E = v.offsetTop, y = v.offsetHeight;
@@ -1269,7 +1269,7 @@ function yn(e) {
   }), e.map.addEventListener("wheel", (t) => {
   });
 }
-const Ne = {
+const Ce = {
   addChild: "\u63D2\u5165\u5B50\u8282\u70B9",
   addParent: "\u63D2\u5165\u7236\u8282\u70B9",
   addSibling: "\u63D2\u5165\u540C\u7EA7\u8282\u70B9",
@@ -1293,8 +1293,8 @@ const Ne = {
   reamrkSeparate: "\u5185\u5BB9",
   summary: "\u6982\u8981"
 }, S = {
-  cn: Ne,
-  zh_CN: Ne,
+  cn: Ce,
+  zh_CN: Ce,
   zh_TW: {
     addChild: "\u63D2\u5165\u5B50\u7BC0\u9EDE",
     addParent: "\u63D2\u5165\u7236\u7BC0\u9EDE",
@@ -1464,26 +1464,26 @@ function vn(e, t) {
     );
   };
 }
-const Ce = '<svg style="width: 1.3em;height: 1.3em;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3464"><path d="M909.061224 684.930612c-5.22449 0-10.44898-2.089796-14.628571-6.269388l-291.526531-291.52653c-4.179592-4.179592-10.971429-4.179592-14.628571 0l-143.673469 143.673469c-9.926531 9.926531-22.987755 15.15102-37.093878 15.151021s-27.167347-5.22449-37.093877-15.151021l-39.183674-39.183673c-4.179592-4.179592-10.971429-4.179592-14.628571 0l-187.036735 187.036734c-8.359184 8.359184-21.420408 8.359184-29.779592 0-8.359184-8.359184-8.359184-21.420408 0-29.779591l187.036735-187.036735c20.37551-20.37551 53.289796-20.37551 73.665306 0l39.183673 39.183673c2.612245 2.612245 5.746939 3.134694 7.314286 3.134694s4.702041-0.522449 7.314286-3.134694l143.673469-143.673469c20.37551-20.37551 53.289796-20.37551 73.665306 0l291.526531 291.526531c8.359184 8.359184 8.359184 21.420408 0 29.779591-3.657143 4.179592-8.881633 6.269388-14.106123 6.269388zM846.367347 867.265306H177.632653c-45.97551 0-83.591837-37.616327-83.591837-83.591837V240.326531c0-45.97551 37.616327-83.591837 83.591837-83.591837h668.734694c45.97551 0 83.591837 37.616327 83.591837 83.591837v543.346938c0 45.97551-37.616327 83.591837-83.591837 83.591837zM177.632653 198.530612c-22.987755 0-41.795918 18.808163-41.795918 41.795919v543.346938c0 22.987755 18.808163 41.795918 41.795918 41.795919h668.734694c22.987755 0 41.795918-18.808163 41.795918-41.795919V240.326531c0-22.987755-18.808163-41.795918-41.795918-41.795919H177.632653zM261.22449 303.020408m-52.244898 0a52.244898 52.244898 0 1 0 104.489796 0 52.244898 52.244898 0 1 0-104.489796 0ZM644.179592 768h-365.714286c-11.493878 0-20.897959-9.404082-20.897959-20.897959s9.404082-20.897959 20.897959-20.897959h365.714286c11.493878 0 20.897959 9.404082 20.897959 20.897959s-9.404082 20.897959-20.897959 20.897959zM461.322449 670.82449h-182.857143c-11.493878 0-20.897959-9.404082-20.897959-20.897959s9.404082-20.897959 20.897959-20.89796h182.857143c11.493878 0 20.897959 9.404082 20.897959 20.89796s-9.404082 20.897959-20.897959 20.897959z" p-id="3465"></path></svg>';
-function he(e, t) {
+const xe = '<svg style="width: 1.3em;height: 1.3em;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3464"><path d="M909.061224 684.930612c-5.22449 0-10.44898-2.089796-14.628571-6.269388l-291.526531-291.52653c-4.179592-4.179592-10.971429-4.179592-14.628571 0l-143.673469 143.673469c-9.926531 9.926531-22.987755 15.15102-37.093878 15.151021s-27.167347-5.22449-37.093877-15.151021l-39.183674-39.183673c-4.179592-4.179592-10.971429-4.179592-14.628571 0l-187.036735 187.036734c-8.359184 8.359184-21.420408 8.359184-29.779592 0-8.359184-8.359184-8.359184-21.420408 0-29.779591l187.036735-187.036735c20.37551-20.37551 53.289796-20.37551 73.665306 0l39.183673 39.183673c2.612245 2.612245 5.746939 3.134694 7.314286 3.134694s4.702041-0.522449 7.314286-3.134694l143.673469-143.673469c20.37551-20.37551 53.289796-20.37551 73.665306 0l291.526531 291.526531c8.359184 8.359184 8.359184 21.420408 0 29.779591-3.657143 4.179592-8.881633 6.269388-14.106123 6.269388zM846.367347 867.265306H177.632653c-45.97551 0-83.591837-37.616327-83.591837-83.591837V240.326531c0-45.97551 37.616327-83.591837 83.591837-83.591837h668.734694c45.97551 0 83.591837 37.616327 83.591837 83.591837v543.346938c0 45.97551-37.616327 83.591837-83.591837 83.591837zM177.632653 198.530612c-22.987755 0-41.795918 18.808163-41.795918 41.795919v543.346938c0 22.987755 18.808163 41.795918 41.795918 41.795919h668.734694c22.987755 0 41.795918-18.808163 41.795918-41.795919V240.326531c0-22.987755-18.808163-41.795918-41.795918-41.795919H177.632653zM261.22449 303.020408m-52.244898 0a52.244898 52.244898 0 1 0 104.489796 0 52.244898 52.244898 0 1 0-104.489796 0ZM644.179592 768h-365.714286c-11.493878 0-20.897959-9.404082-20.897959-20.897959s9.404082-20.897959 20.897959-20.897959h365.714286c11.493878 0 20.897959 9.404082 20.897959 20.897959s-9.404082 20.897959-20.897959 20.897959zM461.322449 670.82449h-182.857143c-11.493878 0-20.897959-9.404082-20.897959-20.897959s9.404082-20.897959 20.897959-20.89796h182.857143c11.493878 0 20.897959 9.404082 20.897959 20.89796s-9.404082 20.897959-20.897959 20.897959z" p-id="3465"></path></svg>';
+function ue(e, t) {
   var i;
   let n = "";
   for (let o = 0; o < ((i = e.children) == null ? void 0 : i.length); o++)
-    n += `<li class="sidebar-links">${he(e.children[o], t + 1)}</li>`;
-  return !(e != null && e.children) || !e.children.length ? `<p class="sidebar-title" id="sidebar${e.id}"><span class="arrow" ${e.topic ? "" : 'style="margin-bottom:5px;"'}"></span><span>${e.topic ? e.topic : Ce}</span></p>` : `<p class="sidebar-title" id="sidebar${e.id}"><span class="arrow ${t < 2 ? "down" : "right"}" ${e.topic ? "" : 'style="margin-bottom:5px;"'}></span><span>${e.topic ? e.topic : Ce}</span></p><ul class="sidebar-heading open ${t < 2 ? "" : "hidden"}">${n}</ul>`;
+    n += `<li class="sidebar-links">${ue(e.children[o], t + 1)}</li>`;
+  return !(e != null && e.children) || !e.children.length ? `<p class="sidebar-title" id="sidebar${e.id}"><span class="arrow" ${e.topic ? "" : 'style="margin-bottom:5px;"'}"></span><span>${e.topic ? e.topic : xe}</span></p>` : `<p class="sidebar-title" id="sidebar${e.id}"><span class="arrow ${t < 2 ? "down" : "right"}" ${e.topic ? "" : 'style="margin-bottom:5px;"'}></span><span>${e.topic ? e.topic : xe}</span></p><ul class="sidebar-heading open ${t < 2 ? "" : "hidden"}">${n}</ul>`;
 }
 function bn(e, t) {
   const n = e.nodeData;
-  t.innerHTML = `${he(n, 0)}`, t.querySelectorAll(".sidebar-title").forEach((i) => {
+  t.innerHTML = `${ue(n, 0)}`, t.querySelectorAll(".sidebar-title").forEach((i) => {
     i.onclick = () => {
       const o = i.querySelector(".down"), s = i.querySelector(".right"), l = e.container.querySelector(".sidebar-title.active");
-      l == null || l.classList.remove("active"), o ? (i.parentElement.querySelector("ul").classList.add("hidden"), o.classList.replace("down", "right")) : s && (i.parentElement.querySelector("ul").classList.remove("hidden"), s.classList.replace("right", "down")), i.classList.add("active"), Se.call(e, i.id.replace("sidebar", ""));
+      l == null || l.classList.remove("active"), o ? (i.parentElement.querySelector("ul").classList.add("hidden"), o.classList.replace("down", "right")) : s && (i.parentElement.querySelector("ul").classList.remove("hidden"), s.classList.replace("right", "down")), i.classList.add("active"), Le.call(e, i.id.replace("sidebar", ""));
     };
   });
 }
 function Nn(e) {
   const t = document.createElement("sidebar"), n = e.nodeData;
-  t.innerHTML = `${he(n, 0)}`, e.container.append(t);
+  t.innerHTML = `${ue(n, 0)}`, e.container.append(t);
 }
 const z = (e, t) => {
   const n = document.createElement("span");
@@ -1505,7 +1505,7 @@ function xn(e) {
   const t = document.createElement("toolbar"), n = z("fullscreen", "full"), i = z("toCenter", "living"), o = z("zoomout", "move"), s = z("zoomin", "add"), l = document.createElement("input");
   l.className = "numberSelection", l.type = "number", l.min = "2", l.max = "100", l.step = "1", l.value = ((a = e == null ? void 0 : e.expandDeep) == null ? void 0 : a.toString()) || "2", l.oninput = Cn(() => {
     const h = e.getAllDataWithAutoHide();
-    de(h == null ? void 0 : h.nodeData), e.layout(), e.linkDiv();
+    he(h == null ? void 0 : h.nodeData), e.layout(), e.linkDiv();
   }, 300);
   const r = document.createElement("span");
   if (r.innerText = "100%", t.appendChild(l), t.appendChild(n), t.appendChild(i), t.appendChild(o), t.appendChild(s), e.uploadButton) {
@@ -1710,7 +1710,7 @@ const ce = document, Tn = function(e, t) {
   const t = e.getElementsByClassName("insert-preview");
   for (const n of t || [])
     n.remove();
-}, xe = function(e, t) {
+}, ke = function(e, t) {
   const n = t.parentNode.parentNode.contains(e);
   return e && e.tagName === "TPC" && e !== t && !n && e.nodeObj.root !== !0;
 };
@@ -1739,7 +1739,7 @@ function An(e) {
       s.clientX,
       s.clientY - 12
     );
-    if (xe(l, t)) {
+    if (ke(l, t)) {
       i = l;
       const r = l.getBoundingClientRect().y;
       s.clientY > r + l.clientHeight ? n = "after" : s.clientY > r + l.clientHeight / 2 && (n = "in");
@@ -1748,7 +1748,7 @@ function An(e) {
         s.clientX,
         s.clientY + 12
       );
-      if (xe(r, t)) {
+      if (ke(r, t)) {
         i = r;
         const a = r.getBoundingClientRect().y;
         s.clientY < a ? n = "before" : s.clientY < a + r.clientHeight / 2 && (n = "in");
@@ -1965,7 +1965,7 @@ function T(e) {
 }
 q.prototype = {
   addParentLink: H,
-  getObjById: ke,
+  getObjById: we,
   generateNewObj: qe,
   generateNewSummaryObj: je,
   insertSibling: T(Xt),
@@ -2028,7 +2028,7 @@ q.prototype = {
   exportSvg: pt,
   exportSvgDom: gt,
   init: function(e, t) {
-    e && (this.nodeData = e), t && (this.expandDeep = t), H(this.nodeData), console.log("ME_version " + q.version), console.log(this), this.mindElixirBox.className.indexOf("mind-elixir") === -1 && (this.mindElixirBox.className += " mind-elixir"), this.mindElixirBox.innerHTML = "", this.container = W.createElement("div"), this.container.className = "map-container", this.overflowHidden && (this.container.style.overflow = "hidden"), this.map = W.createElement("div"), this.map.className = "map-canvas", this.map.setAttribute("tabindex", "0"), this.container.appendChild(this.map), this.mindElixirBox.appendChild(this.container), this.root = W.createElement("root"), this.box = W.createElement("children"), this.box.className = "mindbox", this.svg2nd = J("svg2nd"), this.linkController = J("linkcontroller"), this.P2 = W.createElement("div"), this.P3 = W.createElement("div"), this.P2.className = this.P3.className = "circle", this.line1 = be(0, 0, 0, 0), this.line2 = be(0, 0, 0, 0), this.linkController.appendChild(this.line1), this.linkController.appendChild(this.line2), this.linkSvgGroup = J("topiclinks"), this.map.appendChild(this.root), this.map.appendChild(this.box), this.map.appendChild(this.svg2nd), this.map.appendChild(this.linkController), this.map.appendChild(this.linkSvgGroup), this.map.appendChild(this.P2), this.map.appendChild(this.P3), this.toolBar && Sn(this), this.nodeMenu && $n(this), this.keypress && Mn(this), Nn(this), Re() && this.mobileMenu ? Dn(this) : this.contextMenu && vn(this, this.contextMenuOption), this.draggable && An(this), this.layout(), this.linkDiv(), this.toTopLeft(), yn(this);
+    e && (this.nodeData = e), t && (this.expandDeep = t), H(this.nodeData), console.log("ME_version " + q.version), console.log(this), this.mindElixirBox.className.indexOf("mind-elixir") === -1 && (this.mindElixirBox.className += " mind-elixir"), this.mindElixirBox.innerHTML = "", this.container = W.createElement("div"), this.container.className = "map-container", this.overflowHidden && (this.container.style.overflow = "hidden"), this.map = W.createElement("div"), this.map.className = "map-canvas", this.map.setAttribute("tabindex", "0"), this.container.appendChild(this.map), this.mindElixirBox.appendChild(this.container), this.root = W.createElement("root"), this.box = W.createElement("children"), this.box.className = "mindbox", this.svg2nd = J("svg2nd"), this.linkController = J("linkcontroller"), this.P2 = W.createElement("div"), this.P3 = W.createElement("div"), this.P2.className = this.P3.className = "circle", this.line1 = Ne(0, 0, 0, 0), this.line2 = Ne(0, 0, 0, 0), this.linkController.appendChild(this.line1), this.linkController.appendChild(this.line2), this.linkSvgGroup = J("topiclinks"), this.map.appendChild(this.root), this.map.appendChild(this.box), this.map.appendChild(this.svg2nd), this.map.appendChild(this.linkController), this.map.appendChild(this.linkSvgGroup), this.map.appendChild(this.P2), this.map.appendChild(this.P3), this.toolBar && Sn(this), this.nodeMenu && $n(this), this.keypress && Mn(this), Nn(this), Re() && this.mobileMenu ? Dn(this) : this.contextMenu && vn(this, this.contextMenuOption), this.draggable && An(this), de(this.nodeData, 0, this.expandDeep || 2), this.layout(), this.linkDiv(), this.toTopLeft(), yn(this);
   }
 };
 q.LEFT = 0;

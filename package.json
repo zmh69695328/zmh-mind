@@ -1,7 +1,28 @@
 {
   "name": "zmh-mind",
-  "private": true,
+  "private": false,
   "version": "0.0.1",
+  "main": "./dist/mind.umd.js",
+  "module": "./dist/mind.mjs",
+  "exports": {
+    ".": {
+      "require": "./dist/mind.umd.js",
+      "import": "./dist/mind.mjs"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zmh69695328/zmh-mind.git"
+  },
+  "keywords": [
+    "mindmapping"
+  ],
+  "author": "zhuminhao <hnustzmh@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zmh69695328/zmh-mind/issues"
+  },
+  "homepage": "https://github.com/zmh69695328/zmh-mind",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -19,5 +40,11 @@
   "dependencies": {
     "canvg": "^4.0.0",
     "less": "^4.1.3"
-  }
+  },
+  "files": [
+    "src",
+    "dist",
+    "!tsconfig.json",
+    "!src/package.json"
+  ]
 }

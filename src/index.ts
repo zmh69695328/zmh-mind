@@ -33,6 +33,7 @@ import {
   expandNode,
   refresh,
   toTopLeft,
+  autoHide,
 } from './interact'
 import {
   insertSibling,
@@ -472,7 +473,8 @@ MindElixir.prototype = {
     }
     this.draggable && nodeDraggable(this)
 
-    
+    // 为了兼容从xmind导入的导图在一开始没有
+    autoHide(this.nodeData,0,this.expandDeep||2)
     this.layout()
     this.linkDiv()
     this.toTopLeft()
