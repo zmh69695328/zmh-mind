@@ -61,11 +61,39 @@ export default function(mind) {
       <span class="background">${i18n[locale].background}</span>
       </div>
   `
-  tagDiv.innerHTML = `${i18n[locale].tag}<input class="nm-tag" tabindex="-1" placeholder="${i18n[locale].tagsSeparate}" /><br>`
-  iconDiv.innerHTML = `${i18n[locale].icon}<input class="nm-icon" tabindex="-1" placeholder="${i18n[locale].iconsSeparate}" /><br>`
-  linkDiv.innerHTML = `${i18n[locale].hyperlink}<input class="nm-link" tabindex="-1" placeholder="${i18n[locale].linkSeparate}" /><br>`
-  remarkDiv.innerHTML = `${i18n[locale].remark}<input class="nm-remark" tabindex="-1" placeholder="${i18n[locale].reamrkSeparate}" /><br>`
+  tagDiv.innerHTML = `${i18n[locale].tag}<textarea class="nm-tag" tabindex="-1" placeholder="${i18n[locale].tagsSeparate}" /><br>`
+  iconDiv.innerHTML = `${i18n[locale].icon}<textarea class="nm-icon" tabindex="-1" placeholder="${i18n[locale].iconsSeparate}" /><br>`
+  linkDiv.innerHTML = `${i18n[locale].hyperlink}<textarea class="nm-link" tabindex="-1" placeholder="${i18n[locale].linkSeparate}" /><br>`
+  remarkDiv.innerHTML = `${i18n[locale].remark}<textarea class="nm-remark" tabindex="-1" placeholder="${i18n[locale].reamrkSeparate}" /><br>`
 
+  function addDropTextarea(xxxdiv:HTMLElement){
+    xxxdiv.ondblclick=(e)=>{
+      const textarea=document.createElement('textarea')
+      const preTextarea=xxxdiv.children[0] as HTMLTextAreaElement
+      const maxHeight=mind.container.offsetHeight-xxxdiv.offsetTop-60
+      textarea.value=preTextarea.value
+      textarea.style.position='absolute'
+      textarea.style.left=preTextarea.offsetLeft+'px'
+      textarea.style.top=preTextarea.offsetTop-10+'px'
+      textarea.style.height=(preTextarea.scrollHeight>maxHeight?maxHeight:preTextarea.scrollHeight) + 'px'
+      textarea.style.width=preTextarea.offsetWidth+'px'
+      textarea.oninput=(e:Event&{target:HTMLTextAreaElement})=>{
+        let height=e.target.scrollHeight
+        textarea.style.height =(height>maxHeight?maxHeight:height) + 'px';
+      }
+      textarea.onblur=e=>{
+        preTextarea.value=textarea.value
+        preTextarea.dispatchEvent(new CustomEvent('change'));
+        textarea.remove()
+      }
+      xxxdiv.appendChild(textarea)
+      textarea.focus()
+    }
+  }
+  addDropTextarea(tagDiv)
+  addDropTextarea(iconDiv)
+  addDropTextarea(linkDiv)
+  addDropTextarea(remarkDiv)
   const menuContainer = document.createElement('nmenu')
   menuContainer.innerHTML = `
   <div class="button-container"><svg class="icon" aria-hidden="true">

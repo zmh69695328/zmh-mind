@@ -19,10 +19,10 @@ const Re = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/
     }
   else
     return null;
-}, H = (e, t) => {
+}, B = (e, t) => {
   if (e.parent = t, e.children)
     for (let n = 0; n < e.children.length; n++)
-      H(e.children[n], e);
+      B(e.children[n], e);
 };
 function Ee(e) {
   if (e.id = Q(), e.children)
@@ -40,14 +40,14 @@ function Se(e, t, n, i) {
   const o = i - t, s = e - n;
   let l = Math.atan(Math.abs(o) / Math.abs(s)) / 3.14 * 180;
   s < 0 && o > 0 && (l = 180 - l), s < 0 && o < 0 && (l = 180 + l), s > 0 && o < 0 && (l = 360 - l);
-  const r = 20, a = 30;
-  var h = l + a;
-  const u = l - a;
+  const r = 20, d = 30;
+  var a = l + d;
+  const h = l - d;
   return {
-    x1: n + Math.cos(Math.PI * h / 180) * r,
-    y1: i - Math.sin(Math.PI * h / 180) * r,
-    x2: n + Math.cos(Math.PI * u / 180) * r,
-    y2: i - Math.sin(Math.PI * u / 180) * r
+    x1: n + Math.cos(Math.PI * a / 180) * r,
+    y1: i - Math.sin(Math.PI * a / 180) * r,
+    x2: n + Math.cos(Math.PI * h / 180) * r,
+    y2: i - Math.sin(Math.PI * h / 180) * r
   };
 }
 function le(e, t, n) {
@@ -292,42 +292,42 @@ function nt(e) {
   n && (n.removeAllRanges(), n.addRange(t));
 }
 function it(e) {
-  var i, o, s, l, r, a, h;
+  var i, o, s, l, r, d, a;
   if (console.time("createInputDiv"), !e)
     return;
   let t = L.createElement("div");
   const n = e.childNodes[0].textContent;
-  e.appendChild(t), t.id = "input-box", t.contentEditable = "true", t.spellcheck = !1, t.textContent = n, e.nodeObj.image && e.nodeObj.image.forEach((m) => {
+  e.appendChild(t), t.id = "input-box", t.contentEditable = "true", t.spellcheck = !1, t.textContent = n, e.nodeObj.image && e.nodeObj.image.forEach((y) => {
     const f = L.createElement("img");
-    f.src = m.url, f.style.width = m.width + "px", f.style.display = "block", t.appendChild(f);
-  }), t.style.cssText = `min-width:${e.offsetWidth - 22}px;min-height:${e.clientHeight - 16}px`, (o = (i = e.nodeObj) == null ? void 0 : i.style) != null && o.width && (t.style.width = "auto"), (((l = (s = e.nodeObj) == null ? void 0 : s.style) == null ? void 0 : l.color) === "#ffffff" || ((r = e.nodeObj) == null ? void 0 : r.id) === "root" && !((h = (a = e.nodeObj) == null ? void 0 : a.style) != null && h.color)) && (t.style.color = "#2c3e50"), this.direction === 0 && (t.style.right = "0"), t.focus(), nt(t), this.inputDiv = t, this.bus.fire("operation", {
+    f.src = y.url, f.style.width = y.width + "px", f.style.display = "block", t.appendChild(f);
+  }), t.style.cssText = `min-width:${e.offsetWidth - 22}px;min-height:${e.clientHeight - 16}px`, (o = (i = e.nodeObj) == null ? void 0 : i.style) != null && o.width && (t.style.width = "auto"), (((l = (s = e.nodeObj) == null ? void 0 : s.style) == null ? void 0 : l.color) === "#ffffff" || ((r = e.nodeObj) == null ? void 0 : r.id) === "root" && !((a = (d = e.nodeObj) == null ? void 0 : d.style) != null && a.color)) && (t.style.color = "#2c3e50"), this.direction === 0 && (t.style.right = "0"), t.focus(), nt(t), this.inputDiv = t, this.bus.fire("operation", {
     name: "beginEdit",
     obj: e.nodeObj
-  }), t.addEventListener("keydown", (u) => {
-    u.stopPropagation();
-    const m = u.key;
-    if (m === "Enter" || m === "Tab") {
-      if (u.shiftKey)
+  }), t.addEventListener("keydown", (h) => {
+    h.stopPropagation();
+    const y = h.key;
+    if (y === "Enter" || y === "Tab") {
+      if (h.shiftKey)
         return;
-      u.preventDefault(), this.inputDiv.blur(), this.map.focus();
+      h.preventDefault(), this.inputDiv.blur(), this.map.focus();
     }
   }), t.addEventListener("blur", () => {
     if (!t)
       return;
-    const u = e.nodeObj, m = t.textContent.trim();
-    if (u.image = [], t.childNodes.forEach((v) => {
-      v.nodeName === "IMG" && u.image.push({
-        url: v.src,
-        width: v.width,
-        height: v.height
+    const h = e.nodeObj, y = t.textContent.trim();
+    if (h.image = [], t.childNodes.forEach((N) => {
+      N.nodeName === "IMG" && h.image.push({
+        url: N.src,
+        width: N.width,
+        height: N.height
       });
-    }), m === "" && u.image.length === 0 ? u.topic = n : u.topic = m, t.remove(), this.inputDiv = t = null, m === n && u.image.length === 0)
+    }), y === "" && h.image.length === 0 ? h.topic = n : h.topic = y, t.remove(), this.inputDiv = t = null, y === n && h.image.length === 0)
       return;
-    e.childNodes[0].textContent = u.topic;
-    const f = e.querySelector("widthControllRight"), p = e.querySelector("widthControllRight");
-    u.style || (u.style = {}), u.style.controllWidth = f.style.height = p.style.height = e.clientHeight.toString() + "px", delete u.style.width, this.shapeTpc(e, u), this.linkDiv(), Te.call(this, this.nodeData, u.id, u.topic), this.bus.fire("operation", {
+    e.childNodes[0].textContent = h.topic;
+    const f = e.querySelector("widthControllRight"), g = e.querySelector("widthControllRight");
+    h.style || (h.style = {}), h.style.controllWidth = f.style.height = g.style.height = e.clientHeight.toString() + "px", delete h.style.width, this.shapeTpc(e, h), this.linkDiv(), Te.call(this, this.nodeData, h.id, h.topic), this.bus.fire("operation", {
       name: "finishEdit",
-      obj: u,
+      obj: h,
       origin: n
     });
   }), console.timeEnd("createInputDiv");
@@ -355,29 +355,29 @@ function ot(e, t, n) {
   for (let s = 0; s < e.length; s++) {
     const l = e[s];
     if ((l == null ? void 0 : l.type) === "summary") {
-      const { smy: h } = this.createSummary(l);
+      const { smy: a } = this.createSummary(l);
       if (l.children && l.children.length > 0 && l.expanded !== !1) {
-        const [u, m] = this.createChildren(l.children);
-        h.appendChild(u), m && m.forEach((f) => {
-          h.appendChild(f);
+        const [h, y] = this.createChildren(l.children);
+        a.appendChild(h), y && y.forEach((f) => {
+          a.appendChild(f);
         });
       }
-      o.push(h);
+      o.push(a);
       continue;
     }
     const r = L.createElement("GRP");
     n === 0 ? r.className = "lhs" : n === 1 ? r.className = "rhs" : n === 2 && (l.direction === 0 ? r.className = "lhs" : l.direction === 1 && (r.className = "rhs"));
-    const a = this.createTop(l);
+    const d = this.createTop(l);
     if (l.children && l.children.length > 0) {
-      if (a.appendChild(X(l.expanded)), r.appendChild(a), l.expanded !== !1) {
-        const [h, u] = this.createChildren(l.children);
-        r.appendChild(h), u && u.forEach((m) => {
+      if (d.appendChild(X(l.expanded)), r.appendChild(d), l.expanded !== !1) {
+        const [a, h] = this.createChildren(l.children);
+        r.appendChild(a), h && h.forEach((y) => {
           var f;
-          (f = r.children) != null && f[2] || r.appendChild(L.createElement("smychildren")), r.children[2].appendChild(m);
+          (f = r.children) != null && f[2] || r.appendChild(L.createElement("smychildren")), r.children[2].appendChild(y);
         });
       }
     } else
-      r.appendChild(a);
+      r.appendChild(d);
     i.appendChild(r);
   }
   return [i, o];
@@ -416,30 +416,30 @@ const R = document, I = "http://www.w3.org/2000/svg", lt = function(e) {
   const n = R.createElementNS(I, "g"), i = R.createElementNS(I, "path"), o = R.createElementNS(I, "path");
   return o.setAttribute("d", t), o.setAttribute("stroke", "rgb(235, 95, 82)"), o.setAttribute("fill", "none"), o.setAttribute("stroke-linecap", "cap"), o.setAttribute("stroke-width", "2"), i.setAttribute("d", e), i.setAttribute("stroke", "rgb(235, 95, 82)"), i.setAttribute("fill", "none"), i.setAttribute("stroke-linecap", "cap"), i.setAttribute("stroke-width", "2"), n.appendChild(i), n.appendChild(o), n;
 };
-let Z = document, A = 1e4, O = 1e4, M = 1e4, P = 1e4, D = 40, dt = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
+let Z = document, M = 1e4, O = 1e4, D = 1e4, P = 1e4, H = 40, dt = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
 function Ae() {
-  A = 1e4, O = 1e4, M = 1e4, P = 1e4, D = 40;
+  M = 1e4, O = 1e4, D = 1e4, P = 1e4, H = 40;
 }
 function Me() {
   Ae();
   let e = Z.querySelectorAll(".mindbox > grp, root"), t = "";
   for (let s = 0; s < e.length; s++) {
-    let l = e[s], r = l.getBoundingClientRect(), a = l.offsetTop, h = a + r.height, u = l.offsetLeft, m = u + r.width;
-    a < A && (A = a), h > O && (O = h), u < M && (M = u), m > P && (P = m), t += De(l);
+    let l = e[s], r = l.getBoundingClientRect(), d = l.offsetTop, a = d + r.height, h = l.offsetLeft, y = h + r.width;
+    d < M && (M = d), a > O && (O = a), h < D && (D = h), y > P && (P = y), t += De(l);
   }
-  console.log(A, O, M, P), t += ft();
-  let n = O - A + D * 2, i = P - M + D * 2, o = ut(n, i);
+  console.log(M, O, D, P), t += ft();
+  let n = O - M + H * 2, i = P - D + H * 2, o = ut(n, i);
   return t = `<rect x="0" y="0" width="${i}" height="${n}" fill="#f6f6f6"></rect>` + t, o.innerHTML = t, o;
 }
 function ht() {
   Z = this.container, Ae();
   let e = Z.querySelectorAll(".mindbox > grp, root"), t = "";
   for (let o = 0; o < e.length; o++) {
-    let s = e[o], l = s.getBoundingClientRect(), r = s.offsetTop, a = r + l.height, h = s.offsetLeft, u = h + l.width;
-    r < A && (A = r), a > O && (O = a), h < M && (M = h), u > P && (P = u), t += De(s);
+    let s = e[o], l = s.getBoundingClientRect(), r = s.offsetTop, d = r + l.height, a = s.offsetLeft, h = a + l.width;
+    r < M && (M = r), d > O && (O = d), a < D && (D = a), h > P && (P = h), t += De(s);
   }
-  console.log(A, O, M, P);
-  let n = O - A, i = P - M;
+  console.log(M, O, D, P);
+  let n = O - M, i = P - D;
   return console.log("svgHeight", n), [n + 5, i + 5];
 }
 function ut(e, t) {
@@ -447,102 +447,102 @@ function ut(e, t) {
   return n.setAttribute("height", e), n.setAttribute("width", t), n.setAttribute("xmlns", "http://www.w3.org/2000/svg"), n.setAttribute("version", "1.2"), n.setAttribute("xlink", "http://www.w3.org/1999/xlink"), n;
 }
 function ft() {
-  let e = document.querySelector("root"), t = document.querySelector("root > tpc"), n = t.getBoundingClientRect(), i = getComputedStyle(t), o = t.parentNode, s = 0, l = 0, r = document.querySelector("root > tpc").nodeObj, a = getComputedStyle(o), h = e.offsetTop - A, u = e.offsetLeft - M, m = l + parseInt(a.paddingLeft) + parseInt(n.paddingLeft), f = s + parseInt(a.paddingTop) + parseInt(n.paddingTop) + parseInt(n.fontSize);
-  s + parseInt(a.paddingTop) + parseInt(n.paddingTop);
-  let p = document.querySelector(".svg2nd"), v = "";
+  let e = document.querySelector("root"), t = document.querySelector("root > tpc"), n = t.getBoundingClientRect(), i = getComputedStyle(t), o = t.parentNode, s = 0, l = 0, r = document.querySelector("root > tpc").nodeObj, d = getComputedStyle(o), a = e.offsetTop - M, h = e.offsetLeft - D, y = l + parseInt(d.paddingLeft) + parseInt(n.paddingLeft), f = s + parseInt(d.paddingTop) + parseInt(n.paddingTop) + parseInt(n.fontSize);
+  s + parseInt(d.paddingTop) + parseInt(n.paddingTop);
+  let g = document.querySelector(".svg2nd"), N = "";
   if (r.tags && r.tags.length) {
-    let c = t.querySelectorAll(".tags > span");
-    for (let d = 0; d < c.length; d++) {
-      let g = c[d], N = g.getBoundingClientRect();
-      v += `<rect x="${m}" y="${f + 4}" rx="5px" ry="5px" width="${N.width}" height="${N.height}" style="fill: #d6f0f8;"></rect>
-        <foreignObject x="${m}" y="${f + 4}" rx="5px" ry="5px" width="${N.width}" height="${N.height}" > 
-          <div sytle="font-size:12px">${g.innerHTML}</div>
+    let p = t.querySelectorAll(".tags > span");
+    for (let c = 0; c < p.length; c++) {
+      let m = p[c], u = m.getBoundingClientRect();
+      N += `<rect x="${y}" y="${f + 4}" rx="5px" ry="5px" width="${u.width}" height="${u.height}" style="fill: #d6f0f8;"></rect>
+        <foreignObject x="${y}" y="${f + 4}" rx="5px" ry="5px" width="${u.width}" height="${u.height}" > 
+          <div sytle="font-size:12px">${m.innerHTML}</div>
         </foreignObject>
       `;
     }
   }
   let E = "";
   if (r.icons && r.icons.length) {
-    let c = t.querySelectorAll(".icons > span");
-    for (let d = 0; d < c.length; d++) {
-      let g = c[d];
-      g.getBoundingClientRect(), E += `
-      <tspan>${g.innerHTML}</tspan>`;
+    let p = t.querySelectorAll(".icons > span");
+    for (let c = 0; c < p.length; c++) {
+      let m = p[c];
+      m.getBoundingClientRect(), E += `
+      <tspan>${m.innerHTML}</tspan>`;
     }
   }
-  let y = "";
+  let b = "";
   if (r.image && r.image.length) {
-    let c = tpc.querySelectorAll(".image");
-    for (let d = 0; d < c.length; d++) {
-      let g = c[d];
-      g.getBoundingClientRect(), y += `${g.outerHTML}`;
+    let p = tpc.querySelectorAll(".image");
+    for (let c = 0; c < p.length; c++) {
+      let m = p[c];
+      m.getBoundingClientRect(), b += `${m.outerHTML}`;
     }
   }
-  let x = `<g transform="translate(${D - M}, ${D - A})">${p.innerHTML}</g>`;
-  x += `<g id="root" transform="translate(${u + D}, ${h + D})">
+  let x = `<g transform="translate(${H - D}, ${H - M})">${g.innerHTML}</g>`;
+  x += `<g id="root" transform="translate(${h + H}, ${a + H})">
       <rect x="${l}" y="${s}" rx="5px" ry="5px" width="${n.width}" height="${n.height}" style="fill: #00aaff;"></rect>
       <foreignObject x="${l + 15}" y="${s + 10}" width="${i.width}" height="${i.height}" ">
         <div xmlns="http://www.w3.org/1999/xhtml" style="padding:0;margin:0;font-family:\u5FAE\u8F6F\u96C5\u9ED1;font-size:${i.fontSize};font-weight:${i.fontWeight};color:${i.color};word-break: break-all;line-height: 1">
         ${r.topic}
         ${E}
-        ${y}
+        ${b}
       </div>
       </foreignObject>
-      ${v}
+      ${N}
   </g>`;
-  let C = Z.querySelector(".topiclinks");
-  return C && (x += `<g transform="translate(${D - M}, ${D - A})">${C.innerHTML}</g>`), x;
+  let k = Z.querySelector(".topiclinks");
+  return k && (x += `<g transform="translate(${H - D}, ${H - M})">${k.innerHTML}</g>`), x;
 }
 function De(e) {
-  let t = e.querySelectorAll("tpc"), n = e.offsetTop - A, i = e.offsetLeft - M, o = "", s = e.querySelector(".svg3rd");
-  o += `<g transform="translate(${i + D}, ${n + D})">`, o += s ? s.innerHTML : "";
+  let t = e.querySelectorAll("tpc"), n = e.offsetTop - M, i = e.offsetLeft - D, o = "", s = e.querySelector(".svg3rd");
+  o += `<g transform="translate(${i + H}, ${n + H})">`, o += s ? s.innerHTML : "";
   for (let l = 0; l < t.length; l++) {
-    let r = t[l], a = r.parentNode, h = r.nodeObj;
-    if (h.root)
+    let r = t[l], d = r.parentNode, a = r.nodeObj;
+    if (a.root)
       continue;
-    let u = r.getBoundingClientRect(), m = a.offsetTop, f = a.offsetLeft, p = getComputedStyle(r), v = getComputedStyle(a), E = f + parseInt(v.paddingLeft) + parseInt(p.paddingLeft), y = m + parseInt(v.paddingTop) + parseInt(p.paddingTop) + parseInt(p.fontSize), x = m + parseInt(v.paddingTop) + parseInt(p.paddingTop), C = "";
-    p.borderWidth != "0px" && (C = `<rect x="${f + 15}" y="${m}" rx="5px" ry="5px" width="${u.width}" height="${u.height}" style="fill: rgba(0,0,0,0); stroke:#444;stroke-width:1px;"></rect>`);
+    let h = r.getBoundingClientRect(), y = d.offsetTop, f = d.offsetLeft, g = getComputedStyle(r), N = getComputedStyle(d), E = f + parseInt(N.paddingLeft) + parseInt(g.paddingLeft), b = y + parseInt(N.paddingTop) + parseInt(g.paddingTop) + parseInt(g.fontSize), x = y + parseInt(N.paddingTop) + parseInt(g.paddingTop), k = "";
+    g.borderWidth != "0px" && (k = `<rect x="${f + 15}" y="${y}" rx="5px" ry="5px" width="${h.width}" height="${h.height}" style="fill: rgba(0,0,0,0); stroke:#444;stroke-width:1px;"></rect>`);
+    let p = "";
+    g.backgroundColor != "rgba(0, 0, 0, 0)" && (p = `<rect x="${f + 15}" y="${y}" rx="5px" ry="5px" width="${h.width}" height="${h.height}" style="fill: ${g.backgroundColor};"></rect>`);
     let c = "";
-    p.backgroundColor != "rgba(0, 0, 0, 0)" && (c = `<rect x="${f + 15}" y="${m}" rx="5px" ry="5px" width="${u.width}" height="${u.height}" style="fill: ${p.backgroundColor};"></rect>`);
-    let d = "";
-    if (h.tags && h.tags.length) {
-      let k = r.querySelectorAll(".tags > span");
-      for (let b = 0; b < k.length; b++) {
-        let w = k[b], B = w.getBoundingClientRect();
-        d += `<rect x="${E}" y="${y + 4}" rx="5px" ry="5px" width="${B.width}" height="${B.height}" style="fill: #d6f0f8;"></rect>
-          <foreignObject x="${E}" y="${y + 4}" rx="5px" ry="5px" width="${B.width}" height="${B.height}" > 
+    if (a.tags && a.tags.length) {
+      let C = r.querySelectorAll(".tags > span");
+      for (let v = 0; v < C.length; v++) {
+        let w = C[v], T = w.getBoundingClientRect();
+        c += `<rect x="${E}" y="${b + 4}" rx="5px" ry="5px" width="${T.width}" height="${T.height}" style="fill: #d6f0f8;"></rect>
+          <foreignObject x="${E}" y="${b + 4}" rx="5px" ry="5px" width="${T.width}" height="${T.height}" > 
             <div sytle="font-size:12px">${w.innerHTML}</div>
           </foreignObject>`;
       }
     }
-    let g = "";
-    if (h.icons && h.icons.length) {
-      let k = r.querySelectorAll(".icons > span");
-      for (let b = 0; b < k.length; b++) {
-        let w = k[b];
-        w.getBoundingClientRect(), g += `
+    let m = "";
+    if (a.icons && a.icons.length) {
+      let C = r.querySelectorAll(".icons > span");
+      for (let v = 0; v < C.length; v++) {
+        let w = C[v];
+        w.getBoundingClientRect(), m += `
         <tspan>${w.innerHTML}</tspan>`;
       }
     }
-    let N = "";
-    if (h.image && h.image.length) {
-      let k = r.querySelectorAll(".image");
-      for (let b = 0; b < k.length; b++) {
-        let w = k[b];
-        w.getBoundingClientRect(), N += `${w.outerHTML}`;
+    let u = "";
+    if (a.image && a.image.length) {
+      let C = r.querySelectorAll(".image");
+      for (let v = 0; v < C.length; v++) {
+        let w = C[v];
+        w.getBoundingClientRect(), u += `${w.outerHTML}`;
       }
     }
-    o += `<g id="${h.id}">
-      ${C}
-      ${c}
-      <foreignObject  x="${E}" y="${x}" width="${p.width}" height="${p.height}">
-      <div xmlns="http://www.w3.org/1999/xhtml" style="padding:0;margin:0;font-family:\u5FAE\u8F6F\u96C5\u9ED1;font-size:${p.fontSize};font-weight:${p.fontWeight};color:${p.color};word-break: break-all;line-height: 1">
-        ${h.topic}
-        ${g}
-        ${N}
+    o += `<g id="${a.id}">
+      ${k}
+      ${p}
+      <foreignObject  x="${E}" y="${x}" width="${g.width}" height="${g.height}">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="padding:0;margin:0;font-family:\u5FAE\u8F6F\u96C5\u9ED1;font-size:${g.fontSize};font-weight:${g.fontWeight};color:${g.color};word-break: break-all;line-height: 1">
+        ${a.topic}
+        ${m}
+        ${u}
       </div>
       </foreignObject>
-      ${d}
+      ${c}
   </g>`;
   }
   return o += "</g>", o;
@@ -783,9 +783,9 @@ const G = document, Vt = function(e) {
   if (t == null || t == null)
     return;
   const n = e.hyperLink, i = t.split(",");
-  e.linkJump = (s = e.linkJump) == null ? void 0 : s.filter((a) => !!i.find((h) => h === a.title)), ((l = e.linkJump) == null ? void 0 : l.length) === 0 && delete e.linkJump, e.hyperLink = i.filter((a) => {
-    var h;
-    return a !== "" && !((h = e.linkJump) != null && h.find((u) => u.title === a));
+  e.linkJump = (s = e.linkJump) == null ? void 0 : s.filter((d) => !!i.find((a) => a === d.title)), ((l = e.linkJump) == null ? void 0 : l.length) === 0 && delete e.linkJump, e.hyperLink = i.filter((d) => {
+    var a;
+    return d !== "" && !((a = e.linkJump) != null && a.find((h) => h.title === d));
   }), ((r = e.hyperLink) == null ? void 0 : r.length) === 0 && delete e.hyperLink;
   const o = $(e.id);
   _.call(this, o, e), this.linkDiv(), this.bus.fire("operation", {
@@ -814,11 +814,11 @@ const G = document, Vt = function(e) {
     return;
   }
   const o = t || this.generateNewObj();
-  We(i, o), H(this.nodeData);
+  We(i, o), B(this.nodeData);
   const s = n.parentElement;
   console.time("insertSibling_DOM");
-  const { grp: l, top: r } = this.createGroup(o), a = s.parentNode.parentNode;
-  a.insertBefore(l, s.parentNode.nextSibling), a.className === "mindbox" ? (this.processPrimaryNode(l, o), this.linkDiv()) : this.linkDiv(l.offsetParent), t || this.createInputDiv(r.children[0]), this.selectNode(r.children[0], !0), console.timeEnd("insertSibling_DOM"), this.bus.fire("operation", {
+  const { grp: l, top: r } = this.createGroup(o), d = s.parentNode.parentNode;
+  d.insertBefore(l, s.parentNode.nextSibling), d.className === "mindbox" ? (this.processPrimaryNode(l, o), this.linkDiv()) : this.linkDiv(l.offsetParent), t || this.createInputDiv(r.children[0]), this.selectNode(r.children[0], !0), console.timeEnd("insertSibling_DOM"), this.bus.fire("operation", {
     name: "insertSibling",
     obj: o
   });
@@ -832,11 +832,11 @@ const G = document, Vt = function(e) {
     return;
   }
   const o = t || this.generateNewObj();
-  Ge(i, o), H(this.nodeData);
+  Ge(i, o), B(this.nodeData);
   const s = n.parentElement;
   console.time("insertSibling_DOM");
-  const { grp: l, top: r } = this.createGroup(o), a = s.parentNode.parentNode;
-  a.insertBefore(l, s.parentNode), a.className === "mindbox" ? (this.processPrimaryNode(l, o), this.linkDiv()) : this.linkDiv(l.offsetParent), t || this.createInputDiv(r.children[0]), this.selectNode(r.children[0], !0), console.timeEnd("insertSibling_DOM"), this.bus.fire("operation", {
+  const { grp: l, top: r } = this.createGroup(o), d = s.parentNode.parentNode;
+  d.insertBefore(l, s.parentNode), d.className === "mindbox" ? (this.processPrimaryNode(l, o), this.linkDiv()) : this.linkDiv(l.offsetParent), t || this.createInputDiv(r.children[0]), this.selectNode(r.children[0], !0), console.timeEnd("insertSibling_DOM"), this.bus.fire("operation", {
     name: "insertSibling",
     obj: o
   });
@@ -848,15 +848,15 @@ const G = document, Vt = function(e) {
   if (i.root === !0)
     return;
   const o = t || this.generateNewObj();
-  Xe(i, o), H(this.nodeData);
+  Xe(i, o), B(this.nodeData);
   const s = n.parentElement.parentElement;
   console.time("insertParent_DOM");
   const { grp: l, top: r } = this.createGroup(o, !0);
   r.appendChild(X(!0));
-  const a = s.parentNode;
+  const d = s.parentNode;
   s.insertAdjacentElement("afterend", l);
-  const h = G.createElement("children");
-  h.appendChild(s), r.insertAdjacentElement("afterend", h), a.className === "mindbox" ? (l.className = s.className, s.className = "", s.querySelector(".svg3rd").remove(), this.linkDiv()) : this.linkDiv(l.offsetParent), t || this.createInputDiv(r.children[0]), this.selectNode(r.children[0], !0), console.timeEnd("insertParent_DOM"), this.bus.fire("operation", {
+  const a = G.createElement("children");
+  a.appendChild(s), r.insertAdjacentElement("afterend", a), d.className === "mindbox" ? (l.className = s.className, s.className = "", s.querySelector(".svg3rd").remove(), this.linkDiv()) : this.linkDiv(l.offsetParent), t || this.createInputDiv(r.children[0]), this.selectNode(r.children[0], !0), console.timeEnd("insertParent_DOM"), this.bus.fire("operation", {
     name: "insertParent",
     obj: o
   });
@@ -865,11 +865,11 @@ const G = document, Vt = function(e) {
   if (!e)
     return;
   const n = e.nodeObj, i = t || this.generateNewSummaryObj();
-  n.parent.children.push(i), H(this.nodeData);
+  n.parent.children.push(i), B(this.nodeData);
   const o = e.parentNode.parentNode.parentNode.parentNode, { smy: s, top: l } = this.createSummary(i);
   if (!((r = o.children) != null && r.smychildren)) {
-    const a = G.createElement("smychildren");
-    a.setAttribute("name", "smychildren"), o.appendChild(a);
+    const d = G.createElement("smychildren");
+    d.setAttribute("name", "smychildren"), o.appendChild(d);
   }
   return o.children.smychildren.appendChild(s), this.layout(), this.linkDiv(), { newTop: l, newNodeObj: i };
 }, He = function(e, t) {
@@ -878,7 +878,7 @@ const G = document, Vt = function(e) {
   const n = e.nodeObj;
   n.expanded === !1 && (this.expandNode(e, !0), e = $(n.id));
   const i = t || this.generateNewObj();
-  n.children ? n.children.push(i) : n.children = [i], H(this.nodeData);
+  n.children ? n.children.push(i) : n.children = [i], B(this.nodeData);
   const o = e.parentElement, { grp: s, top: l } = this.createGroup(i);
   if (o.tagName === "T") {
     if (o.children[1])
@@ -898,9 +898,9 @@ const G = document, Vt = function(e) {
     var s, l;
     (s = n[o.nodeObj.parent.id]) != null || (n[o.nodeObj.parent.id] = i.length), i[n[o.nodeObj.parent.id]] = (l = i[n[o.nodeObj.parent.id]]) != null ? l : [], i[n[o.nodeObj.parent.id]].push(o);
   }), console.log(i), i.forEach((o) => {
-    var a, h, u;
+    var d, a, h;
     const s = o[0] || this.currentNode;
-    if (this.currentSummaryNodeArr = o, !s || ((u = (h = (a = s == null ? void 0 : s.parentElement) == null ? void 0 : a.parentElement) == null ? void 0 : h.parentElement) == null ? void 0 : u.className) == "mindbox")
+    if (this.currentSummaryNodeArr = o, !s || ((h = (a = (d = s == null ? void 0 : s.parentElement) == null ? void 0 : d.parentElement) == null ? void 0 : a.parentElement) == null ? void 0 : h.className) == "mindbox")
       return;
     const { newTop: l, newNodeObj: r } = Kt.call(this, s, t);
     console.timeEnd("addSummary"), t || this.createInputDiv(l.children[0]), this.selectNode(l.children[0], !0), this.bus.fire("operation", {
@@ -957,18 +957,18 @@ const G = document, Vt = function(e) {
   const n = t.nodeObj;
   if (n.root === !0)
     throw new Error("Can not remove root node");
-  const i = n.parent.children.findIndex((a) => a === n), o = n.parent.children[i + 1], s = o && o.id, l = ie(n), r = t.parentNode;
+  const i = n.parent.children.findIndex((d) => d === n), o = n.parent.children[i + 1], s = o && o.id, l = ie(n), r = t.parentNode;
   if (r.tagName !== "ROOT") {
     if (l === 0) {
-      const a = r.parentNode.parentNode.previousSibling;
-      a.tagName !== "ROOT" && a.children[1].remove(), this.selectParent();
+      const d = r.parentNode.parentNode.previousSibling;
+      d.tagName !== "ROOT" && d.children[1].remove(), this.selectParent();
     } else
       this.selectPrevSibling() || this.selectNextSibling();
-    for (const a in this.linkData) {
-      const h = this.linkData[a];
-      (h.from === r.firstChild || h.to === r.firstChild) && this.removeLink(
+    for (const d in this.linkData) {
+      const a = this.linkData[d];
+      (a.from === r.firstChild || a.to === r.firstChild) && this.removeLink(
         this.mindElixirBox.querySelector(
-          `[data-linkid=${this.linkData[a].id}]`
+          `[data-linkid=${this.linkData[d].id}]`
         )
       );
     }
@@ -985,14 +985,14 @@ const G = document, Vt = function(e) {
     console.warn("Invalid move");
     return;
   }
-  console.time("moveNode"), Ue(n, i), H(this.nodeData);
+  console.time("moveNode"), Ue(n, i), B(this.nodeData);
   const s = e.parentElement, l = s.parentNode.parentNode, r = t.parentElement;
   if (l.className === "mindbox" ? s.parentNode.lastChild.remove() : s.parentNode.className === "mindbox" && (s.style.cssText = ""), r.tagName === "T")
     if (l.className === "mindbox" && (s.parentNode.className = ""), r.children[1])
       r.nextSibling.appendChild(s.parentNode);
     else {
-      const a = G.createElement("children");
-      a.appendChild(s.parentNode), r.appendChild(X(!0)), r.parentElement.insertBefore(a, r.nextSibling);
+      const d = G.createElement("children");
+      d.appendChild(s.parentNode), r.appendChild(X(!0)), r.parentElement.insertBefore(d, r.nextSibling);
     }
   else
     r.tagName === "ROOT" && (this.processPrimaryNode(s.parentNode, n), r.nextSibling.appendChild(s.parentNode));
@@ -1002,17 +1002,17 @@ const G = document, Vt = function(e) {
   }), console.timeEnd("moveNode");
 }, ln = function(e, t) {
   const n = e.nodeObj, i = t.nodeObj, o = n.parent.id;
-  Je(n, i), H(this.nodeData);
-  const s = e.parentElement, l = s.parentNode, r = t.parentElement, a = r.parentNode;
-  r.parentNode.parentNode.insertBefore(l, a), this.processPrimaryNode(s.parentElement, n), this.linkDiv(), this.bus.fire("operation", {
+  Je(n, i), B(this.nodeData);
+  const s = e.parentElement, l = s.parentNode, r = t.parentElement, d = r.parentNode;
+  r.parentNode.parentNode.insertBefore(l, d), this.processPrimaryNode(s.parentElement, n), this.linkDiv(), this.bus.fire("operation", {
     name: "moveNodeBefore",
     obj: { fromObj: n, toObj: i, originParentId: o }
   });
 }, rn = function(e, t) {
   const n = e.nodeObj, i = t.nodeObj, o = n.parent.id;
-  Ke(n, i), H(this.nodeData);
-  const s = e.parentElement, l = s.parentNode, r = t.parentElement, a = r.parentNode;
-  r.parentNode.parentNode.insertBefore(l, a.nextSibling), this.processPrimaryNode(s.parentElement, n), this.linkDiv(), this.bus.fire("operation", {
+  Ke(n, i), B(this.nodeData);
+  const s = e.parentElement, l = s.parentNode, r = t.parentElement, d = r.parentNode;
+  r.parentNode.parentNode.insertBefore(l, d.nextSibling), this.processPrimaryNode(s.parentElement, n), this.linkDiv(), this.bus.fire("operation", {
     name: "moveNodeAfter",
     obj: { fromObj: n, toObj: i, originParentId: o }
   });
@@ -1036,22 +1036,22 @@ const hn = function(e, t, n, i) {
   const o = this.map.getBoundingClientRect();
   if (!e || !t)
     return;
-  const s = e.getBoundingClientRect(), l = t.getBoundingClientRect(), r = (s.x + s.width / 2 - o.x) / this.scaleVal, a = (s.y + s.height / 2 - o.y) / this.scaleVal, h = (l.x + l.width / 2 - o.x) / this.scaleVal, u = (l.y + l.height / 2 - o.y) / this.scaleVal;
-  let m, f, p, v;
-  n ? (m = r + i.delta1.x, f = a + i.delta1.y, p = h + i.delta2.x, v = u + i.delta2.y) : (a + u) / 2 - a <= s.height / 2 ? (m = (s.x + s.width - o.x) / this.scaleVal + 100, f = a, p = (l.x + l.width - o.x) / this.scaleVal + 100, v = u) : (m = (r + h) / 2, f = (a + u) / 2, p = (r + h) / 2, v = (a + u) / 2);
+  const s = e.getBoundingClientRect(), l = t.getBoundingClientRect(), r = (s.x + s.width / 2 - o.x) / this.scaleVal, d = (s.y + s.height / 2 - o.y) / this.scaleVal, a = (l.x + l.width / 2 - o.x) / this.scaleVal, h = (l.y + l.height / 2 - o.y) / this.scaleVal;
+  let y, f, g, N;
+  n ? (y = r + i.delta1.x, f = d + i.delta1.y, g = a + i.delta2.x, N = h + i.delta2.y) : (d + h) / 2 - d <= s.height / 2 ? (y = (s.x + s.width - o.x) / this.scaleVal + 100, f = d, g = (l.x + l.width - o.x) / this.scaleVal + 100, N = h) : (y = (r + a) / 2, f = (d + h) / 2, g = (r + a) / 2, N = (d + h) / 2);
   const E = {
     cx: r,
-    cy: a,
+    cy: d,
     w: s.width,
     h: s.height
-  }, y = {
-    cx: h,
-    cy: u,
+  }, b = {
+    cx: a,
+    cy: h,
     w: l.width,
     h: l.height
-  }, x = le(E, m, f), C = x.x, c = x.y, d = re(y, p, v), g = d.x, N = d.y, k = Se(p, v, g, N), b = at(
-    `M ${C} ${c} C ${m} ${f} ${p} ${v} ${g} ${N}`,
-    `M ${k.x1} ${k.y1} L ${g} ${N} L ${k.x2} ${k.y2}`
+  }, x = le(E, y, f), k = x.x, p = x.y, c = re(b, g, N), m = c.x, u = c.y, C = Se(g, N, m, u), v = at(
+    `M ${k} ${p} C ${y} ${f} ${g} ${N} ${m} ${u}`,
+    `M ${C.x1} ${C.y1} L ${m} ${u} L ${C.x2} ${C.y2}`
   );
   let w;
   n ? (w = {
@@ -1060,27 +1060,27 @@ const hn = function(e, t, n, i) {
     from: e,
     to: t,
     delta1: {
-      x: m - r,
-      y: f - a
+      x: y - r,
+      y: f - d
     },
     delta2: {
-      x: p - h,
-      y: v - u
+      x: g - a,
+      y: N - h
     }
-  }, this.linkData[i.id] = w, b.linkObj = w, b.dataset.linkid = i.id) : (w = {
+  }, this.linkData[i.id] = w, v.linkObj = w, v.dataset.linkid = i.id) : (w = {
     id: Q(),
     label: "",
     from: e,
     to: t,
     delta1: {
-      x: m - r,
-      y: f - a
+      x: y - r,
+      y: f - d
     },
     delta2: {
-      x: p - h,
-      y: v - u
+      x: g - a,
+      y: N - h
     }
-  }, this.linkData[w.id] = w, b.linkObj = w, b.dataset.linkid = w.id, this.currentLink = b), this.linkSvgGroup.appendChild(b), n || this.showLinkController(m, f, p, v, w, E, y);
+  }, this.linkData[w.id] = w, v.linkObj = w, v.dataset.linkid = w.id, this.currentLink = v), this.linkSvgGroup.appendChild(v), n || this.showLinkController(y, f, g, N, w, E, b);
 }, un = function(e) {
   let t;
   if (e ? t = e : t = this.currentLink, !t)
@@ -1090,120 +1090,120 @@ const hn = function(e, t, n, i) {
   delete this.linkData[n], t.remove(), t = null;
 }, fn = function(e) {
   this.currentLink = e;
-  const t = e.linkObj, n = t.from, i = t.to, o = this.map.getBoundingClientRect(), s = n.getBoundingClientRect(), l = i.getBoundingClientRect(), r = (s.x + s.width / 2 - o.x) / this.scaleVal, a = (s.y + s.height / 2 - o.y) / this.scaleVal, h = (l.x + l.width / 2 - o.x) / this.scaleVal, u = (l.y + l.height / 2 - o.y) / this.scaleVal, m = {
+  const t = e.linkObj, n = t.from, i = t.to, o = this.map.getBoundingClientRect(), s = n.getBoundingClientRect(), l = i.getBoundingClientRect(), r = (s.x + s.width / 2 - o.x) / this.scaleVal, d = (s.y + s.height / 2 - o.y) / this.scaleVal, a = (l.x + l.width / 2 - o.x) / this.scaleVal, h = (l.y + l.height / 2 - o.y) / this.scaleVal, y = {
     cx: r,
-    cy: a,
+    cy: d,
     w: s.width,
     h: s.height
   }, f = {
-    cx: h,
-    cy: u,
+    cx: a,
+    cy: h,
     w: l.width,
     h: l.height
-  }, p = r + t.delta1.x, v = a + t.delta1.y, E = h + t.delta2.x, y = u + t.delta2.y;
-  this.showLinkController(p, v, E, y, t, m, f);
+  }, g = r + t.delta1.x, N = d + t.delta1.y, E = a + t.delta2.x, b = h + t.delta2.y;
+  this.showLinkController(g, N, E, b, t, y, f);
 }, pn = function() {
   this.linkController.style.display = "none", this.P2.style.display = "none", this.P3.style.display = "none";
 }, gn = function(e, t, n, i, o, s, l) {
   this.linkController.style.display = "initial", this.P2.style.display = "initial", this.P3.style.display = "initial";
   const r = le(s, e, t);
-  let a = r.x, h = r.y;
-  const u = re(l, n, i);
-  let m = u.x, f = u.y;
-  this.P2.style.cssText = `top:${t}px;left:${e}px;`, this.P3.style.cssText = `top:${i}px;left:${n}px;`, this.line1.setAttribute("x1", a), this.line1.setAttribute("y1", h), this.line1.setAttribute("x2", e), this.line1.setAttribute("y2", t), this.line2.setAttribute("x1", n), this.line2.setAttribute("y1", i), this.line2.setAttribute("x2", m), this.line2.setAttribute("y2", f), this.helper1 && (this.helper1.destory(this.map), this.helper2.destory(this.map)), this.helper1 = new K(this.P2), this.helper2 = new K(this.P3), this.helper1.init(this.map, (p, v) => {
-    e = e - p / this.scaleVal, t = t - v / this.scaleVal;
+  let d = r.x, a = r.y;
+  const h = re(l, n, i);
+  let y = h.x, f = h.y;
+  this.P2.style.cssText = `top:${t}px;left:${e}px;`, this.P3.style.cssText = `top:${i}px;left:${n}px;`, this.line1.setAttribute("x1", d), this.line1.setAttribute("y1", a), this.line1.setAttribute("x2", e), this.line1.setAttribute("y2", t), this.line2.setAttribute("x1", n), this.line2.setAttribute("y1", i), this.line2.setAttribute("x2", y), this.line2.setAttribute("y2", f), this.helper1 && (this.helper1.destory(this.map), this.helper2.destory(this.map)), this.helper1 = new K(this.P2), this.helper2 = new K(this.P3), this.helper1.init(this.map, (g, N) => {
+    e = e - g / this.scaleVal, t = t - N / this.scaleVal;
     const E = le(s, e, t);
-    a = E.x, h = E.y, this.P2.style.top = t + "px", this.P2.style.left = e + "px", this.currentLink.children[0].setAttribute(
+    d = E.x, a = E.y, this.P2.style.top = t + "px", this.P2.style.left = e + "px", this.currentLink.children[0].setAttribute(
       "d",
-      `M ${a} ${h} C ${e} ${t} ${n} ${i} ${m} ${f}`
-    ), this.line1.setAttribute("x1", a), this.line1.setAttribute("y1", h), this.line1.setAttribute("x2", e), this.line1.setAttribute("y2", t), o.delta1.x = e - s.cx, o.delta1.y = t - s.cy;
-  }), this.helper2.init(this.map, (p, v) => {
-    n = n - p / this.scaleVal, i = i - v / this.scaleVal;
+      `M ${d} ${a} C ${e} ${t} ${n} ${i} ${y} ${f}`
+    ), this.line1.setAttribute("x1", d), this.line1.setAttribute("y1", a), this.line1.setAttribute("x2", e), this.line1.setAttribute("y2", t), o.delta1.x = e - s.cx, o.delta1.y = t - s.cy;
+  }), this.helper2.init(this.map, (g, N) => {
+    n = n - g / this.scaleVal, i = i - N / this.scaleVal;
     const E = re(l, n, i);
-    m = E.x, f = E.y;
-    const y = Se(n, i, m, f);
+    y = E.x, f = E.y;
+    const b = Se(n, i, y, f);
     this.P3.style.top = i + "px", this.P3.style.left = n + "px", this.currentLink.children[0].setAttribute(
       "d",
-      `M ${a} ${h} C ${e} ${t} ${n} ${i} ${m} ${f}`
+      `M ${d} ${a} C ${e} ${t} ${n} ${i} ${y} ${f}`
     ), this.currentLink.children[1].setAttribute(
       "d",
-      `M ${y.x1} ${y.y1} L ${m} ${f} L ${y.x2} ${y.y2}`
-    ), this.line2.setAttribute("x1", n), this.line2.setAttribute("y1", i), this.line2.setAttribute("x2", m), this.line2.setAttribute("y2", f), o.delta2.x = n - l.cx, o.delta2.y = i - l.cy;
+      `M ${b.x1} ${b.y1} L ${y} ${f} L ${b.x2} ${b.y2}`
+    ), this.line2.setAttribute("x1", n), this.line2.setAttribute("y1", i), this.line2.setAttribute("x2", y), this.line2.setAttribute("y2", f), o.delta2.x = n - l.cx, o.delta2.y = i - l.cy;
   });
 };
 function mn(e) {
-  var y, x;
+  var b, x;
   var t = this.primaryNodeHorizontalGap || 65, n = this.primaryNodeVerticalGap || 25;
   console.time("linkDiv");
   const i = this.root;
   i.style.cssText = `top:${1e4 - i.offsetHeight / 2}px;left:${1e4 - i.offsetWidth / 2}px;`;
   const o = this.box.children;
   this.svg2nd.innerHTML = "";
-  let s = 0, l, r = 0, a = 0, h = 0, u = 0, m = 0, f;
+  let s = 0, l, r = 0, d = 0, a = 0, h = 0, y = 0, f;
   if (this.direction === 2) {
-    let C = 0, c = 0, d = 0, g = 0;
-    for (let N = 0; N < o.length; N++) {
-      const k = o[N];
-      k.className === "lhs" ? (u += k.offsetHeight + n, d += k.offsetHeight, C += 1) : (m += k.offsetHeight + n, g += k.offsetHeight, c += 1);
+    let k = 0, p = 0, c = 0, m = 0;
+    for (let u = 0; u < o.length; u++) {
+      const C = o[u];
+      C.className === "lhs" ? (h += C.offsetHeight + n, c += C.offsetHeight, k += 1) : (y += C.offsetHeight + n, m += C.offsetHeight, p += 1);
     }
-    u > m ? (f = 1e4 - Math.max(u) / 2, l = "r", r = (u - g) / (c - 1)) : (f = 1e4 - Math.max(m) / 2, l = "l", r = (m - d) / (C - 1));
+    h > y ? (f = 1e4 - Math.max(h) / 2, l = "r", r = (h - m) / (p - 1)) : (f = 1e4 - Math.max(y) / 2, l = "l", r = (y - c) / (k - 1));
   } else {
-    for (let C = 0; C < o.length; C++)
-      s += o[C].offsetHeight + n;
+    for (let k = 0; k < o.length; k++)
+      s += o[k].offsetHeight + n;
     f = 1e4 - s / 2;
   }
-  let p = "";
-  const v = 1e4 - i.offsetWidth / 2 - t + 60, E = 1e4 + i.offsetWidth / 2 + t - 60;
-  for (let C = 0; C < o.length; C++) {
-    let c, d;
-    const g = o[C], N = g.offsetHeight;
-    let k = i.offsetLeft - 10;
-    if (g.className === "lhs") {
-      g.style.top = f + a + "px", g.style.left = v - g.offsetWidth + "px", c = v - 15, d = f + a + N / 2;
+  let g = "";
+  const N = 1e4 - i.offsetWidth / 2 - t + 60, E = 1e4 + i.offsetWidth / 2 + t - 60;
+  for (let k = 0; k < o.length; k++) {
+    let p, c;
+    const m = o[k], u = m.offsetHeight;
+    let C = i.offsetLeft - 10;
+    if (m.className === "lhs") {
+      m.style.top = f + d + "px", m.style.left = N - m.offsetWidth + "px", p = N - 15, c = f + d + u / 2;
       let w = 1e4;
-      this.primaryLinkStyle === 2 ? (this.direction === 2 && (w = 1e4 - i.offsetWidth / 6), d < 1e4 ? p += `M ${w} 10000 V ${d + 20} C ${w} ${d} ${w} ${d} ${w - 20} ${d} H ${c}` : p += `M ${w} 10000 V ${d - 20} C ${w} ${d} ${w} ${d} ${w - 20} ${d} H ${c}`) : p += `M 10000 10000 H ${k} V ${d} H ${c}`, l === "l" ? a += N + r : a += N + n;
+      this.primaryLinkStyle === 2 ? (this.direction === 2 && (w = 1e4 - i.offsetWidth / 6), c < 1e4 ? g += `M ${w} 10000 V ${c + 20} C ${w} ${c} ${w} ${c} ${w - 20} ${c} H ${p}` : g += `M ${w} 10000 V ${c - 20} C ${w} ${c} ${w} ${c} ${w - 20} ${c} H ${p}`) : g += `M 10000 10000 H ${C} V ${c} H ${p}`, l === "l" ? d += u + r : d += u + n;
     } else {
-      k = i.offsetLeft + i.offsetWidth + 10, g.style.top = f + h + "px", g.style.left = E + "px", c = E + 15, d = f + h + N / 2;
+      C = i.offsetLeft + i.offsetWidth + 10, m.style.top = f + a + "px", m.style.left = E + "px", p = E + 15, c = f + a + u / 2;
       let w = 1e4;
-      this.primaryLinkStyle === 2 ? (this.direction === 2 && (w = 1e4 + i.offsetWidth / 6), d < 1e4 ? p += `M ${w} 10000 V ${d + 20} C ${w} ${d} ${w} ${d} ${w + 20} ${d} H ${c}` : p += `M ${w} 10000 V ${d - 20} C ${w} ${d} ${w} ${d} ${w + 20} ${d} H ${c}`) : p += `M 10000 10000 H ${k} V ${d} H ${c}`, l === "r" ? h += N + r : h += N + n;
+      this.primaryLinkStyle === 2 ? (this.direction === 2 && (w = 1e4 + i.offsetWidth / 6), c < 1e4 ? g += `M ${w} 10000 V ${c + 20} C ${w} ${c} ${w} ${c} ${w + 20} ${c} H ${p}` : g += `M ${w} 10000 V ${c - 20} C ${w} ${c} ${w} ${c} ${w + 20} ${c} H ${p}`) : g += `M 10000 10000 H ${C} V ${c} H ${p}`, l === "r" ? a += u + r : a += u + n;
     }
-    const b = g.children[0].children[1];
-    b && (b.style.top = (b.parentNode.offsetHeight - b.offsetHeight) / 2 + "px", g.className === "lhs" ? b.style.left = -10 + "px" : b.style.left = b.parentNode.offsetWidth - 10 + "px");
+    const v = m.children[0].children[1];
+    v && (v.style.top = (v.parentNode.offsetHeight - v.offsetHeight) / 2 + "px", m.className === "lhs" ? v.style.left = -10 + "px" : v.style.left = v.parentNode.offsetWidth - 10 + "px");
   }
-  this.svg2nd.appendChild(lt(p));
-  for (let C = 0; C < o.length; C++) {
-    const c = o[C];
-    if (!(e && e !== o[C]) && c.childElementCount) {
-      const d = J("svg3rd"), g = J("svg3rd");
-      c.querySelectorAll(".svg3rd").forEach((b) => {
-        b.remove();
-      }), c.appendChild(d);
-      const N = c.children[0];
-      let k;
-      ((x = (y = c.children) == null ? void 0 : y[2]) == null ? void 0 : x.tagName) === "SMYCHILDREN" ? k = [...c.children[1].children, ...c.children[2].children] : k = c.children[1].children, F = "", te = "", Be(k, N, this.nodeData.children[C], !0), d.appendChild(ct(F)), te.length > 0 && (c.appendChild(g), g.appendChild(rt(te)));
+  this.svg2nd.appendChild(lt(g));
+  for (let k = 0; k < o.length; k++) {
+    const p = o[k];
+    if (!(e && e !== o[k]) && p.childElementCount) {
+      const c = J("svg3rd"), m = J("svg3rd");
+      p.querySelectorAll(".svg3rd").forEach((v) => {
+        v.remove();
+      }), p.appendChild(c);
+      const u = p.children[0];
+      let C;
+      ((x = (b = p.children) == null ? void 0 : b[2]) == null ? void 0 : x.tagName) === "SMYCHILDREN" ? C = [...p.children[1].children, ...p.children[2].children] : C = p.children[1].children, F = "", te = "", Be(C, u, this.nodeData.children[k], !0), c.appendChild(ct(F)), te.length > 0 && (p.appendChild(m), m.appendChild(rt(te)));
     }
   }
   this.linkSvgGroup.innerHTML = "";
-  for (const C in this.linkData) {
-    const c = this.linkData[C];
-    typeof c.from == "string" ? this.createLink($(c.from), $(c.to), !0, c) : this.createLink(
-      $(c.from.nodeObj.id),
-      $(c.to.nodeObj.id),
+  for (const k in this.linkData) {
+    const p = this.linkData[k];
+    typeof p.from == "string" ? this.createLink($(p.from), $(p.to), !0, p) : this.createLink(
+      $(p.from.nodeObj.id),
+      $(p.to.nodeObj.id),
       !0,
-      c
+      p
     );
   }
   console.timeEnd("linkDiv");
 }
 let F = "", te = "";
 function Be(e, t, n, i) {
-  var h, u, m;
-  let o = t.offsetTop, s = t.offsetLeft, l = t.offsetWidth, r = t.offsetHeight, a = !1;
-  t.offsetParent.tagName === "SMY" && (a = !0, o += t.offsetParent.offsetTop, s += t.offsetParent.offsetLeft);
+  var a, h, y;
+  let o = t.offsetTop, s = t.offsetLeft, l = t.offsetWidth, r = t.offsetHeight, d = !1;
+  t.offsetParent.tagName === "SMY" && (d = !0, o += t.offsetParent.offsetTop, s += t.offsetParent.offsetLeft);
   for (let f = 0; f < e.length; f++) {
-    const p = e[f];
-    if ((p == null ? void 0 : p.tagName) === "SMY") {
-      let w = e[0], B = e[f - 1];
+    const g = e[f];
+    if ((g == null ? void 0 : g.tagName) === "SMY") {
+      let w = e[0], T = e[f - 1];
       const fe = {};
       n.children[f].summary.range.forEach((j) => {
         fe[j] = !0;
@@ -1211,29 +1211,29 @@ function Be(e, t, n, i) {
       let pe = !0;
       for (let j = 0; j < f; j++) {
         const Fe = e[j].children[0].children[0].getAttribute("data-nodeid").slice(2);
-        fe[Fe] && (pe && (pe = !1, w = e[j]), B = e[j]);
+        fe[Fe] && (pe && (pe = !1, w = e[j]), T = e[j]);
       }
-      const ge = w.offsetLeft + w.offsetWidth + 8, me = w.offsetTop + 15, ye = B.offsetTop + B.offsetHeight - 5, Pe = B.offsetLeft + B.offsetWidth + 8, ze = p.offsetTop + p.children[0].offsetTop + p.children[0].offsetHeight;
-      let ee = (h = p.style.top) != null ? h : 0;
-      typeof ee == "string" && (ee = Number(ee.replace("px", ""))), p.style.top = ee + (ye + me + 20) / 2 - ze + "px", te += `M ${ge} ${me} H ${ge + 10} V ${ye} H${Pe}`;
+      const ge = w.offsetLeft + w.offsetWidth + 8, me = w.offsetTop + 15, ye = T.offsetTop + T.offsetHeight - 5, Pe = T.offsetLeft + T.offsetWidth + 8, ze = g.offsetTop + g.children[0].offsetTop + g.children[0].offsetHeight;
+      let ee = (a = g.style.top) != null ? a : 0;
+      typeof ee == "string" && (ee = Number(ee.replace("px", ""))), g.style.top = ee + (ye + me + 20) / 2 - ze + "px", te += `M ${ge} ${me} H ${ge + 10} V ${ye} H${Pe}`;
     }
-    const v = p.children[0];
-    let E = v.offsetTop, y = v.offsetHeight;
-    a && (E += v.offsetParent.offsetTop);
+    const N = g.children[0];
+    let E = N.offsetTop, b = N.offsetHeight;
+    d && (E += N.offsetParent.offsetTop);
     let x;
-    i || a ? x = o + r / 2 : x = o + r;
-    const C = E + y;
-    let c, d, g;
-    const N = p.offsetParent.className || p.offsetParent.offsetParent.className;
-    N === "lhs" && (p == null ? void 0 : p.tagName) !== "SMY" ? (c = s + 15, g = s, d = s - v.offsetWidth, E + y < o + r / 2 + 50 && E + y > o + r / 2 - 50 ? F += `M ${c} ${x} H ${g} V ${C} H ${d}` : E + y >= o + r / 2 ? F += `M ${c} ${x} H ${g} V ${C} H ${d}` : F += `M ${c} ${x} H ${g} V ${C} H ${d}`) : N === "rhs" && (p == null ? void 0 : p.tagName) !== "SMY" && (c = s + l - 15, a && (c += 15), g = s + l, d = s + l + v.offsetWidth, E + y < o + r / 2 + 50 && E + y > o + r / 2 - 50 ? F += `M ${c} ${x} H ${g} V ${C} H ${d}` : E + y >= o + r / 2 ? F += `M ${c} ${x} H ${g} V ${C} H ${d}` : F += `M ${c} ${x} H ${g} V ${C} H ${d}`);
-    const k = v.children[1];
-    if (k) {
-      if (k.style.top = (v.offsetHeight - k.offsetHeight) / 2 + "px", N === "lhs" ? k.style.left = -10 + "px" : N === "rhs" && (k.style.left = v.offsetWidth - 10 + "px"), !k.expanded)
+    i || d ? x = o + r / 2 : x = o + r;
+    const k = E + b;
+    let p, c, m;
+    const u = g.offsetParent.className || g.offsetParent.offsetParent.className;
+    u === "lhs" && (g == null ? void 0 : g.tagName) !== "SMY" ? (p = s + 15, m = s, c = s - N.offsetWidth, E + b < o + r / 2 + 50 && E + b > o + r / 2 - 50 ? F += `M ${p} ${x} H ${m} V ${k} H ${c}` : E + b >= o + r / 2 ? F += `M ${p} ${x} H ${m} V ${k} H ${c}` : F += `M ${p} ${x} H ${m} V ${k} H ${c}`) : u === "rhs" && (g == null ? void 0 : g.tagName) !== "SMY" && (p = s + l - 15, d && (p += 15), m = s + l, c = s + l + N.offsetWidth, E + b < o + r / 2 + 50 && E + b > o + r / 2 - 50 ? F += `M ${p} ${x} H ${m} V ${k} H ${c}` : E + b >= o + r / 2 ? F += `M ${p} ${x} H ${m} V ${k} H ${c}` : F += `M ${p} ${x} H ${m} V ${k} H ${c}`);
+    const C = N.children[1];
+    if (C) {
+      if (C.style.top = (N.offsetHeight - C.offsetHeight) / 2 + "px", u === "lhs" ? C.style.left = -10 + "px" : u === "rhs" && (C.style.left = N.offsetWidth - 10 + "px"), !C.expanded)
         continue;
     } else
       continue;
-    let b;
-    ((m = (u = p.children) == null ? void 0 : u[2]) == null ? void 0 : m.tagName) === "SMYCHILDREN" ? b = [...p.children[1].children, ...p.children[2].children] : b = [...p.children[1].children], b.length > 0 && Be(b, v, n.children[f]);
+    let v;
+    ((y = (h = g.children) == null ? void 0 : h[2]) == null ? void 0 : y.tagName) === "SMYCHILDREN" ? v = [...g.children[1].children, ...g.children[2].children] : v = [...g.children[1].children], v.length > 0 && Be(v, N, n.children[f]);
   }
 }
 function yn(e) {
@@ -1375,65 +1375,65 @@ const Ce = {
   }
 };
 function vn(e, t) {
-  const n = (c) => {
-    const d = document.createElement("div");
-    return d.innerText = c, d.style.cssText = "position:absolute;bottom:20px;left:50%;transform:translateX(-50%);", d;
-  }, i = (c, d, g) => {
-    const N = document.createElement("li");
-    return N.id = c, N.innerHTML = `<span>${ne(d)}</span><span>${ne(g)}</span>`, N;
-  }, o = S[e.locale] ? e.locale : "en", s = i("cm-add_child", S[o].addChild, "tab"), l = i("cm-add_parent", S[o].addParent, ""), r = i("cm-add_sibling", S[o].addSibling, "enter"), a = i(
+  const n = (p) => {
+    const c = document.createElement("div");
+    return c.innerText = p, c.style.cssText = "position:absolute;bottom:20px;left:50%;transform:translateX(-50%);", c;
+  }, i = (p, c, m) => {
+    const u = document.createElement("li");
+    return u.id = p, u.innerHTML = `<span>${ne(c)}</span><span>${ne(m)}</span>`, u;
+  }, o = S[e.locale] ? e.locale : "en", s = i("cm-add_child", S[o].addChild, "tab"), l = i("cm-add_parent", S[o].addParent, ""), r = i("cm-add_sibling", S[o].addSibling, "enter"), d = i(
     "cm-remove_child",
     S[o].removeNode,
     "delete"
-  ), h = i("cm-fucus", S[o].focus, ""), u = i("cm-unfucus", S[o].cancelFocus, ""), m = i("cm-up", S[o].moveUp, "PgUp"), f = i("cm-down", S[o].moveDown, "Pgdn"), p = i("cm-link", S[o].link, ""), v = i("cm-nodelink", S[o].nodeLink, ""), E = i("cm-summary", S[o].summary, ""), y = document.createElement("ul");
-  if (y.className = "menu-list", y.appendChild(s), y.appendChild(l), y.appendChild(r), y.appendChild(a), (!t || t.focus) && (y.appendChild(h), y.appendChild(u)), y.appendChild(m), y.appendChild(f), (!t || t.link) && (y.appendChild(p), y.appendChild(v)), y.appendChild(E), t && t.extend)
-    for (let c = 0; c < t.extend.length; c++) {
-      const d = t.extend[c], g = i(d.name, d.name, d.key || "");
-      y.appendChild(g), g.onclick = (N) => {
-        d.onclick(N);
+  ), a = i("cm-fucus", S[o].focus, ""), h = i("cm-unfucus", S[o].cancelFocus, ""), y = i("cm-up", S[o].moveUp, "PgUp"), f = i("cm-down", S[o].moveDown, "Pgdn"), g = i("cm-link", S[o].link, ""), N = i("cm-nodelink", S[o].nodeLink, ""), E = i("cm-summary", S[o].summary, ""), b = document.createElement("ul");
+  if (b.className = "menu-list", b.appendChild(s), b.appendChild(l), b.appendChild(r), b.appendChild(d), (!t || t.focus) && (b.appendChild(a), b.appendChild(h)), b.appendChild(y), b.appendChild(f), (!t || t.link) && (b.appendChild(g), b.appendChild(N)), b.appendChild(E), t && t.extend)
+    for (let p = 0; p < t.extend.length; p++) {
+      const c = t.extend[p], m = i(c.name, c.name, c.key || "");
+      b.appendChild(m), m.onclick = (u) => {
+        c.onclick(u);
       };
     }
   const x = document.createElement("cmenu");
-  x.appendChild(y), x.hidden = !0, e.container.append(x);
-  let C = !0;
-  e.container.oncontextmenu = function(c) {
-    if (c.preventDefault(), !e.editable)
+  x.appendChild(b), x.hidden = !0, e.container.append(x);
+  let k = !0;
+  e.container.oncontextmenu = function(p) {
+    if (p.preventDefault(), !e.editable)
       return;
-    const d = c.target;
-    if (d.tagName === "TPC") {
-      d.parentElement.tagName === "ROOT" ? C = !0 : C = !1, C ? (h.className = "disabled", m.className = "disabled", f.className = "disabled", r.className = "disabled", a.className = "disabled") : (h.className = "", m.className = "", f.className = "", r.className = "", a.className = ""), e.selectNode(d), x.hidden = !1;
-      const g = y.offsetHeight, N = y.offsetWidth;
-      g + c.clientY > window.innerHeight ? (y.style.top = "", y.style.bottom = "0px") : (y.style.bottom = "", y.style.top = c.clientY + 15 + "px"), N + c.clientX > window.innerWidth ? (y.style.left = "", y.style.right = "0px") : (y.style.right = "", y.style.left = c.clientX + 10 + "px");
+    const c = p.target;
+    if (c.tagName === "TPC") {
+      c.parentElement.tagName === "ROOT" ? k = !0 : k = !1, k ? (a.className = "disabled", y.className = "disabled", f.className = "disabled", r.className = "disabled", d.className = "disabled") : (a.className = "", y.className = "", f.className = "", r.className = "", d.className = ""), e.selectNode(c), x.hidden = !1;
+      const m = b.offsetHeight, u = b.offsetWidth;
+      m + p.clientY > window.innerHeight ? (b.style.top = "", b.style.bottom = "0px") : (b.style.bottom = "", b.style.top = p.clientY + 15 + "px"), u + p.clientX > window.innerWidth ? (b.style.left = "", b.style.right = "0px") : (b.style.right = "", b.style.left = p.clientX + 10 + "px");
     }
-  }, x.onclick = (c) => {
-    c.target === x && (x.hidden = !0);
-  }, s.onclick = (c) => {
+  }, x.onclick = (p) => {
+    p.target === x && (x.hidden = !0);
+  }, s.onclick = (p) => {
     e.addChild(), x.hidden = !0;
-  }, E.onclick = (c) => {
+  }, E.onclick = (p) => {
     e.addSummary(), x.hidden = !0;
-  }, l.onclick = (c) => {
+  }, l.onclick = (p) => {
     e.insertParent(), x.hidden = !0;
-  }, r.onclick = (c) => {
-    C || (e.insertSibling(), x.hidden = !0);
-  }, a.onclick = (c) => {
-    C || (e.removeNode(), x.hidden = !0);
-  }, h.onclick = (c) => {
-    C || (e.focusNode(e.currentNode), x.hidden = !0);
-  }, u.onclick = (c) => {
+  }, r.onclick = (p) => {
+    k || (e.insertSibling(), x.hidden = !0);
+  }, d.onclick = (p) => {
+    k || (e.removeNode(), x.hidden = !0);
+  }, a.onclick = (p) => {
+    k || (e.focusNode(e.currentNode), x.hidden = !0);
+  }, h.onclick = (p) => {
     e.cancelFocus(), x.hidden = !0;
-  }, m.onclick = (c) => {
-    C || (e.moveUpNode(), x.hidden = !0);
-  }, f.onclick = (c) => {
-    C || (e.moveDownNode(), x.hidden = !0);
-  }, p.onclick = (c) => {
+  }, y.onclick = (p) => {
+    k || (e.moveUpNode(), x.hidden = !0);
+  }, f.onclick = (p) => {
+    k || (e.moveDownNode(), x.hidden = !0);
+  }, g.onclick = (p) => {
     x.hidden = !0;
-    const d = e.currentNode, g = n(S[o].clickTips);
-    e.container.appendChild(g), e.map.addEventListener(
+    const c = e.currentNode, m = n(S[o].clickTips);
+    e.container.appendChild(m), e.map.addEventListener(
       "click",
-      (N) => {
-        if (N.preventDefault(), g.remove(), N.target.parentElement.nodeName === "T" || N.target.parentElement.nodeName === "ROOT") {
-          const k = e.currentNode;
-          e.createLink(d, k);
+      (u) => {
+        if (u.preventDefault(), m.remove(), u.target.parentElement.nodeName === "T" || u.target.parentElement.nodeName === "ROOT") {
+          const C = e.currentNode;
+          e.createLink(c, C);
         } else
           console.log("\u53D6\u6D88\u8FDE\u63A5");
       },
@@ -1441,20 +1441,20 @@ function vn(e, t) {
         once: !0
       }
     );
-  }, v.onclick = (c) => {
+  }, N.onclick = (p) => {
     x.hidden = !0;
-    const d = e.currentNode, g = n(S[o].clickTips);
-    e.container.appendChild(g), e.map.addEventListener(
+    const c = e.currentNode, m = n(S[o].clickTips);
+    e.container.appendChild(m), e.map.addEventListener(
       "click",
-      (N) => {
-        if (N.preventDefault(), g.remove(), N.target.parentElement.nodeName === "T" || N.target.parentElement.nodeName === "ROOT") {
-          const k = e.currentNode;
-          d.nodeObj.linkJump || (d.nodeObj.linkJump = []), d.nodeObj.linkJump.push(
+      (u) => {
+        if (u.preventDefault(), m.remove(), u.target.parentElement.nodeName === "T" || u.target.parentElement.nodeName === "ROOT") {
+          const C = e.currentNode;
+          c.nodeObj.linkJump || (c.nodeObj.linkJump = []), c.nodeObj.linkJump.push(
             {
-              toId: k.nodeObj.id,
-              title: k.nodeObj.topic
+              toId: C.nodeObj.id,
+              title: C.nodeObj.topic
             }
-          ), e.shapeTpc(d, d.nodeObj), e.linkDiv();
+          ), e.shapeTpc(c, c.nodeObj), e.linkDiv();
         } else
           console.log("\u53D6\u6D88\u8FDE\u63A5");
       },
@@ -1501,16 +1501,16 @@ function Cn(e, t) {
   };
 }
 function xn(e) {
-  var a;
+  var d;
   const t = document.createElement("toolbar"), n = z("fullscreen", "full"), i = z("toCenter", "living"), o = z("zoomout", "move"), s = z("zoomin", "add"), l = document.createElement("input");
-  l.className = "numberSelection", l.type = "number", l.min = "2", l.max = "100", l.step = "1", l.value = ((a = e == null ? void 0 : e.expandDeep) == null ? void 0 : a.toString()) || "2", l.oninput = Cn(() => {
-    const h = e.getAllDataWithAutoHide();
-    he(h == null ? void 0 : h.nodeData), e.layout(), e.linkDiv();
+  l.className = "numberSelection", l.type = "number", l.min = "2", l.max = "100", l.step = "1", l.value = ((d = e == null ? void 0 : e.expandDeep) == null ? void 0 : d.toString()) || "2", l.oninput = Cn(() => {
+    const a = e.getAllDataWithAutoHide();
+    he(a == null ? void 0 : a.nodeData), e.layout(), e.linkDiv();
   }, 300);
   const r = document.createElement("span");
   if (r.innerText = "100%", t.appendChild(l), t.appendChild(n), t.appendChild(i), t.appendChild(o), t.appendChild(s), e.uploadButton) {
-    const h = En(e);
-    t.appendChild(h);
+    const a = En(e);
+    t.appendChild(a);
   }
   return t.className = "rb", n.onclick = () => {
     e.container.requestFullscreen();
@@ -1520,9 +1520,9 @@ function xn(e) {
     e.scaleVal < 0.6 || e.scale(e.scaleVal -= 0.2);
   }, s.onclick = () => {
     e.scaleVal > 1.6 || e.scale(e.scaleVal += 0.2);
-  }, e.bus.addListener("wheel", (h) => {
-    const u = h.pageY - h.clientY + document.documentElement.clientHeight, m = e.container.getBoundingClientRect().top + window.scrollY - e.container.clientTop + e.container.clientHeight, p = (m - u > 0 ? m - u : 0) + t.clientHeight - 20;
-    p > 20 && p < e.container.clientHeight - t.clientHeight - 20 && (t.style.bottom = p + "px");
+  }, e.bus.addListener("wheel", (a) => {
+    const h = a.pageY - a.clientY + document.documentElement.clientHeight, y = e.container.getBoundingClientRect().top + window.scrollY - e.container.clientTop + e.container.clientHeight, g = (y - h > 0 ? y - h : 0) + t.clientHeight - 20;
+    g > 20 && g < e.container.clientHeight - t.clientHeight - 20 && (t.style.bottom = g + "px");
   }), t;
 }
 function kn(e) {
@@ -1537,8 +1537,8 @@ function kn(e) {
   }, s.onclick = () => {
     e.initSide();
   }, e.bus.addListener("wheel", (l) => {
-    const r = l.pageY - l.clientY, a = e.container.getBoundingClientRect().top + window.scrollY - e.container.clientTop, h = r - a + 20;
-    h > 20 && h < e.container.clientHeight - t.clientHeight - 20 && (t.style.top = h + "px");
+    const r = l.pageY - l.clientY, d = e.container.getBoundingClientRect().top + window.scrollY - e.container.clientTop, a = r - d + 20;
+    a > 20 && a < e.container.clientHeight - t.clientHeight - 20 && (t.style.top = a + "px");
   }), t;
 }
 function wn(e) {
@@ -1609,87 +1609,99 @@ function $n(e) {
       <span class="font">${S[t].font}</span>
       <span class="background">${S[t].background}</span>
       </div>
-  `, o.innerHTML = `${S[t].tag}<input class="nm-tag" tabindex="-1" placeholder="${S[t].tagsSeparate}" /><br>`, s.innerHTML = `${S[t].icon}<input class="nm-icon" tabindex="-1" placeholder="${S[t].iconsSeparate}" /><br>`, l.innerHTML = `${S[t].hyperlink}<input class="nm-link" tabindex="-1" placeholder="${S[t].linkSeparate}" /><br>`, r.innerHTML = `${S[t].remark}<input class="nm-remark" tabindex="-1" placeholder="${S[t].reamrkSeparate}" /><br>`;
+  `, o.innerHTML = `${S[t].tag}<textarea class="nm-tag" tabindex="-1" placeholder="${S[t].tagsSeparate}" /><br>`, s.innerHTML = `${S[t].icon}<textarea class="nm-icon" tabindex="-1" placeholder="${S[t].iconsSeparate}" /><br>`, l.innerHTML = `${S[t].hyperlink}<textarea class="nm-link" tabindex="-1" placeholder="${S[t].linkSeparate}" /><br>`, r.innerHTML = `${S[t].remark}<textarea class="nm-remark" tabindex="-1" placeholder="${S[t].reamrkSeparate}" /><br>`;
+  function d(c) {
+    c.ondblclick = (m) => {
+      const u = document.createElement("textarea"), C = c.children[0], v = e.container.offsetHeight - c.offsetTop - 60;
+      u.value = C.value, u.style.position = "absolute", u.style.left = C.offsetLeft + "px", u.style.top = C.offsetTop - 10 + "px", u.style.height = (C.scrollHeight > v ? v : C.scrollHeight) + "px", u.style.width = C.offsetWidth + "px", u.oninput = (w) => {
+        let T = w.target.scrollHeight;
+        u.style.height = (T > v ? v : T) + "px";
+      }, u.onblur = (w) => {
+        C.value = u.value, C.dispatchEvent(new CustomEvent("change")), u.remove();
+      }, c.appendChild(u), u.focus();
+    };
+  }
+  d(o), d(s), d(l), d(r);
   const a = document.createElement("nmenu");
   a.innerHTML = `
   <div class="button-container"><svg class="icon" aria-hidden="true">
   <use xlink:href="#icon-close"></use>
   </svg></div>
   `, a.appendChild(i), a.appendChild(o), a.appendChild(s), a.appendChild(l), a.appendChild(r), a.hidden = !0;
-  function h(c, d) {
-    var g = e.container.querySelectorAll(c);
-    [].forEach.call(g, function(N) {
-      N.classList.remove(d);
+  function h(c, m) {
+    var u = e.container.querySelectorAll(c);
+    [].forEach.call(u, function(C) {
+      C.classList.remove(m);
     });
   }
   e.container.append(a);
-  const u = a.querySelectorAll(".size"), m = a.querySelector(".bold"), f = a.querySelector(".button-container"), p = a.querySelector(".font"), v = e.container.querySelector(".nm-tag"), E = e.container.querySelector(".nm-icon"), y = e.container.querySelector(".nm-link"), x = e.container.querySelector(".nm-remark");
+  const y = a.querySelectorAll(".size"), f = a.querySelector(".bold"), g = a.querySelector(".button-container"), N = a.querySelector(".font"), E = e.container.querySelector(".nm-tag"), b = e.container.querySelector(".nm-icon"), x = e.container.querySelector(".nm-link"), k = e.container.querySelector(".nm-remark");
   a.onclick = (c) => {
     if (!e.currentNode)
       return;
-    const d = e.currentNode.nodeObj, g = c.target;
-    g.className === "palette" ? (d.style || (d.style = {}), h(".palette", "nmenu-selected"), g.className = "palette nmenu-selected", n === "font" ? d.style.color = g.dataset.color : n === "background" && (d.style.background = g.dataset.color), e.updateNodeStyle(d)) : g.className === "background" ? (h(".palette", "nmenu-selected"), n = "background", g.className = "background selected", g.previousElementSibling.className = "font", d.style && d.style.background && (a.querySelector(
-      '.palette[data-color="' + d.style.background + '"]'
-    ).className = "palette nmenu-selected")) : g.className === "font" && (h(".palette", "nmenu-selected"), n = "font", g.className = "font selected", g.nextElementSibling.className = "background", d.style && d.style.color && (a.querySelector(
-      '.palette[data-color="' + d.style.color + '"]'
+    const m = e.currentNode.nodeObj, u = c.target;
+    u.className === "palette" ? (m.style || (m.style = {}), h(".palette", "nmenu-selected"), u.className = "palette nmenu-selected", n === "font" ? m.style.color = u.dataset.color : n === "background" && (m.style.background = u.dataset.color), e.updateNodeStyle(m)) : u.className === "background" ? (h(".palette", "nmenu-selected"), n = "background", u.className = "background selected", u.previousElementSibling.className = "font", m.style && m.style.background && (a.querySelector(
+      '.palette[data-color="' + m.style.background + '"]'
+    ).className = "palette nmenu-selected")) : u.className === "font" && (h(".palette", "nmenu-selected"), n = "font", u.className = "font selected", u.nextElementSibling.className = "background", m.style && m.style.color && (a.querySelector(
+      '.palette[data-color="' + m.style.color + '"]'
     ).className = "palette nmenu-selected"));
-  }, Array.from(u).map(
+  }, Array.from(y).map(
     (c) => {
-      c.onclick = (d) => {
+      c.onclick = (m) => {
         e.currentNode.nodeObj.style || (e.currentNode.nodeObj.style = {}), h(".size", "size-selected");
-        const g = d.currentTarget;
-        e.currentNode.nodeObj.style.fontSize = g.dataset.size, g.className = "size size-selected", e.updateNodeStyle(e.currentNode.nodeObj);
+        const u = m.currentTarget;
+        e.currentNode.nodeObj.style.fontSize = u.dataset.size, u.className = "size size-selected", e.updateNodeStyle(e.currentNode.nodeObj);
       };
     }
-  ), m.onclick = (c) => {
+  ), f.onclick = (c) => {
     e.currentNode.nodeObj.style || (e.currentNode.nodeObj.style = {}), e.currentNode.nodeObj.style.fontWeight === "bold" ? (delete e.currentNode.nodeObj.style.fontWeight, c.currentTarget.className = "bold", e.updateNodeStyle(e.currentNode.nodeObj)) : (e.currentNode.nodeObj.style.fontWeight = "bold", c.currentTarget.className = "bold size-selected", e.updateNodeStyle(e.currentNode.nodeObj));
-  }, v.onchange = (c) => {
-    if (!!e.currentNode && (c.target.value !== null || c.target.value !== void 0)) {
-      let d;
-      c.target.value === "" ? d = [] : d = c.target.value.split(","), e.updateNodeTags(e.currentNode.nodeObj, d);
-    }
   }, E.onchange = (c) => {
     if (!!e.currentNode && (c.target.value !== null || c.target.value !== void 0)) {
-      const d = c.target.value.split(",");
-      e.updateNodeIcons(e.currentNode.nodeObj, d);
+      let m;
+      c.target.value === "" ? m = [] : m = c.target.value.split(","), e.updateNodeTags(e.currentNode.nodeObj, m);
     }
-  }, y.onchange = (c) => {
+  }, b.onchange = (c) => {
     if (!!e.currentNode && (c.target.value !== null || c.target.value !== void 0)) {
-      const d = c.target.value;
-      e.updateNodeHyperLink(e.currentNode.nodeObj, d);
+      const m = c.target.value.split(",");
+      e.updateNodeIcons(e.currentNode.nodeObj, m);
     }
   }, x.onchange = (c) => {
     if (!!e.currentNode && (c.target.value !== null || c.target.value !== void 0)) {
-      const d = c.target.value;
-      e.updateNodeRemark(e.currentNode.nodeObj, d);
+      const m = c.target.value;
+      e.updateNodeHyperLink(e.currentNode.nodeObj, m);
+    }
+  }, k.onchange = (c) => {
+    if (!!e.currentNode && (c.target.value !== null || c.target.value !== void 0)) {
+      const m = c.target.value;
+      e.updateNodeRemark(e.currentNode.nodeObj, m);
     }
   };
-  let C = "open";
-  f.onclick = (c) => {
-    C === "open" ? (C = "close", a.className = "close", f.innerHTML = '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"></use></svg>') : (C = "open", a.className = "", f.innerHTML = '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-close"></use></svg>');
+  let p = "open";
+  g.onclick = (c) => {
+    p === "open" ? (p = "close", a.className = "close", g.innerHTML = '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"></use></svg>') : (p = "open", a.className = "", g.innerHTML = '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-close"></use></svg>');
   }, e.bus.addListener("unselectNode", function() {
     a.hidden = !0;
-  }), e.bus.addListener("selectNode", function(c, d) {
-    if (!!d) {
-      if (a.hidden = !1, h(".palette", "nmenu-selected"), h(".size", "size-selected"), h(".bold", "size-selected"), n = "font", p.className = "font selected", p.nextElementSibling.className = "background", c.style) {
+  }), e.bus.addListener("selectNode", function(c, m) {
+    if (!!m) {
+      if (a.hidden = !1, h(".palette", "nmenu-selected"), h(".size", "size-selected"), h(".bold", "size-selected"), n = "font", N.className = "font selected", N.nextElementSibling.className = "background", c.style) {
         if (c.style.fontSize) {
-          const g = a.querySelector(
+          const u = a.querySelector(
             '.size[data-size="' + c.style.fontSize + '"]'
           );
-          g && (g.className = "size size-selected");
+          u && (u.className = "size size-selected");
         }
         if (c.style.fontWeight) {
-          const g = a.querySelector(".bold");
-          g && (g.className = "bold size-selected");
+          const u = a.querySelector(".bold");
+          u && (u.className = "bold size-selected");
         }
         if (c.style.color) {
-          const g = a.querySelector(
+          const u = a.querySelector(
             '.palette[data-color="' + c.style.color + '"]'
           );
-          g && (g.className = "palette nmenu-selected");
+          u && (u.className = "palette nmenu-selected");
         }
       }
-      c.tags ? v.value = c.tags.join(",") : v.value = "", c.icons ? E.value = c.icons.join(",") : E.value = "", y.value = "", c.hyperLink && (y.value = c.hyperLink), c.linkJump && (y.value.length > 0 && (y.value += ","), y.value += c.linkJump.map((g) => g.title).reduce((g, N, k) => g + (k ? "," : "") + N, "")), c.remark ? x.value = c.remark : x.value = "";
+      c.tags ? E.value = c.tags.join(",") : E.value = "", c.icons ? b.value = c.icons.join(",") : b.value = "", x.value = "", c.hyperLink && (x.value = c.hyperLink), c.linkJump && (x.value.length > 0 && (x.value += ","), x.value += c.linkJump.map((u) => u.title).reduce((u, C, v) => u + (v ? "," : "") + C, "")), c.remark ? k.value = c.remark : k.value = "";
     }
   });
 }
@@ -1750,8 +1762,8 @@ function An(e) {
       );
       if (ke(r, t)) {
         i = r;
-        const a = r.getBoundingClientRect().y;
-        s.clientY < a ? n = "before" : s.clientY < a + r.clientHeight / 2 && (n = "in");
+        const d = r.getBoundingClientRect().y;
+        s.clientY < d ? n = "before" : s.clientY < d + r.clientHeight / 2 && (n = "in");
       } else
         n = i = null;
     }
@@ -1824,39 +1836,39 @@ function Mn(e) {
   };
 }
 function Dn(e, t) {
-  const n = (f, p) => {
-    const v = document.createElement("div");
-    return v.id = f, v.innerHTML = `<svg class="icon" aria-hidden="true">
-    <use xlink:href="#icon-${p}"></use>
-  </svg>`, v;
-  }, i = n("cm-add_child", "zijiedian"), o = n("cm-add_sibling", "tongjijiedian-"), s = n("cm-remove_child", "shanchu2"), l = n("cm-up", "rising"), r = n("cm-down", "falling"), a = n("cm-edit", "edit"), h = document.createElement("ul");
-  if (h.className = "menu-list", t && t.extend)
+  const n = (f, g) => {
+    const N = document.createElement("div");
+    return N.id = f, N.innerHTML = `<svg class="icon" aria-hidden="true">
+    <use xlink:href="#icon-${g}"></use>
+  </svg>`, N;
+  }, i = n("cm-add_child", "zijiedian"), o = n("cm-add_sibling", "tongjijiedian-"), s = n("cm-remove_child", "shanchu2"), l = n("cm-up", "rising"), r = n("cm-down", "falling"), d = n("cm-edit", "edit"), a = document.createElement("ul");
+  if (a.className = "menu-list", t && t.extend)
     for (let f = 0; f < t.extend.length; f++) {
-      const p = t.extend[f], v = n(p.name, p.name);
-      h.appendChild(v), v.onclick = (E) => {
-        p.onclick(E);
+      const g = t.extend[f], N = n(g.name, g.name);
+      a.appendChild(N), N.onclick = (E) => {
+        g.onclick(E);
       };
     }
-  const u = document.createElement("mmenu");
-  u.appendChild(i), u.appendChild(o), u.appendChild(s), u.appendChild(l), u.appendChild(r), u.appendChild(a), u.hidden = !0, e.container.append(u);
-  let m = !0;
+  const h = document.createElement("mmenu");
+  h.appendChild(i), h.appendChild(o), h.appendChild(s), h.appendChild(l), h.appendChild(r), h.appendChild(d), h.hidden = !0, e.container.append(h);
+  let y = !0;
   e.bus.addListener("unselectNode", function() {
-    u.hidden = !0;
+    h.hidden = !0;
   }), e.bus.addListener("selectNode", function(f) {
-    u.hidden = !1, f.root ? m = !0 : m = !1;
-  }), u.onclick = (f) => {
-    f.target === u && (u.hidden = !0);
+    h.hidden = !1, f.root ? y = !0 : y = !1;
+  }), h.onclick = (f) => {
+    f.target === h && (h.hidden = !0);
   }, i.onclick = (f) => {
     e.addChild();
   }, o.onclick = (f) => {
-    m || e.insertSibling();
+    y || e.insertSibling();
   }, s.onclick = (f) => {
-    m || e.removeNode();
+    y || e.removeNode();
   }, l.onclick = (f) => {
-    m || e.moveUpNode();
+    y || e.moveUpNode();
   }, r.onclick = (f) => {
-    m || e.moveDownNode();
-  }, a.onclick = (f) => {
+    y || e.moveDownNode();
+  }, d.onclick = (f) => {
     e.beginEdit();
   };
 }
@@ -1887,21 +1899,21 @@ Oe.prototype = {
   }
 };
 (function(e) {
-  var t, n, i, o, s, l, r = '<svg><symbol id="icon-edit" viewBox="0 0 1024 1024"><path d="M423.765333 128a42.666667 42.666667 0 0 1 3.2 85.205333L423.765333 213.333333H234.666667a64 64 0 0 0-63.872 60.245334L170.666667 277.333333v512a64 64 0 0 0 60.245333 63.872L234.666667 853.333333h512a64 64 0 0 0 63.872-60.245333L810.666667 789.333333v-189.098666a42.666667 42.666667 0 0 1 85.205333-3.2l0.128 3.2V789.333333a149.333333 149.333333 0 0 1-144.213333 149.248L746.666667 938.666667h-512a149.333333 149.333333 0 0 1-149.248-144.213334L85.333333 789.333333v-512a149.333333 149.333333 0 0 1 144.213334-149.248L234.666667 128h189.098666z m324.949334-53.248a42.666667 42.666667 0 0 1 60.330666 0l150.869334 150.869333a42.666667 42.666667 0 0 1 0 60.330667l-329.386667 329.386667a42.666667 42.666667 0 0 1-29.44 12.458666l-153.386667 2.517334a42.666667 42.666667 0 0 1-43.349333-43.349334l2.56-153.386666a42.666667 42.666667 0 0 1 12.458667-29.44z m30.165333 90.496L491.946667 452.266667l-1.493334 91.989333 92.032-1.493333 286.976-286.976-90.538666-90.538667z"  ></path></symbol><symbol id="icon-rising" viewBox="0 0 1024 1024"><path d="M553.173333 803.84h-64l0.021334-474.581333-224.021334 224-45.269333-45.226667L521.6 206.293333l301.717333 301.696-45.269333 45.269334-224.853333-224.896v475.477333z"  ></path></symbol><symbol id="icon-falling" viewBox="0 0 1024 1024"><path d="M553.173333 238.314667h-64l0.021334 474.602666-224.021334-224-45.269333 45.226667L521.6 835.861333l301.717333-301.717333-45.269333-45.226667-224.853333 224.853334V238.336z"  ></path></symbol><symbol id="icon-shanchu2" viewBox="0 0 1024 1024"><path d="M516.60601807 107.93026734c-82.64382935 0-149.71865844 65.51751709-152.5729065 147.77160644H171.37136841c-21.40603638 0-38.92044068 17.38504028-38.92044068 38.92126465 0 21.40686036 17.38504028 38.92208862 38.92126466 38.92208862h42.94308471v435.40136719c0 81.73498536 55.39828492 148.55026245 123.90106201 148.55026245h348.99444581c68.37341309 0 123.90106201-66.42553711 123.901062-148.55026245V333.80477906h38.92126465c21.40686036 0 38.92126464-17.38586426 38.92126465-38.92208863 0-21.40686036-17.38504028-38.92126464-38.92126465-38.92126465H668.91854859C666.45321656 173.44860839 599.24902344 107.93109131 516.60601807 107.93109131z m-79.65939331 147.77160644c2.85424805-42.16442872 37.2354126-74.85809326 79.78875732-74.85809326s76.93450927 32.82302857 79.39984131 74.85809326H436.94662476z m-98.86047364 589.01165771c-24.2611084 0-50.98754883-31.13717651-50.98754883-75.76693725V333.80477906h450.97036744V769.33551026c0 44.50039673-26.72644043 75.76776123-50.98754884 75.76776122H338.08615112v-0.38973999z m0 0"  ></path><path d="M390.37063599 751.17263794c17.77313232 0 32.43411255-17.7739563 32.43411255-40.08883667V482.35504151c0-22.31488037-14.53079224-40.08966065-32.43411255-40.08966065-17.77478027 0-32.43493653 17.77478027-32.43493653 40.08966065v228.72875976c0 22.18469239 14.27124023 40.08883667 32.43493653 40.08883667z m117.41308594 0c17.7739563 0 32.43411255-17.7739563 32.43411255-40.08883667V482.35504151c0-22.31488037-14.53079224-40.08966065-32.43411255-40.08966065-17.7739563 0-32.43493653 17.77478027-32.43493653 40.08966065v228.72875976c0 22.18469239 14.66098023 40.08883667 32.43493653 40.08883667z m123.51049804 0c17.7739563 0 32.43493653-17.7739563 32.43493652-40.08883667V482.35504151c0-22.31488037-14.53079224-40.08966065-32.43493652-40.08966065-17.7739563 0-32.43411255 17.77478027-32.43411255 40.08966065v228.72875976c0 22.18469239 14.14105224 40.08883667 32.43411255 40.08883667z m0 0"  ></path></symbol><symbol id="icon-zijiedian" viewBox="0 0 1024 1024"><path d="M312.208 472c19.568-157.856 153.432-280 315.656-280 175.68 0 318.112 143.272 318.112 320S803.552 832 627.864 832c-162.224 0-296.08-122.144-315.656-280H120a40 40 0 0 1 0-80h192.208zM632 752c132.552 0 240-107.448 240-240 0-132.552-107.448-240-240-240-132.552 0-240 107.448-240 240 0 132.552 107.448 240 240 240z m-40-280v-80a40 40 0 0 1 80 0v80h80a40 40 0 0 1 0 80h-80v80a40 40 0 0 1-80 0v-80h-80a40 40 0 0 1 0-80h80z"  ></path></symbol><symbol id="icon-tongjijiedian-" viewBox="0 0 1024 1024"><path d="M803.84 131.626667H410.24A59.733333 59.733333 0 0 0 350.506667 192v45.226667H199.68a51.626667 51.626667 0 0 0-51.626667 51.626666v465.92a51.626667 51.626667 0 0 0 51.626667 51.626667h187.52v-55.466667h-162.133333a21.333333 21.333333 0 0 1-21.333334-21.333333V313.386667a21.333333 21.333333 0 0 1 21.333334-21.333334h125.653333v64a59.733333 59.733333 0 0 0 59.733333 59.733334h393.386667a59.733333 59.733333 0 0 0 59.733333-59.733334V192a59.733333 59.733333 0 0 0-59.733333-60.373333z m4.266667 224.64a4.266667 4.266667 0 0 1-4.266667 4.266666H410.24a4.266667 4.266667 0 0 1-4.266667-4.266666V192a4.266667 4.266667 0 0 1 4.266667-4.266667h393.6a4.266667 4.266667 0 0 1 4.266667 4.266667zM716.16 749.44h-81.28v-81.493333a27.733333 27.733333 0 0 0-55.466667 0v81.28h-81.493333a27.733333 27.733333 0 1 0 0 55.466666h81.28v81.28a27.733333 27.733333 0 1 0 55.466667 0v-81.066666h81.28a27.733333 27.733333 0 0 0 0-55.466667z"  ></path></symbol><symbol id="icon-close" viewBox="0 0 1024 1024"><path d="M557.312 513.248l265.28-263.904c12.544-12.48 12.608-32.704 0.128-45.248-12.512-12.576-32.704-12.608-45.248-0.128L512.128 467.904l-263.04-263.84c-12.448-12.48-32.704-12.544-45.248-0.064-12.512 12.48-12.544 32.736-0.064 45.28l262.976 263.776L201.6 776.8c-12.544 12.48-12.608 32.704-0.128 45.248a31.937 31.937 0 0 0 22.688 9.44c8.16 0 16.32-3.104 22.56-9.312l265.216-263.808 265.44 266.24c6.24 6.272 14.432 9.408 22.656 9.408a31.94 31.94 0 0 0 22.592-9.344c12.512-12.48 12.544-32.704 0.064-45.248L557.312 513.248z" fill="" ></path></symbol><symbol id="icon-menu" viewBox="0 0 1024 1024"><path d="M109.714 292.571h804.572c21.943 0 36.571-21.942 36.571-43.885 0-14.629-14.628-29.257-36.571-29.257H109.714c-21.943 0-36.571 14.628-36.571 36.571 0 14.629 14.628 36.571 36.571 36.571zM914.286 512H109.714c-21.943 0-36.571 14.629-36.571 36.571 0 14.629 14.628 36.572 36.571 36.572h804.572c21.943 0 36.571-21.943 36.571-43.886 0-14.628-14.628-29.257-36.571-29.257z m0 292.571H109.714c-21.943 0-36.571 14.629-36.571 36.572s14.628 36.571 36.571 36.571h804.572c21.943 0 36.571-21.943 36.571-36.571 0-21.943-14.628-36.572-36.571-36.572z"  ></path></symbol><symbol id="icon-right" viewBox="0 0 1024 1024"><path d="M385 560.69999999L385 738.9c0 36.90000001 26.4 68.5 61.3 68.5l150.2 0c1.5 0 3-0.1 4.5-0.3 10.2 38.7 45.5 67.3 87.5 67.3 50 0 90.5-40.5 90.5-90.5s-40.5-90.5-90.5-90.5c-42 0-77.3 28.6-87.5 67.39999999-1.4-0.3-2.9-0.4-4.5-0.39999999L446.3 760.4c-6.8 0-14.3-8.9-14.3-21.49999999l0-427.00000001c0-12.7 7.40000001-21.5 14.30000001-21.5l150.19999999 0c1.5 0 3-0.2 4.5-0.4 10.2 38.8 45.5 67.3 87.5 67.3 50 0 90.5-40.5 90.5-90.4 0-49.9-40.5-90.6-90.5-90.59999999-42 0-77.3 28.6-87.5 67.39999999-1.4-0.2-2.9-0.4-4.49999999-0.4L446.3 243.3c-34.80000001 0-61.3 31.6-61.3 68.50000001L385 513.7l-79.1 0c-10.4-38.5-45.49999999-67-87.4-67-50 0-90.5 40.5-90.5 90.5s40.5 90.5 90.5 90.5c41.79999999 0 77.00000001-28.4 87.4-67L385 560.69999999z" fill="#333333" ></path></symbol><symbol id="icon-left" viewBox="0 0 1024 1024"><path d="M639 463.30000001L639 285.1c0-36.90000001-26.4-68.5-61.3-68.5l-150.2 0c-1.5 0-3 0.1-4.5 0.3-10.2-38.7-45.5-67.3-87.5-67.3-50 0-90.5 40.5-90.5 90.5s40.5 90.5 90.5 90.5c42 0 77.3-28.6 87.5-67.39999999 1.4 0.3 2.9 0.4 4.5 0.39999999L577.7 263.6c6.8 0 14.3 8.9 14.3 21.49999999l0 427.00000001c0 12.7-7.40000001 21.5-14.30000001 21.5l-150.19999999 0c-1.5 0-3 0.2-4.5 0.4-10.2-38.8-45.5-67.3-87.5-67.3-50 0-90.5 40.5-90.5 90.4 0 49.9 40.5 90.6 90.5 90.59999999 42 0 77.3-28.6 87.5-67.39999999 1.4 0.2 2.9 0.4 4.49999999 0.4L577.7 780.7c34.80000001 0 61.3-31.6 61.3-68.50000001L639 510.3l79.1 0c10.4 38.5 45.49999999 67 87.4 67 50 0 90.5-40.5 90.5-90.5s-40.5-90.5-90.5-90.5c-41.79999999 0-77.00000001 28.4-87.4 67L639 463.30000001z" fill="#333333" ></path></symbol><symbol id="icon-side" viewBox="0 0 1024 1024"><path d="M851.91168 328.45312c-59.97056 0-108.6208 48.47104-108.91264 108.36992l-137.92768 38.4a109.14304 109.14304 0 0 0-63.46752-46.58688l1.39264-137.11872c47.29344-11.86816 82.31936-54.66624 82.31936-105.64096 0-60.15488-48.76288-108.91776-108.91776-108.91776s-108.91776 48.76288-108.91776 108.91776c0 49.18784 32.60928 90.75712 77.38368 104.27392l-1.41312 138.87488a109.19936 109.19936 0 0 0-63.50336 48.55808l-138.93632-39.48544 0.01024-0.72704c0-60.15488-48.76288-108.91776-108.91776-108.91776s-108.91776 48.75776-108.91776 108.91776c0 60.15488 48.76288 108.91264 108.91776 108.91264 39.3984 0 73.91232-20.92032 93.03552-52.2496l139.19232 39.552-0.00512 0.2304c0 25.8304 9.00096 49.5616 24.02816 68.23424l-90.14272 132.63872a108.7488 108.7488 0 0 0-34.2528-5.504c-60.15488 0-108.91776 48.768-108.91776 108.91776 0 60.16 48.76288 108.91776 108.91776 108.91776 60.16 0 108.92288-48.75776 108.92288-108.91776 0-27.14624-9.9328-51.968-26.36288-71.04l89.04704-131.03104a108.544 108.544 0 0 0 37.6832 6.70208 108.672 108.672 0 0 0 36.48512-6.272l93.13792 132.57216a108.48256 108.48256 0 0 0-24.69888 69.0688c0 60.16 48.768 108.92288 108.91776 108.92288 60.16 0 108.91776-48.76288 108.91776-108.92288 0-60.14976-48.75776-108.91776-108.91776-108.91776a108.80512 108.80512 0 0 0-36.69504 6.3488l-93.07136-132.48a108.48768 108.48768 0 0 0 24.79616-72.22784l136.09984-37.888c18.99008 31.93856 53.84192 53.3504 93.69088 53.3504 60.16 0 108.92288-48.75776 108.92288-108.91264-0.00512-60.15488-48.77312-108.92288-108.92288-108.92288z"  ></path></symbol><symbol id="icon-B" viewBox="0 0 1024 1024"><path d="M98.067692 65.457231H481.28c75.854769 0 132.411077 3.150769 169.668923 9.452307 37.336615 6.301538 70.656 19.534769 100.036923 39.620924 29.459692 20.007385 53.956923 46.710154 73.570462 80.029538 19.692308 33.398154 29.459692 70.734769 29.459692 112.167385 0 44.898462-12.130462 86.094769-36.233846 123.588923a224.886154 224.886154 0 0 1-98.461539 84.283077c58.368 17.092923 103.266462 46.08 134.695385 87.04 31.350154 40.96 47.025231 89.088 47.025231 144.462769 0 43.638154-10.082462 86.016-30.404923 127.212308-20.243692 41.196308-47.891692 74.043077-83.02277 98.697846-35.052308 24.654769-78.296615 39.778462-129.732923 45.449846-32.295385 3.465846-110.119385 5.671385-233.472 6.537846H98.067692V65.457231z m193.536 159.507692V446.621538h126.818462c75.460923 0 122.328615-1.024 140.603077-3.229538 33.083077-3.938462 59.155692-15.36 78.139077-34.343385 18.904615-18.904615 28.435692-43.874462 28.435692-74.830769 0-29.696-8.192-53.720615-24.497231-72.310154-16.384-18.510769-40.644923-29.696-72.940307-33.634461-19.140923-2.205538-74.279385-3.308308-165.415385-3.308308h-111.064615z m0 381.243077v256.315077h179.2c69.710769 0 113.979077-1.969231 132.726154-5.907692 28.750769-5.198769 52.145231-17.959385 70.262154-38.281847 18.116923-20.243692 27.096615-47.340308 27.096615-81.368615 0-28.750769-6.931692-53.169231-20.873846-73.255385a118.232615 118.232615 0 0 0-60.494769-43.795692c-26.387692-9.137231-83.574154-13.705846-171.638154-13.705846H291.603692z"  ></path></symbol><symbol id="icon-a" viewBox="0 0 1024 1024"><path d="M757.76 665.6q0 20.48 1.536 34.304t7.68 22.016 18.944 12.288 34.304 4.096q-3.072 25.6-15.36 44.032-11.264 16.384-33.28 29.696t-62.976 13.312q-11.264 0-20.48-0.512t-17.408-2.56l-6.144-2.048-1.024 0q-4.096-1.024-10.24-4.096-2.048-2.048-4.096-2.048-1.024-1.024-2.048-1.024-14.336-8.192-23.552-17.408t-14.336-17.408q-6.144-10.24-9.216-20.48-63.488 75.776-178.176 75.776-48.128 0-88.064-15.36t-69.12-44.032-45.056-68.096-15.872-88.576 16.896-89.088 47.616-67.584 74.24-42.496 96.768-14.848q48.128 0 88.576 17.408t66.048 49.152q0-8.192 0.512-16.384t0.512-15.36q0-71.68-39.936-104.448t-128-32.768q-43.008 0-84.992 6.656t-84.992 17.92q14.336-28.672 25.088-47.616t24.064-29.184q30.72-24.576 158.72-24.576 79.872 0 135.168 13.824t90.624 43.52 51.2 75.264 15.872 108.032l0 200.704zM487.424 743.424q50.176 0 79.872-33.28t29.696-95.744q0-61.44-28.672-93.696t-76.8-32.256q-52.224 0-82.944 33.28t-30.72 94.72q0 58.368 31.744 92.672t77.824 34.304z"  ></path></symbol><symbol id="icon-full" viewBox="0 0 1024 1024"><path d="M639.328 416c8.032 0 16.096-3.008 22.304-9.056l202.624-197.184-0.8 143.808c-0.096 17.696 14.144 32.096 31.808 32.192 0.064 0 0.128 0 0.192 0 17.6 0 31.904-14.208 32-31.808l1.248-222.208c0-0.672-0.352-1.248-0.384-1.92 0.032-0.512 0.288-0.896 0.288-1.408 0.032-17.664-14.272-32-31.968-32.032L671.552 96l-0.032 0c-17.664 0-31.968 14.304-32 31.968C639.488 145.632 653.824 160 671.488 160l151.872 0.224-206.368 200.8c-12.672 12.32-12.928 32.608-0.64 45.248C622.656 412.736 630.976 416 639.328 416z"  ></path><path d="M896.032 639.552 896.032 639.552c-17.696 0-32 14.304-32.032 31.968l-0.224 151.872-200.832-206.4c-12.32-12.64-32.576-12.96-45.248-0.64-12.672 12.352-12.928 32.608-0.64 45.248l197.184 202.624-143.808-0.8c-0.064 0-0.128 0-0.192 0-17.6 0-31.904 14.208-32 31.808-0.096 17.696 14.144 32.096 31.808 32.192l222.24 1.248c0.064 0 0.128 0 0.192 0 0.64 0 1.12-0.32 1.76-0.352 0.512 0.032 0.896 0.288 1.408 0.288l0.032 0c17.664 0 31.968-14.304 32-31.968L928 671.584C928.032 653.952 913.728 639.584 896.032 639.552z"  ></path><path d="M209.76 159.744l143.808 0.8c0.064 0 0.128 0 0.192 0 17.6 0 31.904-14.208 32-31.808 0.096-17.696-14.144-32.096-31.808-32.192L131.68 95.328c-0.064 0-0.128 0-0.192 0-0.672 0-1.248 0.352-1.888 0.384-0.448 0-0.8-0.256-1.248-0.256 0 0-0.032 0-0.032 0-17.664 0-31.968 14.304-32 31.968L96 352.448c-0.032 17.664 14.272 32 31.968 32.032 0 0 0.032 0 0.032 0 17.664 0 31.968-14.304 32-31.968l0.224-151.936 200.832 206.4c6.272 6.464 14.624 9.696 22.944 9.696 8.032 0 16.096-3.008 22.304-9.056 12.672-12.32 12.96-32.608 0.64-45.248L209.76 159.744z"  ></path><path d="M362.368 617.056l-202.624 197.184 0.8-143.808c0.096-17.696-14.144-32.096-31.808-32.192-0.064 0-0.128 0-0.192 0-17.6 0-31.904 14.208-32 31.808l-1.248 222.24c0 0.704 0.352 1.312 0.384 2.016 0 0.448-0.256 0.832-0.256 1.312-0.032 17.664 14.272 32 31.968 32.032L352.448 928c0 0 0.032 0 0.032 0 17.664 0 31.968-14.304 32-31.968s-14.272-32-31.968-32.032l-151.936-0.224 206.4-200.832c12.672-12.352 12.96-32.608 0.64-45.248S375.008 604.704 362.368 617.056z"  ></path></symbol><symbol id="icon-add" viewBox="0 0 1024 1024"><path d="M863.328 482.56l-317.344-1.12L545.984 162.816c0-17.664-14.336-32-32-32s-32 14.336-32 32l0 318.4L159.616 480.064c-0.032 0-0.064 0-0.096 0-17.632 0-31.936 14.24-32 31.904C127.424 529.632 141.728 544 159.392 544.064l322.592 1.152 0 319.168c0 17.696 14.336 32 32 32s32-14.304 32-32l0-318.944 317.088 1.12c0.064 0 0.096 0 0.128 0 17.632 0 31.936-14.24 32-31.904C895.264 496.992 880.96 482.624 863.328 482.56z"  ></path></symbol><symbol id="icon-move" viewBox="0 0 1024 1024"><path d="M863.744 544 163.424 544c-17.664 0-32-14.336-32-32s14.336-32 32-32l700.32 0c17.696 0 32 14.336 32 32S881.44 544 863.744 544z"  ></path></symbol><symbol id="icon-living" viewBox="0 0 1024 1024"><path d="M514.133333 488.533333m-106.666666 0a106.666667 106.666667 0 1 0 213.333333 0 106.666667 106.666667 0 1 0-213.333333 0Z" fill="#666666" ></path><path d="M512 64C264.533333 64 64 264.533333 64 512c0 236.8 183.466667 428.8 416 445.866667v-134.4c-53.333333-59.733333-200.533333-230.4-200.533333-334.933334 0-130.133333 104.533333-234.666667 234.666666-234.666666s234.666667 104.533333 234.666667 234.666666c0 61.866667-49.066667 153.6-145.066667 270.933334l-59.733333 68.266666V960C776.533333 942.933333 960 748.8 960 512c0-247.466667-200.533333-448-448-448z" fill="#666666" ></path></symbol></svg>', a = (a = document.getElementsByTagName("script"))[a.length - 1].getAttribute("data-injectcss");
-  if (a && !e.__iconfont__svg__cssinject__) {
+  var t, n, i, o, s, l, r = '<svg><symbol id="icon-edit" viewBox="0 0 1024 1024"><path d="M423.765333 128a42.666667 42.666667 0 0 1 3.2 85.205333L423.765333 213.333333H234.666667a64 64 0 0 0-63.872 60.245334L170.666667 277.333333v512a64 64 0 0 0 60.245333 63.872L234.666667 853.333333h512a64 64 0 0 0 63.872-60.245333L810.666667 789.333333v-189.098666a42.666667 42.666667 0 0 1 85.205333-3.2l0.128 3.2V789.333333a149.333333 149.333333 0 0 1-144.213333 149.248L746.666667 938.666667h-512a149.333333 149.333333 0 0 1-149.248-144.213334L85.333333 789.333333v-512a149.333333 149.333333 0 0 1 144.213334-149.248L234.666667 128h189.098666z m324.949334-53.248a42.666667 42.666667 0 0 1 60.330666 0l150.869334 150.869333a42.666667 42.666667 0 0 1 0 60.330667l-329.386667 329.386667a42.666667 42.666667 0 0 1-29.44 12.458666l-153.386667 2.517334a42.666667 42.666667 0 0 1-43.349333-43.349334l2.56-153.386666a42.666667 42.666667 0 0 1 12.458667-29.44z m30.165333 90.496L491.946667 452.266667l-1.493334 91.989333 92.032-1.493333 286.976-286.976-90.538666-90.538667z"  ></path></symbol><symbol id="icon-rising" viewBox="0 0 1024 1024"><path d="M553.173333 803.84h-64l0.021334-474.581333-224.021334 224-45.269333-45.226667L521.6 206.293333l301.717333 301.696-45.269333 45.269334-224.853333-224.896v475.477333z"  ></path></symbol><symbol id="icon-falling" viewBox="0 0 1024 1024"><path d="M553.173333 238.314667h-64l0.021334 474.602666-224.021334-224-45.269333 45.226667L521.6 835.861333l301.717333-301.717333-45.269333-45.226667-224.853333 224.853334V238.336z"  ></path></symbol><symbol id="icon-shanchu2" viewBox="0 0 1024 1024"><path d="M516.60601807 107.93026734c-82.64382935 0-149.71865844 65.51751709-152.5729065 147.77160644H171.37136841c-21.40603638 0-38.92044068 17.38504028-38.92044068 38.92126465 0 21.40686036 17.38504028 38.92208862 38.92126466 38.92208862h42.94308471v435.40136719c0 81.73498536 55.39828492 148.55026245 123.90106201 148.55026245h348.99444581c68.37341309 0 123.90106201-66.42553711 123.901062-148.55026245V333.80477906h38.92126465c21.40686036 0 38.92126464-17.38586426 38.92126465-38.92208863 0-21.40686036-17.38504028-38.92126464-38.92126465-38.92126465H668.91854859C666.45321656 173.44860839 599.24902344 107.93109131 516.60601807 107.93109131z m-79.65939331 147.77160644c2.85424805-42.16442872 37.2354126-74.85809326 79.78875732-74.85809326s76.93450927 32.82302857 79.39984131 74.85809326H436.94662476z m-98.86047364 589.01165771c-24.2611084 0-50.98754883-31.13717651-50.98754883-75.76693725V333.80477906h450.97036744V769.33551026c0 44.50039673-26.72644043 75.76776123-50.98754884 75.76776122H338.08615112v-0.38973999z m0 0"  ></path><path d="M390.37063599 751.17263794c17.77313232 0 32.43411255-17.7739563 32.43411255-40.08883667V482.35504151c0-22.31488037-14.53079224-40.08966065-32.43411255-40.08966065-17.77478027 0-32.43493653 17.77478027-32.43493653 40.08966065v228.72875976c0 22.18469239 14.27124023 40.08883667 32.43493653 40.08883667z m117.41308594 0c17.7739563 0 32.43411255-17.7739563 32.43411255-40.08883667V482.35504151c0-22.31488037-14.53079224-40.08966065-32.43411255-40.08966065-17.7739563 0-32.43493653 17.77478027-32.43493653 40.08966065v228.72875976c0 22.18469239 14.66098023 40.08883667 32.43493653 40.08883667z m123.51049804 0c17.7739563 0 32.43493653-17.7739563 32.43493652-40.08883667V482.35504151c0-22.31488037-14.53079224-40.08966065-32.43493652-40.08966065-17.7739563 0-32.43411255 17.77478027-32.43411255 40.08966065v228.72875976c0 22.18469239 14.14105224 40.08883667 32.43411255 40.08883667z m0 0"  ></path></symbol><symbol id="icon-zijiedian" viewBox="0 0 1024 1024"><path d="M312.208 472c19.568-157.856 153.432-280 315.656-280 175.68 0 318.112 143.272 318.112 320S803.552 832 627.864 832c-162.224 0-296.08-122.144-315.656-280H120a40 40 0 0 1 0-80h192.208zM632 752c132.552 0 240-107.448 240-240 0-132.552-107.448-240-240-240-132.552 0-240 107.448-240 240 0 132.552 107.448 240 240 240z m-40-280v-80a40 40 0 0 1 80 0v80h80a40 40 0 0 1 0 80h-80v80a40 40 0 0 1-80 0v-80h-80a40 40 0 0 1 0-80h80z"  ></path></symbol><symbol id="icon-tongjijiedian-" viewBox="0 0 1024 1024"><path d="M803.84 131.626667H410.24A59.733333 59.733333 0 0 0 350.506667 192v45.226667H199.68a51.626667 51.626667 0 0 0-51.626667 51.626666v465.92a51.626667 51.626667 0 0 0 51.626667 51.626667h187.52v-55.466667h-162.133333a21.333333 21.333333 0 0 1-21.333334-21.333333V313.386667a21.333333 21.333333 0 0 1 21.333334-21.333334h125.653333v64a59.733333 59.733333 0 0 0 59.733333 59.733334h393.386667a59.733333 59.733333 0 0 0 59.733333-59.733334V192a59.733333 59.733333 0 0 0-59.733333-60.373333z m4.266667 224.64a4.266667 4.266667 0 0 1-4.266667 4.266666H410.24a4.266667 4.266667 0 0 1-4.266667-4.266666V192a4.266667 4.266667 0 0 1 4.266667-4.266667h393.6a4.266667 4.266667 0 0 1 4.266667 4.266667zM716.16 749.44h-81.28v-81.493333a27.733333 27.733333 0 0 0-55.466667 0v81.28h-81.493333a27.733333 27.733333 0 1 0 0 55.466666h81.28v81.28a27.733333 27.733333 0 1 0 55.466667 0v-81.066666h81.28a27.733333 27.733333 0 0 0 0-55.466667z"  ></path></symbol><symbol id="icon-close" viewBox="0 0 1024 1024"><path d="M557.312 513.248l265.28-263.904c12.544-12.48 12.608-32.704 0.128-45.248-12.512-12.576-32.704-12.608-45.248-0.128L512.128 467.904l-263.04-263.84c-12.448-12.48-32.704-12.544-45.248-0.064-12.512 12.48-12.544 32.736-0.064 45.28l262.976 263.776L201.6 776.8c-12.544 12.48-12.608 32.704-0.128 45.248a31.937 31.937 0 0 0 22.688 9.44c8.16 0 16.32-3.104 22.56-9.312l265.216-263.808 265.44 266.24c6.24 6.272 14.432 9.408 22.656 9.408a31.94 31.94 0 0 0 22.592-9.344c12.512-12.48 12.544-32.704 0.064-45.248L557.312 513.248z" fill="" ></path></symbol><symbol id="icon-menu" viewBox="0 0 1024 1024"><path d="M109.714 292.571h804.572c21.943 0 36.571-21.942 36.571-43.885 0-14.629-14.628-29.257-36.571-29.257H109.714c-21.943 0-36.571 14.628-36.571 36.571 0 14.629 14.628 36.571 36.571 36.571zM914.286 512H109.714c-21.943 0-36.571 14.629-36.571 36.571 0 14.629 14.628 36.572 36.571 36.572h804.572c21.943 0 36.571-21.943 36.571-43.886 0-14.628-14.628-29.257-36.571-29.257z m0 292.571H109.714c-21.943 0-36.571 14.629-36.571 36.572s14.628 36.571 36.571 36.571h804.572c21.943 0 36.571-21.943 36.571-36.571 0-21.943-14.628-36.572-36.571-36.572z"  ></path></symbol><symbol id="icon-right" viewBox="0 0 1024 1024"><path d="M385 560.69999999L385 738.9c0 36.90000001 26.4 68.5 61.3 68.5l150.2 0c1.5 0 3-0.1 4.5-0.3 10.2 38.7 45.5 67.3 87.5 67.3 50 0 90.5-40.5 90.5-90.5s-40.5-90.5-90.5-90.5c-42 0-77.3 28.6-87.5 67.39999999-1.4-0.3-2.9-0.4-4.5-0.39999999L446.3 760.4c-6.8 0-14.3-8.9-14.3-21.49999999l0-427.00000001c0-12.7 7.40000001-21.5 14.30000001-21.5l150.19999999 0c1.5 0 3-0.2 4.5-0.4 10.2 38.8 45.5 67.3 87.5 67.3 50 0 90.5-40.5 90.5-90.4 0-49.9-40.5-90.6-90.5-90.59999999-42 0-77.3 28.6-87.5 67.39999999-1.4-0.2-2.9-0.4-4.49999999-0.4L446.3 243.3c-34.80000001 0-61.3 31.6-61.3 68.50000001L385 513.7l-79.1 0c-10.4-38.5-45.49999999-67-87.4-67-50 0-90.5 40.5-90.5 90.5s40.5 90.5 90.5 90.5c41.79999999 0 77.00000001-28.4 87.4-67L385 560.69999999z" fill="#333333" ></path></symbol><symbol id="icon-left" viewBox="0 0 1024 1024"><path d="M639 463.30000001L639 285.1c0-36.90000001-26.4-68.5-61.3-68.5l-150.2 0c-1.5 0-3 0.1-4.5 0.3-10.2-38.7-45.5-67.3-87.5-67.3-50 0-90.5 40.5-90.5 90.5s40.5 90.5 90.5 90.5c42 0 77.3-28.6 87.5-67.39999999 1.4 0.3 2.9 0.4 4.5 0.39999999L577.7 263.6c6.8 0 14.3 8.9 14.3 21.49999999l0 427.00000001c0 12.7-7.40000001 21.5-14.30000001 21.5l-150.19999999 0c-1.5 0-3 0.2-4.5 0.4-10.2-38.8-45.5-67.3-87.5-67.3-50 0-90.5 40.5-90.5 90.4 0 49.9 40.5 90.6 90.5 90.59999999 42 0 77.3-28.6 87.5-67.39999999 1.4 0.2 2.9 0.4 4.49999999 0.4L577.7 780.7c34.80000001 0 61.3-31.6 61.3-68.50000001L639 510.3l79.1 0c10.4 38.5 45.49999999 67 87.4 67 50 0 90.5-40.5 90.5-90.5s-40.5-90.5-90.5-90.5c-41.79999999 0-77.00000001 28.4-87.4 67L639 463.30000001z" fill="#333333" ></path></symbol><symbol id="icon-side" viewBox="0 0 1024 1024"><path d="M851.91168 328.45312c-59.97056 0-108.6208 48.47104-108.91264 108.36992l-137.92768 38.4a109.14304 109.14304 0 0 0-63.46752-46.58688l1.39264-137.11872c47.29344-11.86816 82.31936-54.66624 82.31936-105.64096 0-60.15488-48.76288-108.91776-108.91776-108.91776s-108.91776 48.76288-108.91776 108.91776c0 49.18784 32.60928 90.75712 77.38368 104.27392l-1.41312 138.87488a109.19936 109.19936 0 0 0-63.50336 48.55808l-138.93632-39.48544 0.01024-0.72704c0-60.15488-48.76288-108.91776-108.91776-108.91776s-108.91776 48.75776-108.91776 108.91776c0 60.15488 48.76288 108.91264 108.91776 108.91264 39.3984 0 73.91232-20.92032 93.03552-52.2496l139.19232 39.552-0.00512 0.2304c0 25.8304 9.00096 49.5616 24.02816 68.23424l-90.14272 132.63872a108.7488 108.7488 0 0 0-34.2528-5.504c-60.15488 0-108.91776 48.768-108.91776 108.91776 0 60.16 48.76288 108.91776 108.91776 108.91776 60.16 0 108.92288-48.75776 108.92288-108.91776 0-27.14624-9.9328-51.968-26.36288-71.04l89.04704-131.03104a108.544 108.544 0 0 0 37.6832 6.70208 108.672 108.672 0 0 0 36.48512-6.272l93.13792 132.57216a108.48256 108.48256 0 0 0-24.69888 69.0688c0 60.16 48.768 108.92288 108.91776 108.92288 60.16 0 108.91776-48.76288 108.91776-108.92288 0-60.14976-48.75776-108.91776-108.91776-108.91776a108.80512 108.80512 0 0 0-36.69504 6.3488l-93.07136-132.48a108.48768 108.48768 0 0 0 24.79616-72.22784l136.09984-37.888c18.99008 31.93856 53.84192 53.3504 93.69088 53.3504 60.16 0 108.92288-48.75776 108.92288-108.91264-0.00512-60.15488-48.77312-108.92288-108.92288-108.92288z"  ></path></symbol><symbol id="icon-B" viewBox="0 0 1024 1024"><path d="M98.067692 65.457231H481.28c75.854769 0 132.411077 3.150769 169.668923 9.452307 37.336615 6.301538 70.656 19.534769 100.036923 39.620924 29.459692 20.007385 53.956923 46.710154 73.570462 80.029538 19.692308 33.398154 29.459692 70.734769 29.459692 112.167385 0 44.898462-12.130462 86.094769-36.233846 123.588923a224.886154 224.886154 0 0 1-98.461539 84.283077c58.368 17.092923 103.266462 46.08 134.695385 87.04 31.350154 40.96 47.025231 89.088 47.025231 144.462769 0 43.638154-10.082462 86.016-30.404923 127.212308-20.243692 41.196308-47.891692 74.043077-83.02277 98.697846-35.052308 24.654769-78.296615 39.778462-129.732923 45.449846-32.295385 3.465846-110.119385 5.671385-233.472 6.537846H98.067692V65.457231z m193.536 159.507692V446.621538h126.818462c75.460923 0 122.328615-1.024 140.603077-3.229538 33.083077-3.938462 59.155692-15.36 78.139077-34.343385 18.904615-18.904615 28.435692-43.874462 28.435692-74.830769 0-29.696-8.192-53.720615-24.497231-72.310154-16.384-18.510769-40.644923-29.696-72.940307-33.634461-19.140923-2.205538-74.279385-3.308308-165.415385-3.308308h-111.064615z m0 381.243077v256.315077h179.2c69.710769 0 113.979077-1.969231 132.726154-5.907692 28.750769-5.198769 52.145231-17.959385 70.262154-38.281847 18.116923-20.243692 27.096615-47.340308 27.096615-81.368615 0-28.750769-6.931692-53.169231-20.873846-73.255385a118.232615 118.232615 0 0 0-60.494769-43.795692c-26.387692-9.137231-83.574154-13.705846-171.638154-13.705846H291.603692z"  ></path></symbol><symbol id="icon-a" viewBox="0 0 1024 1024"><path d="M757.76 665.6q0 20.48 1.536 34.304t7.68 22.016 18.944 12.288 34.304 4.096q-3.072 25.6-15.36 44.032-11.264 16.384-33.28 29.696t-62.976 13.312q-11.264 0-20.48-0.512t-17.408-2.56l-6.144-2.048-1.024 0q-4.096-1.024-10.24-4.096-2.048-2.048-4.096-2.048-1.024-1.024-2.048-1.024-14.336-8.192-23.552-17.408t-14.336-17.408q-6.144-10.24-9.216-20.48-63.488 75.776-178.176 75.776-48.128 0-88.064-15.36t-69.12-44.032-45.056-68.096-15.872-88.576 16.896-89.088 47.616-67.584 74.24-42.496 96.768-14.848q48.128 0 88.576 17.408t66.048 49.152q0-8.192 0.512-16.384t0.512-15.36q0-71.68-39.936-104.448t-128-32.768q-43.008 0-84.992 6.656t-84.992 17.92q14.336-28.672 25.088-47.616t24.064-29.184q30.72-24.576 158.72-24.576 79.872 0 135.168 13.824t90.624 43.52 51.2 75.264 15.872 108.032l0 200.704zM487.424 743.424q50.176 0 79.872-33.28t29.696-95.744q0-61.44-28.672-93.696t-76.8-32.256q-52.224 0-82.944 33.28t-30.72 94.72q0 58.368 31.744 92.672t77.824 34.304z"  ></path></symbol><symbol id="icon-full" viewBox="0 0 1024 1024"><path d="M639.328 416c8.032 0 16.096-3.008 22.304-9.056l202.624-197.184-0.8 143.808c-0.096 17.696 14.144 32.096 31.808 32.192 0.064 0 0.128 0 0.192 0 17.6 0 31.904-14.208 32-31.808l1.248-222.208c0-0.672-0.352-1.248-0.384-1.92 0.032-0.512 0.288-0.896 0.288-1.408 0.032-17.664-14.272-32-31.968-32.032L671.552 96l-0.032 0c-17.664 0-31.968 14.304-32 31.968C639.488 145.632 653.824 160 671.488 160l151.872 0.224-206.368 200.8c-12.672 12.32-12.928 32.608-0.64 45.248C622.656 412.736 630.976 416 639.328 416z"  ></path><path d="M896.032 639.552 896.032 639.552c-17.696 0-32 14.304-32.032 31.968l-0.224 151.872-200.832-206.4c-12.32-12.64-32.576-12.96-45.248-0.64-12.672 12.352-12.928 32.608-0.64 45.248l197.184 202.624-143.808-0.8c-0.064 0-0.128 0-0.192 0-17.6 0-31.904 14.208-32 31.808-0.096 17.696 14.144 32.096 31.808 32.192l222.24 1.248c0.064 0 0.128 0 0.192 0 0.64 0 1.12-0.32 1.76-0.352 0.512 0.032 0.896 0.288 1.408 0.288l0.032 0c17.664 0 31.968-14.304 32-31.968L928 671.584C928.032 653.952 913.728 639.584 896.032 639.552z"  ></path><path d="M209.76 159.744l143.808 0.8c0.064 0 0.128 0 0.192 0 17.6 0 31.904-14.208 32-31.808 0.096-17.696-14.144-32.096-31.808-32.192L131.68 95.328c-0.064 0-0.128 0-0.192 0-0.672 0-1.248 0.352-1.888 0.384-0.448 0-0.8-0.256-1.248-0.256 0 0-0.032 0-0.032 0-17.664 0-31.968 14.304-32 31.968L96 352.448c-0.032 17.664 14.272 32 31.968 32.032 0 0 0.032 0 0.032 0 17.664 0 31.968-14.304 32-31.968l0.224-151.936 200.832 206.4c6.272 6.464 14.624 9.696 22.944 9.696 8.032 0 16.096-3.008 22.304-9.056 12.672-12.32 12.96-32.608 0.64-45.248L209.76 159.744z"  ></path><path d="M362.368 617.056l-202.624 197.184 0.8-143.808c0.096-17.696-14.144-32.096-31.808-32.192-0.064 0-0.128 0-0.192 0-17.6 0-31.904 14.208-32 31.808l-1.248 222.24c0 0.704 0.352 1.312 0.384 2.016 0 0.448-0.256 0.832-0.256 1.312-0.032 17.664 14.272 32 31.968 32.032L352.448 928c0 0 0.032 0 0.032 0 17.664 0 31.968-14.304 32-31.968s-14.272-32-31.968-32.032l-151.936-0.224 206.4-200.832c12.672-12.352 12.96-32.608 0.64-45.248S375.008 604.704 362.368 617.056z"  ></path></symbol><symbol id="icon-add" viewBox="0 0 1024 1024"><path d="M863.328 482.56l-317.344-1.12L545.984 162.816c0-17.664-14.336-32-32-32s-32 14.336-32 32l0 318.4L159.616 480.064c-0.032 0-0.064 0-0.096 0-17.632 0-31.936 14.24-32 31.904C127.424 529.632 141.728 544 159.392 544.064l322.592 1.152 0 319.168c0 17.696 14.336 32 32 32s32-14.304 32-32l0-318.944 317.088 1.12c0.064 0 0.096 0 0.128 0 17.632 0 31.936-14.24 32-31.904C895.264 496.992 880.96 482.624 863.328 482.56z"  ></path></symbol><symbol id="icon-move" viewBox="0 0 1024 1024"><path d="M863.744 544 163.424 544c-17.664 0-32-14.336-32-32s14.336-32 32-32l700.32 0c17.696 0 32 14.336 32 32S881.44 544 863.744 544z"  ></path></symbol><symbol id="icon-living" viewBox="0 0 1024 1024"><path d="M514.133333 488.533333m-106.666666 0a106.666667 106.666667 0 1 0 213.333333 0 106.666667 106.666667 0 1 0-213.333333 0Z" fill="#666666" ></path><path d="M512 64C264.533333 64 64 264.533333 64 512c0 236.8 183.466667 428.8 416 445.866667v-134.4c-53.333333-59.733333-200.533333-230.4-200.533333-334.933334 0-130.133333 104.533333-234.666667 234.666666-234.666666s234.666667 104.533333 234.666667 234.666666c0 61.866667-49.066667 153.6-145.066667 270.933334l-59.733333 68.266666V960C776.533333 942.933333 960 748.8 960 512c0-247.466667-200.533333-448-448-448z" fill="#666666" ></path></symbol></svg>', d = (d = document.getElementsByTagName("script"))[d.length - 1].getAttribute("data-injectcss");
+  if (d && !e.__iconfont__svg__cssinject__) {
     e.__iconfont__svg__cssinject__ = !0;
     try {
       document.write("<style>.svgfont {display: inline-block;width: 1em;height: 1em;fill: currentColor;vertical-align: -0.1em;font-size:16px;}</style>");
-    } catch (u) {
-      console && console.log(u);
+    } catch (h) {
+      console && console.log(h);
     }
   }
-  function h() {
+  function a() {
     s || (s = !0, i());
   }
   t = function() {
-    var u, m, f, p;
-    (p = document.createElement("div")).innerHTML = r, r = null, (f = p.getElementsByTagName("svg")[0]) && (f.setAttribute("aria-hidden", "true"), f.style.position = "absolute", f.style.width = 0, f.style.height = 0, f.style.overflow = "hidden", u = f, (m = document.body).firstChild ? (p = u, (f = m.firstChild).parentNode.insertBefore(p, f)) : m.appendChild(u));
+    var h, y, f, g;
+    (g = document.createElement("div")).innerHTML = r, r = null, (f = g.getElementsByTagName("svg")[0]) && (f.setAttribute("aria-hidden", "true"), f.style.position = "absolute", f.style.width = 0, f.style.height = 0, f.style.overflow = "hidden", h = f, (y = document.body).firstChild ? (g = h, (f = y.firstChild).parentNode.insertBefore(g, f)) : y.appendChild(h));
   }, document.addEventListener ? ~["complete", "loaded", "interactive"].indexOf(document.readyState) ? setTimeout(t, 0) : (n = function() {
     document.removeEventListener("DOMContentLoaded", n, !1), t();
   }, document.addEventListener("DOMContentLoaded", n, !1)) : document.attachEvent && (i = t, o = e.document, s = !1, (l = function() {
@@ -1910,9 +1922,9 @@ Oe.prototype = {
     } catch {
       return void setTimeout(l, 50);
     }
-    h();
+    a();
   })(), o.onreadystatechange = function() {
-    o.readyState == "complete" && (o.onreadystatechange = null, h());
+    o.readyState == "complete" && (o.onreadystatechange = null, a());
   });
 })(window);
 const Y = $, W = document;
@@ -1925,62 +1937,62 @@ function q({
   editable: s,
   contextMenu: l,
   contextMenuOption: r,
-  toolBar: a,
-  nodeMenu: h,
-  keypress: u,
-  before: m,
+  toolBar: d,
+  nodeMenu: a,
+  keypress: h,
+  before: y,
   newTopicName: f,
-  allowUndo: p,
-  primaryLinkStyle: v,
+  allowUndo: g,
+  primaryLinkStyle: N,
   overflowHidden: E,
-  primaryNodeHorizontalGap: y,
+  primaryNodeHorizontalGap: b,
   primaryNodeVerticalGap: x,
-  mobileMenu: C,
-  closeButton: c,
-  widthControll: d,
-  uploadButton: g,
-  nodeDraggable: N
+  mobileMenu: k,
+  closeButton: p,
+  widthControll: c,
+  uploadButton: m,
+  nodeDraggable: u
 }) {
-  const k = document.getElementById(e);
-  !k || (this.mindElixirBox = k, this.before = m || {}, this.nodeData = t.nodeData, this.linkData = t.linkData || {}, this.expandDeep = t == null ? void 0 : t.expandDeep, this.locale = i, this.contextMenuOption = r, this.contextMenu = l === void 0 ? !0 : l, this.toolBar = a === void 0 ? !0 : a, this.nodeMenu = h === void 0 ? !0 : h, this.keypress = u === void 0 ? !0 : u, this.closeButton = c === void 0 ? !1 : c, this.widthControll = d === void 0 ? !0 : d, this.mobileMenu = C, this.direction = t.direction !== void 0 ? t.direction : typeof n == "number" ? n : 1, this.draggable = o === void 0 ? !0 : o, this.newTopicName = f, this.editable = s === void 0 ? !0 : s, this.allowUndo = p === void 0 ? !0 : p, this.currentNode = null, this.currentLink = null, this.inputDiv = null, this.scaleVal = 1, this.tempDirection = null, this.primaryLinkStyle = v || 0, this.overflowHidden = E, this.primaryNodeHorizontalGap = y, this.primaryNodeVerticalGap = x, this.uploadButton = g === void 0 ? !0 : g, this.nodeDraggable = N === void 0 ? !0 : N, this.bus = new Oe(), this.bus.addListener("operation", (b) => {
+  const C = document.getElementById(e);
+  !C || (this.mindElixirBox = C, this.before = y || {}, this.nodeData = t.nodeData, this.linkData = t.linkData || {}, this.expandDeep = t == null ? void 0 : t.expandDeep, this.locale = i, this.contextMenuOption = r, this.contextMenu = l === void 0 ? !0 : l, this.toolBar = d === void 0 ? !0 : d, this.nodeMenu = a === void 0 ? !0 : a, this.keypress = h === void 0 ? !0 : h, this.closeButton = p === void 0 ? !1 : p, this.widthControll = c === void 0 ? !0 : c, this.mobileMenu = k, this.direction = t.direction !== void 0 ? t.direction : typeof n == "number" ? n : 1, this.draggable = o === void 0 ? !0 : o, this.newTopicName = f, this.editable = s === void 0 ? !0 : s, this.allowUndo = g === void 0 ? !0 : g, this.currentNode = null, this.currentLink = null, this.inputDiv = null, this.scaleVal = 1, this.tempDirection = null, this.primaryLinkStyle = N || 0, this.overflowHidden = E, this.primaryNodeHorizontalGap = b, this.primaryNodeVerticalGap = x, this.uploadButton = m === void 0 ? !0 : m, this.nodeDraggable = u === void 0 ? !0 : u, this.bus = new Oe(), this.bus.addListener("operation", (v) => {
     if (this.isUndo) {
       this.isUndo = !1;
       return;
     }
     ["moveNode", "removeNode", "addChild", "finishEdit", "editStyle", "editTags", "editIcons"].includes(
-      b.name
-    ) && this.history.push(b);
+      v.name
+    ) && this.history.push(v);
   }), this.history = [], this.isUndo = !1, this.undo = function() {
-    const b = this.history.pop();
-    !b || (this.isUndo = !0, b.name === "moveNode" ? this.moveNode(
-      Y(b.obj.fromObj.id),
-      Y(b.obj.originParentId)
-    ) : b.name === "removeNode" ? b.originSiblingId ? this.insertBefore(Y(b.originSiblingId), b.obj) : this.addChild(Y(b.originParentId), b.obj) : b.name === "addChild" || b.name === "copyNode" ? this.removeNode(Y(b.obj.id)) : b.name === "finishEdit" ? this.setNodeTopic(Y(b.obj.id), b.origin) : this.isUndo = !1);
+    const v = this.history.pop();
+    !v || (this.isUndo = !0, v.name === "moveNode" ? this.moveNode(
+      Y(v.obj.fromObj.id),
+      Y(v.obj.originParentId)
+    ) : v.name === "removeNode" ? v.originSiblingId ? this.insertBefore(Y(v.originSiblingId), v.obj) : this.addChild(Y(v.originParentId), v.obj) : v.name === "addChild" || v.name === "copyNode" ? this.removeNode(Y(v.obj.id)) : v.name === "finishEdit" ? this.setNodeTopic(Y(v.obj.id), v.origin) : this.isUndo = !1);
   });
 }
-function T(e) {
+function A(e) {
   return async function(...t) {
     (!this.before[e.name] || await this.before[e.name].apply(this, t)) && e.apply(this, t);
   };
 }
 q.prototype = {
-  addParentLink: H,
+  addParentLink: B,
   getObjById: we,
   generateNewObj: qe,
   generateNewSummaryObj: je,
-  insertSibling: T(Xt),
-  insertBefore: T(Ut),
-  insertParent: T(Jt),
-  addSummary: T(Zt),
-  addChild: T(Qt),
-  copyNode: T(en),
-  moveNode: T(sn),
-  removeNode: T(on),
-  moveUpNode: T(tn),
-  moveDownNode: T(nn),
-  beginEdit: T(cn),
-  moveNodeBefore: T(ln),
-  moveNodeAfter: T(rn),
+  insertSibling: A(Xt),
+  insertBefore: A(Ut),
+  insertParent: A(Jt),
+  addSummary: A(Zt),
+  addChild: A(Qt),
+  copyNode: A(en),
+  moveNode: A(sn),
+  removeNode: A(on),
+  moveUpNode: A(tn),
+  moveDownNode: A(nn),
+  beginEdit: A(cn),
+  moveNodeBefore: A(ln),
+  moveNodeAfter: A(rn),
   updateNodeStyle: Vt,
   updateNodeTags: _t,
   updateNodeIcons: Yt,
@@ -2028,7 +2040,7 @@ q.prototype = {
   exportSvg: pt,
   exportSvgDom: gt,
   init: function(e, t) {
-    e && (this.nodeData = e), t && (this.expandDeep = t), H(this.nodeData), console.log("ME_version " + q.version), console.log(this), this.mindElixirBox.className.indexOf("mind-elixir") === -1 && (this.mindElixirBox.className += " mind-elixir"), this.mindElixirBox.innerHTML = "", this.container = W.createElement("div"), this.container.className = "map-container", this.overflowHidden && (this.container.style.overflow = "hidden"), this.map = W.createElement("div"), this.map.className = "map-canvas", this.map.setAttribute("tabindex", "0"), this.container.appendChild(this.map), this.mindElixirBox.appendChild(this.container), this.root = W.createElement("root"), this.box = W.createElement("children"), this.box.className = "mindbox", this.svg2nd = J("svg2nd"), this.linkController = J("linkcontroller"), this.P2 = W.createElement("div"), this.P3 = W.createElement("div"), this.P2.className = this.P3.className = "circle", this.line1 = Ne(0, 0, 0, 0), this.line2 = Ne(0, 0, 0, 0), this.linkController.appendChild(this.line1), this.linkController.appendChild(this.line2), this.linkSvgGroup = J("topiclinks"), this.map.appendChild(this.root), this.map.appendChild(this.box), this.map.appendChild(this.svg2nd), this.map.appendChild(this.linkController), this.map.appendChild(this.linkSvgGroup), this.map.appendChild(this.P2), this.map.appendChild(this.P3), this.toolBar && Sn(this), this.nodeMenu && $n(this), this.keypress && Mn(this), Nn(this), Re() && this.mobileMenu ? Dn(this) : this.contextMenu && vn(this, this.contextMenuOption), this.draggable && An(this), de(this.nodeData, 0, this.expandDeep || 2), this.layout(), this.linkDiv(), this.toTopLeft(), yn(this);
+    e && (this.nodeData = e), t && (this.expandDeep = t), B(this.nodeData), console.log("ME_version " + q.version), console.log(this), this.mindElixirBox.className.indexOf("mind-elixir") === -1 && (this.mindElixirBox.className += " mind-elixir"), this.mindElixirBox.innerHTML = "", this.container = W.createElement("div"), this.container.className = "map-container", this.overflowHidden && (this.container.style.overflow = "hidden"), this.map = W.createElement("div"), this.map.className = "map-canvas", this.map.setAttribute("tabindex", "0"), this.container.appendChild(this.map), this.mindElixirBox.appendChild(this.container), this.root = W.createElement("root"), this.box = W.createElement("children"), this.box.className = "mindbox", this.svg2nd = J("svg2nd"), this.linkController = J("linkcontroller"), this.P2 = W.createElement("div"), this.P3 = W.createElement("div"), this.P2.className = this.P3.className = "circle", this.line1 = Ne(0, 0, 0, 0), this.line2 = Ne(0, 0, 0, 0), this.linkController.appendChild(this.line1), this.linkController.appendChild(this.line2), this.linkSvgGroup = J("topiclinks"), this.map.appendChild(this.root), this.map.appendChild(this.box), this.map.appendChild(this.svg2nd), this.map.appendChild(this.linkController), this.map.appendChild(this.linkSvgGroup), this.map.appendChild(this.P2), this.map.appendChild(this.P3), this.toolBar && Sn(this), this.nodeMenu && $n(this), this.keypress && Mn(this), Nn(this), Re() && this.mobileMenu ? Dn(this) : this.contextMenu && vn(this, this.contextMenuOption), this.draggable && An(this), de(this.nodeData, 0, this.expandDeep || 2), this.layout(), this.linkDiv(), this.toTopLeft(), yn(this);
   }
 };
 q.LEFT = 0;
