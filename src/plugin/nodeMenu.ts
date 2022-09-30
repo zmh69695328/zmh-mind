@@ -71,15 +71,25 @@ export default function(mind) {
       const textarea=document.createElement('textarea')
       const preTextarea=xxxdiv.children[0] as HTMLTextAreaElement
       const maxHeight=mind.container.offsetHeight-xxxdiv.offsetTop-60
+      const minHeight=30
+      const getHeight=(curHeight:number)=>{
+        if(curHeight<minHeight){
+          return minHeight
+        }else if(curHeight>maxHeight){
+          return maxHeight
+        }else{
+          return curHeight
+        }
+      }
       textarea.value=preTextarea.value
       textarea.style.position='absolute'
       textarea.style.left=preTextarea.offsetLeft+'px'
       textarea.style.top=preTextarea.offsetTop-10+'px'
-      textarea.style.height=(preTextarea.scrollHeight>maxHeight?maxHeight:preTextarea.scrollHeight) + 'px'
+      textarea.style.height=getHeight(preTextarea.scrollHeight) + 'px'
       textarea.style.width=preTextarea.offsetWidth+'px'
       textarea.oninput=(e:Event&{target:HTMLTextAreaElement})=>{
         let height=e.target.scrollHeight
-        textarea.style.height =(height>maxHeight?maxHeight:height) + 'px';
+        textarea.style.height =getHeight(height) + 'px';
       }
       textarea.onblur=e=>{
         preTextarea.value=textarea.value

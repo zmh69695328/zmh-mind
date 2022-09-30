@@ -19,12 +19,12 @@ export default {
                         "topic": "一个思维导图内核",
                         "id": "beeb823afd6d2114",
                         "remark": "啊啥的饭卡上打飞机拉屎的风景卢卡斯大驾光临看个剧啊",
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "无框架依赖",
                         "id": "c1f06e4cbcf16463",
-                        "expanded": true,
+                        "expanded": false,
                         "children": []
                     },
                     {
@@ -38,23 +38,23 @@ export default {
                                     {
                                         "topic": "两步轻松接入已有项目",
                                         "id": "c1f1f11a7fbf7550",
-                                        "expanded": true
+                                        "expanded": false
                                     }
                                 ],
-                                "expanded": true
+                                "expanded": false
                             },
                             {
                                 "topic": "new MindElixir({...}).init()",
                                 "id": "c1f1ebc7072c8928",
-                                "expanded": true
+                                "expanded": false
                             }
                         ],
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "使用简单",
                         "id": "c1f0723c07b408d7",
-                        "expanded": true,
+                        "expanded": false,
                         "children": [
                             {
                                 "topic": "操作手感类似其他主流思维导图应用",
@@ -62,7 +62,12 @@ export default {
                                 "expanded": true
                             }
                         ]
-                    }
+                    },
+                    // {
+                    //     "topic": "new node",
+                    //     "id": "35361d2879cb8a7e",
+                    //     "type": "summary"
+                    // }
                 ],
                 "linkJump": [
                     {
@@ -84,17 +89,17 @@ export default {
                     {
                         "topic": "tab 新建子节点",
                         "id": "bd1b6892bcab126a",
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "enter 新建同级节点",
                         "id": "bd1b6b632a434b27",
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "del 删除节点",
                         "id": "bd1b983085187c0a",
-                        "expanded": true
+                        "expanded": false
                     }
                 ]
             },
@@ -107,12 +112,12 @@ export default {
                     {
                         "topic": "点击右键，专注模式",
                         "id": "bd1bb2ac4bbab458",
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "需要取消专注时同样通过右键菜单，点击取消专注",
                         "id": "bd1bb4b14d6697c3",
-                        "expanded": true
+                        "expanded": false
                     }
                 ]
             },
@@ -125,22 +130,22 @@ export default {
                     {
                         "topic": "选择节点分布方式",
                         "id": "bd1ba11e620c3c1a",
-                        "expanded": true,
+                        "expanded": false,
                         "children": [
                             {
                                 "topic": "左侧分布",
                                 "id": "bd1c1cb51e6745d3",
-                                "expanded": true
+                                "expanded": false
                             },
                             {
                                 "topic": "右侧分布",
                                 "id": "bd1c1e12fd603ff6",
-                                "expanded": true
+                                "expanded": false
                             },
                             {
                                 "topic": "左右分布",
                                 "id": "bd1c1f03def5c97b",
-                                "expanded": true
+                                "expanded": false
                             }
                         ]
                     }
@@ -155,22 +160,22 @@ export default {
                     {
                         "topic": "全屏",
                         "id": "bd1ba81d9bc95a7e",
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "定位到中点",
                         "id": "bd1babdd5c18a7a2",
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "画布缩小",
                         "id": "bd1bae68e0ab186e",
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "画布放大",
                         "id": "bd1bb06377439977",
-                        "expanded": true
+                        "expanded": false
                     }
                 ]
             },
@@ -183,17 +188,17 @@ export default {
                     {
                         "topic": "点击右键菜单——连接",
                         "id": "bd1bf320da90046a",
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "然后直接点击连接目标",
                         "id": "bd1bf6f94ff2e642",
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "可以通过贝塞尔曲线控制点修改连线弧度",
                         "id": "bd1c0c4a487bd036",
-                        "expanded": true
+                        "expanded": false
                     }
                 ]
             },
@@ -217,7 +222,7 @@ export default {
                                 "height": 60
                             }
                         ],
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "字体颜色",
@@ -225,7 +230,7 @@ export default {
                         "style": {
                             "color": "#c0392c"
                         },
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "背景颜色",
@@ -234,7 +239,7 @@ export default {
                             "color": "#bdc3c7",
                             "background": "#2c3e50"
                         },
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "添加标签",
@@ -242,7 +247,7 @@ export default {
                         "tags": [
                             "已完成"
                         ],
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "添加图标",
@@ -250,7 +255,7 @@ export default {
                         "icons": [
                             "😂"
                         ],
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "文字加粗",
@@ -258,7 +263,7 @@ export default {
                         "style": {
                             "fontWeight": "bold"
                         },
-                        "expanded": true
+                        "expanded": false
                     }
                 ]
             },
@@ -271,7 +276,7 @@ export default {
                     {
                         "topic": "将一个节点拖拽到另一个节点，会成为另一个节点的子节点",
                         "id": "bd1f07c598e729dc",
-                        "expanded": true
+                        "expanded": false
                     }
                 ]
             },
@@ -284,7 +289,7 @@ export default {
                         "topic": "默认展开所有主题，展开时呈现“-”按钮，收缩时“+”按钮",
                         "id": "14be159ca67a99cc",
                         "children": [],
-                        "expanded": true
+                        "expanded": false
                     }
                 ],
                 "expanded": true
@@ -298,23 +303,23 @@ export default {
                     {
                         "topic": "JSON",
                         "id": "beeb784cc189375f",
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "HTML",
                         "id": "beeb7a6bec2d68f5",
                         "children": [],
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "PNG",
                         "id": "14be3fc82b32cc75",
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "Markdown",
                         "id": "14be40cc1fe19bae",
-                        "expanded": true
+                        "expanded": false
                     }
                 ]
             },
@@ -327,33 +332,33 @@ export default {
                     {
                         "topic": "节点插入图片",
                         "id": "bd1fb1ec53010749",
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "样式优化",
                         "id": "beeb7f3db6ad6496",
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "超链接",
                         "id": "14be4b8313971dee",
                         "children": [],
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "目录生成",
                         "id": "14be4c1b19a1702b",
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "自由主题",
                         "id": "14be4c962e26d9c8",
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "概要",
                         "id": "14be4d1f12d024aa",
-                        "expanded": true
+                        "expanded": false
                     }
                 ]
             },
@@ -369,12 +374,12 @@ export default {
                     {
                         "topic": "暂时只能手动保存",
                         "id": "bd42e1d0163ebf04",
-                        "expanded": true,
+                        "expanded": false,
                         "children": [
                             {
                                 "topic": "ctrl + S 保存",
                                 "id": "bd42e97d7ac35e99",
-                                "expanded": true
+                                "expanded": false
                             }
                         ]
                     },
@@ -382,22 +387,17 @@ export default {
                         "topic": "Hyper link",
                         "id": "bd41fd4ca32322a5",
                         "hyperLink": "https://github.com/ssshooter/mind-elixir-core",
-                        "expanded": true
+                        "expanded": false
                     },
                     {
                         "topic": "tupian",
                         "id": "14be159ca67a99aa",
-                        "expanded": true
+                        "expanded": false
                     }
                 ]
             }
         ],
         "expanded": true
     },
-    "linkData": {},
-    "height": [
-        2080,
-        1410.6640625
-    ],
-    "expandDeep": 3
+    "linkData": {}
 }

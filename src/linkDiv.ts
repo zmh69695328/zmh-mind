@@ -285,7 +285,10 @@ function loopChildren(children: HTMLElement[], parent: HTMLElement,nodeData:Node
       }
     } else if (direction === 'rhs'&&child?.tagName!=='SMY') {
       x1 = parentOL + parentOW - GAP
-      if(isSmyChild) x1+=GAP
+      if(isSmyChild){
+        x1+=GAP
+        // y2=y1
+      } 
       xMiddle = parentOL + parentOW
       x2 = parentOL + parentOW + childT.offsetWidth
       if (
