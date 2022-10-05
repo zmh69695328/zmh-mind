@@ -7,3 +7,6 @@
 
 # 使用方式
 > npm i zmh-mind
+
+# Demo
+https://zmh.dounx.me/mindmapping/
