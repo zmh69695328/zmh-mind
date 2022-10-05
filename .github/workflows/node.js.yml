@@ -31,6 +31,7 @@ jobs:
       uses: pnpm/action-setup@v2.2.2
       with:
         # Version of pnpm to install
+        version : latest
         # Where to store pnpm files
         # If specified, run `pnpm install`
         run_install: true
