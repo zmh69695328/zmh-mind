@@ -2,7 +2,12 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: Node.js CI
-
+env:
+  SERVER_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }} # 服务器私钥
+  SERVER_HOST: ${{ secrets.REMOTE_HOST }} # 服务器IP地址
+  USER_NAME: ${{ secrets.REMOTE_USER }} # 服务器用户名
+  PORT: ${{secrets.REMOTE_PORT}}
+  cache-name: note
 on:
   push:
     branches: [ "main" ]
