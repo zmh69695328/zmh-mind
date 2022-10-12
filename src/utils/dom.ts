@@ -4,6 +4,7 @@ import MindElixir, { NodeObj } from '../index'
 import { expandNodeChild, getHeightFromRootToAnotherNode, getWidthFromRootToAnotherNode } from '../interact'
 import { addChild } from '../nodeOperation'
 import { encodeHTML, getArrowPoints } from '../utils/index'
+import { createFrameselection } from './svg'
 export type Top = HTMLElement
 export type Group = HTMLElement
 
@@ -269,6 +270,7 @@ export function createInputDiv(tpc: Topic) {
   div.contentEditable = 'true'
   div.spellcheck = false
   div.textContent = origin
+  div.draggable=false
   if(tpc.nodeObj.image){
     const images=tpc.nodeObj.image
     images.forEach(val=>{
@@ -277,6 +279,8 @@ export function createInputDiv(tpc: Topic) {
       imgContainer.style.width = val.width + 'px'
       imgContainer.style.display = 'block'
       div.appendChild(imgContainer)
+      const rect=createFrameselection(imgContainer.clientWidth,imgContainer.clientHeight,imgContainer)
+      div.insertBefore(rect,imgContainer)
     })
   }
   div.style.cssText = `min-width:${tpc.offsetWidth - 22}px;min-height:${tpc.clientHeight-16}px`
@@ -310,6 +314,7 @@ export function createInputDiv(tpc: Topic) {
     }
   })
   div.addEventListener('blur', () => {
+    // return
     if (!div) return // 防止重复blur
     const node = tpc.nodeObj
     const topic = div.textContent!.trim()

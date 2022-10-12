@@ -212,7 +212,7 @@ export default {
                         "topic": "字体大小",
                         "id": "bd1c24420cd2c2f5",
                         "style": {
-                            "fontSize": "200pt",
+                            "fontSize": "10px",
                             "color": "#3298db"
                         },
                         "image": [
@@ -247,6 +247,10 @@ export default {
                         "tags": [
                             "已完成"
                         ],
+                        "tagsStyle":{
+                            "color": "#bdc3c7",
+                            "background": "#2c3e50"
+                        },
                         "expanded": false
                     },
                     {
