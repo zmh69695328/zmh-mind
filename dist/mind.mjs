@@ -219,18 +219,17 @@ const H = document, B = "http://www.w3.org/2000/svg", Ze = function(e) {
   const l = H.createElementNS(B, "rect");
   return l.setAttribute("width", "6"), l.setAttribute("height", "6"), l.setAttribute("stroke", "#2ebdff"), l.setAttribute("stroke-width", "2"), l.setAttribute("fill", "white"), l.setAttribute("x", (e - 3).toString()), l.setAttribute("y", (t - 3).toString()), l.setAttribute("class", "resize"), o.appendChild(l), i.appendChild(o), i.style.width = n.clientWidth + 5 + "px", i.style.height = n.clientHeight + 5 + "px", l.onpointerdown = function(r) {
     const d = Number(s.getAttribute("width")), a = Number(s.getAttribute("height"));
-    console.log(d, a);
     let h = r.clientX, y = r.clientY;
     u(r.pageX, r.pageY);
-    function u(v, E) {
-      const b = d + v - h, x = a + E - y;
-      s.setAttribute("width", b.toString()), s.setAttribute("height", x.toString()), l.setAttribute("x", (b - 3).toString()), l.setAttribute("y", (x - 3).toString()), i.style.width = b + 5 + "px", i.style.height = x + 5 + "px", n.style.width = b + "px", n.style.height = x + "px";
+    function u(b, E) {
+      const v = d + b - h, N = a + E - y;
+      s.setAttribute("width", v.toString()), s.setAttribute("height", N.toString()), l.setAttribute("x", (v - 3).toString()), l.setAttribute("y", (N - 3).toString()), i.style.width = v + 5 + "px", i.style.height = N + 5 + "px", n.style.width = v + "px", n.style.height = N + "px";
     }
-    function f(v) {
-      console.log(v.pageX, v.pageY, h, y), u(v.pageX, v.pageY);
+    function f(b) {
+      u(b.pageX, b.pageY);
     }
-    l.onpointermove = f, l.onpointerup = function(v) {
-      l.onpointermove = null, l.onpointerup = null, l.releasePointerCapture(v.pointerId);
+    l.onpointermove = f, l.onpointerup = function(b) {
+      l.onpointermove = null, l.onpointerup = null, l.releasePointerCapture(b.pointerId);
     }, r.stopPropagation(), r.preventDefault(), l.setPointerCapture(r.pointerId);
   }, l.ondragstart = function() {
     return !1;
@@ -354,20 +353,21 @@ function ct(e) {
       h.preventDefault(), this.inputDiv.blur(), this.map.focus();
     }
   }), t.addEventListener("blur", () => {
+    var E, v;
     if (!t)
       return;
-    const h = e.nodeObj, y = t.textContent.trim();
-    if (h.image = [], t.childNodes.forEach((v) => {
-      v.nodeName === "IMG" && h.image.push({
-        url: v.src,
-        width: v.width,
-        height: v.height
+    const h = e.nodeObj, y = t.textContent.trim(), u = (v = (E = h.image) == null ? void 0 : E.length) != null ? v : 0;
+    if (h.image = [], t.childNodes.forEach((N) => {
+      N.nodeName === "IMG" && h.image.push({
+        url: N.src,
+        width: N.width,
+        height: N.height
       });
-    }), y === "" && h.image.length === 0 ? h.topic = n : h.topic = y, t.remove(), this.inputDiv = t = null, y === n && h.image.length === 0)
+    }), y === "" && h.image.length === 0 ? h.topic = n : h.topic = y, t.remove(), this.inputDiv = t = null, y === n && u === h.image.length && u === 0)
       return;
-    e.childNodes[0].textContent = h.topic;
-    const u = e.querySelector("widthControllRight"), f = e.querySelector("widthControllRight");
-    h.style || (h.style = {}), h.style.controllWidth = u.style.height = f.style.height = e.clientHeight.toString() + "px", delete h.style.width, this.shapeTpc(e, h), this.linkDiv(), Ae.call(this, this.nodeData, h.id, h.topic), this.bus.fire("operation", {
+    h.image.length === 0 && delete h.image, e.childNodes[0].textContent = h.topic;
+    const f = e.querySelector("widthControllRight"), b = e.querySelector("widthControllRight");
+    h.style || (h.style = {}), h.style.controllWidth = f.style.height = b.style.height = e.clientHeight.toString() + "px", delete h.style.width, this.shapeTpc(e, h), this.linkDiv(), Ae.call(this, this.nodeData, h.id, h.topic), this.bus.fire("operation", {
       name: "finishEdit",
       obj: h,
       origin: n
@@ -472,12 +472,12 @@ function ft(e, t) {
 function pt() {
   let e = document.querySelector("root"), t = document.querySelector("root > tpc"), n = t.getBoundingClientRect(), i = getComputedStyle(t), o = t.parentNode, s = 0, l = 0, r = document.querySelector("root > tpc").nodeObj, d = getComputedStyle(o), a = e.offsetTop - M, h = e.offsetLeft - D, y = l + parseInt(d.paddingLeft) + parseInt(n.paddingLeft), u = s + parseInt(d.paddingTop) + parseInt(n.paddingTop) + parseInt(n.fontSize);
   s + parseInt(d.paddingTop) + parseInt(n.paddingTop);
-  let f = document.querySelector(".svg2nd"), v = "";
+  let f = document.querySelector(".svg2nd"), b = "";
   if (r.tags && r.tags.length) {
     let g = t.querySelectorAll(".tags > span");
     for (let c = 0; c < g.length; c++) {
       let m = g[c], p = m.getBoundingClientRect();
-      v += `<rect x="${y}" y="${u + 4}" rx="5px" ry="5px" width="${p.width}" height="${p.height}" style="fill: #d6f0f8;"></rect>
+      b += `<rect x="${y}" y="${u + 4}" rx="5px" ry="5px" width="${p.width}" height="${p.height}" style="fill: #d6f0f8;"></rect>
         <foreignObject x="${y}" y="${u + 4}" rx="5px" ry="5px" width="${p.width}" height="${p.height}" > 
           <div sytle="font-size:12px">${m.innerHTML}</div>
         </foreignObject>
@@ -493,28 +493,28 @@ function pt() {
       <tspan>${m.innerHTML}</tspan>`;
     }
   }
-  let b = "";
+  let v = "";
   if (r.image && r.image.length) {
     let g = tpc.querySelectorAll(".image");
     for (let c = 0; c < g.length; c++) {
       let m = g[c];
-      m.getBoundingClientRect(), b += `${m.outerHTML}`;
+      m.getBoundingClientRect(), v += `${m.outerHTML}`;
     }
   }
-  let x = `<g transform="translate(${O - D}, ${O - M})">${f.innerHTML}</g>`;
-  x += `<g id="root" transform="translate(${h + O}, ${a + O})">
+  let N = `<g transform="translate(${O - D}, ${O - M})">${f.innerHTML}</g>`;
+  N += `<g id="root" transform="translate(${h + O}, ${a + O})">
       <rect x="${l}" y="${s}" rx="5px" ry="5px" width="${n.width}" height="${n.height}" style="fill: #00aaff;"></rect>
       <foreignObject x="${l + 15}" y="${s + 10}" width="${i.width}" height="${i.height}" ">
         <div xmlns="http://www.w3.org/1999/xhtml" style="padding:0;margin:0;font-family:\u5FAE\u8F6F\u96C5\u9ED1;font-size:${i.fontSize};font-weight:${i.fontWeight};color:${i.color};word-break: break-all;line-height: 1">
         ${r.topic}
         ${E}
-        ${b}
+        ${v}
       </div>
       </foreignObject>
-      ${v}
+      ${b}
   </g>`;
   let k = Q.querySelector(".topiclinks");
-  return k && (x += `<g transform="translate(${O - D}, ${O - M})">${k.innerHTML}</g>`), x;
+  return k && (N += `<g transform="translate(${O - D}, ${O - M})">${k.innerHTML}</g>`), N;
 }
 function De(e) {
   let t = e.querySelectorAll("tpc"), n = e.offsetTop - M, i = e.offsetLeft - D, o = "", s = e.querySelector(".svg3rd");
@@ -523,42 +523,42 @@ function De(e) {
     let r = t[l], d = r.parentNode, a = r.nodeObj;
     if (a.root)
       continue;
-    let h = r.getBoundingClientRect(), y = d.offsetTop, u = d.offsetLeft, f = getComputedStyle(r), v = getComputedStyle(d), E = u + parseInt(v.paddingLeft) + parseInt(f.paddingLeft), b = y + parseInt(v.paddingTop) + parseInt(f.paddingTop) + parseInt(f.fontSize), x = y + parseInt(v.paddingTop) + parseInt(f.paddingTop), k = "";
+    let h = r.getBoundingClientRect(), y = d.offsetTop, u = d.offsetLeft, f = getComputedStyle(r), b = getComputedStyle(d), E = u + parseInt(b.paddingLeft) + parseInt(f.paddingLeft), v = y + parseInt(b.paddingTop) + parseInt(f.paddingTop) + parseInt(f.fontSize), N = y + parseInt(b.paddingTop) + parseInt(f.paddingTop), k = "";
     f.borderWidth != "0px" && (k = `<rect x="${u + 15}" y="${y}" rx="5px" ry="5px" width="${h.width}" height="${h.height}" style="fill: rgba(0,0,0,0); stroke:#444;stroke-width:1px;"></rect>`);
     let g = "";
     f.backgroundColor != "rgba(0, 0, 0, 0)" && (g = `<rect x="${u + 15}" y="${y}" rx="5px" ry="5px" width="${h.width}" height="${h.height}" style="fill: ${f.backgroundColor};"></rect>`);
     let c = "";
     if (a.tags && a.tags.length) {
-      let C = r.querySelectorAll(".tags > span");
-      for (let N = 0; N < C.length; N++) {
-        let w = C[N], A = w.getBoundingClientRect();
-        c += `<rect x="${E}" y="${b + 4}" rx="5px" ry="5px" width="${A.width}" height="${A.height}" style="fill: #d6f0f8;"></rect>
-          <foreignObject x="${E}" y="${b + 4}" rx="5px" ry="5px" width="${A.width}" height="${A.height}" > 
+      let x = r.querySelectorAll(".tags > span");
+      for (let C = 0; C < x.length; C++) {
+        let w = x[C], A = w.getBoundingClientRect();
+        c += `<rect x="${E}" y="${v + 4}" rx="5px" ry="5px" width="${A.width}" height="${A.height}" style="fill: #d6f0f8;"></rect>
+          <foreignObject x="${E}" y="${v + 4}" rx="5px" ry="5px" width="${A.width}" height="${A.height}" > 
             <div sytle="font-size:12px">${w.innerHTML}</div>
           </foreignObject>`;
       }
     }
     let m = "";
     if (a.icons && a.icons.length) {
-      let C = r.querySelectorAll(".icons > span");
-      for (let N = 0; N < C.length; N++) {
-        let w = C[N];
+      let x = r.querySelectorAll(".icons > span");
+      for (let C = 0; C < x.length; C++) {
+        let w = x[C];
         w.getBoundingClientRect(), m += `
         <tspan>${w.innerHTML}</tspan>`;
       }
     }
     let p = "";
     if (a.image && a.image.length) {
-      let C = r.querySelectorAll(".image");
-      for (let N = 0; N < C.length; N++) {
-        let w = C[N];
+      let x = r.querySelectorAll(".image");
+      for (let C = 0; C < x.length; C++) {
+        let w = x[C];
         w.getBoundingClientRect(), p += `${w.outerHTML}`;
       }
     }
     o += `<g id="${a.id}">
       ${k}
       ${g}
-      <foreignObject  x="${E}" y="${x}" width="${f.width}" height="${f.height}">
+      <foreignObject  x="${E}" y="${N}" width="${f.width}" height="${f.height}">
       <div xmlns="http://www.w3.org/1999/xhtml" style="padding:0;margin:0;font-family:\u5FAE\u8F6F\u96C5\u9ED1;font-size:${f.fontSize};font-weight:${f.fontWeight};color:${f.color};word-break: break-all;line-height: 1">
         ${a.topic}
         ${m}
@@ -1060,21 +1060,21 @@ const un = function(e, t, n, i) {
   if (!e || !t)
     return;
   const s = e.getBoundingClientRect(), l = t.getBoundingClientRect(), r = (s.x + s.width / 2 - o.x) / this.scaleVal, d = (s.y + s.height / 2 - o.y) / this.scaleVal, a = (l.x + l.width / 2 - o.x) / this.scaleVal, h = (l.y + l.height / 2 - o.y) / this.scaleVal;
-  let y, u, f, v;
-  n ? (y = r + i.delta1.x, u = d + i.delta1.y, f = a + i.delta2.x, v = h + i.delta2.y) : (d + h) / 2 - d <= s.height / 2 ? (y = (s.x + s.width - o.x) / this.scaleVal + 100, u = d, f = (l.x + l.width - o.x) / this.scaleVal + 100, v = h) : (y = (r + a) / 2, u = (d + h) / 2, f = (r + a) / 2, v = (d + h) / 2);
+  let y, u, f, b;
+  n ? (y = r + i.delta1.x, u = d + i.delta1.y, f = a + i.delta2.x, b = h + i.delta2.y) : (d + h) / 2 - d <= s.height / 2 ? (y = (s.x + s.width - o.x) / this.scaleVal + 100, u = d, f = (l.x + l.width - o.x) / this.scaleVal + 100, b = h) : (y = (r + a) / 2, u = (d + h) / 2, f = (r + a) / 2, b = (d + h) / 2);
   const E = {
     cx: r,
     cy: d,
     w: s.width,
     h: s.height
-  }, b = {
+  }, v = {
     cx: a,
     cy: h,
     w: l.width,
     h: l.height
-  }, x = ce(E, y, u), k = x.x, g = x.y, c = ae(b, f, v), m = c.x, p = c.y, C = Se(f, v, m, p), N = tt(
-    `M ${k} ${g} C ${y} ${u} ${f} ${v} ${m} ${p}`,
-    `M ${C.x1} ${C.y1} L ${m} ${p} L ${C.x2} ${C.y2}`
+  }, N = ce(E, y, u), k = N.x, g = N.y, c = ae(v, f, b), m = c.x, p = c.y, x = Se(f, b, m, p), C = tt(
+    `M ${k} ${g} C ${y} ${u} ${f} ${b} ${m} ${p}`,
+    `M ${x.x1} ${x.y1} L ${m} ${p} L ${x.x2} ${x.y2}`
   );
   let w;
   n ? (w = {
@@ -1088,9 +1088,9 @@ const un = function(e, t, n, i) {
     },
     delta2: {
       x: f - a,
-      y: v - h
+      y: b - h
     }
-  }, this.linkData[i.id] = w, N.linkObj = w, N.dataset.linkid = i.id) : (w = {
+  }, this.linkData[i.id] = w, C.linkObj = w, C.dataset.linkid = i.id) : (w = {
     id: ee(),
     label: "",
     from: e,
@@ -1101,9 +1101,9 @@ const un = function(e, t, n, i) {
     },
     delta2: {
       x: f - a,
-      y: v - h
+      y: b - h
     }
-  }, this.linkData[w.id] = w, N.linkObj = w, N.dataset.linkid = w.id, this.currentLink = N), this.linkSvgGroup.appendChild(N), n || this.showLinkController(y, u, f, v, w, E, b);
+  }, this.linkData[w.id] = w, C.linkObj = w, C.dataset.linkid = w.id, this.currentLink = C), this.linkSvgGroup.appendChild(C), n || this.showLinkController(y, u, f, b, w, E, v);
 }, fn = function(e) {
   let t;
   if (e ? t = e : t = this.currentLink, !t)
@@ -1123,8 +1123,8 @@ const un = function(e, t, n, i) {
     cy: h,
     w: l.width,
     h: l.height
-  }, f = r + t.delta1.x, v = d + t.delta1.y, E = a + t.delta2.x, b = h + t.delta2.y;
-  this.showLinkController(f, v, E, b, t, y, u);
+  }, f = r + t.delta1.x, b = d + t.delta1.y, E = a + t.delta2.x, v = h + t.delta2.y;
+  this.showLinkController(f, b, E, v, t, y, u);
 }, gn = function() {
   this.linkController.style.display = "none", this.P2.style.display = "none", this.P3.style.display = "none";
 }, mn = function(e, t, n, i, o, s, l) {
@@ -1133,29 +1133,29 @@ const un = function(e, t, n, i) {
   let d = r.x, a = r.y;
   const h = ae(l, n, i);
   let y = h.x, u = h.y;
-  this.P2.style.cssText = `top:${t}px;left:${e}px;`, this.P3.style.cssText = `top:${i}px;left:${n}px;`, this.line1.setAttribute("x1", d), this.line1.setAttribute("y1", a), this.line1.setAttribute("x2", e), this.line1.setAttribute("y2", t), this.line2.setAttribute("x1", n), this.line2.setAttribute("y1", i), this.line2.setAttribute("x2", y), this.line2.setAttribute("y2", u), this.helper1 && (this.helper1.destory(this.map), this.helper2.destory(this.map)), this.helper1 = new Z(this.P2), this.helper2 = new Z(this.P3), this.helper1.init(this.map, (f, v) => {
-    e = e - f / this.scaleVal, t = t - v / this.scaleVal;
+  this.P2.style.cssText = `top:${t}px;left:${e}px;`, this.P3.style.cssText = `top:${i}px;left:${n}px;`, this.line1.setAttribute("x1", d), this.line1.setAttribute("y1", a), this.line1.setAttribute("x2", e), this.line1.setAttribute("y2", t), this.line2.setAttribute("x1", n), this.line2.setAttribute("y1", i), this.line2.setAttribute("x2", y), this.line2.setAttribute("y2", u), this.helper1 && (this.helper1.destory(this.map), this.helper2.destory(this.map)), this.helper1 = new Z(this.P2), this.helper2 = new Z(this.P3), this.helper1.init(this.map, (f, b) => {
+    e = e - f / this.scaleVal, t = t - b / this.scaleVal;
     const E = ce(s, e, t);
     d = E.x, a = E.y, this.P2.style.top = t + "px", this.P2.style.left = e + "px", this.currentLink.children[0].setAttribute(
       "d",
       `M ${d} ${a} C ${e} ${t} ${n} ${i} ${y} ${u}`
     ), this.line1.setAttribute("x1", d), this.line1.setAttribute("y1", a), this.line1.setAttribute("x2", e), this.line1.setAttribute("y2", t), o.delta1.x = e - s.cx, o.delta1.y = t - s.cy;
-  }), this.helper2.init(this.map, (f, v) => {
-    n = n - f / this.scaleVal, i = i - v / this.scaleVal;
+  }), this.helper2.init(this.map, (f, b) => {
+    n = n - f / this.scaleVal, i = i - b / this.scaleVal;
     const E = ae(l, n, i);
     y = E.x, u = E.y;
-    const b = Se(n, i, y, u);
+    const v = Se(n, i, y, u);
     this.P3.style.top = i + "px", this.P3.style.left = n + "px", this.currentLink.children[0].setAttribute(
       "d",
       `M ${d} ${a} C ${e} ${t} ${n} ${i} ${y} ${u}`
     ), this.currentLink.children[1].setAttribute(
       "d",
-      `M ${b.x1} ${b.y1} L ${y} ${u} L ${b.x2} ${b.y2}`
+      `M ${v.x1} ${v.y1} L ${y} ${u} L ${v.x2} ${v.y2}`
     ), this.line2.setAttribute("x1", n), this.line2.setAttribute("y1", i), this.line2.setAttribute("x2", y), this.line2.setAttribute("y2", u), o.delta2.x = n - l.cx, o.delta2.y = i - l.cy;
   });
 };
 function yn(e) {
-  var b, x;
+  var v, N;
   var t = this.primaryNodeHorizontalGap || 65, n = this.primaryNodeVerticalGap || 25;
   console.time("linkDiv");
   const i = this.root;
@@ -1166,8 +1166,8 @@ function yn(e) {
   if (this.direction === 2) {
     let k = 0, g = 0, c = 0, m = 0;
     for (let p = 0; p < o.length; p++) {
-      const C = o[p];
-      C.className === "lhs" ? (h += C.offsetHeight + n, c += C.offsetHeight, k += 1) : (y += C.offsetHeight + n, m += C.offsetHeight, g += 1);
+      const x = o[p];
+      x.className === "lhs" ? (h += x.offsetHeight + n, c += x.offsetHeight, k += 1) : (y += x.offsetHeight + n, m += x.offsetHeight, g += 1);
     }
     h > y ? (u = 1e4 - Math.max(h) / 2, l = "r", r = (h - m) / (g - 1)) : (u = 1e4 - Math.max(y) / 2, l = "l", r = (y - c) / (k - 1));
   } else {
@@ -1176,34 +1176,34 @@ function yn(e) {
     u = 1e4 - s / 2;
   }
   let f = "";
-  const v = 1e4 - i.offsetWidth / 2 - t + 60, E = 1e4 + i.offsetWidth / 2 + t - 60;
+  const b = 1e4 - i.offsetWidth / 2 - t + 60, E = 1e4 + i.offsetWidth / 2 + t - 60;
   for (let k = 0; k < o.length; k++) {
     let g, c;
     const m = o[k], p = m.offsetHeight;
-    let C = i.offsetLeft - 10;
+    let x = i.offsetLeft - 10;
     if (m.className === "lhs") {
-      m.style.top = u + d + "px", m.style.left = v - m.offsetWidth + "px", g = v - 15, c = u + d + p / 2;
+      m.style.top = u + d + "px", m.style.left = b - m.offsetWidth + "px", g = b - 15, c = u + d + p / 2;
       let w = 1e4;
-      this.primaryLinkStyle === 2 ? (this.direction === 2 && (w = 1e4 - i.offsetWidth / 6), c < 1e4 ? f += `M ${w} 10000 V ${c + 20} C ${w} ${c} ${w} ${c} ${w - 20} ${c} H ${g}` : f += `M ${w} 10000 V ${c - 20} C ${w} ${c} ${w} ${c} ${w - 20} ${c} H ${g}`) : f += `M 10000 10000 H ${C} V ${c} H ${g}`, l === "l" ? d += p + r : d += p + n;
+      this.primaryLinkStyle === 2 ? (this.direction === 2 && (w = 1e4 - i.offsetWidth / 6), c < 1e4 ? f += `M ${w} 10000 V ${c + 20} C ${w} ${c} ${w} ${c} ${w - 20} ${c} H ${g}` : f += `M ${w} 10000 V ${c - 20} C ${w} ${c} ${w} ${c} ${w - 20} ${c} H ${g}`) : f += `M 10000 10000 H ${x} V ${c} H ${g}`, l === "l" ? d += p + r : d += p + n;
     } else {
-      C = i.offsetLeft + i.offsetWidth + 10, m.style.top = u + a + "px", m.style.left = E + "px", g = E + 15, c = u + a + p / 2;
+      x = i.offsetLeft + i.offsetWidth + 10, m.style.top = u + a + "px", m.style.left = E + "px", g = E + 15, c = u + a + p / 2;
       let w = 1e4;
-      this.primaryLinkStyle === 2 ? (this.direction === 2 && (w = 1e4 + i.offsetWidth / 6), c < 1e4 ? f += `M ${w} 10000 V ${c + 20} C ${w} ${c} ${w} ${c} ${w + 20} ${c} H ${g}` : f += `M ${w} 10000 V ${c - 20} C ${w} ${c} ${w} ${c} ${w + 20} ${c} H ${g}`) : f += `M 10000 10000 H ${C} V ${c} H ${g}`, l === "r" ? a += p + r : a += p + n;
+      this.primaryLinkStyle === 2 ? (this.direction === 2 && (w = 1e4 + i.offsetWidth / 6), c < 1e4 ? f += `M ${w} 10000 V ${c + 20} C ${w} ${c} ${w} ${c} ${w + 20} ${c} H ${g}` : f += `M ${w} 10000 V ${c - 20} C ${w} ${c} ${w} ${c} ${w + 20} ${c} H ${g}`) : f += `M 10000 10000 H ${x} V ${c} H ${g}`, l === "r" ? a += p + r : a += p + n;
     }
-    const N = m.children[0].children[1];
-    N && (N.style.top = (N.parentNode.offsetHeight - N.offsetHeight) / 2 + "px", m.className === "lhs" ? N.style.left = -10 + "px" : N.style.left = N.parentNode.offsetWidth - 10 + "px");
+    const C = m.children[0].children[1];
+    C && (C.style.top = (C.parentNode.offsetHeight - C.offsetHeight) / 2 + "px", m.className === "lhs" ? C.style.left = -10 + "px" : C.style.left = C.parentNode.offsetWidth - 10 + "px");
   }
   this.svg2nd.appendChild(Ze(f));
   for (let k = 0; k < o.length; k++) {
     const g = o[k];
     if (!(e && e !== o[k]) && g.childElementCount) {
       const c = K("svg3rd"), m = K("svg3rd");
-      g.querySelectorAll(".svg3rd").forEach((N) => {
-        N.remove();
+      g.querySelectorAll(".svg3rd").forEach((C) => {
+        C.remove();
       }), g.appendChild(c);
       const p = g.children[0];
-      let C;
-      ((x = (b = g.children) == null ? void 0 : b[2]) == null ? void 0 : x.tagName) === "SMYCHILDREN" ? C = [...g.children[1].children, ...g.children[2].children] : C = g.children[1].children, q = "", ie = "", Be(C, p, this.nodeData.children[k], !0), c.appendChild(et(q)), ie.length > 0 && (g.appendChild(m), m.appendChild(Qe(ie)));
+      let x;
+      ((N = (v = g.children) == null ? void 0 : v[2]) == null ? void 0 : N.tagName) === "SMYCHILDREN" ? x = [...g.children[1].children, ...g.children[2].children] : x = g.children[1].children, q = "", ie = "", Be(x, p, this.nodeData.children[k], !0), c.appendChild(et(q)), ie.length > 0 && (g.appendChild(m), m.appendChild(Qe(ie)));
     }
   }
   this.linkSvgGroup.innerHTML = "";
@@ -1240,23 +1240,23 @@ function Be(e, t, n, i) {
       let ne = (a = f.style.top) != null ? a : 0;
       typeof ne == "string" && (ne = Number(ne.replace("px", ""))), f.style.top = ne + (ye + me + 20) / 2 - ze + "px", ie += `M ${ge} ${me} H ${ge + 10} V ${ye} H${Pe}`;
     }
-    const v = f.children[0];
-    let E = v.offsetTop, b = v.offsetHeight;
-    d && (E += v.offsetParent.offsetTop);
-    let x;
-    i || d ? x = o + r / 2 : x = o + r;
-    const k = E + b;
+    const b = f.children[0];
+    let E = b.offsetTop, v = b.offsetHeight;
+    d && (E += b.offsetParent.offsetTop);
+    let N;
+    i || d ? N = o + r / 2 : N = o + r;
+    const k = E + v;
     let g, c, m;
     const p = f.offsetParent.className || f.offsetParent.offsetParent.className;
-    p === "lhs" && (f == null ? void 0 : f.tagName) !== "SMY" ? (g = s + 15, m = s, c = s - v.offsetWidth, E + b < o + r / 2 + 50 && E + b > o + r / 2 - 50 ? q += `M ${g} ${x} H ${m} V ${k} H ${c}` : E + b >= o + r / 2 ? q += `M ${g} ${x} H ${m} V ${k} H ${c}` : q += `M ${g} ${x} H ${m} V ${k} H ${c}`) : p === "rhs" && (f == null ? void 0 : f.tagName) !== "SMY" && (g = s + l - 15, d && (g += 15), m = s + l, c = s + l + v.offsetWidth, E + b < o + r / 2 + 50 && E + b > o + r / 2 - 50 ? q += `M ${g} ${x} H ${m} V ${k} H ${c}` : E + b >= o + r / 2 ? q += `M ${g} ${x} H ${m} V ${k} H ${c}` : q += `M ${g} ${x} H ${m} V ${k} H ${c}`);
-    const C = v.children[1];
-    if (C) {
-      if (C.style.top = (v.offsetHeight - C.offsetHeight) / 2 + "px", p === "lhs" ? C.style.left = -10 + "px" : p === "rhs" && (C.style.left = v.offsetWidth - 10 + "px"), !C.expanded)
+    p === "lhs" && (f == null ? void 0 : f.tagName) !== "SMY" ? (g = s + 15, m = s, c = s - b.offsetWidth, E + v < o + r / 2 + 50 && E + v > o + r / 2 - 50 ? q += `M ${g} ${N} H ${m} V ${k} H ${c}` : E + v >= o + r / 2 ? q += `M ${g} ${N} H ${m} V ${k} H ${c}` : q += `M ${g} ${N} H ${m} V ${k} H ${c}`) : p === "rhs" && (f == null ? void 0 : f.tagName) !== "SMY" && (g = s + l - 15, d && (g += 15), m = s + l, c = s + l + b.offsetWidth, E + v < o + r / 2 + 50 && E + v > o + r / 2 - 50 ? q += `M ${g} ${N} H ${m} V ${k} H ${c}` : E + v >= o + r / 2 ? q += `M ${g} ${N} H ${m} V ${k} H ${c}` : q += `M ${g} ${N} H ${m} V ${k} H ${c}`);
+    const x = b.children[1];
+    if (x) {
+      if (x.style.top = (b.offsetHeight - x.offsetHeight) / 2 + "px", p === "lhs" ? x.style.left = -10 + "px" : p === "rhs" && (x.style.left = b.offsetWidth - 10 + "px"), !x.expanded)
         continue;
     } else
       continue;
-    let N;
-    ((y = (h = f.children) == null ? void 0 : h[2]) == null ? void 0 : y.tagName) === "SMYCHILDREN" ? N = [...f.children[1].children, ...f.children[2].children] : N = [...f.children[1].children], N.length > 0 && Be(N, v, n.children[u]);
+    let C;
+    ((y = (h = f.children) == null ? void 0 : h[2]) == null ? void 0 : y.tagName) === "SMYCHILDREN" ? C = [...f.children[1].children, ...f.children[2].children] : C = [...f.children[1].children], C.length > 0 && Be(C, b, n.children[u]);
   }
 }
 function vn(e) {
@@ -1408,55 +1408,55 @@ function bn(e, t) {
     "cm-remove_child",
     S[o].removeNode,
     "delete"
-  ), a = i("cm-fucus", S[o].focus, ""), h = i("cm-unfucus", S[o].cancelFocus, ""), y = i("cm-up", S[o].moveUp, "PgUp"), u = i("cm-down", S[o].moveDown, "Pgdn"), f = i("cm-link", S[o].link, ""), v = i("cm-nodelink", S[o].nodeLink, ""), E = i("cm-summary", S[o].summary, ""), b = document.createElement("ul");
-  if (b.className = "menu-list", b.appendChild(s), b.appendChild(l), b.appendChild(r), b.appendChild(d), (!t || t.focus) && (b.appendChild(a), b.appendChild(h)), b.appendChild(y), b.appendChild(u), (!t || t.link) && (b.appendChild(f), b.appendChild(v)), b.appendChild(E), t && t.extend)
+  ), a = i("cm-fucus", S[o].focus, ""), h = i("cm-unfucus", S[o].cancelFocus, ""), y = i("cm-up", S[o].moveUp, "PgUp"), u = i("cm-down", S[o].moveDown, "Pgdn"), f = i("cm-link", S[o].link, ""), b = i("cm-nodelink", S[o].nodeLink, ""), E = i("cm-summary", S[o].summary, ""), v = document.createElement("ul");
+  if (v.className = "menu-list", v.appendChild(s), v.appendChild(l), v.appendChild(r), v.appendChild(d), (!t || t.focus) && (v.appendChild(a), v.appendChild(h)), v.appendChild(y), v.appendChild(u), (!t || t.link) && (v.appendChild(f), v.appendChild(b)), v.appendChild(E), t && t.extend)
     for (let g = 0; g < t.extend.length; g++) {
       const c = t.extend[g], m = i(c.name, c.name, c.key || "");
-      b.appendChild(m), m.onclick = (p) => {
+      v.appendChild(m), m.onclick = (p) => {
         c.onclick(p);
       };
     }
-  const x = document.createElement("cmenu");
-  x.appendChild(b), x.hidden = !0, e.container.append(x);
+  const N = document.createElement("cmenu");
+  N.appendChild(v), N.hidden = !0, e.container.append(N);
   let k = !0;
   e.container.oncontextmenu = function(g) {
     if (g.preventDefault(), !e.editable)
       return;
     const c = g.target;
     if (c.tagName === "TPC") {
-      c.parentElement.tagName === "ROOT" ? k = !0 : k = !1, k ? (a.className = "disabled", y.className = "disabled", u.className = "disabled", r.className = "disabled", d.className = "disabled") : (a.className = "", y.className = "", u.className = "", r.className = "", d.className = ""), e.selectNode(c), x.hidden = !1;
-      const m = b.offsetHeight, p = b.offsetWidth;
-      m + g.clientY > window.innerHeight ? (b.style.top = "", b.style.bottom = "0px") : (b.style.bottom = "", b.style.top = g.clientY + 15 + "px"), p + g.clientX > window.innerWidth ? (b.style.left = "", b.style.right = "0px") : (b.style.right = "", b.style.left = g.clientX + 10 + "px");
+      c.parentElement.tagName === "ROOT" ? k = !0 : k = !1, k ? (a.className = "disabled", y.className = "disabled", u.className = "disabled", r.className = "disabled", d.className = "disabled") : (a.className = "", y.className = "", u.className = "", r.className = "", d.className = ""), e.selectNode(c), N.hidden = !1;
+      const m = v.offsetHeight, p = v.offsetWidth;
+      m + g.clientY > window.innerHeight ? (v.style.top = "", v.style.bottom = "0px") : (v.style.bottom = "", v.style.top = g.clientY + 15 + "px"), p + g.clientX > window.innerWidth ? (v.style.left = "", v.style.right = "0px") : (v.style.right = "", v.style.left = g.clientX + 10 + "px");
     }
-  }, x.onclick = (g) => {
-    g.target === x && (x.hidden = !0);
+  }, N.onclick = (g) => {
+    g.target === N && (N.hidden = !0);
   }, s.onclick = (g) => {
-    e.addChild(), x.hidden = !0;
+    e.addChild(), N.hidden = !0;
   }, E.onclick = (g) => {
-    e.addSummary(), x.hidden = !0;
+    e.addSummary(), N.hidden = !0;
   }, l.onclick = (g) => {
-    e.insertParent(), x.hidden = !0;
+    e.insertParent(), N.hidden = !0;
   }, r.onclick = (g) => {
-    k || (e.insertSibling(), x.hidden = !0);
+    k || (e.insertSibling(), N.hidden = !0);
   }, d.onclick = (g) => {
-    k || (e.removeNode(), x.hidden = !0);
+    k || (e.removeNode(), N.hidden = !0);
   }, a.onclick = (g) => {
-    k || (e.focusNode(e.currentNode), x.hidden = !0);
+    k || (e.focusNode(e.currentNode), N.hidden = !0);
   }, h.onclick = (g) => {
-    e.cancelFocus(), x.hidden = !0;
+    e.cancelFocus(), N.hidden = !0;
   }, y.onclick = (g) => {
-    k || (e.moveUpNode(), x.hidden = !0);
+    k || (e.moveUpNode(), N.hidden = !0);
   }, u.onclick = (g) => {
-    k || (e.moveDownNode(), x.hidden = !0);
+    k || (e.moveDownNode(), N.hidden = !0);
   }, f.onclick = (g) => {
-    x.hidden = !0;
+    N.hidden = !0;
     const c = e.currentNode, m = n(S[o].clickTips);
     e.container.appendChild(m), e.map.addEventListener(
       "click",
       (p) => {
         if (p.preventDefault(), m.remove(), p.target.parentElement.nodeName === "T" || p.target.parentElement.nodeName === "ROOT") {
-          const C = e.currentNode;
-          e.createLink(c, C);
+          const x = e.currentNode;
+          e.createLink(c, x);
         } else
           console.log("\u53D6\u6D88\u8FDE\u63A5");
       },
@@ -1464,18 +1464,18 @@ function bn(e, t) {
         once: !0
       }
     );
-  }, v.onclick = (g) => {
-    x.hidden = !0;
+  }, b.onclick = (g) => {
+    N.hidden = !0;
     const c = e.currentNode, m = n(S[o].clickTips);
     e.container.appendChild(m), e.map.addEventListener(
       "click",
       (p) => {
         if (p.preventDefault(), m.remove(), p.target.parentElement.nodeName === "T" || p.target.parentElement.nodeName === "ROOT") {
-          const C = e.currentNode;
+          const x = e.currentNode;
           c.nodeObj.linkJump || (c.nodeObj.linkJump = []), c.nodeObj.linkJump.push(
             {
-              toId: C.nodeObj.id,
-              title: C.nodeObj.topic
+              toId: x.nodeObj.id,
+              title: x.nodeObj.topic
             }
           ), e.shapeTpc(c, c.nodeObj), e.linkDiv();
         } else
@@ -1635,12 +1635,12 @@ function An(e) {
   `, o.innerHTML = `${S[t].tag}<textarea class="nm-tag" tabindex="-1" placeholder="${S[t].tagsSeparate}" /><br>`, s.innerHTML = `${S[t].icon}<textarea class="nm-icon" tabindex="-1" placeholder="${S[t].iconsSeparate}" /><br>`, l.innerHTML = `${S[t].hyperlink}<textarea class="nm-link" tabindex="-1" placeholder="${S[t].linkSeparate}" /><br>`, r.innerHTML = `${S[t].remark}<textarea class="nm-remark" tabindex="-1" placeholder="${S[t].reamrkSeparate}" /><br>`;
   function d(c) {
     c.ondblclick = (m) => {
-      const p = document.createElement("textarea"), C = c.children[0], N = e.container.offsetHeight - c.offsetTop - 60, w = 30, A = (z) => z < w ? w : z > N ? N : z;
-      p.value = C.value, p.style.position = "absolute", p.style.left = C.offsetLeft + "px", p.style.top = C.offsetTop - 10 + "px", p.style.height = A(C.scrollHeight) + "px", p.style.width = C.offsetWidth + "px", p.oninput = (z) => {
+      const p = document.createElement("textarea"), x = c.children[0], C = e.container.offsetHeight - c.offsetTop - 60, w = 30, A = (z) => z < w ? w : z > C ? C : z;
+      p.value = x.value, p.style.position = "absolute", p.style.left = x.offsetLeft + "px", p.style.top = x.offsetTop - 10 + "px", p.style.height = A(x.scrollHeight) + "px", p.style.width = x.offsetWidth + "px", p.oninput = (z) => {
         let te = z.target.scrollHeight;
         p.style.height = A(te) + "px";
       }, p.onblur = (z) => {
-        C.value = p.value, C.dispatchEvent(new CustomEvent("change")), p.remove();
+        x.value = p.value, x.dispatchEvent(new CustomEvent("change")), p.remove();
       }, c.appendChild(p), p.focus();
     };
   }
@@ -1653,12 +1653,12 @@ function An(e) {
   `, a.appendChild(i), a.appendChild(o), a.appendChild(s), a.appendChild(l), a.appendChild(r), a.hidden = !0;
   function h(c, m) {
     var p = e.container.querySelectorAll(c);
-    [].forEach.call(p, function(C) {
-      C.classList.remove(m);
+    [].forEach.call(p, function(x) {
+      x.classList.remove(m);
     });
   }
   e.container.append(a);
-  const y = a.querySelectorAll(".size"), u = a.querySelector(".bold"), f = a.querySelector(".button-container"), v = a.querySelector(".font"), E = e.container.querySelector(".nm-tag"), b = e.container.querySelector(".nm-icon"), x = e.container.querySelector(".nm-link"), k = e.container.querySelector(".nm-remark");
+  const y = a.querySelectorAll(".size"), u = a.querySelector(".bold"), f = a.querySelector(".button-container"), b = a.querySelector(".font"), E = e.container.querySelector(".nm-tag"), v = e.container.querySelector(".nm-icon"), N = e.container.querySelector(".nm-link"), k = e.container.querySelector(".nm-remark");
   a.onclick = (c) => {
     if (!e.currentNode)
       return;
@@ -1683,12 +1683,12 @@ function An(e) {
       let m;
       c.target.value === "" ? m = [] : m = c.target.value.split(","), e.updateNodeTags(e.currentNode.nodeObj, m);
     }
-  }, b.onchange = (c) => {
+  }, v.onchange = (c) => {
     if (!!e.currentNode && (c.target.value !== null || c.target.value !== void 0)) {
       const m = c.target.value.split(",");
       e.updateNodeIcons(e.currentNode.nodeObj, m);
     }
-  }, x.onchange = (c) => {
+  }, N.onchange = (c) => {
     if (!!e.currentNode && (c.target.value !== null || c.target.value !== void 0)) {
       const m = c.target.value;
       e.updateNodeHyperLink(e.currentNode.nodeObj, m);
@@ -1706,7 +1706,7 @@ function An(e) {
     a.hidden = !0;
   }), e.bus.addListener("selectNode", function(c, m) {
     if (!!m) {
-      if (a.hidden = !1, h(".palette", "nmenu-selected"), h(".size", "size-selected"), h(".bold", "size-selected"), n = "font", v.className = "font selected", v.nextElementSibling.className = "background", c.style) {
+      if (a.hidden = !1, h(".palette", "nmenu-selected"), h(".size", "size-selected"), h(".bold", "size-selected"), n = "font", b.className = "font selected", b.nextElementSibling.className = "background", c.style) {
         if (c.style.fontSize) {
           const p = a.querySelector(
             '.size[data-size="' + c.style.fontSize + '"]'
@@ -1724,7 +1724,7 @@ function An(e) {
           p && (p.className = "palette nmenu-selected");
         }
       }
-      c.tags ? E.value = c.tags.join(",") : E.value = "", c.icons ? b.value = c.icons.join(",") : b.value = "", x.value = "", c.hyperLink && (x.value = c.hyperLink), c.linkJump && (x.value.length > 0 && (x.value += ","), x.value += c.linkJump.map((p) => p.title).reduce((p, C, N) => p + (N ? "," : "") + C, "")), c.remark ? k.value = c.remark : k.value = "";
+      c.tags ? E.value = c.tags.join(",") : E.value = "", c.icons ? v.value = c.icons.join(",") : v.value = "", N.value = "", c.hyperLink && (N.value = c.hyperLink), c.linkJump && (N.value.length > 0 && (N.value += ","), N.value += c.linkJump.map((p) => p.title).reduce((p, x, C) => p + (C ? "," : "") + x, "")), c.remark ? k.value = c.remark : k.value = "";
     }
   });
 }
@@ -1860,15 +1860,15 @@ function Dn(e) {
 }
 function Hn(e, t) {
   const n = (u, f) => {
-    const v = document.createElement("div");
-    return v.id = u, v.innerHTML = `<svg class="icon" aria-hidden="true">
+    const b = document.createElement("div");
+    return b.id = u, b.innerHTML = `<svg class="icon" aria-hidden="true">
     <use xlink:href="#icon-${f}"></use>
-  </svg>`, v;
+  </svg>`, b;
   }, i = n("cm-add_child", "zijiedian"), o = n("cm-add_sibling", "tongjijiedian-"), s = n("cm-remove_child", "shanchu2"), l = n("cm-up", "rising"), r = n("cm-down", "falling"), d = n("cm-edit", "edit"), a = document.createElement("ul");
   if (a.className = "menu-list", t && t.extend)
     for (let u = 0; u < t.extend.length; u++) {
-      const f = t.extend[u], v = n(f.name, f.name);
-      a.appendChild(v), v.onclick = (E) => {
+      const f = t.extend[u], b = n(f.name, f.name);
+      a.appendChild(b), b.onclick = (E) => {
         f.onclick(E);
       };
     }
@@ -1966,31 +1966,31 @@ function j({
   before: y,
   newTopicName: u,
   allowUndo: f,
-  primaryLinkStyle: v,
+  primaryLinkStyle: b,
   overflowHidden: E,
-  primaryNodeHorizontalGap: b,
-  primaryNodeVerticalGap: x,
+  primaryNodeHorizontalGap: v,
+  primaryNodeVerticalGap: N,
   mobileMenu: k,
   closeButton: g,
   widthControll: c,
   uploadButton: m,
   nodeDraggable: p
 }) {
-  const C = document.getElementById(e);
-  !C || (this.mindElixirBox = C, this.before = y || {}, this.nodeData = t.nodeData, this.linkData = t.linkData || {}, this.expandDeep = t == null ? void 0 : t.expandDeep, this.locale = i, this.contextMenuOption = r, this.contextMenu = l === void 0 ? !0 : l, this.toolBar = d === void 0 ? !0 : d, this.nodeMenu = a === void 0 ? !0 : a, this.keypress = h === void 0 ? !0 : h, this.closeButton = g === void 0 ? !1 : g, this.widthControll = c === void 0 ? !0 : c, this.mobileMenu = k, this.direction = t.direction !== void 0 ? t.direction : typeof n == "number" ? n : 1, this.draggable = o === void 0 ? !0 : o, this.newTopicName = u, this.editable = s === void 0 ? !0 : s, this.allowUndo = f === void 0 ? !0 : f, this.currentNode = null, this.currentLink = null, this.inputDiv = null, this.scaleVal = 1, this.tempDirection = null, this.primaryLinkStyle = v || 0, this.overflowHidden = E, this.primaryNodeHorizontalGap = b, this.primaryNodeVerticalGap = x, this.uploadButton = m === void 0 ? !0 : m, this.nodeDraggable = p === void 0 ? !0 : p, this.bus = new Oe(), this.bus.addListener("operation", (N) => {
+  const x = document.getElementById(e);
+  !x || (this.mindElixirBox = x, this.before = y || {}, this.nodeData = t.nodeData, this.linkData = t.linkData || {}, this.expandDeep = t == null ? void 0 : t.expandDeep, this.locale = i, this.contextMenuOption = r, this.contextMenu = l === void 0 ? !0 : l, this.toolBar = d === void 0 ? !0 : d, this.nodeMenu = a === void 0 ? !0 : a, this.keypress = h === void 0 ? !0 : h, this.closeButton = g === void 0 ? !1 : g, this.widthControll = c === void 0 ? !0 : c, this.mobileMenu = k, this.direction = t.direction !== void 0 ? t.direction : typeof n == "number" ? n : 1, this.draggable = o === void 0 ? !0 : o, this.newTopicName = u, this.editable = s === void 0 ? !0 : s, this.allowUndo = f === void 0 ? !0 : f, this.currentNode = null, this.currentLink = null, this.inputDiv = null, this.scaleVal = 1, this.tempDirection = null, this.primaryLinkStyle = b || 0, this.overflowHidden = E, this.primaryNodeHorizontalGap = v, this.primaryNodeVerticalGap = N, this.uploadButton = m === void 0 ? !0 : m, this.nodeDraggable = p === void 0 ? !0 : p, this.bus = new Oe(), this.bus.addListener("operation", (C) => {
     if (this.isUndo) {
       this.isUndo = !1;
       return;
     }
     ["moveNode", "removeNode", "addChild", "finishEdit", "editStyle", "editTags", "editIcons"].includes(
-      N.name
-    ) && this.history.push(N);
+      C.name
+    ) && this.history.push(C);
   }), this.history = [], this.isUndo = !1, this.undo = function() {
-    const N = this.history.pop();
-    !N || (this.isUndo = !0, N.name === "moveNode" ? this.moveNode(
-      _(N.obj.fromObj.id),
-      _(N.obj.originParentId)
-    ) : N.name === "removeNode" ? N.originSiblingId ? this.insertBefore(_(N.originSiblingId), N.obj) : this.addChild(_(N.originParentId), N.obj) : N.name === "addChild" || N.name === "copyNode" ? this.removeNode(_(N.obj.id)) : N.name === "finishEdit" ? this.setNodeTopic(_(N.obj.id), N.origin) : this.isUndo = !1);
+    const C = this.history.pop();
+    !C || (this.isUndo = !0, C.name === "moveNode" ? this.moveNode(
+      _(C.obj.fromObj.id),
+      _(C.obj.originParentId)
+    ) : C.name === "removeNode" ? C.originSiblingId ? this.insertBefore(_(C.originSiblingId), C.obj) : this.addChild(_(C.originParentId), C.obj) : C.name === "addChild" || C.name === "copyNode" ? this.removeNode(_(C.obj.id)) : C.name === "finishEdit" ? this.setNodeTopic(_(C.obj.id), C.origin) : this.isUndo = !1);
   });
 }
 function T(e) {

@@ -282,6 +282,8 @@ export function createInputDiv(tpc: Topic) {
       const rect=createFrameselection(imgContainer.clientWidth,imgContainer.clientHeight,imgContainer)
       div.insertBefore(rect,imgContainer)
     })
+    //未来增加同步删除框选的功能
+    // div.addEventListener('webkitEditableContentChanged',) 
   }
   div.style.cssText = `min-width:${tpc.offsetWidth - 22}px;min-height:${tpc.clientHeight-16}px`
   if(tpc.nodeObj?.style?.width){
@@ -320,10 +322,10 @@ export function createInputDiv(tpc: Topic) {
     const topic = div.textContent!.trim()
     //添加图片支持
     //去除节点缩放鼠标移动的监听
+    const preImgLength=node.image?.length??0
     node.image=[]
     div.childNodes.forEach((val)=>{
       if(val.nodeName==='IMG'){
-          // console.log('宽度  ',div.clientWidth)
           node.image.push({
             url:(val as HTMLImageElement).src,
             width:(val as HTMLImageElement).width,
@@ -336,7 +338,8 @@ export function createInputDiv(tpc: Topic) {
     div.remove()
     this.inputDiv = div = null
     // TODO 优化
-    if (topic === origin && node.image.length===0) return // 没有修改不做处理
+    if (topic === origin && preImgLength===node.image.length && preImgLength===0) return // 没有修改不做处理
+    if(node.image.length===0) delete node.image
     tpc.childNodes[0].textContent = node.topic
     //更新宽度控制条的高度
     const widthControllLeft=tpc.querySelector('widthControllRight') as HTMLElement

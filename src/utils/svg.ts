@@ -106,7 +106,6 @@ export const createFrameselection = function(width=10,height=10,img:HTMLElement)
   const resize =$d.createElementNS(svgNS, 'rect')
   resize.setAttribute('width','6')
   resize.setAttribute('height','6')
-  // resize.setAttribute('opacity','0')
   resize.setAttribute('stroke','#2ebdff')
   resize.setAttribute('stroke-width','2')
   resize.setAttribute('fill','white')
@@ -120,18 +119,9 @@ export const createFrameselection = function(width=10,height=10,img:HTMLElement)
   resize.onpointerdown = function(event) {
     const startX=Number(rect.getAttribute('width'))
     const startY=Number(rect.getAttribute('height'))
-    console.log(startX,startY)
     let shiftX = event.clientX 
     let shiftY = event.clientY 
-  
-    // ball.style.position = 'absolute';
-    // ball.style.zIndex = 1000;
-    // document.body.append(ball);
-  
     moveAt(event.pageX, event.pageY);
-  
-    // 移动现在位于坐标 (pageX, pageY) 上的球
-    // 将初始的偏移考虑在内
     function moveAt(pageX, pageY) {
       const offsetX=startX+pageX - shiftX
       const offsetY=startY+pageY - shiftY
@@ -144,16 +134,10 @@ export const createFrameselection = function(width=10,height=10,img:HTMLElement)
       img.style.width=offsetX+'px'
       img.style.height=offsetY+'px'
     }
-  
     function onMouseMove(event) {
-      console.log(event.pageX, event.pageY,shiftX,shiftY)
       moveAt(event.pageX, event.pageY);
     }
     resize.onpointermove=onMouseMove
-    // 在 mousemove 事件上移动球
-    // document.addEventListener('mousemove', onMouseMove);
-    
-    // 放下球，并移除不需要的处理程序
     resize.onpointerup = function(event) {
       resize.onpointermove=null
       resize.onpointerup = null;
