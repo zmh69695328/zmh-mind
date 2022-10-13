@@ -75,19 +75,6 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
     widthControllLeft.style.height=widthControllRight.style.height=nodeObj.style.controllWidth || '29px'
   }
 
-  // TODO allow to add online image
-  if (nodeObj.image) {
-    const images=nodeObj.image
-    images.forEach(val=>{
-      const imgContainer = $d.createElement('img')
-      imgContainer.className='image'
-      imgContainer.src = val.url
-      imgContainer.style.width = val.width + 'px'
-      imgContainer.style.height = val.height + 'px'
-      imgContainer.style.display = 'block'
-      tpc.appendChild(imgContainer)
-    })
-  }
   
   if (nodeObj.hyperLink) {
     const linkContainer =$d.createElement('a')
@@ -153,6 +140,20 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
       }
       tpc.appendChild(button)
     });
+  }
+
+  // TODO allow to add online image
+  if (nodeObj.image) {
+    const images=nodeObj.image
+    images.forEach(val=>{
+      const imgContainer = $d.createElement('img')
+      imgContainer.className='image'
+      imgContainer.src = val.url
+      imgContainer.style.width = val.width + 'px'
+      imgContainer.style.height = val.height + 'px'
+      imgContainer.style.display = 'block'
+      tpc.appendChild(imgContainer)
+    })
   }
   if (nodeObj.tags) {
     const tagsContainer = $d.createElement('div')
