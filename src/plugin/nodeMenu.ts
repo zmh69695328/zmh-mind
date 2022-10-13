@@ -11,7 +11,8 @@ const colorList = [
   '#34495e',
   '#7f8c8d',
   '#94a5a6',
-  '#bdc3c7',
+  //'#bdc3c7',
+  '#f6f6f6',
   '#ffffff',
   '#8e44ad',
   '#9b59b6',
@@ -52,7 +53,12 @@ export default function(mind) {
       <div class="nm-fontcolor-container">
         ${colorList
     .map(color => {
-      return `<div class="split6"><div class="palette" data-color="${color}" style="background-color: ${color};"></div></div>`
+      let dataColor = color;
+      if (color === '#f6f6f6') {
+        // #f6f6f6 为恢复画布背景颜色
+        dataColor = '';
+      }
+      return `<div class="split6"><div class="palette" data-color="${dataColor}" style="background-color: ${color};"></div></div>`
     })
     .join('')}
       </div>
