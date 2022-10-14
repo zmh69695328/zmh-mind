@@ -68,7 +68,7 @@ export default function(mind) {
       </div>
   `
   tagDiv.innerHTML = `${i18n[locale].tag}<textarea class="nm-tag" tabindex="-1" placeholder="${i18n[locale].tagsSeparate}" /><br>`
-  iconDiv.innerHTML = `${i18n[locale].icon}<textarea class="nm-icon" tabindex="-1" placeholder="${i18n[locale].iconsSeparate}" /><br>`
+  iconDiv.innerHTML = `${i18n[locale].icon}<div class="nm-icon" contenteditable="true" spellcheck="false" placeholder="${i18n[locale].iconsSeparate}" ></div>`
   linkDiv.innerHTML = `${i18n[locale].hyperlink}<textarea class="nm-link" tabindex="-1" placeholder="${i18n[locale].linkSeparate}" /><br>`
   remarkDiv.innerHTML = `${i18n[locale].remark}<textarea class="nm-remark" tabindex="-1" placeholder="${i18n[locale].reamrkSeparate}" /><br>`
 
@@ -107,7 +107,7 @@ export default function(mind) {
     }
   }
   addDropTextarea(tagDiv)
-  addDropTextarea(iconDiv)
+  // addDropTextarea(iconDiv)
   addDropTextarea(linkDiv)
   addDropTextarea(remarkDiv)
   const menuContainer = document.createElement('nmenu')
@@ -210,13 +210,20 @@ export default function(mind) {
       mind.updateNodeTags(mind.currentNode.nodeObj, newTags)
     }
   }
-  iconInput.onchange = (e:InputEvent & { target: HTMLInputElement}) => {
+  // iconInput.webkitEditableContentChanged = (e:InputEvent & { target: HTMLInputElement}) => {
+  //   if (!mind.currentNode) return
+  //   if (e.target.value!==null||e.target.value!==undefined) {
+  //     const newIcons = e.target.value.split(',')
+  //     mind.updateNodeIcons(mind.currentNode.nodeObj, newIcons)
+  //   }
+  // }
+  iconInput.addEventListener('input',(e:InputEvent & { target: HTMLInputElement}) => {
     if (!mind.currentNode) return
-    if (e.target.value!==null||e.target.value!==undefined) {
-      const newIcons = e.target.value.split(',')
+    if (e.target.innerText!==null||e.target.innerText!==undefined) {
+      const newIcons = e.target.innerText.split(',')
       mind.updateNodeIcons(mind.currentNode.nodeObj, newIcons)
     }
-  }
+  })
   linkInput.onchange = (e:InputEvent & { target: HTMLInputElement}) => {
     if (!mind.currentNode) return
     if (e.target.value!==null||e.target.value!==undefined) {
@@ -279,9 +286,9 @@ export default function(mind) {
       tagInput.value = '' 
     }
     if (nodeObj.icons) {
-      iconInput.value = nodeObj.icons.join(',')
+      iconInput.innerText = nodeObj.icons.join(',')
     } else {
-      iconInput.value = ''
+      iconInput.innerText = ''
     }
     linkInput.value=''
     if (nodeObj.hyperLink) {

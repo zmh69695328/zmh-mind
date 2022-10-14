@@ -252,10 +252,7 @@ function Ne(e, t, n) {
 const W = function(e, t) {
   var o;
   const n = L.createElement("widthControllRight"), i = L.createElement("widthControllLeft");
-  if (e.textContent = t.topic, this != null && this.widthControll && (Ne.call(this, i, e, n), Ne.call(this, n, e, i), e.appendChild(n), e.appendChild(i)), t.style && (e.style.color = t.style.color || "#2c3e50", e.style.background = t.style.background ? t.style.background : (o = t == null ? void 0 : t.parent) != null && o.root ? "#ffffff" : "inherit", /[a-z]/i.test(t.style.fontSize) ? e.style.fontSize = t.style.fontSize : e.style.fontSize = t.style.fontSize + "px", e.style.fontWeight = t.style.fontWeight || "normal", e.style.width = t.style.width || "fit-content", i.style.height = n.style.height = t.style.controllWidth || "29px"), t.image && t.image.forEach((l) => {
-    const r = L.createElement("img");
-    r.className = "image", r.src = l.url, r.style.width = l.width + "px", r.style.height = l.height + "px", r.style.display = "block", e.appendChild(r);
-  }), t.hyperLink) {
+  if (e.textContent = t.topic, this != null && this.widthControll && (Ne.call(this, i, e, n), Ne.call(this, n, e, i), e.appendChild(n), e.appendChild(i)), t.style && (e.style.color = t.style.color || "#2c3e50", e.style.background = t.style.background ? t.style.background : (o = t == null ? void 0 : t.parent) != null && o.root ? "#ffffff" : "inherit", /[a-z]/i.test(t.style.fontSize) ? e.style.fontSize = t.style.fontSize : e.style.fontSize = t.style.fontSize + "px", e.style.fontWeight = t.style.fontWeight || "normal", e.style.width = t.style.width || "fit-content", i.style.height = n.style.height = t.style.controllWidth || "29px"), t.hyperLink) {
     const s = L.createElement("a");
     s.className = "hyper-link", s.target = "_blank", s.innerHTML = '<svg t="1662346495524" style="font-size:20px;margin-left: 3px" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2372" width="22" height="22"><path d="M573.44 640a187.68 187.68 0 0 1-132.8-55.36L416 560l45.28-45.28 24.64 24.64a124.32 124.32 0 0 0 170.08 5.76l1.44-1.28a49.44 49.44 0 0 0 4-3.84l101.28-101.28a124.16 124.16 0 0 0 0-176l-1.92-1.92a124.16 124.16 0 0 0-176 0l-51.68 51.68a49.44 49.44 0 0 0-3.84 4l-20 24.96-49.92-40L480 276.32a108.16 108.16 0 0 1 8.64-9.28l51.68-51.68a188.16 188.16 0 0 1 266.72 0l1.92 1.92a188.16 188.16 0 0 1 0 266.72l-101.28 101.28a112 112 0 0 1-8.48 7.84 190.24 190.24 0 0 1-125.28 48z" fill="#002fa7" p-id="2373"></path><path d="M350.72 864a187.36 187.36 0 0 1-133.28-55.36l-1.92-1.92a188.16 188.16 0 0 1 0-266.72l101.28-101.28a112 112 0 0 1 8.48-7.84 188.32 188.32 0 0 1 258.08 7.84L608 464l-45.28 45.28-24.64-24.64A124.32 124.32 0 0 0 368 478.88l-1.44 1.28a49.44 49.44 0 0 0-4 3.84l-101.28 101.28a124.16 124.16 0 0 0 0 176l1.92 1.92a124.16 124.16 0 0 0 176 0l51.68-51.68a49.44 49.44 0 0 0 3.84-4l20-24.96 50.08 40-20.8 25.12a108.16 108.16 0 0 1-8.64 9.28l-51.68 51.68A187.36 187.36 0 0 1 350.72 864z" fill="#002fa7" p-id="2374"></path></svg>', s.href = t.hyperLink, e.appendChild(s);
   }
@@ -288,6 +285,9 @@ const W = function(e, t) {
     l.className = "linkJump", l.title = s.title, l.innerHTML = '<svg t="1661493526135" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2220" width="16" height="16"><path d="M1001.175714 593.762001L700.806246 293.324796a76.091491 76.091491 0 0 0-107.566725 0 76.023754 76.023754 0 0 0 0 107.544146l171.713884 171.826779H152.653982v-115.288769a76.046333 76.046333 0 0 0-152.115245 0v152.092666c0 6.931777 2.145012 13.253918 3.951338 19.621218-1.806326 6.389879-3.951339 12.644283-3.951338 19.621218a76.068912 76.068912 0 0 0 76.046333 76.068912h686.020111L593.239521 894.131468a76.046333 76.046333 0 1 0 107.566725 107.566726L1001.175714 701.328726a76.091491 76.091491 0 0 0 0-107.566725z" fill="#1296db" p-id="2221"></path></svg>', l.onclick = () => {
       Le.call(this, s.toId);
     }, e.appendChild(l);
+  }), t.image && t.image.forEach((l) => {
+    const r = L.createElement("img");
+    r.className = "image", r.src = l.url, r.style.width = l.width + "px", r.style.height = l.height + "px", r.style.display = "block", e.appendChild(r);
   }), t.tags) {
     const s = L.createElement("div");
     s.className = "tags", s.innerHTML = t.tags.filter((l) => l !== "").map((l) => `<span>${oe(l)}</span>`).join(""), e.appendChild(s);
@@ -1597,7 +1597,7 @@ const J = (e) => {
   "#34495e",
   "#7f8c8d",
   "#94a5a6",
-  "#bdc3c7",
+  "#f6f6f6",
   "#ffffff",
   "#8e44ad",
   "#9b59b6",
@@ -1626,13 +1626,16 @@ function An(e) {
   </svg></div>
       </div>
       <div class="nm-fontcolor-container">
-        ${$n.map((c) => `<div class="split6"><div class="palette" data-color="${c}" style="background-color: ${c};"></div></div>`).join("")}
+        ${$n.map((c) => {
+    let m = c;
+    return c === "#f6f6f6" && (m = ""), `<div class="split6"><div class="palette" data-color="${m}" style="background-color: ${c};"></div></div>`;
+  }).join("")}
       </div>
       <div class="bof">
       <span class="font">${S[t].font}</span>
       <span class="background">${S[t].background}</span>
       </div>
-  `, o.innerHTML = `${S[t].tag}<textarea class="nm-tag" tabindex="-1" placeholder="${S[t].tagsSeparate}" /><br>`, s.innerHTML = `${S[t].icon}<textarea class="nm-icon" tabindex="-1" placeholder="${S[t].iconsSeparate}" /><br>`, l.innerHTML = `${S[t].hyperlink}<textarea class="nm-link" tabindex="-1" placeholder="${S[t].linkSeparate}" /><br>`, r.innerHTML = `${S[t].remark}<textarea class="nm-remark" tabindex="-1" placeholder="${S[t].reamrkSeparate}" /><br>`;
+  `, o.innerHTML = `${S[t].tag}<textarea class="nm-tag" tabindex="-1" placeholder="${S[t].tagsSeparate}" /><br>`, s.innerHTML = `${S[t].icon}<div class="nm-icon" contenteditable="true" spellcheck="false" placeholder="${S[t].iconsSeparate}" ></div>`, l.innerHTML = `${S[t].hyperlink}<textarea class="nm-link" tabindex="-1" placeholder="${S[t].linkSeparate}" /><br>`, r.innerHTML = `${S[t].remark}<textarea class="nm-remark" tabindex="-1" placeholder="${S[t].reamrkSeparate}" /><br>`;
   function d(c) {
     c.ondblclick = (m) => {
       const p = document.createElement("textarea"), x = c.children[0], C = e.container.offsetHeight - c.offsetTop - 60, w = 30, A = (z) => z < w ? w : z > C ? C : z;
@@ -1644,7 +1647,7 @@ function An(e) {
       }, c.appendChild(p), p.focus();
     };
   }
-  d(o), d(s), d(l), d(r);
+  d(o), d(l), d(r);
   const a = document.createElement("nmenu");
   a.innerHTML = `
   <div class="button-container"><svg class="icon" aria-hidden="true">
@@ -1683,12 +1686,12 @@ function An(e) {
       let m;
       c.target.value === "" ? m = [] : m = c.target.value.split(","), e.updateNodeTags(e.currentNode.nodeObj, m);
     }
-  }, v.onchange = (c) => {
-    if (!!e.currentNode && (c.target.value !== null || c.target.value !== void 0)) {
-      const m = c.target.value.split(",");
+  }, v.addEventListener("input", (c) => {
+    if (!!e.currentNode && (c.target.innerText !== null || c.target.innerText !== void 0)) {
+      const m = c.target.innerText.split(",");
       e.updateNodeIcons(e.currentNode.nodeObj, m);
     }
-  }, N.onchange = (c) => {
+  }), N.onchange = (c) => {
     if (!!e.currentNode && (c.target.value !== null || c.target.value !== void 0)) {
       const m = c.target.value;
       e.updateNodeHyperLink(e.currentNode.nodeObj, m);
@@ -1724,7 +1727,7 @@ function An(e) {
           p && (p.className = "palette nmenu-selected");
         }
       }
-      c.tags ? E.value = c.tags.join(",") : E.value = "", c.icons ? v.value = c.icons.join(",") : v.value = "", N.value = "", c.hyperLink && (N.value = c.hyperLink), c.linkJump && (N.value.length > 0 && (N.value += ","), N.value += c.linkJump.map((p) => p.title).reduce((p, x, C) => p + (C ? "," : "") + x, "")), c.remark ? k.value = c.remark : k.value = "";
+      c.tags ? E.value = c.tags.join(",") : E.value = "", c.icons ? v.innerText = c.icons.join(",") : v.innerText = "", N.value = "", c.hyperLink && (N.value = c.hyperLink), c.linkJump && (N.value.length > 0 && (N.value += ","), N.value += c.linkJump.map((p) => p.title).reduce((p, x, C) => p + (C ? "," : "") + x, "")), c.remark ? k.value = c.remark : k.value = "";
     }
   });
 }

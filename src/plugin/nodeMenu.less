@@ -22,7 +22,19 @@ nmenu {
   #nm-tag {
     margin-top: 20px;
   }
-  textarea{
+  #nm-icon{
+    [contenteditable=true]:empty:before{
+      content: attr(placeholder);
+      pointer-events: none;
+      display: block; /* For Firefox */
+      color: grey;
+    }
+    [contenteditable=true]{
+      display: inline-block; 
+    }
+  }
+  #nm-icon div,
+  textarea {
     background: #f7f9fa;
     border: 1px solid #dce2e6;
     border-radius: 3px;
@@ -38,6 +50,7 @@ nmenu {
     white-space: normal;
     word-wrap: break-word;
     height: 30px;
+    overflow: auto;
   } 
   .nm-fontsize-container {
     display: flex;
