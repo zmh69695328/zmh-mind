@@ -178,7 +178,8 @@ export interface MindElixirInstance {
   closeButton:boolean,
   widthControll:boolean,
   uploadButton:boolean,
-  nodeDraggable:boolean
+  nodeDraggable:boolean,
+  scrollContainer:HTMLElement
 }
 export interface Options {
   el: string,
@@ -207,6 +208,8 @@ export interface Options {
   uploadButton?:boolean,
   //配置节点拖拽
   nodeDraggable?:boolean
+  //工具栏固钉
+  scrollContainer?:HTMLElement
 }
 const $d = document
 /**
@@ -249,7 +252,8 @@ function MindElixir(this: MindElixirInstance, {
   closeButton,
   widthControll,
   uploadButton,
-  nodeDraggable
+  nodeDraggable,
+  scrollContainer
 }: Options) {
   const box = document.getElementById(el) as HTMLElement
   if (!box) return
@@ -286,7 +290,7 @@ function MindElixir(this: MindElixirInstance, {
   this.primaryNodeVerticalGap = primaryNodeVerticalGap
   this.uploadButton = uploadButton === undefined ? true : uploadButton
   this.nodeDraggable = nodeDraggable === undefined ? true : nodeDraggable
-
+  this.scrollContainer=scrollContainer
   this.bus = new Bus()
   ;(this.bus as any).addListener('operation', (operation: operation) => {
     if (this.isUndo) {
@@ -420,14 +424,13 @@ MindElixir.prototype = {
     console.log('ME_version ' + MindElixir.version)
     console.log(this)
     if(this.mindElixirBox.className.indexOf('mind-elixir')===-1)
-      this.mindElixirBox.className += ' mind-elixir'
+      this.mindElixirBox.className += 'mind-elixir'
     this.mindElixirBox.innerHTML = ''
 
     this.container = $d.createElement('div') // map container
     this.container.className = 'map-container'
 
     if (this.overflowHidden) this.container.style.overflow = 'hidden'
-
     this.map = $d.createElement('div') // map-canvas Element
     this.map.className = 'map-canvas'
     this.map.setAttribute('tabindex', '0')

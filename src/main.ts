@@ -16,7 +16,8 @@ let mind = new MindElixir({
   nodeMenu: true, // default true
   keypress: true, // default true
   locale: 'zh_CN',
-  widthControll:true  // primaryLinkStyle:2
+  widthControll:true,  // primaryLinkStyle:2
+  // scrollContainer:document.querySelector('body')
 })
 mind.init()
 window.mind=mind
@@ -59,3 +60,4 @@ haha2?.addEventListener('click',e=>{
 // document.onwheel=e=>{
 //   mind.bus.fire('wheel',e)
 // }
+

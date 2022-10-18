@@ -56,7 +56,6 @@ function createToolBarRBContainer(mind) {
     const uploadButton = createUploadButton(mind)
     toolBarRBContainer.appendChild(uploadButton)
   }
-  // toolBarRBContainer.appendChild(percentage)
   toolBarRBContainer.className = 'rb'
   fc.onclick = () => {
     mind.container.requestFullscreen()
@@ -72,14 +71,25 @@ function createToolBarRBContainer(mind) {
     if (mind.scaleVal > 1.6) return
     mind.scale((mind.scaleVal += 0.2))
   }
-  mind.bus.addListener('wheel',e=>{
-    const viewBTop=e.pageY-e.clientY+document.documentElement.clientHeight
-    const mindBTop = mind.container.getBoundingClientRect().top+window.scrollY-mind.container.clientTop+mind.container.clientHeight
-    //bottom 20
-    const offsetTop= mindBTop-viewBTop>0?mindBTop-viewBTop:0
-    const offset=offsetTop+toolBarRBContainer.clientHeight-20
-    if(offset>20&&offset<mind.container.clientHeight-toolBarRBContainer.clientHeight-20)
-      toolBarRBContainer.style.bottom=offset+'px'
+  const scrollContainer = mind.scrollContainer;
+  scrollContainer?.addEventListener('wheel',e=>{
+    const viewTop=e.pageY-e.clientY
+    const viewBottom=viewTop+document.body.clientHeight
+    const mindTop = mind.mindElixirBox.offsetTop
+    const mindBottom = mind.mindElixirBox.offsetTop+mind.mindElixirBox.clientHeight
+    const mindHeight=mind.mindElixirBox.clientHeight
+    // const toolbarBottom=mindTop+mindHeight-toolBarRBContainer.clientHeight-40
+    console.log(mindTop+toolBarRBContainer.clientHeight+40,viewBottom)
+    if(viewBottom<mindTop+toolBarRBContainer.clientHeight+40){
+      toolBarRBContainer.style.position='absolute'
+      toolBarRBContainer.style.bottom=mindHeight-20-toolBarRBContainer.clientHeight+'px'
+    }else if(viewBottom<=mindBottom){
+      toolBarRBContainer.style.position='fixed'
+      toolBarRBContainer.style.bottom='20px'
+    } else if(viewBottom>mindBottom){
+      toolBarRBContainer.style.position='absolute'
+      toolBarRBContainer.style.bottom='20px'
+    } 
   })
   return toolBarRBContainer
 }
@@ -116,13 +126,24 @@ function createToolBarLTContainer(mind) {
   s.onclick = () => {
     mind.initSide()
   }
-  mind.bus.addListener('wheel',e=>{
+  const scrollContainer = mind.scrollContainer
+  scrollContainer?.addEventListener('wheel',e=>{
     const viewTop=e.pageY-e.clientY
-    const mindTop = mind.container.getBoundingClientRect().top+window.scrollY-mind.container.clientTop
-    const offset=viewTop-mindTop+20
-    if(offset>20&&offset<mind.container.clientHeight-toolBarLTContainer.clientHeight-20)
-      toolBarLTContainer.style.top=offset+'px'
-  })
+    const mindTop = mind.mindElixirBox.offsetTop
+    const mindHeight=mind.mindElixirBox.clientHeight
+    const toolbarBottom=mindTop+mindHeight-toolBarLTContainer.clientHeight-40
+    if(viewTop>toolbarBottom){
+      toolBarLTContainer.style.position='absolute'
+      toolBarLTContainer.style.top=toolbarBottom-mindTop+20+'px'
+    }else if(viewTop>=mindTop){
+      toolBarLTContainer.style.position='fixed'
+      toolBarLTContainer.style.top='20px'
+    } else if(viewTop<mindTop){
+      toolBarLTContainer.style.position='absolute'
+      toolBarLTContainer.style.top='20px'
+    } 
+  }
+  )
   return toolBarLTContainer
 }
 
@@ -155,7 +176,7 @@ function createUploadButton(mind){
 
 
 export default function(mind) {
+  mind.mindElixirBox.append(createToolBarLTContainer(mind))
   mind.container.append(createToolBarRBContainer(mind))
-  mind.container.append(createToolBarLTContainer(mind))
   mind.closeButton && mind.container.append(createCloseButton(mind))
 }
