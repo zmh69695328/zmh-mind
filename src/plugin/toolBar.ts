@@ -72,14 +72,14 @@ function createToolBarRBContainer(mind) {
     mind.scale((mind.scaleVal += 0.2))
   }
   const scrollContainer = mind.scrollContainer;
-  scrollContainer?.addEventListener('wheel',e=>{
-    const viewTop=e.pageY-e.clientY
+  scrollContainer?.addEventListener('scroll',e=>{
+    const viewTop=scrollContainer.scrollTop
     const viewBottom=viewTop+document.body.clientHeight
     const mindTop = mind.mindElixirBox.offsetTop
     const mindBottom = mind.mindElixirBox.offsetTop+mind.mindElixirBox.clientHeight
     const mindHeight=mind.mindElixirBox.clientHeight
     // const toolbarBottom=mindTop+mindHeight-toolBarRBContainer.clientHeight-40
-    console.log(mindTop+toolBarRBContainer.clientHeight+40,viewBottom)
+    // console.log(mindTop+toolBarRBContainer.clientHeight+40,viewBottom)
     if(viewBottom<mindTop+toolBarRBContainer.clientHeight+40){
       toolBarRBContainer.style.position='absolute'
       toolBarRBContainer.style.bottom=mindHeight-20-toolBarRBContainer.clientHeight+'px'
@@ -127,8 +127,8 @@ function createToolBarLTContainer(mind) {
     mind.initSide()
   }
   const scrollContainer = mind.scrollContainer
-  scrollContainer?.addEventListener('wheel',e=>{
-    const viewTop=e.pageY-e.clientY
+  scrollContainer?.addEventListener('scroll',e=>{
+    const viewTop=scrollContainer.scrollTop
     const mindTop = mind.mindElixirBox.offsetTop
     const mindHeight=mind.mindElixirBox.clientHeight
     const toolbarBottom=mindTop+mindHeight-toolBarLTContainer.clientHeight-40
@@ -142,7 +142,7 @@ function createToolBarLTContainer(mind) {
       toolBarLTContainer.style.position='absolute'
       toolBarLTContainer.style.top='20px'
     } 
-  }
+  },
   )
   return toolBarLTContainer
 }

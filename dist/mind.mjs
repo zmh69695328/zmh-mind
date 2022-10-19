@@ -40,14 +40,14 @@ function Se(e, t, n, i) {
   const o = i - t, s = e - n;
   let l = Math.atan(Math.abs(o) / Math.abs(s)) / 3.14 * 180;
   s < 0 && o > 0 && (l = 180 - l), s < 0 && o < 0 && (l = 180 + l), s > 0 && o < 0 && (l = 360 - l);
-  const r = 20, d = 30;
-  var h = l + d;
-  const a = l - d;
+  const r = 20, a = 30;
+  var h = l + a;
+  const d = l - a;
   return {
     x1: n + Math.cos(Math.PI * h / 180) * r,
     y1: i - Math.sin(Math.PI * h / 180) * r,
-    x2: n + Math.cos(Math.PI * a / 180) * r,
-    y2: i - Math.sin(Math.PI * a / 180) * r
+    x2: n + Math.cos(Math.PI * d / 180) * r,
+    y2: i - Math.sin(Math.PI * d / 180) * r
   };
 }
 function ce(e, t, n) {
@@ -99,11 +99,11 @@ function Ve(e, t) {
   }
   return n;
 }
-function Ye(e) {
+function We(e) {
   const t = e.parent.children, n = t.indexOf(e), i = t[n];
   n === 0 ? (t[n] = t[t.length - 1], t[t.length - 1] = i) : (t[n] = t[n - 1], t[n - 1] = i);
 }
-function We(e) {
+function _e(e) {
   const t = e.parent.children, n = t.indexOf(e), i = t[n];
   n === t.length - 1 ? (t[n] = t[0], t[0] = i) : (t[n] = t[n + 1], t[n + 1] = i);
 }
@@ -111,7 +111,7 @@ function se(e) {
   const t = e.parent.children, n = t.indexOf(e);
   return t.splice(n, 1), t.length;
 }
-function _e(e, t) {
+function Ye(e, t) {
   const n = e.parent.children, i = n.indexOf(e);
   n.splice(i + 1, 0, t);
 }
@@ -148,7 +148,7 @@ function Ke(e, t) {
     }
   n.splice(i + 1, 0, e);
 }
-const Y = {
+const W = {
   afterMoving: !1,
   mousedown: !1,
   lastX: null,
@@ -195,34 +195,34 @@ Z.prototype.destory = function(e) {
 Z.prototype.clear = function() {
   this.mousedown = !1, this.lastX = null, this.lastY = null;
 };
-const D = document, B = "http://www.w3.org/2000/svg", Ze = function(e) {
-  const t = D.createElementNS(B, "path");
+const H = document, B = "http://www.w3.org/2000/svg", Ze = function(e) {
+  const t = H.createElementNS(B, "path");
   return t.setAttribute("d", e), t.setAttribute("stroke", "#555"), t.setAttribute("fill", "none"), t.setAttribute("stroke-width", "1"), t.setAttribute("stroke-linecap", "square"), t.setAttribute("transform", "translate(0.5,-0.5)"), t;
 }, K = function(e) {
-  const t = D.createElementNS(B, "svg");
+  const t = H.createElementNS(B, "svg");
   return t.setAttribute("class", e), t;
 }, Qe = function(e) {
-  const t = D.createElementNS(B, "path");
+  const t = H.createElementNS(B, "path");
   return t.setAttribute("d", e), t.setAttribute("fill", "none"), t.setAttribute("stroke-linecap", "square"), t.setAttribute("stroke", "#F6A04D"), t.setAttribute("stroke-width", "3"), t.setAttribute("transform", "translate(0.5,-0.5)"), t;
 }, be = function(e, t, n, i) {
-  const o = D.createElementNS(B, "line");
+  const o = H.createElementNS(B, "line");
   return o.setAttribute("x1", e.toString()), o.setAttribute("y1", t.toString()), o.setAttribute("x2", n.toString()), o.setAttribute("y2", i.toString()), o.setAttribute("stroke", "#bbb"), o.setAttribute("fill", "none"), o.setAttribute("stroke-width", "2"), o;
 }, et = function(e) {
-  const t = D.createElementNS(B, "path");
+  const t = H.createElementNS(B, "path");
   return t.setAttribute("d", e), t.setAttribute("stroke", "#555"), t.setAttribute("fill", "none"), t.setAttribute("stroke-linecap", "square"), t.setAttribute("stroke-width", "1"), t.setAttribute("transform", "translate(0.5,-0.5)"), t;
 }, tt = function(e, t) {
-  const n = D.createElementNS(B, "g"), i = D.createElementNS(B, "path"), o = D.createElementNS(B, "path");
+  const n = H.createElementNS(B, "g"), i = H.createElementNS(B, "path"), o = H.createElementNS(B, "path");
   return o.setAttribute("d", t), o.setAttribute("stroke", "rgb(235, 95, 82)"), o.setAttribute("fill", "none"), o.setAttribute("stroke-linecap", "cap"), o.setAttribute("stroke-width", "2"), i.setAttribute("d", e), i.setAttribute("stroke", "rgb(235, 95, 82)"), i.setAttribute("fill", "none"), i.setAttribute("stroke-linecap", "cap"), i.setAttribute("stroke-width", "2"), n.appendChild(i), n.appendChild(o), n;
 }, nt = function(e = 10, t = 10, n) {
-  const i = D.createElementNS(B, "svg"), o = D.createElementNS(B, "g"), s = D.createElementNS(B, "rect");
+  const i = H.createElementNS(B, "svg"), o = H.createElementNS(B, "g"), s = H.createElementNS(B, "rect");
   s.setAttribute("width", e.toString()), s.setAttribute("height", t.toString()), s.setAttribute("stroke", "#2ebdff"), s.setAttribute("stroke-width", "2"), s.setAttribute("fill", "none"), i.setAttribute("class", "line"), s.setAttribute("x", "1"), s.setAttribute("y", "1"), o.appendChild(s);
-  const l = D.createElementNS(B, "rect");
+  const l = H.createElementNS(B, "rect");
   return l.setAttribute("width", "6"), l.setAttribute("height", "6"), l.setAttribute("stroke", "#2ebdff"), l.setAttribute("stroke-width", "2"), l.setAttribute("fill", "white"), l.setAttribute("x", (e - 3).toString()), l.setAttribute("y", (t - 3).toString()), l.setAttribute("class", "resize"), o.appendChild(l), i.appendChild(o), i.style.width = n.clientWidth + 5 + "px", i.style.height = n.clientHeight + 5 + "px", l.onpointerdown = function(r) {
-    const d = Number(s.getAttribute("width")), h = Number(s.getAttribute("height"));
-    let a = r.clientX, y = r.clientY;
+    const a = Number(s.getAttribute("width")), h = Number(s.getAttribute("height"));
+    let d = r.clientX, y = r.clientY;
     u(r.pageX, r.pageY);
     function u(N, E) {
-      const b = d + N - a, x = h + E - y;
+      const b = a + N - d, x = h + E - y;
       s.setAttribute("width", b.toString()), s.setAttribute("height", x.toString()), l.setAttribute("x", (b - 3).toString()), l.setAttribute("y", (x - 3).toString()), i.style.width = b + 5 + "px", i.style.height = x + 5 + "px", n.style.width = b + "px", n.style.height = x + "px";
     }
     function p(N) {
@@ -249,7 +249,7 @@ function Ne(e, t, n) {
     e.onpointermove = null, e.releasePointerCapture(i.pointerId), (o = this == null ? void 0 : this.linkDiv) == null || o.call(this);
   };
 }
-const W = function(e, t) {
+const _ = function(e, t) {
   var o;
   const n = L.createElement("widthControllRight"), i = L.createElement("widthControllLeft");
   if (e.textContent = t.topic, this != null && this.widthControll && (Ne.call(this, i, e, n), Ne.call(this, n, e, i), e.appendChild(n), e.appendChild(i)), t.style && (e.style.color = t.style.color || "#2c3e50", e.style.background = t.style.background ? t.style.background : (o = t == null ? void 0 : t.parent) != null && o.root ? "#ffffff" : "inherit", /[a-z]/i.test(t.style.fontSize) ? e.style.fontSize = t.style.fontSize : e.style.fontSize = t.style.fontSize + "px", e.style.fontWeight = t.style.fontWeight || "normal", e.style.width = t.style.width || "fit-content", i.style.height = n.style.height = t.style.controllWidth || "29px"), t.hyperLink) {
@@ -319,7 +319,7 @@ const it = function(e, t) {
   return n.appendChild(i), !t && e.children && e.children.length > 0 && (i.appendChild(U(e.expanded)), e.expanded !== !1 && this.createChildren(e.children)), { smy: n, top: i };
 }, st = function(e) {
   const t = L.createElement("t"), n = this.createTopic(e);
-  return W.call(this, n, e), t.appendChild(n), t;
+  return _.call(this, n, e), t.appendChild(n), t;
 }, lt = function(e) {
   const t = L.createElement("tpc");
   return t.nodeObj = e, t.dataset.nodeid = "me" + e.id, t.draggable = this.draggable, t;
@@ -331,7 +331,7 @@ function rt(e) {
   n && (n.removeAllRanges(), n.addRange(t));
 }
 function ct(e) {
-  var i, o, s, l, r, d, h;
+  var i, o, s, l, r, a, h;
   if (console.time("createInputDiv"), !e)
     return;
   let t = L.createElement("div");
@@ -341,35 +341,35 @@ function ct(e) {
     u.src = y.url, u.style.width = y.width + "px", u.style.display = "block", t.appendChild(u);
     const p = nt(u.clientWidth, u.clientHeight, u);
     t.insertBefore(p, u);
-  }), t.style.cssText = `min-width:${e.offsetWidth - 22}px;min-height:${e.clientHeight - 16}px`, (o = (i = e.nodeObj) == null ? void 0 : i.style) != null && o.width && (t.style.width = "auto"), (((l = (s = e.nodeObj) == null ? void 0 : s.style) == null ? void 0 : l.color) === "#ffffff" || ((r = e.nodeObj) == null ? void 0 : r.id) === "root" && !((h = (d = e.nodeObj) == null ? void 0 : d.style) != null && h.color)) && (t.style.color = "#2c3e50"), this.direction === 0 && (t.style.right = "0"), t.focus(), rt(t), this.inputDiv = t, this.bus.fire("operation", {
+  }), t.style.cssText = `min-width:${e.offsetWidth - 22}px;min-height:${e.clientHeight - 16}px`, (o = (i = e.nodeObj) == null ? void 0 : i.style) != null && o.width && (t.style.width = "auto"), (((l = (s = e.nodeObj) == null ? void 0 : s.style) == null ? void 0 : l.color) === "#ffffff" || ((r = e.nodeObj) == null ? void 0 : r.id) === "root" && !((h = (a = e.nodeObj) == null ? void 0 : a.style) != null && h.color)) && (t.style.color = "#2c3e50"), this.direction === 0 && (t.style.right = "0"), t.focus(), rt(t), this.inputDiv = t, this.bus.fire("operation", {
     name: "beginEdit",
     obj: e.nodeObj
-  }), t.addEventListener("keydown", (a) => {
-    a.stopPropagation();
-    const y = a.key;
+  }), t.addEventListener("keydown", (d) => {
+    d.stopPropagation();
+    const y = d.key;
     if (y === "Enter" || y === "Tab") {
-      if (a.shiftKey)
+      if (d.shiftKey)
         return;
-      a.preventDefault(), this.inputDiv.blur(), this.map.focus();
+      d.preventDefault(), this.inputDiv.blur(), this.map.focus();
     }
   }), t.addEventListener("blur", () => {
     var E, b;
     if (!t)
       return;
-    const a = e.nodeObj, y = t.textContent.trim(), u = (b = (E = a.image) == null ? void 0 : E.length) != null ? b : 0;
-    if (a.image = [], t.childNodes.forEach((x) => {
-      x.nodeName === "IMG" && a.image.push({
+    const d = e.nodeObj, y = t.textContent.trim(), u = (b = (E = d.image) == null ? void 0 : E.length) != null ? b : 0;
+    if (d.image = [], t.childNodes.forEach((x) => {
+      x.nodeName === "IMG" && d.image.push({
         url: x.src,
         width: x.width,
         height: x.height
       });
-    }), y === "" && a.image.length === 0 ? a.topic = n : a.topic = y, t.remove(), this.inputDiv = t = null, y === n && u === a.image.length && u === 0)
+    }), y === "" && d.image.length === 0 ? d.topic = n : d.topic = y, t.remove(), this.inputDiv = t = null, y === n && u === d.image.length && u === 0)
       return;
-    a.image.length === 0 && delete a.image, e.childNodes[0].textContent = a.topic;
+    d.image.length === 0 && delete d.image, e.childNodes[0].textContent = d.topic;
     const p = e.querySelector("widthControllRight"), N = e.querySelector("widthControllRight");
-    a.style || (a.style = {}), a.style.controllWidth = p.style.height = N.style.height = e.clientHeight.toString() + "px", delete a.style.width, this.shapeTpc(e, a), this.linkDiv(), Ae.call(this, this.nodeData, a.id, a.topic), this.bus.fire("operation", {
+    d.style || (d.style = {}), d.style.controllWidth = p.style.height = N.style.height = e.clientHeight.toString() + "px", delete d.style.width, this.shapeTpc(e, d), this.linkDiv(), Ae.call(this, this.nodeData, d.id, d.topic), this.bus.fire("operation", {
       name: "finishEdit",
-      obj: a,
+      obj: d,
       origin: n
     });
   }), console.timeEnd("createInputDiv");
@@ -399,8 +399,8 @@ function at(e, t, n) {
     if ((l == null ? void 0 : l.type) === "summary") {
       const { smy: h } = this.createSummary(l);
       if (l.children && l.children.length > 0 && l.expanded !== !1) {
-        const [a, y] = this.createChildren(l.children);
-        h.appendChild(a), y && y.forEach((u) => {
+        const [d, y] = this.createChildren(l.children);
+        h.appendChild(d), y && y.forEach((u) => {
           h.appendChild(u);
         });
       }
@@ -409,17 +409,17 @@ function at(e, t, n) {
     }
     const r = L.createElement("GRP");
     n === 0 ? r.className = "lhs" : n === 1 ? r.className = "rhs" : n === 2 && (l.direction === 0 ? r.className = "lhs" : l.direction === 1 && (r.className = "rhs"));
-    const d = this.createTop(l);
+    const a = this.createTop(l);
     if (l.children && l.children.length > 0) {
-      if (d.appendChild(U(l.expanded)), r.appendChild(d), l.expanded !== !1) {
-        const [h, a] = this.createChildren(l.children);
-        r.appendChild(h), a && a.forEach((y) => {
+      if (a.appendChild(U(l.expanded)), r.appendChild(a), l.expanded !== !1) {
+        const [h, d] = this.createChildren(l.children);
+        r.appendChild(h), d && d.forEach((y) => {
           var u;
           (u = r.children) != null && u[2] || r.appendChild(L.createElement("smychildren")), r.children[2].appendChild(y);
         });
       }
     } else
-      r.appendChild(d);
+      r.appendChild(a);
     i.appendChild(r);
   }
   return [i, o];
@@ -427,7 +427,7 @@ function at(e, t, n) {
 function dt() {
   console.time("layout"), this.root.innerHTML = "", this.box.innerHTML = "";
   const e = this.createTopic(this.nodeData);
-  W.call(this, e, this.nodeData), e.draggable = !1, this.root.appendChild(e);
+  _.call(this, e, this.nodeData), e.draggable = !1, this.root.appendChild(e);
   const t = this.nodeData.children;
   if (!(!t || t.length === 0)) {
     if (this.direction === 2) {
@@ -439,30 +439,30 @@ function dt() {
     this.createChildren(this.nodeData.children, this.box, this.direction), console.timeEnd("layout");
   }
 }
-let Q = document, M = 1e4, F = 1e4, H = 1e4, R = 1e4, O = 40, ht = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
+let Q = document, M = 1e4, F = 1e4, D = 1e4, R = 1e4, O = 40, ht = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
 function Te() {
-  M = 1e4, F = 1e4, H = 1e4, R = 1e4, O = 40;
+  M = 1e4, F = 1e4, D = 1e4, R = 1e4, O = 40;
 }
 function Me() {
   Te();
   let e = Q.querySelectorAll(".mindbox > grp, root"), t = "";
   for (let s = 0; s < e.length; s++) {
-    let l = e[s], r = l.getBoundingClientRect(), d = l.offsetTop, h = d + r.height, a = l.offsetLeft, y = a + r.width;
-    d < M && (M = d), h > F && (F = h), a < H && (H = a), y > R && (R = y), t += He(l);
+    let l = e[s], r = l.getBoundingClientRect(), a = l.offsetTop, h = a + r.height, d = l.offsetLeft, y = d + r.width;
+    a < M && (M = a), h > F && (F = h), d < D && (D = d), y > R && (R = y), t += De(l);
   }
-  console.log(M, F, H, R), t += pt();
-  let n = F - M + O * 2, i = R - H + O * 2, o = ft(n, i);
+  console.log(M, F, D, R), t += pt();
+  let n = F - M + O * 2, i = R - D + O * 2, o = ft(n, i);
   return t = `<rect x="0" y="0" width="${i}" height="${n}" fill="#f6f6f6"></rect>` + t, o.innerHTML = t, o;
 }
 function ut() {
   Q = this.container, Te();
   let e = Q.querySelectorAll(".mindbox > grp, root"), t = "";
   for (let o = 0; o < e.length; o++) {
-    let s = e[o], l = s.getBoundingClientRect(), r = s.offsetTop, d = r + l.height, h = s.offsetLeft, a = h + l.width;
-    r < M && (M = r), d > F && (F = d), h < H && (H = h), a > R && (R = a), t += He(s);
+    let s = e[o], l = s.getBoundingClientRect(), r = s.offsetTop, a = r + l.height, h = s.offsetLeft, d = h + l.width;
+    r < M && (M = r), a > F && (F = a), h < D && (D = h), d > R && (R = d), t += De(s);
   }
-  console.log(M, F, H, R);
-  let n = F - M, i = R - H;
+  console.log(M, F, D, R);
+  let n = F - M, i = R - D;
   return console.log("svgHeight", n), [n + 5, i + 5];
 }
 function ft(e, t) {
@@ -470,8 +470,8 @@ function ft(e, t) {
   return n.setAttribute("height", e), n.setAttribute("width", t), n.setAttribute("xmlns", "http://www.w3.org/2000/svg"), n.setAttribute("version", "1.2"), n.setAttribute("xlink", "http://www.w3.org/1999/xlink"), n;
 }
 function pt() {
-  let e = document.querySelector("root"), t = document.querySelector("root > tpc"), n = t.getBoundingClientRect(), i = getComputedStyle(t), o = t.parentNode, s = 0, l = 0, r = document.querySelector("root > tpc").nodeObj, d = getComputedStyle(o), h = e.offsetTop - M, a = e.offsetLeft - H, y = l + parseInt(d.paddingLeft) + parseInt(n.paddingLeft), u = s + parseInt(d.paddingTop) + parseInt(n.paddingTop) + parseInt(n.fontSize);
-  s + parseInt(d.paddingTop) + parseInt(n.paddingTop);
+  let e = document.querySelector("root"), t = document.querySelector("root > tpc"), n = t.getBoundingClientRect(), i = getComputedStyle(t), o = t.parentNode, s = 0, l = 0, r = document.querySelector("root > tpc").nodeObj, a = getComputedStyle(o), h = e.offsetTop - M, d = e.offsetLeft - D, y = l + parseInt(a.paddingLeft) + parseInt(n.paddingLeft), u = s + parseInt(a.paddingTop) + parseInt(n.paddingTop) + parseInt(n.fontSize);
+  s + parseInt(a.paddingTop) + parseInt(n.paddingTop);
   let p = document.querySelector(".svg2nd"), N = "";
   if (r.tags && r.tags.length) {
     let g = t.querySelectorAll(".tags > span");
@@ -501,8 +501,8 @@ function pt() {
       m.getBoundingClientRect(), b += `${m.outerHTML}`;
     }
   }
-  let x = `<g transform="translate(${O - H}, ${O - M})">${p.innerHTML}</g>`;
-  x += `<g id="root" transform="translate(${a + O}, ${h + O})">
+  let x = `<g transform="translate(${O - D}, ${O - M})">${p.innerHTML}</g>`;
+  x += `<g id="root" transform="translate(${d + O}, ${h + O})">
       <rect x="${l}" y="${s}" rx="5px" ry="5px" width="${n.width}" height="${n.height}" style="fill: #00aaff;"></rect>
       <foreignObject x="${l + 15}" y="${s + 10}" width="${i.width}" height="${i.height}" ">
         <div xmlns="http://www.w3.org/1999/xhtml" style="padding:0;margin:0;font-family:\u5FAE\u8F6F\u96C5\u9ED1;font-size:${i.fontSize};font-weight:${i.fontWeight};color:${i.color};word-break: break-all;line-height: 1">
@@ -514,19 +514,19 @@ function pt() {
       ${N}
   </g>`;
   let k = Q.querySelector(".topiclinks");
-  return k && (x += `<g transform="translate(${O - H}, ${O - M})">${k.innerHTML}</g>`), x;
+  return k && (x += `<g transform="translate(${O - D}, ${O - M})">${k.innerHTML}</g>`), x;
 }
-function He(e) {
-  let t = e.querySelectorAll("tpc"), n = e.offsetTop - M, i = e.offsetLeft - H, o = "", s = e.querySelector(".svg3rd");
+function De(e) {
+  let t = e.querySelectorAll("tpc"), n = e.offsetTop - M, i = e.offsetLeft - D, o = "", s = e.querySelector(".svg3rd");
   o += `<g transform="translate(${i + O}, ${n + O})">`, o += s ? s.innerHTML : "";
   for (let l = 0; l < t.length; l++) {
-    let r = t[l], d = r.parentNode, h = r.nodeObj;
+    let r = t[l], a = r.parentNode, h = r.nodeObj;
     if (h.root)
       continue;
-    let a = r.getBoundingClientRect(), y = d.offsetTop, u = d.offsetLeft, p = getComputedStyle(r), N = getComputedStyle(d), E = u + parseInt(N.paddingLeft) + parseInt(p.paddingLeft), b = y + parseInt(N.paddingTop) + parseInt(p.paddingTop) + parseInt(p.fontSize), x = y + parseInt(N.paddingTop) + parseInt(p.paddingTop), k = "";
-    p.borderWidth != "0px" && (k = `<rect x="${u + 15}" y="${y}" rx="5px" ry="5px" width="${a.width}" height="${a.height}" style="fill: rgba(0,0,0,0); stroke:#444;stroke-width:1px;"></rect>`);
+    let d = r.getBoundingClientRect(), y = a.offsetTop, u = a.offsetLeft, p = getComputedStyle(r), N = getComputedStyle(a), E = u + parseInt(N.paddingLeft) + parseInt(p.paddingLeft), b = y + parseInt(N.paddingTop) + parseInt(p.paddingTop) + parseInt(p.fontSize), x = y + parseInt(N.paddingTop) + parseInt(p.paddingTop), k = "";
+    p.borderWidth != "0px" && (k = `<rect x="${u + 15}" y="${y}" rx="5px" ry="5px" width="${d.width}" height="${d.height}" style="fill: rgba(0,0,0,0); stroke:#444;stroke-width:1px;"></rect>`);
     let g = "";
-    p.backgroundColor != "rgba(0, 0, 0, 0)" && (g = `<rect x="${u + 15}" y="${y}" rx="5px" ry="5px" width="${a.width}" height="${a.height}" style="fill: ${p.backgroundColor};"></rect>`);
+    p.backgroundColor != "rgba(0, 0, 0, 0)" && (g = `<rect x="${u + 15}" y="${y}" rx="5px" ry="5px" width="${d.width}" height="${d.height}" style="fill: ${p.backgroundColor};"></rect>`);
     let c = "";
     if (h.tags && h.tags.length) {
       let C = r.querySelectorAll(".tags > span");
@@ -719,14 +719,14 @@ function Tt(e) {
 function Mt(e) {
   return e.querySelector("root").offsetHeight || 150;
 }
-function Ht(e, t) {
+function Dt(e, t) {
   var o, s;
   const n = ((o = e == null ? void 0 : e.getBoundingClientRect()) == null ? void 0 : o.top) || 0, i = ((s = t == null ? void 0 : t.getBoundingClientRect()) == null ? void 0 : s.top) || n;
   return Math.abs(n - i);
 }
-function Dt(e) {
+function Ht(e) {
   const t = e.querySelector("root"), n = e.querySelector(".map-canvas children grp");
-  return Ht(t, n);
+  return Dt(t, n);
 }
 const Bt = function() {
   this.container.scrollTo(
@@ -737,7 +737,7 @@ const Bt = function() {
   var e;
   ((e = this.nodeData) == null ? void 0 : e.children.length) > 0 ? this.container.scrollTo(
     1e4 - Tt(this.container) / 2 - 10,
-    1e4 - Mt(this.container) / 2 - Dt(this.container) - 5
+    1e4 - Mt(this.container) / 2 - Ht(this.container) - 5
   ) : this.container.scrollTo(
     1e4 - this.container.offsetWidth / 2,
     1e4 - this.container.offsetHeight / 2
@@ -765,7 +765,7 @@ function fe(e) {
   for (const t of e.children || [])
     fe(t);
 }
-const X = document, Yt = function(e) {
+const X = document, Wt = function(e) {
   if (!e.style)
     return;
   const t = $(e.id, this), n = {
@@ -779,24 +779,24 @@ const X = document, Yt = function(e) {
     obj: e,
     origin: n
   });
-}, Wt = function(e, t) {
+}, _t = function(e, t) {
   if (!t)
     return;
   const n = e.tags;
   t.length === 0 ? delete e.tags : e.tags = t;
   const i = $(e.id);
-  W.call(this, i, e), this.linkDiv(), this.bus.fire("operation", {
+  _.call(this, i, e), this.linkDiv(), this.bus.fire("operation", {
     name: "editTags",
     obj: e,
     origin: n
   });
-}, _t = function(e, t) {
+}, Yt = function(e, t) {
   if (!t)
     return;
   const n = e.icons;
   e.icons = t;
   const i = $(e.id);
-  W.call(this, i, e), this.linkDiv(), this.bus.fire("operation", {
+  _.call(this, i, e), this.linkDiv(), this.bus.fire("operation", {
     name: "editIcons",
     obj: e,
     origin: n
@@ -806,12 +806,12 @@ const X = document, Yt = function(e) {
   if (t == null || t == null)
     return;
   const n = e.hyperLink, i = t.split(",");
-  e.linkJump = (s = e.linkJump) == null ? void 0 : s.filter((d) => !!i.find((h) => h === d.title)), ((l = e.linkJump) == null ? void 0 : l.length) === 0 && delete e.linkJump, e.hyperLink = i.filter((d) => {
+  e.linkJump = (s = e.linkJump) == null ? void 0 : s.filter((a) => !!i.find((h) => h === a.title)), ((l = e.linkJump) == null ? void 0 : l.length) === 0 && delete e.linkJump, e.hyperLink = i.filter((a) => {
     var h;
-    return d !== "" && !((h = e.linkJump) != null && h.find((a) => a.title === d));
+    return a !== "" && !((h = e.linkJump) != null && h.find((d) => d.title === a));
   }), ((r = e.hyperLink) == null ? void 0 : r.length) === 0 && delete e.hyperLink;
   const o = $(e.id);
-  W.call(this, o, e), this.linkDiv(), this.bus.fire("operation", {
+  _.call(this, o, e), this.linkDiv(), this.bus.fire("operation", {
     name: "editHyperLink",
     obj: e,
     origin: n
@@ -822,7 +822,7 @@ const X = document, Yt = function(e) {
   const n = e.remark;
   e.remark = t;
   const i = $(e.id);
-  W.call(this, i, e), this.linkDiv(), this.bus.fire("operation", {
+  _.call(this, i, e), this.linkDiv(), this.bus.fire("operation", {
     name: "editRemark",
     obj: e,
     origin: n
@@ -837,11 +837,11 @@ const X = document, Yt = function(e) {
     return;
   }
   const o = t || this.generateNewObj();
-  _e(i, o), P(this.nodeData);
+  Ye(i, o), P(this.nodeData);
   const s = n.parentElement;
   console.time("insertSibling_DOM");
-  const { grp: l, top: r } = this.createGroup(o), d = s.parentNode.parentNode;
-  d.insertBefore(l, s.parentNode.nextSibling), d.className === "mindbox" ? (this.processPrimaryNode(l, o), this.linkDiv()) : this.linkDiv(l.offsetParent), t || this.createInputDiv(r.children[0]), this.selectNode(r.children[0], !0), console.timeEnd("insertSibling_DOM"), this.bus.fire("operation", {
+  const { grp: l, top: r } = this.createGroup(o), a = s.parentNode.parentNode;
+  a.insertBefore(l, s.parentNode.nextSibling), a.className === "mindbox" ? (this.processPrimaryNode(l, o), this.linkDiv()) : this.linkDiv(l.offsetParent), t || this.createInputDiv(r.children[0]), this.selectNode(r.children[0], !0), console.timeEnd("insertSibling_DOM"), this.bus.fire("operation", {
     name: "insertSibling",
     obj: o
   });
@@ -858,8 +858,8 @@ const X = document, Yt = function(e) {
   Ge(i, o), P(this.nodeData);
   const s = n.parentElement;
   console.time("insertSibling_DOM");
-  const { grp: l, top: r } = this.createGroup(o), d = s.parentNode.parentNode;
-  d.insertBefore(l, s.parentNode), d.className === "mindbox" ? (this.processPrimaryNode(l, o), this.linkDiv()) : this.linkDiv(l.offsetParent), t || this.createInputDiv(r.children[0]), this.selectNode(r.children[0], !0), console.timeEnd("insertSibling_DOM"), this.bus.fire("operation", {
+  const { grp: l, top: r } = this.createGroup(o), a = s.parentNode.parentNode;
+  a.insertBefore(l, s.parentNode), a.className === "mindbox" ? (this.processPrimaryNode(l, o), this.linkDiv()) : this.linkDiv(l.offsetParent), t || this.createInputDiv(r.children[0]), this.selectNode(r.children[0], !0), console.timeEnd("insertSibling_DOM"), this.bus.fire("operation", {
     name: "insertSibling",
     obj: o
   });
@@ -876,10 +876,10 @@ const X = document, Yt = function(e) {
   console.time("insertParent_DOM");
   const { grp: l, top: r } = this.createGroup(o, !0);
   r.appendChild(U(!0));
-  const d = s.parentNode;
+  const a = s.parentNode;
   s.insertAdjacentElement("afterend", l);
   const h = X.createElement("children");
-  h.appendChild(s), r.insertAdjacentElement("afterend", h), d.className === "mindbox" ? (l.className = s.className, s.className = "", s.querySelector(".svg3rd").remove(), this.linkDiv()) : this.linkDiv(l.offsetParent), t || this.createInputDiv(r.children[0]), this.selectNode(r.children[0], !0), console.timeEnd("insertParent_DOM"), this.bus.fire("operation", {
+  h.appendChild(s), r.insertAdjacentElement("afterend", h), a.className === "mindbox" ? (l.className = s.className, s.className = "", s.querySelector(".svg3rd").remove(), this.linkDiv()) : this.linkDiv(l.offsetParent), t || this.createInputDiv(r.children[0]), this.selectNode(r.children[0], !0), console.timeEnd("insertParent_DOM"), this.bus.fire("operation", {
     name: "insertParent",
     obj: o
   });
@@ -891,11 +891,11 @@ const X = document, Yt = function(e) {
   n.parent.children.push(i), P(this.nodeData);
   const o = e.parentNode.parentNode.parentNode.parentNode, { smy: s, top: l } = this.createSummary(i);
   if (!((r = o.children) != null && r.smychildren)) {
-    const d = X.createElement("smychildren");
-    d.setAttribute("name", "smychildren"), o.appendChild(d);
+    const a = X.createElement("smychildren");
+    a.setAttribute("name", "smychildren"), o.appendChild(a);
   }
   return o.children.smychildren.appendChild(s), this.layout(), this.linkDiv(), { newTop: l, newNodeObj: i };
-}, De = function(e, t) {
+}, He = function(e, t) {
   if (!e)
     return;
   const n = e.nodeObj;
@@ -921,9 +921,9 @@ const X = document, Yt = function(e) {
     var s, l;
     (s = n[o.nodeObj.parent.id]) != null || (n[o.nodeObj.parent.id] = i.length), i[n[o.nodeObj.parent.id]] = (l = i[n[o.nodeObj.parent.id]]) != null ? l : [], i[n[o.nodeObj.parent.id]].push(o);
   }), console.log(i), i.forEach((o) => {
-    var d, h, a;
+    var a, h, d;
     const s = o[0] || this.currentNode;
-    if (this.currentSummaryNodeArr = o, !s || ((a = (h = (d = s == null ? void 0 : s.parentElement) == null ? void 0 : d.parentElement) == null ? void 0 : h.parentElement) == null ? void 0 : a.className) == "mindbox")
+    if (this.currentSummaryNodeArr = o, !s || ((d = (h = (a = s == null ? void 0 : s.parentElement) == null ? void 0 : a.parentElement) == null ? void 0 : h.parentElement) == null ? void 0 : d.className) == "mindbox")
       return;
     const { newTop: l, newNodeObj: r } = Zt.call(this, s, t);
     console.timeEnd("addSummary"), t || this.createInputDiv(l.children[0]), this.selectNode(l.children[0], !0), this.bus.fire("operation", {
@@ -936,7 +936,7 @@ const X = document, Yt = function(e) {
   const n = e || this.currentNode;
   if (!n)
     return;
-  const { newTop: i, newNodeObj: o } = De.call(this, n, t);
+  const { newTop: i, newNodeObj: o } = He.call(this, n, t);
   console.timeEnd("addChild"), t || this.createInputDiv(i.children[0]), this.selectNode(i.children[0], !0), this.bus.fire("operation", {
     name: "addChild",
     obj: o
@@ -950,7 +950,7 @@ const X = document, Yt = function(e) {
     })
   );
   we(n);
-  const { newNodeObj: i } = De.call(this, t, n);
+  const { newNodeObj: i } = He.call(this, t, n);
   console.timeEnd("copyNode"), this.bus.fire("operation", {
     name: "copyNode",
     obj: i
@@ -960,7 +960,7 @@ const X = document, Yt = function(e) {
   if (!t)
     return;
   const n = t.parentNode.parentNode, i = t.nodeObj;
-  Ye(i), n.parentNode.insertBefore(n, n.previousSibling), this.linkDiv(), this.bus.fire("operation", {
+  We(i), n.parentNode.insertBefore(n, n.previousSibling), this.linkDiv(), this.bus.fire("operation", {
     name: "moveUpNode",
     obj: i
   });
@@ -969,7 +969,7 @@ const X = document, Yt = function(e) {
   if (!t)
     return;
   const n = t.parentNode.parentNode, i = t.nodeObj;
-  We(i), n.nextSibling ? n.insertAdjacentElement("beforebegin", n.nextSibling) : n.parentNode.prepend(n), this.linkDiv(), this.bus.fire("operation", {
+  _e(i), n.nextSibling ? n.insertAdjacentElement("beforebegin", n.nextSibling) : n.parentNode.prepend(n), this.linkDiv(), this.bus.fire("operation", {
     name: "moveDownNode",
     obj: i
   });
@@ -980,18 +980,18 @@ const X = document, Yt = function(e) {
   const n = t.nodeObj;
   if (n.root === !0)
     throw new Error("Can not remove root node");
-  const i = n.parent.children.findIndex((d) => d === n), o = n.parent.children[i + 1], s = o && o.id, l = se(n), r = t.parentNode;
+  const i = n.parent.children.findIndex((a) => a === n), o = n.parent.children[i + 1], s = o && o.id, l = se(n), r = t.parentNode;
   if (r.tagName !== "ROOT") {
     if (l === 0) {
-      const d = r.parentNode.parentNode.previousSibling;
-      d.tagName !== "ROOT" && d.children[1].remove(), this.selectParent();
+      const a = r.parentNode.parentNode.previousSibling;
+      a.tagName !== "ROOT" && a.children[1].remove(), this.selectParent();
     } else
       this.selectPrevSibling() || this.selectNextSibling();
-    for (const d in this.linkData) {
-      const h = this.linkData[d];
+    for (const a in this.linkData) {
+      const h = this.linkData[a];
       (h.from === r.firstChild || h.to === r.firstChild) && this.removeLink(
         this.mindElixirBox.querySelector(
-          `[data-linkid=${this.linkData[d].id}]`
+          `[data-linkid=${this.linkData[a].id}]`
         )
       );
     }
@@ -1014,8 +1014,8 @@ const X = document, Yt = function(e) {
     if (l.className === "mindbox" && (s.parentNode.className = ""), r.children[1])
       r.nextSibling.appendChild(s.parentNode);
     else {
-      const d = X.createElement("children");
-      d.appendChild(s.parentNode), r.appendChild(U(!0)), r.parentElement.insertBefore(d, r.nextSibling);
+      const a = X.createElement("children");
+      a.appendChild(s.parentNode), r.appendChild(U(!0)), r.parentElement.insertBefore(a, r.nextSibling);
     }
   else
     r.tagName === "ROOT" && (this.processPrimaryNode(s.parentNode, n), r.nextSibling.appendChild(s.parentNode));
@@ -1026,16 +1026,16 @@ const X = document, Yt = function(e) {
 }, rn = function(e, t) {
   const n = e.nodeObj, i = t.nodeObj, o = n.parent.id;
   Je(n, i), P(this.nodeData);
-  const s = e.parentElement, l = s.parentNode, r = t.parentElement, d = r.parentNode;
-  r.parentNode.parentNode.insertBefore(l, d), this.processPrimaryNode(s.parentElement, n), this.linkDiv(), this.bus.fire("operation", {
+  const s = e.parentElement, l = s.parentNode, r = t.parentElement, a = r.parentNode;
+  r.parentNode.parentNode.insertBefore(l, a), this.processPrimaryNode(s.parentElement, n), this.linkDiv(), this.bus.fire("operation", {
     name: "moveNodeBefore",
     obj: { fromObj: n, toObj: i, originParentId: o }
   });
 }, cn = function(e, t) {
   const n = e.nodeObj, i = t.nodeObj, o = n.parent.id;
   Ke(n, i), P(this.nodeData);
-  const s = e.parentElement, l = s.parentNode, r = t.parentElement, d = r.parentNode;
-  r.parentNode.parentNode.insertBefore(l, d.nextSibling), this.processPrimaryNode(s.parentElement, n), this.linkDiv(), this.bus.fire("operation", {
+  const s = e.parentElement, l = s.parentNode, r = t.parentElement, a = r.parentNode;
+  r.parentNode.parentNode.insertBefore(l, a.nextSibling), this.processPrimaryNode(s.parentElement, n), this.linkDiv(), this.bus.fire("operation", {
     name: "moveNodeAfter",
     obj: { fromObj: n, toObj: i, originParentId: o }
   });
@@ -1059,17 +1059,17 @@ const un = function(e, t, n, i) {
   const o = this.map.getBoundingClientRect();
   if (!e || !t)
     return;
-  const s = e.getBoundingClientRect(), l = t.getBoundingClientRect(), r = (s.x + s.width / 2 - o.x) / this.scaleVal, d = (s.y + s.height / 2 - o.y) / this.scaleVal, h = (l.x + l.width / 2 - o.x) / this.scaleVal, a = (l.y + l.height / 2 - o.y) / this.scaleVal;
+  const s = e.getBoundingClientRect(), l = t.getBoundingClientRect(), r = (s.x + s.width / 2 - o.x) / this.scaleVal, a = (s.y + s.height / 2 - o.y) / this.scaleVal, h = (l.x + l.width / 2 - o.x) / this.scaleVal, d = (l.y + l.height / 2 - o.y) / this.scaleVal;
   let y, u, p, N;
-  n ? (y = r + i.delta1.x, u = d + i.delta1.y, p = h + i.delta2.x, N = a + i.delta2.y) : (d + a) / 2 - d <= s.height / 2 ? (y = (s.x + s.width - o.x) / this.scaleVal + 100, u = d, p = (l.x + l.width - o.x) / this.scaleVal + 100, N = a) : (y = (r + h) / 2, u = (d + a) / 2, p = (r + h) / 2, N = (d + a) / 2);
+  n ? (y = r + i.delta1.x, u = a + i.delta1.y, p = h + i.delta2.x, N = d + i.delta2.y) : (a + d) / 2 - a <= s.height / 2 ? (y = (s.x + s.width - o.x) / this.scaleVal + 100, u = a, p = (l.x + l.width - o.x) / this.scaleVal + 100, N = d) : (y = (r + h) / 2, u = (a + d) / 2, p = (r + h) / 2, N = (a + d) / 2);
   const E = {
     cx: r,
-    cy: d,
+    cy: a,
     w: s.width,
     h: s.height
   }, b = {
     cx: h,
-    cy: a,
+    cy: d,
     w: l.width,
     h: l.height
   }, x = ce(E, y, u), k = x.x, g = x.y, c = ae(b, p, N), m = c.x, f = c.y, C = Se(p, N, m, f), w = tt(
@@ -1084,11 +1084,11 @@ const un = function(e, t, n, i) {
     to: t,
     delta1: {
       x: y - r,
-      y: u - d
+      y: u - a
     },
     delta2: {
       x: p - h,
-      y: N - a
+      y: N - d
     }
   }, this.linkData[i.id] = v, w.linkObj = v, w.dataset.linkid = i.id) : (v = {
     id: ee(),
@@ -1097,11 +1097,11 @@ const un = function(e, t, n, i) {
     to: t,
     delta1: {
       x: y - r,
-      y: u - d
+      y: u - a
     },
     delta2: {
       x: p - h,
-      y: N - a
+      y: N - d
     }
   }, this.linkData[v.id] = v, w.linkObj = v, w.dataset.linkid = v.id, this.currentLink = w), this.linkSvgGroup.appendChild(w), n || this.showLinkController(y, u, p, N, v, E, b);
 }, fn = function(e) {
@@ -1113,33 +1113,33 @@ const un = function(e, t, n, i) {
   delete this.linkData[n], t.remove(), t = null;
 }, pn = function(e) {
   this.currentLink = e;
-  const t = e.linkObj, n = t.from, i = t.to, o = this.map.getBoundingClientRect(), s = n.getBoundingClientRect(), l = i.getBoundingClientRect(), r = (s.x + s.width / 2 - o.x) / this.scaleVal, d = (s.y + s.height / 2 - o.y) / this.scaleVal, h = (l.x + l.width / 2 - o.x) / this.scaleVal, a = (l.y + l.height / 2 - o.y) / this.scaleVal, y = {
+  const t = e.linkObj, n = t.from, i = t.to, o = this.map.getBoundingClientRect(), s = n.getBoundingClientRect(), l = i.getBoundingClientRect(), r = (s.x + s.width / 2 - o.x) / this.scaleVal, a = (s.y + s.height / 2 - o.y) / this.scaleVal, h = (l.x + l.width / 2 - o.x) / this.scaleVal, d = (l.y + l.height / 2 - o.y) / this.scaleVal, y = {
     cx: r,
-    cy: d,
+    cy: a,
     w: s.width,
     h: s.height
   }, u = {
     cx: h,
-    cy: a,
+    cy: d,
     w: l.width,
     h: l.height
-  }, p = r + t.delta1.x, N = d + t.delta1.y, E = h + t.delta2.x, b = a + t.delta2.y;
+  }, p = r + t.delta1.x, N = a + t.delta1.y, E = h + t.delta2.x, b = d + t.delta2.y;
   this.showLinkController(p, N, E, b, t, y, u);
 }, gn = function() {
   this.linkController.style.display = "none", this.P2.style.display = "none", this.P3.style.display = "none";
 }, mn = function(e, t, n, i, o, s, l) {
   this.linkController.style.display = "initial", this.P2.style.display = "initial", this.P3.style.display = "initial";
   const r = ce(s, e, t);
-  let d = r.x, h = r.y;
-  const a = ae(l, n, i);
-  let y = a.x, u = a.y;
-  this.P2.style.cssText = `top:${t}px;left:${e}px;`, this.P3.style.cssText = `top:${i}px;left:${n}px;`, this.line1.setAttribute("x1", d), this.line1.setAttribute("y1", h), this.line1.setAttribute("x2", e), this.line1.setAttribute("y2", t), this.line2.setAttribute("x1", n), this.line2.setAttribute("y1", i), this.line2.setAttribute("x2", y), this.line2.setAttribute("y2", u), this.helper1 && (this.helper1.destory(this.map), this.helper2.destory(this.map)), this.helper1 = new Z(this.P2), this.helper2 = new Z(this.P3), this.helper1.init(this.map, (p, N) => {
+  let a = r.x, h = r.y;
+  const d = ae(l, n, i);
+  let y = d.x, u = d.y;
+  this.P2.style.cssText = `top:${t}px;left:${e}px;`, this.P3.style.cssText = `top:${i}px;left:${n}px;`, this.line1.setAttribute("x1", a), this.line1.setAttribute("y1", h), this.line1.setAttribute("x2", e), this.line1.setAttribute("y2", t), this.line2.setAttribute("x1", n), this.line2.setAttribute("y1", i), this.line2.setAttribute("x2", y), this.line2.setAttribute("y2", u), this.helper1 && (this.helper1.destory(this.map), this.helper2.destory(this.map)), this.helper1 = new Z(this.P2), this.helper2 = new Z(this.P3), this.helper1.init(this.map, (p, N) => {
     e = e - p / this.scaleVal, t = t - N / this.scaleVal;
     const E = ce(s, e, t);
-    d = E.x, h = E.y, this.P2.style.top = t + "px", this.P2.style.left = e + "px", this.currentLink.children[0].setAttribute(
+    a = E.x, h = E.y, this.P2.style.top = t + "px", this.P2.style.left = e + "px", this.currentLink.children[0].setAttribute(
       "d",
-      `M ${d} ${h} C ${e} ${t} ${n} ${i} ${y} ${u}`
-    ), this.line1.setAttribute("x1", d), this.line1.setAttribute("y1", h), this.line1.setAttribute("x2", e), this.line1.setAttribute("y2", t), o.delta1.x = e - s.cx, o.delta1.y = t - s.cy;
+      `M ${a} ${h} C ${e} ${t} ${n} ${i} ${y} ${u}`
+    ), this.line1.setAttribute("x1", a), this.line1.setAttribute("y1", h), this.line1.setAttribute("x2", e), this.line1.setAttribute("y2", t), o.delta1.x = e - s.cx, o.delta1.y = t - s.cy;
   }), this.helper2.init(this.map, (p, N) => {
     n = n - p / this.scaleVal, i = i - N / this.scaleVal;
     const E = ae(l, n, i);
@@ -1147,7 +1147,7 @@ const un = function(e, t, n, i) {
     const b = Se(n, i, y, u);
     this.P3.style.top = i + "px", this.P3.style.left = n + "px", this.currentLink.children[0].setAttribute(
       "d",
-      `M ${d} ${h} C ${e} ${t} ${n} ${i} ${y} ${u}`
+      `M ${a} ${h} C ${e} ${t} ${n} ${i} ${y} ${u}`
     ), this.currentLink.children[1].setAttribute(
       "d",
       `M ${b.x1} ${b.y1} L ${y} ${u} L ${b.x2} ${b.y2}`
@@ -1162,14 +1162,14 @@ function yn(e) {
   i.style.cssText = `top:${1e4 - i.offsetHeight / 2}px;left:${1e4 - i.offsetWidth / 2}px;`;
   const o = this.box.children;
   this.svg2nd.innerHTML = "";
-  let s = 0, l, r = 0, d = 0, h = 0, a = 0, y = 0, u;
+  let s = 0, l, r = 0, a = 0, h = 0, d = 0, y = 0, u;
   if (this.direction === 2) {
     let k = 0, g = 0, c = 0, m = 0;
     for (let f = 0; f < o.length; f++) {
       const C = o[f];
-      C.className === "lhs" ? (a += C.offsetHeight + n, c += C.offsetHeight, k += 1) : (y += C.offsetHeight + n, m += C.offsetHeight, g += 1);
+      C.className === "lhs" ? (d += C.offsetHeight + n, c += C.offsetHeight, k += 1) : (y += C.offsetHeight + n, m += C.offsetHeight, g += 1);
     }
-    a > y ? (u = 1e4 - Math.max(a) / 2, l = "r", r = (a - m) / (g - 1)) : (u = 1e4 - Math.max(y) / 2, l = "l", r = (y - c) / (k - 1));
+    d > y ? (u = 1e4 - Math.max(d) / 2, l = "r", r = (d - m) / (g - 1)) : (u = 1e4 - Math.max(y) / 2, l = "l", r = (y - c) / (k - 1));
   } else {
     for (let k = 0; k < o.length; k++)
       s += o[k].offsetHeight + n;
@@ -1182,9 +1182,9 @@ function yn(e) {
     const m = o[k], f = m.offsetHeight;
     let C = i.offsetLeft - 10;
     if (m.className === "lhs") {
-      m.style.top = u + d + "px", m.style.left = N - m.offsetWidth + "px", g = N - 15, c = u + d + f / 2;
+      m.style.top = u + a + "px", m.style.left = N - m.offsetWidth + "px", g = N - 15, c = u + a + f / 2;
       let v = 1e4;
-      this.primaryLinkStyle === 2 ? (this.direction === 2 && (v = 1e4 - i.offsetWidth / 6), c < 1e4 ? p += `M ${v} 10000 V ${c + 20} C ${v} ${c} ${v} ${c} ${v - 20} ${c} H ${g}` : p += `M ${v} 10000 V ${c - 20} C ${v} ${c} ${v} ${c} ${v - 20} ${c} H ${g}`) : p += `M 10000 10000 H ${C} V ${c} H ${g}`, l === "l" ? d += f + r : d += f + n;
+      this.primaryLinkStyle === 2 ? (this.direction === 2 && (v = 1e4 - i.offsetWidth / 6), c < 1e4 ? p += `M ${v} 10000 V ${c + 20} C ${v} ${c} ${v} ${c} ${v - 20} ${c} H ${g}` : p += `M ${v} 10000 V ${c - 20} C ${v} ${c} ${v} ${c} ${v - 20} ${c} H ${g}`) : p += `M 10000 10000 H ${C} V ${c} H ${g}`, l === "l" ? a += f + r : a += f + n;
     } else {
       C = i.offsetLeft + i.offsetWidth + 10, m.style.top = u + h + "px", m.style.left = E + "px", g = E + 15, c = u + h + f / 2;
       let v = 1e4;
@@ -1220,9 +1220,9 @@ function yn(e) {
 }
 let q = "", ie = "";
 function Be(e, t, n, i) {
-  var h, a, y;
-  let o = t.offsetTop, s = t.offsetLeft, l = t.offsetWidth, r = t.offsetHeight, d = !1;
-  t.offsetParent.tagName === "SMY" && (d = !0, o += t.offsetParent.offsetTop, s += t.offsetParent.offsetLeft);
+  var h, d, y;
+  let o = t.offsetTop, s = t.offsetLeft, l = t.offsetWidth, r = t.offsetHeight, a = !1;
+  t.offsetParent.tagName === "SMY" && (a = !0, o += t.offsetParent.offsetTop, s += t.offsetParent.offsetLeft);
   for (let u = 0; u < e.length; u++) {
     const p = e[u];
     if ((p == null ? void 0 : p.tagName) === "SMY") {
@@ -1242,13 +1242,13 @@ function Be(e, t, n, i) {
     }
     const N = p.children[0];
     let E = N.offsetTop, b = N.offsetHeight;
-    d && (E += N.offsetParent.offsetTop);
+    a && (E += N.offsetParent.offsetTop);
     let x;
-    i || d ? x = o + r / 2 : x = o + r;
+    i || a ? x = o + r / 2 : x = o + r;
     const k = E + b;
     let g, c, m;
     const f = p.offsetParent.className || p.offsetParent.offsetParent.className;
-    f === "lhs" && (p == null ? void 0 : p.tagName) !== "SMY" ? (g = s + 15, m = s, c = s - N.offsetWidth, E + b < o + r / 2 + 50 && E + b > o + r / 2 - 50 ? q += `M ${g} ${x} H ${m} V ${k} H ${c}` : E + b >= o + r / 2 ? q += `M ${g} ${x} H ${m} V ${k} H ${c}` : q += `M ${g} ${x} H ${m} V ${k} H ${c}`) : f === "rhs" && (p == null ? void 0 : p.tagName) !== "SMY" && (g = s + l - 15, d && (g += 15), m = s + l, c = s + l + N.offsetWidth, E + b < o + r / 2 + 50 && E + b > o + r / 2 - 50 ? q += `M ${g} ${x} H ${m} V ${k} H ${c}` : E + b >= o + r / 2 ? q += `M ${g} ${x} H ${m} V ${k} H ${c}` : q += `M ${g} ${x} H ${m} V ${k} H ${c}`);
+    f === "lhs" && (p == null ? void 0 : p.tagName) !== "SMY" ? (g = s + 15, m = s, c = s - N.offsetWidth, E + b < o + r / 2 + 50 && E + b > o + r / 2 - 50 ? q += `M ${g} ${x} H ${m} V ${k} H ${c}` : E + b >= o + r / 2 ? q += `M ${g} ${x} H ${m} V ${k} H ${c}` : q += `M ${g} ${x} H ${m} V ${k} H ${c}`) : f === "rhs" && (p == null ? void 0 : p.tagName) !== "SMY" && (g = s + l - 15, a && (g += 15), m = s + l, c = s + l + N.offsetWidth, E + b < o + r / 2 + 50 && E + b > o + r / 2 - 50 ? q += `M ${g} ${x} H ${m} V ${k} H ${c}` : E + b >= o + r / 2 ? q += `M ${g} ${x} H ${m} V ${k} H ${c}` : q += `M ${g} ${x} H ${m} V ${k} H ${c}`);
     const C = N.children[1];
     if (C) {
       if (C.style.top = (N.offsetHeight - C.offsetHeight) / 2 + "px", f === "lhs" ? C.style.left = -10 + "px" : f === "rhs" && (C.style.left = N.offsetWidth - 10 + "px"), !C.expanded)
@@ -1256,7 +1256,7 @@ function Be(e, t, n, i) {
     } else
       continue;
     let w;
-    ((y = (a = p.children) == null ? void 0 : a[2]) == null ? void 0 : y.tagName) === "SMYCHILDREN" ? w = [...p.children[1].children, ...p.children[2].children] : w = [...p.children[1].children], w.length > 0 && Be(w, N, n.children[u]);
+    ((y = (d = p.children) == null ? void 0 : d[2]) == null ? void 0 : y.tagName) === "SMYCHILDREN" ? w = [...p.children[1].children, ...p.children[2].children] : w = [...p.children[1].children], w.length > 0 && Be(w, N, n.children[u]);
   }
 }
 function vn(e) {
@@ -1279,16 +1279,16 @@ function vn(e) {
     }
   }), e.map.addEventListener("mousemove", (t) => {
     if (!e.nodeDraggable && t && t.target.className === "selected") {
-      Y.clear(), t.target.draggable = !1;
+      W.clear(), t.target.draggable = !1;
       return;
     }
-    t.target.contentEditable !== "true" && Y.onMove(t, e.container);
+    t.target.contentEditable !== "true" && W.onMove(t, e.container);
   }), e.map.addEventListener("mousedown", (t) => {
-    t.target.contentEditable !== "true" && (Y.afterMoving = !1, Y.mousedown = !0);
+    t.target.contentEditable !== "true" && (W.afterMoving = !1, W.mousedown = !0);
   }), e.map.addEventListener("mouseleave", (t) => {
-    Y.clear();
+    W.clear();
   }), e.map.addEventListener("mouseup", (t) => {
-    Y.clear();
+    W.clear();
   }), e.map.addEventListener("wheel", (t) => {
   });
 }
@@ -1404,12 +1404,12 @@ function bn(e, t) {
   }, i = (g, c, m) => {
     const f = document.createElement("li");
     return f.id = g, f.innerHTML = `<span>${oe(c)}</span><span>${oe(m)}</span>`, f;
-  }, o = S[e.locale] ? e.locale : "en", s = i("cm-add_child", S[o].addChild, "tab"), l = i("cm-add_parent", S[o].addParent, ""), r = i("cm-add_sibling", S[o].addSibling, "enter"), d = i(
+  }, o = S[e.locale] ? e.locale : "en", s = i("cm-add_child", S[o].addChild, "tab"), l = i("cm-add_parent", S[o].addParent, ""), r = i("cm-add_sibling", S[o].addSibling, "enter"), a = i(
     "cm-remove_child",
     S[o].removeNode,
     "delete"
-  ), h = i("cm-fucus", S[o].focus, ""), a = i("cm-unfucus", S[o].cancelFocus, ""), y = i("cm-up", S[o].moveUp, "PgUp"), u = i("cm-down", S[o].moveDown, "Pgdn"), p = i("cm-link", S[o].link, ""), N = i("cm-nodelink", S[o].nodeLink, ""), E = i("cm-summary", S[o].summary, ""), b = document.createElement("ul");
-  if (b.className = "menu-list", b.appendChild(s), b.appendChild(l), b.appendChild(r), b.appendChild(d), (!t || t.focus) && (b.appendChild(h), b.appendChild(a)), b.appendChild(y), b.appendChild(u), (!t || t.link) && (b.appendChild(p), b.appendChild(N)), b.appendChild(E), t && t.extend)
+  ), h = i("cm-fucus", S[o].focus, ""), d = i("cm-unfucus", S[o].cancelFocus, ""), y = i("cm-up", S[o].moveUp, "PgUp"), u = i("cm-down", S[o].moveDown, "Pgdn"), p = i("cm-link", S[o].link, ""), N = i("cm-nodelink", S[o].nodeLink, ""), E = i("cm-summary", S[o].summary, ""), b = document.createElement("ul");
+  if (b.className = "menu-list", b.appendChild(s), b.appendChild(l), b.appendChild(r), b.appendChild(a), (!t || t.focus) && (b.appendChild(h), b.appendChild(d)), b.appendChild(y), b.appendChild(u), (!t || t.link) && (b.appendChild(p), b.appendChild(N)), b.appendChild(E), t && t.extend)
     for (let g = 0; g < t.extend.length; g++) {
       const c = t.extend[g], m = i(c.name, c.name, c.key || "");
       b.appendChild(m), m.onclick = (f) => {
@@ -1424,7 +1424,7 @@ function bn(e, t) {
       return;
     const c = g.target;
     if (c.tagName === "TPC") {
-      c.parentElement.tagName === "ROOT" ? k = !0 : k = !1, k ? (h.className = "disabled", y.className = "disabled", u.className = "disabled", r.className = "disabled", d.className = "disabled") : (h.className = "", y.className = "", u.className = "", r.className = "", d.className = ""), e.selectNode(c), x.hidden = !1;
+      c.parentElement.tagName === "ROOT" ? k = !0 : k = !1, k ? (h.className = "disabled", y.className = "disabled", u.className = "disabled", r.className = "disabled", a.className = "disabled") : (h.className = "", y.className = "", u.className = "", r.className = "", a.className = ""), e.selectNode(c), x.hidden = !1;
       const m = b.offsetHeight, f = b.offsetWidth;
       m + g.clientY > window.innerHeight ? (b.style.top = "", b.style.bottom = "0px") : (b.style.bottom = "", b.style.top = g.clientY + 15 + "px"), f + g.clientX > window.innerWidth ? (b.style.left = "", b.style.right = "0px") : (b.style.right = "", b.style.left = g.clientX + 10 + "px");
     }
@@ -1438,11 +1438,11 @@ function bn(e, t) {
     e.insertParent(), x.hidden = !0;
   }, r.onclick = (g) => {
     k || (e.insertSibling(), x.hidden = !0);
-  }, d.onclick = (g) => {
+  }, a.onclick = (g) => {
     k || (e.removeNode(), x.hidden = !0);
   }, h.onclick = (g) => {
     k || (e.focusNode(e.currentNode), x.hidden = !0);
-  }, a.onclick = (g) => {
+  }, d.onclick = (g) => {
     e.cancelFocus(), x.hidden = !0;
   }, y.onclick = (g) => {
     k || (e.moveUpNode(), x.hidden = !0);
@@ -1527,13 +1527,13 @@ function kn(e) {
   var h;
   const t = document.createElement("toolbar"), n = I("fullscreen", "full"), i = I("toCenter", "living"), o = I("zoomout", "move"), s = I("zoomin", "add"), l = document.createElement("input");
   l.className = "numberSelection", l.type = "number", l.min = "2", l.max = "100", l.step = "1", l.value = ((h = e == null ? void 0 : e.expandDeep) == null ? void 0 : h.toString()) || "2", l.oninput = Cn(() => {
-    const a = e.getAllDataWithAutoHide();
-    fe(a == null ? void 0 : a.nodeData), e.layout(), e.linkDiv();
+    const d = e.getAllDataWithAutoHide();
+    fe(d == null ? void 0 : d.nodeData), e.layout(), e.linkDiv();
   }, 300);
   const r = document.createElement("span");
   if (r.innerText = "100%", t.appendChild(l), t.appendChild(n), t.appendChild(i), t.appendChild(o), t.appendChild(s), e.uploadButton) {
-    const a = Sn(e);
-    t.appendChild(a);
+    const d = Sn(e);
+    t.appendChild(d);
   }
   t.className = "rb", n.onclick = () => {
     e.container.requestFullscreen();
@@ -1544,10 +1544,10 @@ function kn(e) {
   }, s.onclick = () => {
     e.scaleVal > 1.6 || e.scale(e.scaleVal += 0.2);
   };
-  const d = e.scrollContainer;
-  return d == null || d.addEventListener("wheel", (a) => {
-    const u = a.pageY - a.clientY + document.body.clientHeight, p = e.mindElixirBox.offsetTop, N = e.mindElixirBox.offsetTop + e.mindElixirBox.clientHeight, E = e.mindElixirBox.clientHeight;
-    console.log(p + t.clientHeight + 40, u), u < p + t.clientHeight + 40 ? (t.style.position = "absolute", t.style.bottom = E - 20 - t.clientHeight + "px") : u <= N ? (t.style.position = "fixed", t.style.bottom = "20px") : u > N && (t.style.position = "absolute", t.style.bottom = "20px");
+  const a = e.scrollContainer;
+  return a == null || a.addEventListener("scroll", (d) => {
+    const u = a.scrollTop + document.body.clientHeight, p = e.mindElixirBox.offsetTop, N = e.mindElixirBox.offsetTop + e.mindElixirBox.clientHeight, E = e.mindElixirBox.clientHeight;
+    u < p + t.clientHeight + 40 ? (t.style.position = "absolute", t.style.bottom = E - 20 - t.clientHeight + "px") : u <= N ? (t.style.position = "fixed", t.style.bottom = "20px") : u > N && (t.style.position = "absolute", t.style.bottom = "20px");
   }), t;
 }
 function En(e) {
@@ -1564,10 +1564,10 @@ function En(e) {
   };
   const l = e.scrollContainer;
   return l == null || l.addEventListener(
-    "wheel",
+    "scroll",
     (r) => {
-      const d = r.pageY - r.clientY, h = e.mindElixirBox.offsetTop, a = e.mindElixirBox.clientHeight, y = h + a - t.clientHeight - 40;
-      d > y ? (t.style.position = "absolute", t.style.top = y - h + 20 + "px") : d >= h ? (t.style.position = "fixed", t.style.top = "20px") : d < h && (t.style.position = "absolute", t.style.top = "20px");
+      const a = l.scrollTop, h = e.mindElixirBox.offsetTop, d = e.mindElixirBox.clientHeight, y = h + d - t.clientHeight - 40;
+      a > y ? (t.style.position = "absolute", t.style.top = y - h + 20 + "px") : a >= h ? (t.style.position = "fixed", t.style.top = "20px") : a < h && (t.style.position = "absolute", t.style.top = "20px");
     }
   ), t;
 }
@@ -1643,7 +1643,7 @@ function An(e) {
       <span class="background">${S[t].background}</span>
       </div>
   `, o.innerHTML = `${S[t].tag}<textarea class="nm-tag" tabindex="-1" placeholder="${S[t].tagsSeparate}" /><br>`, s.innerHTML = `${S[t].icon}<div class="nm-icon" contenteditable="true" spellcheck="false" placeholder="${S[t].iconsSeparate}" ></div>`, l.innerHTML = `${S[t].hyperlink}<textarea class="nm-link" tabindex="-1" placeholder="${S[t].linkSeparate}" /><br>`, r.innerHTML = `${S[t].remark}<textarea class="nm-remark" tabindex="-1" placeholder="${S[t].reamrkSeparate}" /><br>`;
-  function d(c) {
+  function a(c) {
     c.ondblclick = (m) => {
       const f = document.createElement("textarea"), C = c.children[0], w = e.container.offsetHeight - c.offsetTop - 60, v = 30, A = (z) => z < v ? v : z > w ? w : z;
       f.value = C.value, f.style.position = "absolute", f.style.left = C.offsetLeft + "px", f.style.top = C.offsetTop - 10 + "px", f.style.height = A(C.scrollHeight) + "px", f.style.width = C.offsetWidth + "px", f.oninput = (z) => {
@@ -1654,14 +1654,14 @@ function An(e) {
       }, c.appendChild(f), f.focus();
     };
   }
-  d(o), d(l), d(r);
+  a(o), a(l), a(r);
   const h = document.createElement("nmenu");
   h.innerHTML = `
   <div class="button-container"><svg class="icon" aria-hidden="true">
   <use xlink:href="#icon-close"></use>
   </svg></div>
   `, h.appendChild(i), h.appendChild(o), h.appendChild(s), h.appendChild(l), h.appendChild(r), h.hidden = !0;
-  function a(c, m) {
+  function d(c, m) {
     var f = e.container.querySelectorAll(c);
     [].forEach.call(f, function(C) {
       C.classList.remove(m);
@@ -1673,15 +1673,15 @@ function An(e) {
     if (!e.currentNode)
       return;
     const m = e.currentNode.nodeObj, f = c.target;
-    f.className === "palette" ? (m.style || (m.style = {}), a(".palette", "nmenu-selected"), f.className = "palette nmenu-selected", n === "font" ? m.style.color = f.dataset.color : n === "background" && (m.style.background = f.dataset.color), e.updateNodeStyle(m)) : f.className === "background" ? (a(".palette", "nmenu-selected"), n = "background", f.className = "background selected", f.previousElementSibling.className = "font", m.style && m.style.background && (h.querySelector(
+    f.className === "palette" ? (m.style || (m.style = {}), d(".palette", "nmenu-selected"), f.className = "palette nmenu-selected", n === "font" ? m.style.color = f.dataset.color : n === "background" && (m.style.background = f.dataset.color), e.updateNodeStyle(m)) : f.className === "background" ? (d(".palette", "nmenu-selected"), n = "background", f.className = "background selected", f.previousElementSibling.className = "font", m.style && m.style.background && (h.querySelector(
       '.palette[data-color="' + m.style.background + '"]'
-    ).className = "palette nmenu-selected")) : f.className === "font" && (a(".palette", "nmenu-selected"), n = "font", f.className = "font selected", f.nextElementSibling.className = "background", m.style && m.style.color && (h.querySelector(
+    ).className = "palette nmenu-selected")) : f.className === "font" && (d(".palette", "nmenu-selected"), n = "font", f.className = "font selected", f.nextElementSibling.className = "background", m.style && m.style.color && (h.querySelector(
       '.palette[data-color="' + m.style.color + '"]'
     ).className = "palette nmenu-selected"));
   }, Array.from(y).map(
     (c) => {
       c.onclick = (m) => {
-        e.currentNode.nodeObj.style || (e.currentNode.nodeObj.style = {}), a(".size", "size-selected");
+        e.currentNode.nodeObj.style || (e.currentNode.nodeObj.style = {}), d(".size", "size-selected");
         const f = m.currentTarget;
         e.currentNode.nodeObj.style.fontSize = f.dataset.size, f.className = "size size-selected", e.updateNodeStyle(e.currentNode.nodeObj);
       };
@@ -1716,7 +1716,7 @@ function An(e) {
     h.hidden = !0;
   }), e.bus.addListener("selectNode", function(c, m) {
     if (!!m) {
-      if (h.hidden = !1, a(".palette", "nmenu-selected"), a(".size", "size-selected"), a(".bold", "size-selected"), n = "font", N.className = "font selected", N.nextElementSibling.className = "background", c.style) {
+      if (h.hidden = !1, d(".palette", "nmenu-selected"), d(".size", "size-selected"), d(".bold", "size-selected"), n = "font", N.className = "font selected", N.nextElementSibling.className = "background", c.style) {
         if (c.style.fontSize) {
           const f = h.querySelector(
             '.size[data-size="' + c.style.fontSize + '"]'
@@ -1762,7 +1762,7 @@ const de = document, Tn = function(e, t) {
 function Mn(e) {
   let t, n, i;
   e.map.addEventListener("dragstart", function(s) {
-    t = s.target, t.parentNode.parentNode.style.opacity = "0.5", Y.clear();
+    t = s.target, t.parentNode.parentNode.style.opacity = "0.5", W.clear();
   }), e.map.addEventListener("dragend", async function(s) {
     s.target.style.opacity = "", he(i);
     const l = t.nodeObj;
@@ -1795,15 +1795,15 @@ function Mn(e) {
       );
       if (ke(r, t)) {
         i = r;
-        const d = r.getBoundingClientRect().y;
-        s.clientY < d ? n = "before" : s.clientY < d + r.clientHeight / 2 && (n = "in");
+        const a = r.getBoundingClientRect().y;
+        s.clientY < a ? n = "before" : s.clientY < a + r.clientHeight / 2 && (n = "in");
       } else
         n = i = null;
     }
     i && Tn(i, n);
   }, 200));
 }
-function Hn(e) {
+function Dn(e) {
   const t = {
     13: () => {
       e.insertSibling();
@@ -1868,13 +1868,13 @@ function Hn(e) {
     (n.keyCode === 17 || n.keyCode === 91) && (e.ctrlRepeat = !1);
   };
 }
-function Dn(e, t) {
+function Hn(e, t) {
   const n = (u, p) => {
     const N = document.createElement("div");
     return N.id = u, N.innerHTML = `<svg class="icon" aria-hidden="true">
     <use xlink:href="#icon-${p}"></use>
   </svg>`, N;
-  }, i = n("cm-add_child", "zijiedian"), o = n("cm-add_sibling", "tongjijiedian-"), s = n("cm-remove_child", "shanchu2"), l = n("cm-up", "rising"), r = n("cm-down", "falling"), d = n("cm-edit", "edit"), h = document.createElement("ul");
+  }, i = n("cm-add_child", "zijiedian"), o = n("cm-add_sibling", "tongjijiedian-"), s = n("cm-remove_child", "shanchu2"), l = n("cm-up", "rising"), r = n("cm-down", "falling"), a = n("cm-edit", "edit"), h = document.createElement("ul");
   if (h.className = "menu-list", t && t.extend)
     for (let u = 0; u < t.extend.length; u++) {
       const p = t.extend[u], N = n(p.name, p.name);
@@ -1882,15 +1882,15 @@ function Dn(e, t) {
         p.onclick(E);
       };
     }
-  const a = document.createElement("mmenu");
-  a.appendChild(i), a.appendChild(o), a.appendChild(s), a.appendChild(l), a.appendChild(r), a.appendChild(d), a.hidden = !0, e.container.append(a);
+  const d = document.createElement("mmenu");
+  d.appendChild(i), d.appendChild(o), d.appendChild(s), d.appendChild(l), d.appendChild(r), d.appendChild(a), d.hidden = !0, e.container.append(d);
   let y = !0;
   e.bus.addListener("unselectNode", function() {
-    a.hidden = !0;
+    d.hidden = !0;
   }), e.bus.addListener("selectNode", function(u) {
-    a.hidden = !1, u.root ? y = !0 : y = !1;
-  }), a.onclick = (u) => {
-    u.target === a && (a.hidden = !0);
+    d.hidden = !1, u.root ? y = !0 : y = !1;
+  }), d.onclick = (u) => {
+    u.target === d && (d.hidden = !0);
   }, i.onclick = (u) => {
     e.addChild();
   }, o.onclick = (u) => {
@@ -1901,7 +1901,7 @@ function Dn(e, t) {
     y || e.moveUpNode();
   }, r.onclick = (u) => {
     y || e.moveDownNode();
-  }, d.onclick = (u) => {
+  }, a.onclick = (u) => {
     e.beginEdit();
   };
 }
@@ -1932,21 +1932,21 @@ Oe.prototype = {
   }
 };
 (function(e) {
-  var t, n, i, o, s, l, r = '<svg><symbol id="icon-edit" viewBox="0 0 1024 1024"><path d="M423.765333 128a42.666667 42.666667 0 0 1 3.2 85.205333L423.765333 213.333333H234.666667a64 64 0 0 0-63.872 60.245334L170.666667 277.333333v512a64 64 0 0 0 60.245333 63.872L234.666667 853.333333h512a64 64 0 0 0 63.872-60.245333L810.666667 789.333333v-189.098666a42.666667 42.666667 0 0 1 85.205333-3.2l0.128 3.2V789.333333a149.333333 149.333333 0 0 1-144.213333 149.248L746.666667 938.666667h-512a149.333333 149.333333 0 0 1-149.248-144.213334L85.333333 789.333333v-512a149.333333 149.333333 0 0 1 144.213334-149.248L234.666667 128h189.098666z m324.949334-53.248a42.666667 42.666667 0 0 1 60.330666 0l150.869334 150.869333a42.666667 42.666667 0 0 1 0 60.330667l-329.386667 329.386667a42.666667 42.666667 0 0 1-29.44 12.458666l-153.386667 2.517334a42.666667 42.666667 0 0 1-43.349333-43.349334l2.56-153.386666a42.666667 42.666667 0 0 1 12.458667-29.44z m30.165333 90.496L491.946667 452.266667l-1.493334 91.989333 92.032-1.493333 286.976-286.976-90.538666-90.538667z"  ></path></symbol><symbol id="icon-rising" viewBox="0 0 1024 1024"><path d="M553.173333 803.84h-64l0.021334-474.581333-224.021334 224-45.269333-45.226667L521.6 206.293333l301.717333 301.696-45.269333 45.269334-224.853333-224.896v475.477333z"  ></path></symbol><symbol id="icon-falling" viewBox="0 0 1024 1024"><path d="M553.173333 238.314667h-64l0.021334 474.602666-224.021334-224-45.269333 45.226667L521.6 835.861333l301.717333-301.717333-45.269333-45.226667-224.853333 224.853334V238.336z"  ></path></symbol><symbol id="icon-shanchu2" viewBox="0 0 1024 1024"><path d="M516.60601807 107.93026734c-82.64382935 0-149.71865844 65.51751709-152.5729065 147.77160644H171.37136841c-21.40603638 0-38.92044068 17.38504028-38.92044068 38.92126465 0 21.40686036 17.38504028 38.92208862 38.92126466 38.92208862h42.94308471v435.40136719c0 81.73498536 55.39828492 148.55026245 123.90106201 148.55026245h348.99444581c68.37341309 0 123.90106201-66.42553711 123.901062-148.55026245V333.80477906h38.92126465c21.40686036 0 38.92126464-17.38586426 38.92126465-38.92208863 0-21.40686036-17.38504028-38.92126464-38.92126465-38.92126465H668.91854859C666.45321656 173.44860839 599.24902344 107.93109131 516.60601807 107.93109131z m-79.65939331 147.77160644c2.85424805-42.16442872 37.2354126-74.85809326 79.78875732-74.85809326s76.93450927 32.82302857 79.39984131 74.85809326H436.94662476z m-98.86047364 589.01165771c-24.2611084 0-50.98754883-31.13717651-50.98754883-75.76693725V333.80477906h450.97036744V769.33551026c0 44.50039673-26.72644043 75.76776123-50.98754884 75.76776122H338.08615112v-0.38973999z m0 0"  ></path><path d="M390.37063599 751.17263794c17.77313232 0 32.43411255-17.7739563 32.43411255-40.08883667V482.35504151c0-22.31488037-14.53079224-40.08966065-32.43411255-40.08966065-17.77478027 0-32.43493653 17.77478027-32.43493653 40.08966065v228.72875976c0 22.18469239 14.27124023 40.08883667 32.43493653 40.08883667z m117.41308594 0c17.7739563 0 32.43411255-17.7739563 32.43411255-40.08883667V482.35504151c0-22.31488037-14.53079224-40.08966065-32.43411255-40.08966065-17.7739563 0-32.43493653 17.77478027-32.43493653 40.08966065v228.72875976c0 22.18469239 14.66098023 40.08883667 32.43493653 40.08883667z m123.51049804 0c17.7739563 0 32.43493653-17.7739563 32.43493652-40.08883667V482.35504151c0-22.31488037-14.53079224-40.08966065-32.43493652-40.08966065-17.7739563 0-32.43411255 17.77478027-32.43411255 40.08966065v228.72875976c0 22.18469239 14.14105224 40.08883667 32.43411255 40.08883667z m0 0"  ></path></symbol><symbol id="icon-zijiedian" viewBox="0 0 1024 1024"><path d="M312.208 472c19.568-157.856 153.432-280 315.656-280 175.68 0 318.112 143.272 318.112 320S803.552 832 627.864 832c-162.224 0-296.08-122.144-315.656-280H120a40 40 0 0 1 0-80h192.208zM632 752c132.552 0 240-107.448 240-240 0-132.552-107.448-240-240-240-132.552 0-240 107.448-240 240 0 132.552 107.448 240 240 240z m-40-280v-80a40 40 0 0 1 80 0v80h80a40 40 0 0 1 0 80h-80v80a40 40 0 0 1-80 0v-80h-80a40 40 0 0 1 0-80h80z"  ></path></symbol><symbol id="icon-tongjijiedian-" viewBox="0 0 1024 1024"><path d="M803.84 131.626667H410.24A59.733333 59.733333 0 0 0 350.506667 192v45.226667H199.68a51.626667 51.626667 0 0 0-51.626667 51.626666v465.92a51.626667 51.626667 0 0 0 51.626667 51.626667h187.52v-55.466667h-162.133333a21.333333 21.333333 0 0 1-21.333334-21.333333V313.386667a21.333333 21.333333 0 0 1 21.333334-21.333334h125.653333v64a59.733333 59.733333 0 0 0 59.733333 59.733334h393.386667a59.733333 59.733333 0 0 0 59.733333-59.733334V192a59.733333 59.733333 0 0 0-59.733333-60.373333z m4.266667 224.64a4.266667 4.266667 0 0 1-4.266667 4.266666H410.24a4.266667 4.266667 0 0 1-4.266667-4.266666V192a4.266667 4.266667 0 0 1 4.266667-4.266667h393.6a4.266667 4.266667 0 0 1 4.266667 4.266667zM716.16 749.44h-81.28v-81.493333a27.733333 27.733333 0 0 0-55.466667 0v81.28h-81.493333a27.733333 27.733333 0 1 0 0 55.466666h81.28v81.28a27.733333 27.733333 0 1 0 55.466667 0v-81.066666h81.28a27.733333 27.733333 0 0 0 0-55.466667z"  ></path></symbol><symbol id="icon-close" viewBox="0 0 1024 1024"><path d="M557.312 513.248l265.28-263.904c12.544-12.48 12.608-32.704 0.128-45.248-12.512-12.576-32.704-12.608-45.248-0.128L512.128 467.904l-263.04-263.84c-12.448-12.48-32.704-12.544-45.248-0.064-12.512 12.48-12.544 32.736-0.064 45.28l262.976 263.776L201.6 776.8c-12.544 12.48-12.608 32.704-0.128 45.248a31.937 31.937 0 0 0 22.688 9.44c8.16 0 16.32-3.104 22.56-9.312l265.216-263.808 265.44 266.24c6.24 6.272 14.432 9.408 22.656 9.408a31.94 31.94 0 0 0 22.592-9.344c12.512-12.48 12.544-32.704 0.064-45.248L557.312 513.248z" fill="" ></path></symbol><symbol id="icon-menu" viewBox="0 0 1024 1024"><path d="M109.714 292.571h804.572c21.943 0 36.571-21.942 36.571-43.885 0-14.629-14.628-29.257-36.571-29.257H109.714c-21.943 0-36.571 14.628-36.571 36.571 0 14.629 14.628 36.571 36.571 36.571zM914.286 512H109.714c-21.943 0-36.571 14.629-36.571 36.571 0 14.629 14.628 36.572 36.571 36.572h804.572c21.943 0 36.571-21.943 36.571-43.886 0-14.628-14.628-29.257-36.571-29.257z m0 292.571H109.714c-21.943 0-36.571 14.629-36.571 36.572s14.628 36.571 36.571 36.571h804.572c21.943 0 36.571-21.943 36.571-36.571 0-21.943-14.628-36.572-36.571-36.572z"  ></path></symbol><symbol id="icon-right" viewBox="0 0 1024 1024"><path d="M385 560.69999999L385 738.9c0 36.90000001 26.4 68.5 61.3 68.5l150.2 0c1.5 0 3-0.1 4.5-0.3 10.2 38.7 45.5 67.3 87.5 67.3 50 0 90.5-40.5 90.5-90.5s-40.5-90.5-90.5-90.5c-42 0-77.3 28.6-87.5 67.39999999-1.4-0.3-2.9-0.4-4.5-0.39999999L446.3 760.4c-6.8 0-14.3-8.9-14.3-21.49999999l0-427.00000001c0-12.7 7.40000001-21.5 14.30000001-21.5l150.19999999 0c1.5 0 3-0.2 4.5-0.4 10.2 38.8 45.5 67.3 87.5 67.3 50 0 90.5-40.5 90.5-90.4 0-49.9-40.5-90.6-90.5-90.59999999-42 0-77.3 28.6-87.5 67.39999999-1.4-0.2-2.9-0.4-4.49999999-0.4L446.3 243.3c-34.80000001 0-61.3 31.6-61.3 68.50000001L385 513.7l-79.1 0c-10.4-38.5-45.49999999-67-87.4-67-50 0-90.5 40.5-90.5 90.5s40.5 90.5 90.5 90.5c41.79999999 0 77.00000001-28.4 87.4-67L385 560.69999999z" fill="#333333" ></path></symbol><symbol id="icon-left" viewBox="0 0 1024 1024"><path d="M639 463.30000001L639 285.1c0-36.90000001-26.4-68.5-61.3-68.5l-150.2 0c-1.5 0-3 0.1-4.5 0.3-10.2-38.7-45.5-67.3-87.5-67.3-50 0-90.5 40.5-90.5 90.5s40.5 90.5 90.5 90.5c42 0 77.3-28.6 87.5-67.39999999 1.4 0.3 2.9 0.4 4.5 0.39999999L577.7 263.6c6.8 0 14.3 8.9 14.3 21.49999999l0 427.00000001c0 12.7-7.40000001 21.5-14.30000001 21.5l-150.19999999 0c-1.5 0-3 0.2-4.5 0.4-10.2-38.8-45.5-67.3-87.5-67.3-50 0-90.5 40.5-90.5 90.4 0 49.9 40.5 90.6 90.5 90.59999999 42 0 77.3-28.6 87.5-67.39999999 1.4 0.2 2.9 0.4 4.49999999 0.4L577.7 780.7c34.80000001 0 61.3-31.6 61.3-68.50000001L639 510.3l79.1 0c10.4 38.5 45.49999999 67 87.4 67 50 0 90.5-40.5 90.5-90.5s-40.5-90.5-90.5-90.5c-41.79999999 0-77.00000001 28.4-87.4 67L639 463.30000001z" fill="#333333" ></path></symbol><symbol id="icon-side" viewBox="0 0 1024 1024"><path d="M851.91168 328.45312c-59.97056 0-108.6208 48.47104-108.91264 108.36992l-137.92768 38.4a109.14304 109.14304 0 0 0-63.46752-46.58688l1.39264-137.11872c47.29344-11.86816 82.31936-54.66624 82.31936-105.64096 0-60.15488-48.76288-108.91776-108.91776-108.91776s-108.91776 48.76288-108.91776 108.91776c0 49.18784 32.60928 90.75712 77.38368 104.27392l-1.41312 138.87488a109.19936 109.19936 0 0 0-63.50336 48.55808l-138.93632-39.48544 0.01024-0.72704c0-60.15488-48.76288-108.91776-108.91776-108.91776s-108.91776 48.75776-108.91776 108.91776c0 60.15488 48.76288 108.91264 108.91776 108.91264 39.3984 0 73.91232-20.92032 93.03552-52.2496l139.19232 39.552-0.00512 0.2304c0 25.8304 9.00096 49.5616 24.02816 68.23424l-90.14272 132.63872a108.7488 108.7488 0 0 0-34.2528-5.504c-60.15488 0-108.91776 48.768-108.91776 108.91776 0 60.16 48.76288 108.91776 108.91776 108.91776 60.16 0 108.92288-48.75776 108.92288-108.91776 0-27.14624-9.9328-51.968-26.36288-71.04l89.04704-131.03104a108.544 108.544 0 0 0 37.6832 6.70208 108.672 108.672 0 0 0 36.48512-6.272l93.13792 132.57216a108.48256 108.48256 0 0 0-24.69888 69.0688c0 60.16 48.768 108.92288 108.91776 108.92288 60.16 0 108.91776-48.76288 108.91776-108.92288 0-60.14976-48.75776-108.91776-108.91776-108.91776a108.80512 108.80512 0 0 0-36.69504 6.3488l-93.07136-132.48a108.48768 108.48768 0 0 0 24.79616-72.22784l136.09984-37.888c18.99008 31.93856 53.84192 53.3504 93.69088 53.3504 60.16 0 108.92288-48.75776 108.92288-108.91264-0.00512-60.15488-48.77312-108.92288-108.92288-108.92288z"  ></path></symbol><symbol id="icon-B" viewBox="0 0 1024 1024"><path d="M98.067692 65.457231H481.28c75.854769 0 132.411077 3.150769 169.668923 9.452307 37.336615 6.301538 70.656 19.534769 100.036923 39.620924 29.459692 20.007385 53.956923 46.710154 73.570462 80.029538 19.692308 33.398154 29.459692 70.734769 29.459692 112.167385 0 44.898462-12.130462 86.094769-36.233846 123.588923a224.886154 224.886154 0 0 1-98.461539 84.283077c58.368 17.092923 103.266462 46.08 134.695385 87.04 31.350154 40.96 47.025231 89.088 47.025231 144.462769 0 43.638154-10.082462 86.016-30.404923 127.212308-20.243692 41.196308-47.891692 74.043077-83.02277 98.697846-35.052308 24.654769-78.296615 39.778462-129.732923 45.449846-32.295385 3.465846-110.119385 5.671385-233.472 6.537846H98.067692V65.457231z m193.536 159.507692V446.621538h126.818462c75.460923 0 122.328615-1.024 140.603077-3.229538 33.083077-3.938462 59.155692-15.36 78.139077-34.343385 18.904615-18.904615 28.435692-43.874462 28.435692-74.830769 0-29.696-8.192-53.720615-24.497231-72.310154-16.384-18.510769-40.644923-29.696-72.940307-33.634461-19.140923-2.205538-74.279385-3.308308-165.415385-3.308308h-111.064615z m0 381.243077v256.315077h179.2c69.710769 0 113.979077-1.969231 132.726154-5.907692 28.750769-5.198769 52.145231-17.959385 70.262154-38.281847 18.116923-20.243692 27.096615-47.340308 27.096615-81.368615 0-28.750769-6.931692-53.169231-20.873846-73.255385a118.232615 118.232615 0 0 0-60.494769-43.795692c-26.387692-9.137231-83.574154-13.705846-171.638154-13.705846H291.603692z"  ></path></symbol><symbol id="icon-a" viewBox="0 0 1024 1024"><path d="M757.76 665.6q0 20.48 1.536 34.304t7.68 22.016 18.944 12.288 34.304 4.096q-3.072 25.6-15.36 44.032-11.264 16.384-33.28 29.696t-62.976 13.312q-11.264 0-20.48-0.512t-17.408-2.56l-6.144-2.048-1.024 0q-4.096-1.024-10.24-4.096-2.048-2.048-4.096-2.048-1.024-1.024-2.048-1.024-14.336-8.192-23.552-17.408t-14.336-17.408q-6.144-10.24-9.216-20.48-63.488 75.776-178.176 75.776-48.128 0-88.064-15.36t-69.12-44.032-45.056-68.096-15.872-88.576 16.896-89.088 47.616-67.584 74.24-42.496 96.768-14.848q48.128 0 88.576 17.408t66.048 49.152q0-8.192 0.512-16.384t0.512-15.36q0-71.68-39.936-104.448t-128-32.768q-43.008 0-84.992 6.656t-84.992 17.92q14.336-28.672 25.088-47.616t24.064-29.184q30.72-24.576 158.72-24.576 79.872 0 135.168 13.824t90.624 43.52 51.2 75.264 15.872 108.032l0 200.704zM487.424 743.424q50.176 0 79.872-33.28t29.696-95.744q0-61.44-28.672-93.696t-76.8-32.256q-52.224 0-82.944 33.28t-30.72 94.72q0 58.368 31.744 92.672t77.824 34.304z"  ></path></symbol><symbol id="icon-full" viewBox="0 0 1024 1024"><path d="M639.328 416c8.032 0 16.096-3.008 22.304-9.056l202.624-197.184-0.8 143.808c-0.096 17.696 14.144 32.096 31.808 32.192 0.064 0 0.128 0 0.192 0 17.6 0 31.904-14.208 32-31.808l1.248-222.208c0-0.672-0.352-1.248-0.384-1.92 0.032-0.512 0.288-0.896 0.288-1.408 0.032-17.664-14.272-32-31.968-32.032L671.552 96l-0.032 0c-17.664 0-31.968 14.304-32 31.968C639.488 145.632 653.824 160 671.488 160l151.872 0.224-206.368 200.8c-12.672 12.32-12.928 32.608-0.64 45.248C622.656 412.736 630.976 416 639.328 416z"  ></path><path d="M896.032 639.552 896.032 639.552c-17.696 0-32 14.304-32.032 31.968l-0.224 151.872-200.832-206.4c-12.32-12.64-32.576-12.96-45.248-0.64-12.672 12.352-12.928 32.608-0.64 45.248l197.184 202.624-143.808-0.8c-0.064 0-0.128 0-0.192 0-17.6 0-31.904 14.208-32 31.808-0.096 17.696 14.144 32.096 31.808 32.192l222.24 1.248c0.064 0 0.128 0 0.192 0 0.64 0 1.12-0.32 1.76-0.352 0.512 0.032 0.896 0.288 1.408 0.288l0.032 0c17.664 0 31.968-14.304 32-31.968L928 671.584C928.032 653.952 913.728 639.584 896.032 639.552z"  ></path><path d="M209.76 159.744l143.808 0.8c0.064 0 0.128 0 0.192 0 17.6 0 31.904-14.208 32-31.808 0.096-17.696-14.144-32.096-31.808-32.192L131.68 95.328c-0.064 0-0.128 0-0.192 0-0.672 0-1.248 0.352-1.888 0.384-0.448 0-0.8-0.256-1.248-0.256 0 0-0.032 0-0.032 0-17.664 0-31.968 14.304-32 31.968L96 352.448c-0.032 17.664 14.272 32 31.968 32.032 0 0 0.032 0 0.032 0 17.664 0 31.968-14.304 32-31.968l0.224-151.936 200.832 206.4c6.272 6.464 14.624 9.696 22.944 9.696 8.032 0 16.096-3.008 22.304-9.056 12.672-12.32 12.96-32.608 0.64-45.248L209.76 159.744z"  ></path><path d="M362.368 617.056l-202.624 197.184 0.8-143.808c0.096-17.696-14.144-32.096-31.808-32.192-0.064 0-0.128 0-0.192 0-17.6 0-31.904 14.208-32 31.808l-1.248 222.24c0 0.704 0.352 1.312 0.384 2.016 0 0.448-0.256 0.832-0.256 1.312-0.032 17.664 14.272 32 31.968 32.032L352.448 928c0 0 0.032 0 0.032 0 17.664 0 31.968-14.304 32-31.968s-14.272-32-31.968-32.032l-151.936-0.224 206.4-200.832c12.672-12.352 12.96-32.608 0.64-45.248S375.008 604.704 362.368 617.056z"  ></path></symbol><symbol id="icon-add" viewBox="0 0 1024 1024"><path d="M863.328 482.56l-317.344-1.12L545.984 162.816c0-17.664-14.336-32-32-32s-32 14.336-32 32l0 318.4L159.616 480.064c-0.032 0-0.064 0-0.096 0-17.632 0-31.936 14.24-32 31.904C127.424 529.632 141.728 544 159.392 544.064l322.592 1.152 0 319.168c0 17.696 14.336 32 32 32s32-14.304 32-32l0-318.944 317.088 1.12c0.064 0 0.096 0 0.128 0 17.632 0 31.936-14.24 32-31.904C895.264 496.992 880.96 482.624 863.328 482.56z"  ></path></symbol><symbol id="icon-move" viewBox="0 0 1024 1024"><path d="M863.744 544 163.424 544c-17.664 0-32-14.336-32-32s14.336-32 32-32l700.32 0c17.696 0 32 14.336 32 32S881.44 544 863.744 544z"  ></path></symbol><symbol id="icon-living" viewBox="0 0 1024 1024"><path d="M514.133333 488.533333m-106.666666 0a106.666667 106.666667 0 1 0 213.333333 0 106.666667 106.666667 0 1 0-213.333333 0Z" fill="#666666" ></path><path d="M512 64C264.533333 64 64 264.533333 64 512c0 236.8 183.466667 428.8 416 445.866667v-134.4c-53.333333-59.733333-200.533333-230.4-200.533333-334.933334 0-130.133333 104.533333-234.666667 234.666666-234.666666s234.666667 104.533333 234.666667 234.666666c0 61.866667-49.066667 153.6-145.066667 270.933334l-59.733333 68.266666V960C776.533333 942.933333 960 748.8 960 512c0-247.466667-200.533333-448-448-448z" fill="#666666" ></path></symbol></svg>', d = (d = document.getElementsByTagName("script"))[d.length - 1].getAttribute("data-injectcss");
-  if (d && !e.__iconfont__svg__cssinject__) {
+  var t, n, i, o, s, l, r = '<svg><symbol id="icon-edit" viewBox="0 0 1024 1024"><path d="M423.765333 128a42.666667 42.666667 0 0 1 3.2 85.205333L423.765333 213.333333H234.666667a64 64 0 0 0-63.872 60.245334L170.666667 277.333333v512a64 64 0 0 0 60.245333 63.872L234.666667 853.333333h512a64 64 0 0 0 63.872-60.245333L810.666667 789.333333v-189.098666a42.666667 42.666667 0 0 1 85.205333-3.2l0.128 3.2V789.333333a149.333333 149.333333 0 0 1-144.213333 149.248L746.666667 938.666667h-512a149.333333 149.333333 0 0 1-149.248-144.213334L85.333333 789.333333v-512a149.333333 149.333333 0 0 1 144.213334-149.248L234.666667 128h189.098666z m324.949334-53.248a42.666667 42.666667 0 0 1 60.330666 0l150.869334 150.869333a42.666667 42.666667 0 0 1 0 60.330667l-329.386667 329.386667a42.666667 42.666667 0 0 1-29.44 12.458666l-153.386667 2.517334a42.666667 42.666667 0 0 1-43.349333-43.349334l2.56-153.386666a42.666667 42.666667 0 0 1 12.458667-29.44z m30.165333 90.496L491.946667 452.266667l-1.493334 91.989333 92.032-1.493333 286.976-286.976-90.538666-90.538667z"  ></path></symbol><symbol id="icon-rising" viewBox="0 0 1024 1024"><path d="M553.173333 803.84h-64l0.021334-474.581333-224.021334 224-45.269333-45.226667L521.6 206.293333l301.717333 301.696-45.269333 45.269334-224.853333-224.896v475.477333z"  ></path></symbol><symbol id="icon-falling" viewBox="0 0 1024 1024"><path d="M553.173333 238.314667h-64l0.021334 474.602666-224.021334-224-45.269333 45.226667L521.6 835.861333l301.717333-301.717333-45.269333-45.226667-224.853333 224.853334V238.336z"  ></path></symbol><symbol id="icon-shanchu2" viewBox="0 0 1024 1024"><path d="M516.60601807 107.93026734c-82.64382935 0-149.71865844 65.51751709-152.5729065 147.77160644H171.37136841c-21.40603638 0-38.92044068 17.38504028-38.92044068 38.92126465 0 21.40686036 17.38504028 38.92208862 38.92126466 38.92208862h42.94308471v435.40136719c0 81.73498536 55.39828492 148.55026245 123.90106201 148.55026245h348.99444581c68.37341309 0 123.90106201-66.42553711 123.901062-148.55026245V333.80477906h38.92126465c21.40686036 0 38.92126464-17.38586426 38.92126465-38.92208863 0-21.40686036-17.38504028-38.92126464-38.92126465-38.92126465H668.91854859C666.45321656 173.44860839 599.24902344 107.93109131 516.60601807 107.93109131z m-79.65939331 147.77160644c2.85424805-42.16442872 37.2354126-74.85809326 79.78875732-74.85809326s76.93450927 32.82302857 79.39984131 74.85809326H436.94662476z m-98.86047364 589.01165771c-24.2611084 0-50.98754883-31.13717651-50.98754883-75.76693725V333.80477906h450.97036744V769.33551026c0 44.50039673-26.72644043 75.76776123-50.98754884 75.76776122H338.08615112v-0.38973999z m0 0"  ></path><path d="M390.37063599 751.17263794c17.77313232 0 32.43411255-17.7739563 32.43411255-40.08883667V482.35504151c0-22.31488037-14.53079224-40.08966065-32.43411255-40.08966065-17.77478027 0-32.43493653 17.77478027-32.43493653 40.08966065v228.72875976c0 22.18469239 14.27124023 40.08883667 32.43493653 40.08883667z m117.41308594 0c17.7739563 0 32.43411255-17.7739563 32.43411255-40.08883667V482.35504151c0-22.31488037-14.53079224-40.08966065-32.43411255-40.08966065-17.7739563 0-32.43493653 17.77478027-32.43493653 40.08966065v228.72875976c0 22.18469239 14.66098023 40.08883667 32.43493653 40.08883667z m123.51049804 0c17.7739563 0 32.43493653-17.7739563 32.43493652-40.08883667V482.35504151c0-22.31488037-14.53079224-40.08966065-32.43493652-40.08966065-17.7739563 0-32.43411255 17.77478027-32.43411255 40.08966065v228.72875976c0 22.18469239 14.14105224 40.08883667 32.43411255 40.08883667z m0 0"  ></path></symbol><symbol id="icon-zijiedian" viewBox="0 0 1024 1024"><path d="M312.208 472c19.568-157.856 153.432-280 315.656-280 175.68 0 318.112 143.272 318.112 320S803.552 832 627.864 832c-162.224 0-296.08-122.144-315.656-280H120a40 40 0 0 1 0-80h192.208zM632 752c132.552 0 240-107.448 240-240 0-132.552-107.448-240-240-240-132.552 0-240 107.448-240 240 0 132.552 107.448 240 240 240z m-40-280v-80a40 40 0 0 1 80 0v80h80a40 40 0 0 1 0 80h-80v80a40 40 0 0 1-80 0v-80h-80a40 40 0 0 1 0-80h80z"  ></path></symbol><symbol id="icon-tongjijiedian-" viewBox="0 0 1024 1024"><path d="M803.84 131.626667H410.24A59.733333 59.733333 0 0 0 350.506667 192v45.226667H199.68a51.626667 51.626667 0 0 0-51.626667 51.626666v465.92a51.626667 51.626667 0 0 0 51.626667 51.626667h187.52v-55.466667h-162.133333a21.333333 21.333333 0 0 1-21.333334-21.333333V313.386667a21.333333 21.333333 0 0 1 21.333334-21.333334h125.653333v64a59.733333 59.733333 0 0 0 59.733333 59.733334h393.386667a59.733333 59.733333 0 0 0 59.733333-59.733334V192a59.733333 59.733333 0 0 0-59.733333-60.373333z m4.266667 224.64a4.266667 4.266667 0 0 1-4.266667 4.266666H410.24a4.266667 4.266667 0 0 1-4.266667-4.266666V192a4.266667 4.266667 0 0 1 4.266667-4.266667h393.6a4.266667 4.266667 0 0 1 4.266667 4.266667zM716.16 749.44h-81.28v-81.493333a27.733333 27.733333 0 0 0-55.466667 0v81.28h-81.493333a27.733333 27.733333 0 1 0 0 55.466666h81.28v81.28a27.733333 27.733333 0 1 0 55.466667 0v-81.066666h81.28a27.733333 27.733333 0 0 0 0-55.466667z"  ></path></symbol><symbol id="icon-close" viewBox="0 0 1024 1024"><path d="M557.312 513.248l265.28-263.904c12.544-12.48 12.608-32.704 0.128-45.248-12.512-12.576-32.704-12.608-45.248-0.128L512.128 467.904l-263.04-263.84c-12.448-12.48-32.704-12.544-45.248-0.064-12.512 12.48-12.544 32.736-0.064 45.28l262.976 263.776L201.6 776.8c-12.544 12.48-12.608 32.704-0.128 45.248a31.937 31.937 0 0 0 22.688 9.44c8.16 0 16.32-3.104 22.56-9.312l265.216-263.808 265.44 266.24c6.24 6.272 14.432 9.408 22.656 9.408a31.94 31.94 0 0 0 22.592-9.344c12.512-12.48 12.544-32.704 0.064-45.248L557.312 513.248z" fill="" ></path></symbol><symbol id="icon-menu" viewBox="0 0 1024 1024"><path d="M109.714 292.571h804.572c21.943 0 36.571-21.942 36.571-43.885 0-14.629-14.628-29.257-36.571-29.257H109.714c-21.943 0-36.571 14.628-36.571 36.571 0 14.629 14.628 36.571 36.571 36.571zM914.286 512H109.714c-21.943 0-36.571 14.629-36.571 36.571 0 14.629 14.628 36.572 36.571 36.572h804.572c21.943 0 36.571-21.943 36.571-43.886 0-14.628-14.628-29.257-36.571-29.257z m0 292.571H109.714c-21.943 0-36.571 14.629-36.571 36.572s14.628 36.571 36.571 36.571h804.572c21.943 0 36.571-21.943 36.571-36.571 0-21.943-14.628-36.572-36.571-36.572z"  ></path></symbol><symbol id="icon-right" viewBox="0 0 1024 1024"><path d="M385 560.69999999L385 738.9c0 36.90000001 26.4 68.5 61.3 68.5l150.2 0c1.5 0 3-0.1 4.5-0.3 10.2 38.7 45.5 67.3 87.5 67.3 50 0 90.5-40.5 90.5-90.5s-40.5-90.5-90.5-90.5c-42 0-77.3 28.6-87.5 67.39999999-1.4-0.3-2.9-0.4-4.5-0.39999999L446.3 760.4c-6.8 0-14.3-8.9-14.3-21.49999999l0-427.00000001c0-12.7 7.40000001-21.5 14.30000001-21.5l150.19999999 0c1.5 0 3-0.2 4.5-0.4 10.2 38.8 45.5 67.3 87.5 67.3 50 0 90.5-40.5 90.5-90.4 0-49.9-40.5-90.6-90.5-90.59999999-42 0-77.3 28.6-87.5 67.39999999-1.4-0.2-2.9-0.4-4.49999999-0.4L446.3 243.3c-34.80000001 0-61.3 31.6-61.3 68.50000001L385 513.7l-79.1 0c-10.4-38.5-45.49999999-67-87.4-67-50 0-90.5 40.5-90.5 90.5s40.5 90.5 90.5 90.5c41.79999999 0 77.00000001-28.4 87.4-67L385 560.69999999z" fill="#333333" ></path></symbol><symbol id="icon-left" viewBox="0 0 1024 1024"><path d="M639 463.30000001L639 285.1c0-36.90000001-26.4-68.5-61.3-68.5l-150.2 0c-1.5 0-3 0.1-4.5 0.3-10.2-38.7-45.5-67.3-87.5-67.3-50 0-90.5 40.5-90.5 90.5s40.5 90.5 90.5 90.5c42 0 77.3-28.6 87.5-67.39999999 1.4 0.3 2.9 0.4 4.5 0.39999999L577.7 263.6c6.8 0 14.3 8.9 14.3 21.49999999l0 427.00000001c0 12.7-7.40000001 21.5-14.30000001 21.5l-150.19999999 0c-1.5 0-3 0.2-4.5 0.4-10.2-38.8-45.5-67.3-87.5-67.3-50 0-90.5 40.5-90.5 90.4 0 49.9 40.5 90.6 90.5 90.59999999 42 0 77.3-28.6 87.5-67.39999999 1.4 0.2 2.9 0.4 4.49999999 0.4L577.7 780.7c34.80000001 0 61.3-31.6 61.3-68.50000001L639 510.3l79.1 0c10.4 38.5 45.49999999 67 87.4 67 50 0 90.5-40.5 90.5-90.5s-40.5-90.5-90.5-90.5c-41.79999999 0-77.00000001 28.4-87.4 67L639 463.30000001z" fill="#333333" ></path></symbol><symbol id="icon-side" viewBox="0 0 1024 1024"><path d="M851.91168 328.45312c-59.97056 0-108.6208 48.47104-108.91264 108.36992l-137.92768 38.4a109.14304 109.14304 0 0 0-63.46752-46.58688l1.39264-137.11872c47.29344-11.86816 82.31936-54.66624 82.31936-105.64096 0-60.15488-48.76288-108.91776-108.91776-108.91776s-108.91776 48.76288-108.91776 108.91776c0 49.18784 32.60928 90.75712 77.38368 104.27392l-1.41312 138.87488a109.19936 109.19936 0 0 0-63.50336 48.55808l-138.93632-39.48544 0.01024-0.72704c0-60.15488-48.76288-108.91776-108.91776-108.91776s-108.91776 48.75776-108.91776 108.91776c0 60.15488 48.76288 108.91264 108.91776 108.91264 39.3984 0 73.91232-20.92032 93.03552-52.2496l139.19232 39.552-0.00512 0.2304c0 25.8304 9.00096 49.5616 24.02816 68.23424l-90.14272 132.63872a108.7488 108.7488 0 0 0-34.2528-5.504c-60.15488 0-108.91776 48.768-108.91776 108.91776 0 60.16 48.76288 108.91776 108.91776 108.91776 60.16 0 108.92288-48.75776 108.92288-108.91776 0-27.14624-9.9328-51.968-26.36288-71.04l89.04704-131.03104a108.544 108.544 0 0 0 37.6832 6.70208 108.672 108.672 0 0 0 36.48512-6.272l93.13792 132.57216a108.48256 108.48256 0 0 0-24.69888 69.0688c0 60.16 48.768 108.92288 108.91776 108.92288 60.16 0 108.91776-48.76288 108.91776-108.92288 0-60.14976-48.75776-108.91776-108.91776-108.91776a108.80512 108.80512 0 0 0-36.69504 6.3488l-93.07136-132.48a108.48768 108.48768 0 0 0 24.79616-72.22784l136.09984-37.888c18.99008 31.93856 53.84192 53.3504 93.69088 53.3504 60.16 0 108.92288-48.75776 108.92288-108.91264-0.00512-60.15488-48.77312-108.92288-108.92288-108.92288z"  ></path></symbol><symbol id="icon-B" viewBox="0 0 1024 1024"><path d="M98.067692 65.457231H481.28c75.854769 0 132.411077 3.150769 169.668923 9.452307 37.336615 6.301538 70.656 19.534769 100.036923 39.620924 29.459692 20.007385 53.956923 46.710154 73.570462 80.029538 19.692308 33.398154 29.459692 70.734769 29.459692 112.167385 0 44.898462-12.130462 86.094769-36.233846 123.588923a224.886154 224.886154 0 0 1-98.461539 84.283077c58.368 17.092923 103.266462 46.08 134.695385 87.04 31.350154 40.96 47.025231 89.088 47.025231 144.462769 0 43.638154-10.082462 86.016-30.404923 127.212308-20.243692 41.196308-47.891692 74.043077-83.02277 98.697846-35.052308 24.654769-78.296615 39.778462-129.732923 45.449846-32.295385 3.465846-110.119385 5.671385-233.472 6.537846H98.067692V65.457231z m193.536 159.507692V446.621538h126.818462c75.460923 0 122.328615-1.024 140.603077-3.229538 33.083077-3.938462 59.155692-15.36 78.139077-34.343385 18.904615-18.904615 28.435692-43.874462 28.435692-74.830769 0-29.696-8.192-53.720615-24.497231-72.310154-16.384-18.510769-40.644923-29.696-72.940307-33.634461-19.140923-2.205538-74.279385-3.308308-165.415385-3.308308h-111.064615z m0 381.243077v256.315077h179.2c69.710769 0 113.979077-1.969231 132.726154-5.907692 28.750769-5.198769 52.145231-17.959385 70.262154-38.281847 18.116923-20.243692 27.096615-47.340308 27.096615-81.368615 0-28.750769-6.931692-53.169231-20.873846-73.255385a118.232615 118.232615 0 0 0-60.494769-43.795692c-26.387692-9.137231-83.574154-13.705846-171.638154-13.705846H291.603692z"  ></path></symbol><symbol id="icon-a" viewBox="0 0 1024 1024"><path d="M757.76 665.6q0 20.48 1.536 34.304t7.68 22.016 18.944 12.288 34.304 4.096q-3.072 25.6-15.36 44.032-11.264 16.384-33.28 29.696t-62.976 13.312q-11.264 0-20.48-0.512t-17.408-2.56l-6.144-2.048-1.024 0q-4.096-1.024-10.24-4.096-2.048-2.048-4.096-2.048-1.024-1.024-2.048-1.024-14.336-8.192-23.552-17.408t-14.336-17.408q-6.144-10.24-9.216-20.48-63.488 75.776-178.176 75.776-48.128 0-88.064-15.36t-69.12-44.032-45.056-68.096-15.872-88.576 16.896-89.088 47.616-67.584 74.24-42.496 96.768-14.848q48.128 0 88.576 17.408t66.048 49.152q0-8.192 0.512-16.384t0.512-15.36q0-71.68-39.936-104.448t-128-32.768q-43.008 0-84.992 6.656t-84.992 17.92q14.336-28.672 25.088-47.616t24.064-29.184q30.72-24.576 158.72-24.576 79.872 0 135.168 13.824t90.624 43.52 51.2 75.264 15.872 108.032l0 200.704zM487.424 743.424q50.176 0 79.872-33.28t29.696-95.744q0-61.44-28.672-93.696t-76.8-32.256q-52.224 0-82.944 33.28t-30.72 94.72q0 58.368 31.744 92.672t77.824 34.304z"  ></path></symbol><symbol id="icon-full" viewBox="0 0 1024 1024"><path d="M639.328 416c8.032 0 16.096-3.008 22.304-9.056l202.624-197.184-0.8 143.808c-0.096 17.696 14.144 32.096 31.808 32.192 0.064 0 0.128 0 0.192 0 17.6 0 31.904-14.208 32-31.808l1.248-222.208c0-0.672-0.352-1.248-0.384-1.92 0.032-0.512 0.288-0.896 0.288-1.408 0.032-17.664-14.272-32-31.968-32.032L671.552 96l-0.032 0c-17.664 0-31.968 14.304-32 31.968C639.488 145.632 653.824 160 671.488 160l151.872 0.224-206.368 200.8c-12.672 12.32-12.928 32.608-0.64 45.248C622.656 412.736 630.976 416 639.328 416z"  ></path><path d="M896.032 639.552 896.032 639.552c-17.696 0-32 14.304-32.032 31.968l-0.224 151.872-200.832-206.4c-12.32-12.64-32.576-12.96-45.248-0.64-12.672 12.352-12.928 32.608-0.64 45.248l197.184 202.624-143.808-0.8c-0.064 0-0.128 0-0.192 0-17.6 0-31.904 14.208-32 31.808-0.096 17.696 14.144 32.096 31.808 32.192l222.24 1.248c0.064 0 0.128 0 0.192 0 0.64 0 1.12-0.32 1.76-0.352 0.512 0.032 0.896 0.288 1.408 0.288l0.032 0c17.664 0 31.968-14.304 32-31.968L928 671.584C928.032 653.952 913.728 639.584 896.032 639.552z"  ></path><path d="M209.76 159.744l143.808 0.8c0.064 0 0.128 0 0.192 0 17.6 0 31.904-14.208 32-31.808 0.096-17.696-14.144-32.096-31.808-32.192L131.68 95.328c-0.064 0-0.128 0-0.192 0-0.672 0-1.248 0.352-1.888 0.384-0.448 0-0.8-0.256-1.248-0.256 0 0-0.032 0-0.032 0-17.664 0-31.968 14.304-32 31.968L96 352.448c-0.032 17.664 14.272 32 31.968 32.032 0 0 0.032 0 0.032 0 17.664 0 31.968-14.304 32-31.968l0.224-151.936 200.832 206.4c6.272 6.464 14.624 9.696 22.944 9.696 8.032 0 16.096-3.008 22.304-9.056 12.672-12.32 12.96-32.608 0.64-45.248L209.76 159.744z"  ></path><path d="M362.368 617.056l-202.624 197.184 0.8-143.808c0.096-17.696-14.144-32.096-31.808-32.192-0.064 0-0.128 0-0.192 0-17.6 0-31.904 14.208-32 31.808l-1.248 222.24c0 0.704 0.352 1.312 0.384 2.016 0 0.448-0.256 0.832-0.256 1.312-0.032 17.664 14.272 32 31.968 32.032L352.448 928c0 0 0.032 0 0.032 0 17.664 0 31.968-14.304 32-31.968s-14.272-32-31.968-32.032l-151.936-0.224 206.4-200.832c12.672-12.352 12.96-32.608 0.64-45.248S375.008 604.704 362.368 617.056z"  ></path></symbol><symbol id="icon-add" viewBox="0 0 1024 1024"><path d="M863.328 482.56l-317.344-1.12L545.984 162.816c0-17.664-14.336-32-32-32s-32 14.336-32 32l0 318.4L159.616 480.064c-0.032 0-0.064 0-0.096 0-17.632 0-31.936 14.24-32 31.904C127.424 529.632 141.728 544 159.392 544.064l322.592 1.152 0 319.168c0 17.696 14.336 32 32 32s32-14.304 32-32l0-318.944 317.088 1.12c0.064 0 0.096 0 0.128 0 17.632 0 31.936-14.24 32-31.904C895.264 496.992 880.96 482.624 863.328 482.56z"  ></path></symbol><symbol id="icon-move" viewBox="0 0 1024 1024"><path d="M863.744 544 163.424 544c-17.664 0-32-14.336-32-32s14.336-32 32-32l700.32 0c17.696 0 32 14.336 32 32S881.44 544 863.744 544z"  ></path></symbol><symbol id="icon-living" viewBox="0 0 1024 1024"><path d="M514.133333 488.533333m-106.666666 0a106.666667 106.666667 0 1 0 213.333333 0 106.666667 106.666667 0 1 0-213.333333 0Z" fill="#666666" ></path><path d="M512 64C264.533333 64 64 264.533333 64 512c0 236.8 183.466667 428.8 416 445.866667v-134.4c-53.333333-59.733333-200.533333-230.4-200.533333-334.933334 0-130.133333 104.533333-234.666667 234.666666-234.666666s234.666667 104.533333 234.666667 234.666666c0 61.866667-49.066667 153.6-145.066667 270.933334l-59.733333 68.266666V960C776.533333 942.933333 960 748.8 960 512c0-247.466667-200.533333-448-448-448z" fill="#666666" ></path></symbol></svg>', a = (a = document.getElementsByTagName("script"))[a.length - 1].getAttribute("data-injectcss");
+  if (a && !e.__iconfont__svg__cssinject__) {
     e.__iconfont__svg__cssinject__ = !0;
     try {
       document.write("<style>.svgfont {display: inline-block;width: 1em;height: 1em;fill: currentColor;vertical-align: -0.1em;font-size:16px;}</style>");
-    } catch (a) {
-      console && console.log(a);
+    } catch (d) {
+      console && console.log(d);
     }
   }
   function h() {
     s || (s = !0, i());
   }
   t = function() {
-    var a, y, u, p;
-    (p = document.createElement("div")).innerHTML = r, r = null, (u = p.getElementsByTagName("svg")[0]) && (u.setAttribute("aria-hidden", "true"), u.style.position = "absolute", u.style.width = 0, u.style.height = 0, u.style.overflow = "hidden", a = u, (y = document.body).firstChild ? (p = a, (u = y.firstChild).parentNode.insertBefore(p, u)) : y.appendChild(a));
+    var d, y, u, p;
+    (p = document.createElement("div")).innerHTML = r, r = null, (u = p.getElementsByTagName("svg")[0]) && (u.setAttribute("aria-hidden", "true"), u.style.position = "absolute", u.style.width = 0, u.style.height = 0, u.style.overflow = "hidden", d = u, (y = document.body).firstChild ? (p = d, (u = y.firstChild).parentNode.insertBefore(p, u)) : y.appendChild(d));
   }, document.addEventListener ? ~["complete", "loaded", "interactive"].indexOf(document.readyState) ? setTimeout(t, 0) : (n = function() {
     document.removeEventListener("DOMContentLoaded", n, !1), t();
   }, document.addEventListener("DOMContentLoaded", n, !1)) : document.attachEvent && (i = t, o = e.document, s = !1, (l = function() {
@@ -1960,7 +1960,7 @@ Oe.prototype = {
     o.readyState == "complete" && (o.onreadystatechange = null, h());
   });
 })(window);
-const _ = $, G = document;
+const Y = $, G = document;
 function j({
   el: e,
   data: t,
@@ -1970,9 +1970,9 @@ function j({
   editable: s,
   contextMenu: l,
   contextMenuOption: r,
-  toolBar: d,
+  toolBar: a,
   nodeMenu: h,
-  keypress: a,
+  keypress: d,
   before: y,
   newTopicName: u,
   allowUndo: p,
@@ -1988,7 +1988,7 @@ function j({
   scrollContainer: C
 }) {
   const w = document.getElementById(e);
-  !w || (this.mindElixirBox = w, this.before = y || {}, this.nodeData = t.nodeData, this.linkData = t.linkData || {}, this.expandDeep = t == null ? void 0 : t.expandDeep, this.locale = i, this.contextMenuOption = r, this.contextMenu = l === void 0 ? !0 : l, this.toolBar = d === void 0 ? !0 : d, this.nodeMenu = h === void 0 ? !0 : h, this.keypress = a === void 0 ? !0 : a, this.closeButton = g === void 0 ? !1 : g, this.widthControll = c === void 0 ? !0 : c, this.mobileMenu = k, this.direction = t.direction !== void 0 ? t.direction : typeof n == "number" ? n : 1, this.draggable = o === void 0 ? !0 : o, this.newTopicName = u, this.editable = s === void 0 ? !0 : s, this.allowUndo = p === void 0 ? !0 : p, this.currentNode = null, this.currentLink = null, this.inputDiv = null, this.scaleVal = 1, this.tempDirection = null, this.primaryLinkStyle = N || 0, this.overflowHidden = E, this.primaryNodeHorizontalGap = b, this.primaryNodeVerticalGap = x, this.uploadButton = m === void 0 ? !0 : m, this.nodeDraggable = f === void 0 ? !0 : f, this.scrollContainer = C, this.bus = new Oe(), this.bus.addListener("operation", (v) => {
+  !w || (this.mindElixirBox = w, this.before = y || {}, this.nodeData = t.nodeData, this.linkData = t.linkData || {}, this.expandDeep = t == null ? void 0 : t.expandDeep, this.locale = i, this.contextMenuOption = r, this.contextMenu = l === void 0 ? !0 : l, this.toolBar = a === void 0 ? !0 : a, this.nodeMenu = h === void 0 ? !0 : h, this.keypress = d === void 0 ? !0 : d, this.closeButton = g === void 0 ? !1 : g, this.widthControll = c === void 0 ? !0 : c, this.mobileMenu = k, this.direction = t.direction !== void 0 ? t.direction : typeof n == "number" ? n : 1, this.draggable = o === void 0 ? !0 : o, this.newTopicName = u, this.editable = s === void 0 ? !0 : s, this.allowUndo = p === void 0 ? !0 : p, this.currentNode = null, this.currentLink = null, this.inputDiv = null, this.scaleVal = 1, this.tempDirection = null, this.primaryLinkStyle = N || 0, this.overflowHidden = E, this.primaryNodeHorizontalGap = b, this.primaryNodeVerticalGap = x, this.uploadButton = m === void 0 ? !0 : m, this.nodeDraggable = f === void 0 ? !0 : f, this.scrollContainer = C, this.bus = new Oe(), this.bus.addListener("operation", (v) => {
     if (this.isUndo) {
       this.isUndo = !1;
       return;
@@ -1999,9 +1999,9 @@ function j({
   }), this.history = [], this.isUndo = !1, this.undo = function() {
     const v = this.history.pop();
     !v || (this.isUndo = !0, v.name === "moveNode" ? this.moveNode(
-      _(v.obj.fromObj.id),
-      _(v.obj.originParentId)
-    ) : v.name === "removeNode" ? v.originSiblingId ? this.insertBefore(_(v.originSiblingId), v.obj) : this.addChild(_(v.originParentId), v.obj) : v.name === "addChild" || v.name === "copyNode" ? this.removeNode(_(v.obj.id)) : v.name === "finishEdit" ? this.setNodeTopic(_(v.obj.id), v.origin) : this.isUndo = !1);
+      Y(v.obj.fromObj.id),
+      Y(v.obj.originParentId)
+    ) : v.name === "removeNode" ? v.originSiblingId ? this.insertBefore(Y(v.originSiblingId), v.obj) : this.addChild(Y(v.originParentId), v.obj) : v.name === "addChild" || v.name === "copyNode" ? this.removeNode(Y(v.obj.id)) : v.name === "finishEdit" ? this.setNodeTopic(Y(v.obj.id), v.origin) : this.isUndo = !1);
   });
 }
 function T(e) {
@@ -2027,9 +2027,9 @@ j.prototype = {
   beginEdit: T(an),
   moveNodeBefore: T(rn),
   moveNodeAfter: T(cn),
-  updateNodeStyle: Yt,
-  updateNodeTags: Wt,
-  updateNodeIcons: _t,
+  updateNodeStyle: Wt,
+  updateNodeTags: _t,
+  updateNodeIcons: Yt,
   updateNodeHyperLink: Gt,
   updateNodeRemark: Xt,
   processPrimaryNode: hn,
@@ -2042,7 +2042,7 @@ j.prototype = {
   layout: dt,
   linkDiv: yn,
   createInputDiv: ct,
-  shapeTpc: W,
+  shapeTpc: _,
   createChildren: at,
   createGroup: it,
   createTop: st,
@@ -2074,7 +2074,7 @@ j.prototype = {
   exportSvg: gt,
   exportSvgDom: mt,
   init: function(e, t) {
-    e && (this.nodeData = e), t && (this.expandDeep = t), P(this.nodeData), console.log("ME_version " + j.version), console.log(this), this.mindElixirBox.className.indexOf("mind-elixir") === -1 && (this.mindElixirBox.className += "mind-elixir"), this.mindElixirBox.innerHTML = "", this.container = G.createElement("div"), this.container.className = "map-container", this.overflowHidden && (this.container.style.overflow = "hidden"), this.map = G.createElement("div"), this.map.className = "map-canvas", this.map.setAttribute("tabindex", "0"), this.container.appendChild(this.map), this.mindElixirBox.appendChild(this.container), this.root = G.createElement("root"), this.box = G.createElement("children"), this.box.className = "mindbox", this.svg2nd = K("svg2nd"), this.linkController = K("linkcontroller"), this.P2 = G.createElement("div"), this.P3 = G.createElement("div"), this.P2.className = this.P3.className = "circle", this.line1 = be(0, 0, 0, 0), this.line2 = be(0, 0, 0, 0), this.linkController.appendChild(this.line1), this.linkController.appendChild(this.line2), this.linkSvgGroup = K("topiclinks"), this.map.appendChild(this.root), this.map.appendChild(this.box), this.map.appendChild(this.svg2nd), this.map.appendChild(this.linkController), this.map.appendChild(this.linkSvgGroup), this.map.appendChild(this.P2), this.map.appendChild(this.P3), this.toolBar && Ln(this), this.nodeMenu && An(this), this.keypress && Hn(this), xn(this), Re() && this.mobileMenu ? Dn(this) : this.contextMenu && bn(this, this.contextMenuOption), this.draggable && Mn(this), ue(this.nodeData, 0, this.expandDeep || 2), this.layout(), this.linkDiv(), this.toTopLeft(), vn(this);
+    e && (this.nodeData = e), t && (this.expandDeep = t), P(this.nodeData), console.log("ME_version " + j.version), console.log(this), this.mindElixirBox.className.indexOf("mind-elixir") === -1 && (this.mindElixirBox.className += "mind-elixir"), this.mindElixirBox.innerHTML = "", this.container = G.createElement("div"), this.container.className = "map-container", this.overflowHidden && (this.container.style.overflow = "hidden"), this.map = G.createElement("div"), this.map.className = "map-canvas", this.map.setAttribute("tabindex", "0"), this.container.appendChild(this.map), this.mindElixirBox.appendChild(this.container), this.root = G.createElement("root"), this.box = G.createElement("children"), this.box.className = "mindbox", this.svg2nd = K("svg2nd"), this.linkController = K("linkcontroller"), this.P2 = G.createElement("div"), this.P3 = G.createElement("div"), this.P2.className = this.P3.className = "circle", this.line1 = be(0, 0, 0, 0), this.line2 = be(0, 0, 0, 0), this.linkController.appendChild(this.line1), this.linkController.appendChild(this.line2), this.linkSvgGroup = K("topiclinks"), this.map.appendChild(this.root), this.map.appendChild(this.box), this.map.appendChild(this.svg2nd), this.map.appendChild(this.linkController), this.map.appendChild(this.linkSvgGroup), this.map.appendChild(this.P2), this.map.appendChild(this.P3), this.toolBar && Ln(this), this.nodeMenu && An(this), this.keypress && Dn(this), xn(this), Re() && this.mobileMenu ? Hn(this) : this.contextMenu && bn(this, this.contextMenuOption), this.draggable && Mn(this), ue(this.nodeData, 0, this.expandDeep || 2), this.layout(), this.linkDiv(), this.toTopLeft(), vn(this);
   }
 };
 j.LEFT = 0;
