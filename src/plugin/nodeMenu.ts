@@ -7,7 +7,8 @@ const createDiv = (id) => {
 }
 
 const colorList = [
-  '#2c3e50',
+  '#000000',
+  // '#2c3e50',
   '#34495e',
   '#7f8c8d',
   '#94a5a6',
