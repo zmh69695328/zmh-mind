@@ -72,9 +72,10 @@ function createToolBarRBContainer(mind) {
     mind.scale((mind.scaleVal += 0.2))
   }
   const scrollContainer = mind.scrollContainer;
+  const offsetRight=window.innerWidth-scrollContainer?.getBoundingClientRect().right+parseInt(scrollContainer&&getComputedStyle(scrollContainer).paddingRight)
   scrollContainer?.addEventListener('scroll',e=>{
     const viewTop=scrollContainer.scrollTop
-    const viewBottom=viewTop+document.body.clientHeight
+    const viewBottom=viewTop+scrollContainer.clientHeight
     const mindTop = mind.mindElixirBox.offsetTop
     const mindBottom = mind.mindElixirBox.offsetTop+mind.mindElixirBox.clientHeight
     const mindHeight=mind.mindElixirBox.clientHeight
@@ -86,6 +87,7 @@ function createToolBarRBContainer(mind) {
     }else if(viewBottom<=mindBottom){
       toolBarRBContainer.style.position='fixed'
       toolBarRBContainer.style.bottom='20px'
+      toolBarRBContainer.style.right=offsetRight+20+'px'
     } else if(viewBottom>mindBottom){
       toolBarRBContainer.style.position='absolute'
       toolBarRBContainer.style.bottom='20px'
@@ -126,7 +128,8 @@ function createToolBarLTContainer(mind) {
   s.onclick = () => {
     mind.initSide()
   }
-  const scrollContainer = mind.scrollContainer
+  const scrollContainer:HTMLElement= mind.scrollContainer
+  const offsetLeft=scrollContainer?.getBoundingClientRect().left+parseInt(scrollContainer&&getComputedStyle(scrollContainer).paddingLeft)
   scrollContainer?.addEventListener('scroll',e=>{
     const viewTop=scrollContainer.scrollTop
     const mindTop = mind.mindElixirBox.offsetTop
@@ -138,6 +141,7 @@ function createToolBarLTContainer(mind) {
     }else if(viewTop>=mindTop){
       toolBarLTContainer.style.position='fixed'
       toolBarLTContainer.style.top='20px'
+      toolBarLTContainer.style.left=offsetLeft+20+'px'
     } else if(viewTop<mindTop){
       toolBarLTContainer.style.position='absolute'
       toolBarLTContainer.style.top='20px'
