@@ -17,7 +17,7 @@ let mind = new MindElixir({
   keypress: true, // default true
   locale: 'zh_CN',
   widthControll:true,  // primaryLinkStyle:2
-  scrollContainer:document.querySelector('body')
+  // scrollContainer:document.querySelector('body')
 })
 mind.init()
 window.mind=mind

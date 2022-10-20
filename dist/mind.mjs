@@ -221,14 +221,14 @@ const H = document, B = "http://www.w3.org/2000/svg", Ze = function(e) {
     const a = Number(s.getAttribute("width")), h = Number(s.getAttribute("height"));
     let d = r.clientX, y = r.clientY;
     u(r.pageX, r.pageY);
-    function u(N, E) {
-      const b = a + N - d, x = h + E - y;
-      s.setAttribute("width", b.toString()), s.setAttribute("height", x.toString()), l.setAttribute("x", (b - 3).toString()), l.setAttribute("y", (x - 3).toString()), i.style.width = b + 5 + "px", i.style.height = x + 5 + "px", n.style.width = b + "px", n.style.height = x + "px";
+    function u(N, k) {
+      const v = a + N - d, x = h + k - y;
+      s.setAttribute("width", v.toString()), s.setAttribute("height", x.toString()), l.setAttribute("x", (v - 3).toString()), l.setAttribute("y", (x - 3).toString()), i.style.width = v + 5 + "px", i.style.height = x + 5 + "px", n.style.width = v + "px", n.style.height = x + "px";
     }
-    function p(N) {
+    function f(N) {
       u(N.pageX, N.pageY);
     }
-    l.onpointermove = p, l.onpointerup = function(N) {
+    l.onpointermove = f, l.onpointerup = function(N) {
       l.onpointermove = null, l.onpointerup = null, l.releasePointerCapture(N.pointerId);
     }, r.stopPropagation(), r.preventDefault(), l.setPointerCapture(r.pointerId);
   }, l.ondragstart = function() {
@@ -339,8 +339,8 @@ function ct(e) {
   e.appendChild(t), t.id = "input-box", t.contentEditable = "true", t.spellcheck = !1, t.textContent = n, t.draggable = !1, e.nodeObj.image && e.nodeObj.image.forEach((y) => {
     const u = L.createElement("img");
     u.src = y.url, u.style.width = y.width + "px", u.style.display = "block", t.appendChild(u);
-    const p = nt(u.clientWidth, u.clientHeight, u);
-    t.insertBefore(p, u);
+    const f = nt(u.clientWidth, u.clientHeight, u);
+    t.insertBefore(f, u);
   }), t.style.cssText = `min-width:${e.offsetWidth - 22}px;min-height:${e.clientHeight - 16}px`, (o = (i = e.nodeObj) == null ? void 0 : i.style) != null && o.width && (t.style.width = "auto"), (((l = (s = e.nodeObj) == null ? void 0 : s.style) == null ? void 0 : l.color) === "#ffffff" || ((r = e.nodeObj) == null ? void 0 : r.id) === "root" && !((h = (a = e.nodeObj) == null ? void 0 : a.style) != null && h.color)) && (t.style.color = "#2c3e50"), this.direction === 0 && (t.style.right = "0"), t.focus(), rt(t), this.inputDiv = t, this.bus.fire("operation", {
     name: "beginEdit",
     obj: e.nodeObj
@@ -353,10 +353,10 @@ function ct(e) {
       d.preventDefault(), this.inputDiv.blur(), this.map.focus();
     }
   }), t.addEventListener("blur", () => {
-    var E, b;
+    var k, v;
     if (!t)
       return;
-    const d = e.nodeObj, y = t.textContent.trim(), u = (b = (E = d.image) == null ? void 0 : E.length) != null ? b : 0;
+    const d = e.nodeObj, y = t.textContent.trim(), u = (v = (k = d.image) == null ? void 0 : k.length) != null ? v : 0;
     if (d.image = [], t.childNodes.forEach((x) => {
       x.nodeName === "IMG" && d.image.push({
         url: x.src,
@@ -366,8 +366,8 @@ function ct(e) {
     }), y === "" && d.image.length === 0 ? d.topic = n : d.topic = y, t.remove(), this.inputDiv = t = null, y === n && u === d.image.length && u === 0)
       return;
     d.image.length === 0 && delete d.image, e.childNodes[0].textContent = d.topic;
-    const p = e.querySelector("widthControllRight"), N = e.querySelector("widthControllRight");
-    d.style || (d.style = {}), d.style.controllWidth = p.style.height = N.style.height = e.clientHeight.toString() + "px", delete d.style.width, this.shapeTpc(e, d), this.linkDiv(), Ae.call(this, this.nodeData, d.id, d.topic), this.bus.fire("operation", {
+    const f = e.querySelector("widthControllRight"), N = e.querySelector("widthControllRight");
+    d.style || (d.style = {}), d.style.controllWidth = f.style.height = N.style.height = e.clientHeight.toString() + "px", delete d.style.width, this.shapeTpc(e, d), this.linkDiv(), Ae.call(this, this.nodeData, d.id, d.topic), this.bus.fire("operation", {
       name: "finishEdit",
       obj: d,
       origin: n
@@ -472,49 +472,49 @@ function ft(e, t) {
 function pt() {
   let e = document.querySelector("root"), t = document.querySelector("root > tpc"), n = t.getBoundingClientRect(), i = getComputedStyle(t), o = t.parentNode, s = 0, l = 0, r = document.querySelector("root > tpc").nodeObj, a = getComputedStyle(o), h = e.offsetTop - M, d = e.offsetLeft - D, y = l + parseInt(a.paddingLeft) + parseInt(n.paddingLeft), u = s + parseInt(a.paddingTop) + parseInt(n.paddingTop) + parseInt(n.fontSize);
   s + parseInt(a.paddingTop) + parseInt(n.paddingTop);
-  let p = document.querySelector(".svg2nd"), N = "";
+  let f = document.querySelector(".svg2nd"), N = "";
   if (r.tags && r.tags.length) {
     let g = t.querySelectorAll(".tags > span");
     for (let c = 0; c < g.length; c++) {
-      let m = g[c], f = m.getBoundingClientRect();
-      N += `<rect x="${y}" y="${u + 4}" rx="5px" ry="5px" width="${f.width}" height="${f.height}" style="fill: #d6f0f8;"></rect>
-        <foreignObject x="${y}" y="${u + 4}" rx="5px" ry="5px" width="${f.width}" height="${f.height}" > 
+      let m = g[c], p = m.getBoundingClientRect();
+      N += `<rect x="${y}" y="${u + 4}" rx="5px" ry="5px" width="${p.width}" height="${p.height}" style="fill: #d6f0f8;"></rect>
+        <foreignObject x="${y}" y="${u + 4}" rx="5px" ry="5px" width="${p.width}" height="${p.height}" > 
           <div sytle="font-size:12px">${m.innerHTML}</div>
         </foreignObject>
       `;
     }
   }
-  let E = "";
+  let k = "";
   if (r.icons && r.icons.length) {
     let g = t.querySelectorAll(".icons > span");
     for (let c = 0; c < g.length; c++) {
       let m = g[c];
-      m.getBoundingClientRect(), E += `
+      m.getBoundingClientRect(), k += `
       <tspan>${m.innerHTML}</tspan>`;
     }
   }
-  let b = "";
+  let v = "";
   if (r.image && r.image.length) {
     let g = tpc.querySelectorAll(".image");
     for (let c = 0; c < g.length; c++) {
       let m = g[c];
-      m.getBoundingClientRect(), b += `${m.outerHTML}`;
+      m.getBoundingClientRect(), v += `${m.outerHTML}`;
     }
   }
-  let x = `<g transform="translate(${O - D}, ${O - M})">${p.innerHTML}</g>`;
+  let x = `<g transform="translate(${O - D}, ${O - M})">${f.innerHTML}</g>`;
   x += `<g id="root" transform="translate(${d + O}, ${h + O})">
       <rect x="${l}" y="${s}" rx="5px" ry="5px" width="${n.width}" height="${n.height}" style="fill: #00aaff;"></rect>
       <foreignObject x="${l + 15}" y="${s + 10}" width="${i.width}" height="${i.height}" ">
         <div xmlns="http://www.w3.org/1999/xhtml" style="padding:0;margin:0;font-family:\u5FAE\u8F6F\u96C5\u9ED1;font-size:${i.fontSize};font-weight:${i.fontWeight};color:${i.color};word-break: break-all;line-height: 1">
         ${r.topic}
-        ${E}
-        ${b}
+        ${k}
+        ${v}
       </div>
       </foreignObject>
       ${N}
   </g>`;
-  let k = Q.querySelector(".topiclinks");
-  return k && (x += `<g transform="translate(${O - D}, ${O - M})">${k.innerHTML}</g>`), x;
+  let E = Q.querySelector(".topiclinks");
+  return E && (x += `<g transform="translate(${O - D}, ${O - M})">${E.innerHTML}</g>`), x;
 }
 function De(e) {
   let t = e.querySelectorAll("tpc"), n = e.offsetTop - M, i = e.offsetLeft - D, o = "", s = e.querySelector(".svg3rd");
@@ -523,18 +523,18 @@ function De(e) {
     let r = t[l], a = r.parentNode, h = r.nodeObj;
     if (h.root)
       continue;
-    let d = r.getBoundingClientRect(), y = a.offsetTop, u = a.offsetLeft, p = getComputedStyle(r), N = getComputedStyle(a), E = u + parseInt(N.paddingLeft) + parseInt(p.paddingLeft), b = y + parseInt(N.paddingTop) + parseInt(p.paddingTop) + parseInt(p.fontSize), x = y + parseInt(N.paddingTop) + parseInt(p.paddingTop), k = "";
-    p.borderWidth != "0px" && (k = `<rect x="${u + 15}" y="${y}" rx="5px" ry="5px" width="${d.width}" height="${d.height}" style="fill: rgba(0,0,0,0); stroke:#444;stroke-width:1px;"></rect>`);
+    let d = r.getBoundingClientRect(), y = a.offsetTop, u = a.offsetLeft, f = getComputedStyle(r), N = getComputedStyle(a), k = u + parseInt(N.paddingLeft) + parseInt(f.paddingLeft), v = y + parseInt(N.paddingTop) + parseInt(f.paddingTop) + parseInt(f.fontSize), x = y + parseInt(N.paddingTop) + parseInt(f.paddingTop), E = "";
+    f.borderWidth != "0px" && (E = `<rect x="${u + 15}" y="${y}" rx="5px" ry="5px" width="${d.width}" height="${d.height}" style="fill: rgba(0,0,0,0); stroke:#444;stroke-width:1px;"></rect>`);
     let g = "";
-    p.backgroundColor != "rgba(0, 0, 0, 0)" && (g = `<rect x="${u + 15}" y="${y}" rx="5px" ry="5px" width="${d.width}" height="${d.height}" style="fill: ${p.backgroundColor};"></rect>`);
+    f.backgroundColor != "rgba(0, 0, 0, 0)" && (g = `<rect x="${u + 15}" y="${y}" rx="5px" ry="5px" width="${d.width}" height="${d.height}" style="fill: ${f.backgroundColor};"></rect>`);
     let c = "";
     if (h.tags && h.tags.length) {
       let C = r.querySelectorAll(".tags > span");
       for (let w = 0; w < C.length; w++) {
-        let v = C[w], A = v.getBoundingClientRect();
-        c += `<rect x="${E}" y="${b + 4}" rx="5px" ry="5px" width="${A.width}" height="${A.height}" style="fill: #d6f0f8;"></rect>
-          <foreignObject x="${E}" y="${b + 4}" rx="5px" ry="5px" width="${A.width}" height="${A.height}" > 
-            <div sytle="font-size:12px">${v.innerHTML}</div>
+        let b = C[w], A = b.getBoundingClientRect();
+        c += `<rect x="${k}" y="${v + 4}" rx="5px" ry="5px" width="${A.width}" height="${A.height}" style="fill: #d6f0f8;"></rect>
+          <foreignObject x="${k}" y="${v + 4}" rx="5px" ry="5px" width="${A.width}" height="${A.height}" > 
+            <div sytle="font-size:12px">${b.innerHTML}</div>
           </foreignObject>`;
       }
     }
@@ -542,27 +542,27 @@ function De(e) {
     if (h.icons && h.icons.length) {
       let C = r.querySelectorAll(".icons > span");
       for (let w = 0; w < C.length; w++) {
-        let v = C[w];
-        v.getBoundingClientRect(), m += `
-        <tspan>${v.innerHTML}</tspan>`;
+        let b = C[w];
+        b.getBoundingClientRect(), m += `
+        <tspan>${b.innerHTML}</tspan>`;
       }
     }
-    let f = "";
+    let p = "";
     if (h.image && h.image.length) {
       let C = r.querySelectorAll(".image");
       for (let w = 0; w < C.length; w++) {
-        let v = C[w];
-        v.getBoundingClientRect(), f += `${v.outerHTML}`;
+        let b = C[w];
+        b.getBoundingClientRect(), p += `${b.outerHTML}`;
       }
     }
     o += `<g id="${h.id}">
-      ${k}
+      ${E}
       ${g}
-      <foreignObject  x="${E}" y="${x}" width="${p.width}" height="${p.height}">
-      <div xmlns="http://www.w3.org/1999/xhtml" style="padding:0;margin:0;font-family:\u5FAE\u8F6F\u96C5\u9ED1;font-size:${p.fontSize};font-weight:${p.fontWeight};color:${p.color};word-break: break-all;line-height: 1">
+      <foreignObject  x="${k}" y="${x}" width="${f.width}" height="${f.height}">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="padding:0;margin:0;font-family:\u5FAE\u8F6F\u96C5\u9ED1;font-size:${f.fontSize};font-weight:${f.fontWeight};color:${f.color};word-break: break-all;line-height: 1">
         ${h.topic}
         ${m}
-        ${f}
+        ${p}
       </div>
       </foreignObject>
       ${c}
@@ -1060,24 +1060,24 @@ const un = function(e, t, n, i) {
   if (!e || !t)
     return;
   const s = e.getBoundingClientRect(), l = t.getBoundingClientRect(), r = (s.x + s.width / 2 - o.x) / this.scaleVal, a = (s.y + s.height / 2 - o.y) / this.scaleVal, h = (l.x + l.width / 2 - o.x) / this.scaleVal, d = (l.y + l.height / 2 - o.y) / this.scaleVal;
-  let y, u, p, N;
-  n ? (y = r + i.delta1.x, u = a + i.delta1.y, p = h + i.delta2.x, N = d + i.delta2.y) : (a + d) / 2 - a <= s.height / 2 ? (y = (s.x + s.width - o.x) / this.scaleVal + 100, u = a, p = (l.x + l.width - o.x) / this.scaleVal + 100, N = d) : (y = (r + h) / 2, u = (a + d) / 2, p = (r + h) / 2, N = (a + d) / 2);
-  const E = {
+  let y, u, f, N;
+  n ? (y = r + i.delta1.x, u = a + i.delta1.y, f = h + i.delta2.x, N = d + i.delta2.y) : (a + d) / 2 - a <= s.height / 2 ? (y = (s.x + s.width - o.x) / this.scaleVal + 100, u = a, f = (l.x + l.width - o.x) / this.scaleVal + 100, N = d) : (y = (r + h) / 2, u = (a + d) / 2, f = (r + h) / 2, N = (a + d) / 2);
+  const k = {
     cx: r,
     cy: a,
     w: s.width,
     h: s.height
-  }, b = {
+  }, v = {
     cx: h,
     cy: d,
     w: l.width,
     h: l.height
-  }, x = ce(E, y, u), k = x.x, g = x.y, c = ae(b, p, N), m = c.x, f = c.y, C = Se(p, N, m, f), w = tt(
-    `M ${k} ${g} C ${y} ${u} ${p} ${N} ${m} ${f}`,
-    `M ${C.x1} ${C.y1} L ${m} ${f} L ${C.x2} ${C.y2}`
+  }, x = ce(k, y, u), E = x.x, g = x.y, c = ae(v, f, N), m = c.x, p = c.y, C = Se(f, N, m, p), w = tt(
+    `M ${E} ${g} C ${y} ${u} ${f} ${N} ${m} ${p}`,
+    `M ${C.x1} ${C.y1} L ${m} ${p} L ${C.x2} ${C.y2}`
   );
-  let v;
-  n ? (v = {
+  let b;
+  n ? (b = {
     id: i.id,
     label: "",
     from: e,
@@ -1087,10 +1087,10 @@ const un = function(e, t, n, i) {
       y: u - a
     },
     delta2: {
-      x: p - h,
+      x: f - h,
       y: N - d
     }
-  }, this.linkData[i.id] = v, w.linkObj = v, w.dataset.linkid = i.id) : (v = {
+  }, this.linkData[i.id] = b, w.linkObj = b, w.dataset.linkid = i.id) : (b = {
     id: ee(),
     label: "",
     from: e,
@@ -1100,10 +1100,10 @@ const un = function(e, t, n, i) {
       y: u - a
     },
     delta2: {
-      x: p - h,
+      x: f - h,
       y: N - d
     }
-  }, this.linkData[v.id] = v, w.linkObj = v, w.dataset.linkid = v.id, this.currentLink = w), this.linkSvgGroup.appendChild(w), n || this.showLinkController(y, u, p, N, v, E, b);
+  }, this.linkData[b.id] = b, w.linkObj = b, w.dataset.linkid = b.id, this.currentLink = w), this.linkSvgGroup.appendChild(w), n || this.showLinkController(y, u, f, N, b, k, v);
 }, fn = function(e) {
   let t;
   if (e ? t = e : t = this.currentLink, !t)
@@ -1123,8 +1123,8 @@ const un = function(e, t, n, i) {
     cy: d,
     w: l.width,
     h: l.height
-  }, p = r + t.delta1.x, N = a + t.delta1.y, E = h + t.delta2.x, b = d + t.delta2.y;
-  this.showLinkController(p, N, E, b, t, y, u);
+  }, f = r + t.delta1.x, N = a + t.delta1.y, k = h + t.delta2.x, v = d + t.delta2.y;
+  this.showLinkController(f, N, k, v, t, y, u);
 }, gn = function() {
   this.linkController.style.display = "none", this.P2.style.display = "none", this.P3.style.display = "none";
 }, mn = function(e, t, n, i, o, s, l) {
@@ -1133,29 +1133,29 @@ const un = function(e, t, n, i) {
   let a = r.x, h = r.y;
   const d = ae(l, n, i);
   let y = d.x, u = d.y;
-  this.P2.style.cssText = `top:${t}px;left:${e}px;`, this.P3.style.cssText = `top:${i}px;left:${n}px;`, this.line1.setAttribute("x1", a), this.line1.setAttribute("y1", h), this.line1.setAttribute("x2", e), this.line1.setAttribute("y2", t), this.line2.setAttribute("x1", n), this.line2.setAttribute("y1", i), this.line2.setAttribute("x2", y), this.line2.setAttribute("y2", u), this.helper1 && (this.helper1.destory(this.map), this.helper2.destory(this.map)), this.helper1 = new Z(this.P2), this.helper2 = new Z(this.P3), this.helper1.init(this.map, (p, N) => {
-    e = e - p / this.scaleVal, t = t - N / this.scaleVal;
-    const E = ce(s, e, t);
-    a = E.x, h = E.y, this.P2.style.top = t + "px", this.P2.style.left = e + "px", this.currentLink.children[0].setAttribute(
+  this.P2.style.cssText = `top:${t}px;left:${e}px;`, this.P3.style.cssText = `top:${i}px;left:${n}px;`, this.line1.setAttribute("x1", a), this.line1.setAttribute("y1", h), this.line1.setAttribute("x2", e), this.line1.setAttribute("y2", t), this.line2.setAttribute("x1", n), this.line2.setAttribute("y1", i), this.line2.setAttribute("x2", y), this.line2.setAttribute("y2", u), this.helper1 && (this.helper1.destory(this.map), this.helper2.destory(this.map)), this.helper1 = new Z(this.P2), this.helper2 = new Z(this.P3), this.helper1.init(this.map, (f, N) => {
+    e = e - f / this.scaleVal, t = t - N / this.scaleVal;
+    const k = ce(s, e, t);
+    a = k.x, h = k.y, this.P2.style.top = t + "px", this.P2.style.left = e + "px", this.currentLink.children[0].setAttribute(
       "d",
       `M ${a} ${h} C ${e} ${t} ${n} ${i} ${y} ${u}`
     ), this.line1.setAttribute("x1", a), this.line1.setAttribute("y1", h), this.line1.setAttribute("x2", e), this.line1.setAttribute("y2", t), o.delta1.x = e - s.cx, o.delta1.y = t - s.cy;
-  }), this.helper2.init(this.map, (p, N) => {
-    n = n - p / this.scaleVal, i = i - N / this.scaleVal;
-    const E = ae(l, n, i);
-    y = E.x, u = E.y;
-    const b = Se(n, i, y, u);
+  }), this.helper2.init(this.map, (f, N) => {
+    n = n - f / this.scaleVal, i = i - N / this.scaleVal;
+    const k = ae(l, n, i);
+    y = k.x, u = k.y;
+    const v = Se(n, i, y, u);
     this.P3.style.top = i + "px", this.P3.style.left = n + "px", this.currentLink.children[0].setAttribute(
       "d",
       `M ${a} ${h} C ${e} ${t} ${n} ${i} ${y} ${u}`
     ), this.currentLink.children[1].setAttribute(
       "d",
-      `M ${b.x1} ${b.y1} L ${y} ${u} L ${b.x2} ${b.y2}`
+      `M ${v.x1} ${v.y1} L ${y} ${u} L ${v.x2} ${v.y2}`
     ), this.line2.setAttribute("x1", n), this.line2.setAttribute("y1", i), this.line2.setAttribute("x2", y), this.line2.setAttribute("y2", u), o.delta2.x = n - l.cx, o.delta2.y = i - l.cy;
   });
 };
 function yn(e) {
-  var b, x;
+  var v, x;
   var t = this.primaryNodeHorizontalGap || 65, n = this.primaryNodeVerticalGap || 25;
   console.time("linkDiv");
   const i = this.root;
@@ -1164,51 +1164,51 @@ function yn(e) {
   this.svg2nd.innerHTML = "";
   let s = 0, l, r = 0, a = 0, h = 0, d = 0, y = 0, u;
   if (this.direction === 2) {
-    let k = 0, g = 0, c = 0, m = 0;
-    for (let f = 0; f < o.length; f++) {
-      const C = o[f];
-      C.className === "lhs" ? (d += C.offsetHeight + n, c += C.offsetHeight, k += 1) : (y += C.offsetHeight + n, m += C.offsetHeight, g += 1);
+    let E = 0, g = 0, c = 0, m = 0;
+    for (let p = 0; p < o.length; p++) {
+      const C = o[p];
+      C.className === "lhs" ? (d += C.offsetHeight + n, c += C.offsetHeight, E += 1) : (y += C.offsetHeight + n, m += C.offsetHeight, g += 1);
     }
-    d > y ? (u = 1e4 - Math.max(d) / 2, l = "r", r = (d - m) / (g - 1)) : (u = 1e4 - Math.max(y) / 2, l = "l", r = (y - c) / (k - 1));
+    d > y ? (u = 1e4 - Math.max(d) / 2, l = "r", r = (d - m) / (g - 1)) : (u = 1e4 - Math.max(y) / 2, l = "l", r = (y - c) / (E - 1));
   } else {
-    for (let k = 0; k < o.length; k++)
-      s += o[k].offsetHeight + n;
+    for (let E = 0; E < o.length; E++)
+      s += o[E].offsetHeight + n;
     u = 1e4 - s / 2;
   }
-  let p = "";
-  const N = 1e4 - i.offsetWidth / 2 - t + 60, E = 1e4 + i.offsetWidth / 2 + t - 60;
-  for (let k = 0; k < o.length; k++) {
+  let f = "";
+  const N = 1e4 - i.offsetWidth / 2 - t + 60, k = 1e4 + i.offsetWidth / 2 + t - 60;
+  for (let E = 0; E < o.length; E++) {
     let g, c;
-    const m = o[k], f = m.offsetHeight;
+    const m = o[E], p = m.offsetHeight;
     let C = i.offsetLeft - 10;
     if (m.className === "lhs") {
-      m.style.top = u + a + "px", m.style.left = N - m.offsetWidth + "px", g = N - 15, c = u + a + f / 2;
-      let v = 1e4;
-      this.primaryLinkStyle === 2 ? (this.direction === 2 && (v = 1e4 - i.offsetWidth / 6), c < 1e4 ? p += `M ${v} 10000 V ${c + 20} C ${v} ${c} ${v} ${c} ${v - 20} ${c} H ${g}` : p += `M ${v} 10000 V ${c - 20} C ${v} ${c} ${v} ${c} ${v - 20} ${c} H ${g}`) : p += `M 10000 10000 H ${C} V ${c} H ${g}`, l === "l" ? a += f + r : a += f + n;
+      m.style.top = u + a + "px", m.style.left = N - m.offsetWidth + "px", g = N - 15, c = u + a + p / 2;
+      let b = 1e4;
+      this.primaryLinkStyle === 2 ? (this.direction === 2 && (b = 1e4 - i.offsetWidth / 6), c < 1e4 ? f += `M ${b} 10000 V ${c + 20} C ${b} ${c} ${b} ${c} ${b - 20} ${c} H ${g}` : f += `M ${b} 10000 V ${c - 20} C ${b} ${c} ${b} ${c} ${b - 20} ${c} H ${g}`) : f += `M 10000 10000 H ${C} V ${c} H ${g}`, l === "l" ? a += p + r : a += p + n;
     } else {
-      C = i.offsetLeft + i.offsetWidth + 10, m.style.top = u + h + "px", m.style.left = E + "px", g = E + 15, c = u + h + f / 2;
-      let v = 1e4;
-      this.primaryLinkStyle === 2 ? (this.direction === 2 && (v = 1e4 + i.offsetWidth / 6), c < 1e4 ? p += `M ${v} 10000 V ${c + 20} C ${v} ${c} ${v} ${c} ${v + 20} ${c} H ${g}` : p += `M ${v} 10000 V ${c - 20} C ${v} ${c} ${v} ${c} ${v + 20} ${c} H ${g}`) : p += `M 10000 10000 H ${C} V ${c} H ${g}`, l === "r" ? h += f + r : h += f + n;
+      C = i.offsetLeft + i.offsetWidth + 10, m.style.top = u + h + "px", m.style.left = k + "px", g = k + 15, c = u + h + p / 2;
+      let b = 1e4;
+      this.primaryLinkStyle === 2 ? (this.direction === 2 && (b = 1e4 + i.offsetWidth / 6), c < 1e4 ? f += `M ${b} 10000 V ${c + 20} C ${b} ${c} ${b} ${c} ${b + 20} ${c} H ${g}` : f += `M ${b} 10000 V ${c - 20} C ${b} ${c} ${b} ${c} ${b + 20} ${c} H ${g}`) : f += `M 10000 10000 H ${C} V ${c} H ${g}`, l === "r" ? h += p + r : h += p + n;
     }
     const w = m.children[0].children[1];
     w && (w.style.top = (w.parentNode.offsetHeight - w.offsetHeight) / 2 + "px", m.className === "lhs" ? w.style.left = -10 + "px" : w.style.left = w.parentNode.offsetWidth - 10 + "px");
   }
-  this.svg2nd.appendChild(Ze(p));
-  for (let k = 0; k < o.length; k++) {
-    const g = o[k];
-    if (!(e && e !== o[k]) && g.childElementCount) {
+  this.svg2nd.appendChild(Ze(f));
+  for (let E = 0; E < o.length; E++) {
+    const g = o[E];
+    if (!(e && e !== o[E]) && g.childElementCount) {
       const c = K("svg3rd"), m = K("svg3rd");
       g.querySelectorAll(".svg3rd").forEach((w) => {
         w.remove();
       }), g.appendChild(c);
-      const f = g.children[0];
+      const p = g.children[0];
       let C;
-      ((x = (b = g.children) == null ? void 0 : b[2]) == null ? void 0 : x.tagName) === "SMYCHILDREN" ? C = [...g.children[1].children, ...g.children[2].children] : C = g.children[1].children, q = "", ie = "", Be(C, f, this.nodeData.children[k], !0), c.appendChild(et(q)), ie.length > 0 && (g.appendChild(m), m.appendChild(Qe(ie)));
+      ((x = (v = g.children) == null ? void 0 : v[2]) == null ? void 0 : x.tagName) === "SMYCHILDREN" ? C = [...g.children[1].children, ...g.children[2].children] : C = g.children[1].children, q = "", ie = "", Be(C, p, this.nodeData.children[E], !0), c.appendChild(et(q)), ie.length > 0 && (g.appendChild(m), m.appendChild(Qe(ie)));
     }
   }
   this.linkSvgGroup.innerHTML = "";
-  for (const k in this.linkData) {
-    const g = this.linkData[k];
+  for (const E in this.linkData) {
+    const g = this.linkData[E];
     typeof g.from == "string" ? this.createLink($(g.from), $(g.to), !0, g) : this.createLink(
       $(g.from.nodeObj.id),
       $(g.to.nodeObj.id),
@@ -1224,9 +1224,9 @@ function Be(e, t, n, i) {
   let o = t.offsetTop, s = t.offsetLeft, l = t.offsetWidth, r = t.offsetHeight, a = !1;
   t.offsetParent.tagName === "SMY" && (a = !0, o += t.offsetParent.offsetTop, s += t.offsetParent.offsetLeft);
   for (let u = 0; u < e.length; u++) {
-    const p = e[u];
-    if ((p == null ? void 0 : p.tagName) === "SMY") {
-      let v = e[0], A = e[u - 1];
+    const f = e[u];
+    if ((f == null ? void 0 : f.tagName) === "SMY") {
+      let b = e[0], A = e[u - 1];
       const z = {};
       n.children[u].summary.range.forEach((V) => {
         z[V] = !0;
@@ -1234,29 +1234,29 @@ function Be(e, t, n, i) {
       let te = !0;
       for (let V = 0; V < u; V++) {
         const Fe = e[V].children[0].children[0].getAttribute("data-nodeid").slice(2);
-        z[Fe] && (te && (te = !1, v = e[V]), A = e[V]);
+        z[Fe] && (te && (te = !1, b = e[V]), A = e[V]);
       }
-      const ge = v.offsetLeft + v.offsetWidth + 8, me = v.offsetTop + 15, ye = A.offsetTop + A.offsetHeight - 5, Pe = A.offsetLeft + A.offsetWidth + 8, ze = p.offsetTop + p.children[0].offsetTop + p.children[0].offsetHeight;
-      let ne = (h = p.style.top) != null ? h : 0;
-      typeof ne == "string" && (ne = Number(ne.replace("px", ""))), p.style.top = ne + (ye + me + 20) / 2 - ze + "px", ie += `M ${ge} ${me} H ${ge + 10} V ${ye} H${Pe}`;
+      const ge = b.offsetLeft + b.offsetWidth + 8, me = b.offsetTop + 15, ye = A.offsetTop + A.offsetHeight - 5, Pe = A.offsetLeft + A.offsetWidth + 8, ze = f.offsetTop + f.children[0].offsetTop + f.children[0].offsetHeight;
+      let ne = (h = f.style.top) != null ? h : 0;
+      typeof ne == "string" && (ne = Number(ne.replace("px", ""))), f.style.top = ne + (ye + me + 20) / 2 - ze + "px", ie += `M ${ge} ${me} H ${ge + 10} V ${ye} H${Pe}`;
     }
-    const N = p.children[0];
-    let E = N.offsetTop, b = N.offsetHeight;
-    a && (E += N.offsetParent.offsetTop);
+    const N = f.children[0];
+    let k = N.offsetTop, v = N.offsetHeight;
+    a && (k += N.offsetParent.offsetTop);
     let x;
     i || a ? x = o + r / 2 : x = o + r;
-    const k = E + b;
+    const E = k + v;
     let g, c, m;
-    const f = p.offsetParent.className || p.offsetParent.offsetParent.className;
-    f === "lhs" && (p == null ? void 0 : p.tagName) !== "SMY" ? (g = s + 15, m = s, c = s - N.offsetWidth, E + b < o + r / 2 + 50 && E + b > o + r / 2 - 50 ? q += `M ${g} ${x} H ${m} V ${k} H ${c}` : E + b >= o + r / 2 ? q += `M ${g} ${x} H ${m} V ${k} H ${c}` : q += `M ${g} ${x} H ${m} V ${k} H ${c}`) : f === "rhs" && (p == null ? void 0 : p.tagName) !== "SMY" && (g = s + l - 15, a && (g += 15), m = s + l, c = s + l + N.offsetWidth, E + b < o + r / 2 + 50 && E + b > o + r / 2 - 50 ? q += `M ${g} ${x} H ${m} V ${k} H ${c}` : E + b >= o + r / 2 ? q += `M ${g} ${x} H ${m} V ${k} H ${c}` : q += `M ${g} ${x} H ${m} V ${k} H ${c}`);
+    const p = f.offsetParent.className || f.offsetParent.offsetParent.className;
+    p === "lhs" && (f == null ? void 0 : f.tagName) !== "SMY" ? (g = s + 15, m = s, c = s - N.offsetWidth, k + v < o + r / 2 + 50 && k + v > o + r / 2 - 50 ? q += `M ${g} ${x} H ${m} V ${E} H ${c}` : k + v >= o + r / 2 ? q += `M ${g} ${x} H ${m} V ${E} H ${c}` : q += `M ${g} ${x} H ${m} V ${E} H ${c}`) : p === "rhs" && (f == null ? void 0 : f.tagName) !== "SMY" && (g = s + l - 15, a && (g += 15), m = s + l, c = s + l + N.offsetWidth, k + v < o + r / 2 + 50 && k + v > o + r / 2 - 50 ? q += `M ${g} ${x} H ${m} V ${E} H ${c}` : k + v >= o + r / 2 ? q += `M ${g} ${x} H ${m} V ${E} H ${c}` : q += `M ${g} ${x} H ${m} V ${E} H ${c}`);
     const C = N.children[1];
     if (C) {
-      if (C.style.top = (N.offsetHeight - C.offsetHeight) / 2 + "px", f === "lhs" ? C.style.left = -10 + "px" : f === "rhs" && (C.style.left = N.offsetWidth - 10 + "px"), !C.expanded)
+      if (C.style.top = (N.offsetHeight - C.offsetHeight) / 2 + "px", p === "lhs" ? C.style.left = -10 + "px" : p === "rhs" && (C.style.left = N.offsetWidth - 10 + "px"), !C.expanded)
         continue;
     } else
       continue;
     let w;
-    ((y = (d = p.children) == null ? void 0 : d[2]) == null ? void 0 : y.tagName) === "SMYCHILDREN" ? w = [...p.children[1].children, ...p.children[2].children] : w = [...p.children[1].children], w.length > 0 && Be(w, N, n.children[u]);
+    ((y = (d = f.children) == null ? void 0 : d[2]) == null ? void 0 : y.tagName) === "SMYCHILDREN" ? w = [...f.children[1].children, ...f.children[2].children] : w = [...f.children[1].children], w.length > 0 && Be(w, N, n.children[u]);
   }
 }
 function vn(e) {
@@ -1402,59 +1402,59 @@ function bn(e, t) {
     const c = document.createElement("div");
     return c.innerText = g, c.style.cssText = "position:absolute;bottom:20px;left:50%;transform:translateX(-50%);", c;
   }, i = (g, c, m) => {
-    const f = document.createElement("li");
-    return f.id = g, f.innerHTML = `<span>${oe(c)}</span><span>${oe(m)}</span>`, f;
+    const p = document.createElement("li");
+    return p.id = g, p.innerHTML = `<span>${oe(c)}</span><span>${oe(m)}</span>`, p;
   }, o = S[e.locale] ? e.locale : "en", s = i("cm-add_child", S[o].addChild, "tab"), l = i("cm-add_parent", S[o].addParent, ""), r = i("cm-add_sibling", S[o].addSibling, "enter"), a = i(
     "cm-remove_child",
     S[o].removeNode,
     "delete"
-  ), h = i("cm-fucus", S[o].focus, ""), d = i("cm-unfucus", S[o].cancelFocus, ""), y = i("cm-up", S[o].moveUp, "PgUp"), u = i("cm-down", S[o].moveDown, "Pgdn"), p = i("cm-link", S[o].link, ""), N = i("cm-nodelink", S[o].nodeLink, ""), E = i("cm-summary", S[o].summary, ""), b = document.createElement("ul");
-  if (b.className = "menu-list", b.appendChild(s), b.appendChild(l), b.appendChild(r), b.appendChild(a), (!t || t.focus) && (b.appendChild(h), b.appendChild(d)), b.appendChild(y), b.appendChild(u), (!t || t.link) && (b.appendChild(p), b.appendChild(N)), b.appendChild(E), t && t.extend)
+  ), h = i("cm-fucus", S[o].focus, ""), d = i("cm-unfucus", S[o].cancelFocus, ""), y = i("cm-up", S[o].moveUp, "PgUp"), u = i("cm-down", S[o].moveDown, "Pgdn"), f = i("cm-link", S[o].link, ""), N = i("cm-nodelink", S[o].nodeLink, ""), k = i("cm-summary", S[o].summary, ""), v = document.createElement("ul");
+  if (v.className = "menu-list", v.appendChild(s), v.appendChild(l), v.appendChild(r), v.appendChild(a), (!t || t.focus) && (v.appendChild(h), v.appendChild(d)), v.appendChild(y), v.appendChild(u), (!t || t.link) && (v.appendChild(f), v.appendChild(N)), v.appendChild(k), t && t.extend)
     for (let g = 0; g < t.extend.length; g++) {
       const c = t.extend[g], m = i(c.name, c.name, c.key || "");
-      b.appendChild(m), m.onclick = (f) => {
-        c.onclick(f);
+      v.appendChild(m), m.onclick = (p) => {
+        c.onclick(p);
       };
     }
   const x = document.createElement("cmenu");
-  x.appendChild(b), x.hidden = !0, e.container.append(x);
-  let k = !0;
+  x.appendChild(v), x.hidden = !0, e.container.append(x);
+  let E = !0;
   e.container.oncontextmenu = function(g) {
     if (g.preventDefault(), !e.editable)
       return;
     const c = g.target;
     if (c.tagName === "TPC") {
-      c.parentElement.tagName === "ROOT" ? k = !0 : k = !1, k ? (h.className = "disabled", y.className = "disabled", u.className = "disabled", r.className = "disabled", a.className = "disabled") : (h.className = "", y.className = "", u.className = "", r.className = "", a.className = ""), e.selectNode(c), x.hidden = !1;
-      const m = b.offsetHeight, f = b.offsetWidth;
-      m + g.clientY > window.innerHeight ? (b.style.top = "", b.style.bottom = "0px") : (b.style.bottom = "", b.style.top = g.clientY + 15 + "px"), f + g.clientX > window.innerWidth ? (b.style.left = "", b.style.right = "0px") : (b.style.right = "", b.style.left = g.clientX + 10 + "px");
+      c.parentElement.tagName === "ROOT" ? E = !0 : E = !1, E ? (h.className = "disabled", y.className = "disabled", u.className = "disabled", r.className = "disabled", a.className = "disabled") : (h.className = "", y.className = "", u.className = "", r.className = "", a.className = ""), e.selectNode(c), x.hidden = !1;
+      const m = v.offsetHeight, p = v.offsetWidth;
+      m + g.clientY > window.innerHeight ? (v.style.top = "", v.style.bottom = "0px") : (v.style.bottom = "", v.style.top = g.clientY + 15 + "px"), p + g.clientX > window.innerWidth ? (v.style.left = "", v.style.right = "0px") : (v.style.right = "", v.style.left = g.clientX + 10 + "px");
     }
   }, x.onclick = (g) => {
     g.target === x && (x.hidden = !0);
   }, s.onclick = (g) => {
     e.addChild(), x.hidden = !0;
-  }, E.onclick = (g) => {
+  }, k.onclick = (g) => {
     e.addSummary(), x.hidden = !0;
   }, l.onclick = (g) => {
     e.insertParent(), x.hidden = !0;
   }, r.onclick = (g) => {
-    k || (e.insertSibling(), x.hidden = !0);
+    E || (e.insertSibling(), x.hidden = !0);
   }, a.onclick = (g) => {
-    k || (e.removeNode(), x.hidden = !0);
+    E || (e.removeNode(), x.hidden = !0);
   }, h.onclick = (g) => {
-    k || (e.focusNode(e.currentNode), x.hidden = !0);
+    E || (e.focusNode(e.currentNode), x.hidden = !0);
   }, d.onclick = (g) => {
     e.cancelFocus(), x.hidden = !0;
   }, y.onclick = (g) => {
-    k || (e.moveUpNode(), x.hidden = !0);
+    E || (e.moveUpNode(), x.hidden = !0);
   }, u.onclick = (g) => {
-    k || (e.moveDownNode(), x.hidden = !0);
-  }, p.onclick = (g) => {
+    E || (e.moveDownNode(), x.hidden = !0);
+  }, f.onclick = (g) => {
     x.hidden = !0;
     const c = e.currentNode, m = n(S[o].clickTips);
     e.container.appendChild(m), e.map.addEventListener(
       "click",
-      (f) => {
-        if (f.preventDefault(), m.remove(), f.target.parentElement.nodeName === "T" || f.target.parentElement.nodeName === "ROOT") {
+      (p) => {
+        if (p.preventDefault(), m.remove(), p.target.parentElement.nodeName === "T" || p.target.parentElement.nodeName === "ROOT") {
           const C = e.currentNode;
           e.createLink(c, C);
         } else
@@ -1469,8 +1469,8 @@ function bn(e, t) {
     const c = e.currentNode, m = n(S[o].clickTips);
     e.container.appendChild(m), e.map.addEventListener(
       "click",
-      (f) => {
-        if (f.preventDefault(), m.remove(), f.target.parentElement.nodeName === "T" || f.target.parentElement.nodeName === "ROOT") {
+      (p) => {
+        if (p.preventDefault(), m.remove(), p.target.parentElement.nodeName === "T" || p.target.parentElement.nodeName === "ROOT") {
           const C = e.currentNode;
           c.nodeObj.linkJump || (c.nodeObj.linkJump = []), c.nodeObj.linkJump.push(
             {
@@ -1524,16 +1524,16 @@ function Cn(e, t) {
   };
 }
 function kn(e) {
-  var h;
+  var d;
   const t = document.createElement("toolbar"), n = I("fullscreen", "full"), i = I("toCenter", "living"), o = I("zoomout", "move"), s = I("zoomin", "add"), l = document.createElement("input");
-  l.className = "numberSelection", l.type = "number", l.min = "2", l.max = "100", l.step = "1", l.value = ((h = e == null ? void 0 : e.expandDeep) == null ? void 0 : h.toString()) || "2", l.oninput = Cn(() => {
-    const d = e.getAllDataWithAutoHide();
-    fe(d == null ? void 0 : d.nodeData), e.layout(), e.linkDiv();
+  l.className = "numberSelection", l.type = "number", l.min = "2", l.max = "100", l.step = "1", l.value = ((d = e == null ? void 0 : e.expandDeep) == null ? void 0 : d.toString()) || "2", l.oninput = Cn(() => {
+    const y = e.getAllDataWithAutoHide();
+    fe(y == null ? void 0 : y.nodeData), e.layout(), e.linkDiv();
   }, 300);
   const r = document.createElement("span");
   if (r.innerText = "100%", t.appendChild(l), t.appendChild(n), t.appendChild(i), t.appendChild(o), t.appendChild(s), e.uploadButton) {
-    const d = Sn(e);
-    t.appendChild(d);
+    const y = Sn(e);
+    t.appendChild(y);
   }
   t.className = "rb", n.onclick = () => {
     e.container.requestFullscreen();
@@ -1544,17 +1544,17 @@ function kn(e) {
   }, s.onclick = () => {
     e.scaleVal > 1.6 || e.scale(e.scaleVal += 0.2);
   };
-  const a = e.scrollContainer;
-  return a == null || a.addEventListener("scroll", (d) => {
-    const u = a.scrollTop + document.body.clientHeight, p = e.mindElixirBox.offsetTop, N = e.mindElixirBox.offsetTop + e.mindElixirBox.clientHeight, E = e.mindElixirBox.clientHeight;
-    u < p + t.clientHeight + 40 ? (t.style.position = "absolute", t.style.bottom = E - 20 - t.clientHeight + "px") : u <= N ? (t.style.position = "fixed", t.style.bottom = "20px") : u > N && (t.style.position = "absolute", t.style.bottom = "20px");
+  const a = e.scrollContainer, h = window.innerWidth - (a == null ? void 0 : a.getBoundingClientRect().right) + parseInt(a && getComputedStyle(a).paddingRight);
+  return a == null || a.addEventListener("scroll", (y) => {
+    const f = a.scrollTop + a.clientHeight, N = e.mindElixirBox.offsetTop, k = e.mindElixirBox.offsetTop + e.mindElixirBox.clientHeight, v = e.mindElixirBox.clientHeight;
+    f < N + t.clientHeight + 40 ? (t.style.position = "absolute", t.style.bottom = v - 20 - t.clientHeight + "px") : f <= k ? (t.style.position = "fixed", t.style.bottom = "20px", t.style.right = h + 20 + "px") : f > k && (t.style.position = "absolute", t.style.bottom = "20px");
   }), t;
 }
 function En(e) {
   const t = document.createElement("toolbar"), n = I("sidebar", "menu"), i = I("tbltl", "left"), o = I("tbltr", "right"), s = I("tblts", "side");
   t.appendChild(n), t.appendChild(i), t.appendChild(o), t.appendChild(s), t.className = "lt", n.onclick = () => {
-    const r = document.querySelector("sidebar");
-    Nn(e, r), r.classList.contains("selected") ? r.removeAttribute("class") : r.setAttribute("class", "selected");
+    const a = document.querySelector("sidebar");
+    Nn(e, a), a.classList.contains("selected") ? a.removeAttribute("class") : a.setAttribute("class", "selected");
   }, i.onclick = () => {
     e.initLeft();
   }, o.onclick = () => {
@@ -1562,12 +1562,12 @@ function En(e) {
   }, s.onclick = () => {
     e.initSide();
   };
-  const l = e.scrollContainer;
+  const l = e.scrollContainer, r = (l == null ? void 0 : l.getBoundingClientRect().left) + parseInt(l && getComputedStyle(l).paddingLeft);
   return l == null || l.addEventListener(
     "scroll",
-    (r) => {
-      const a = l.scrollTop, h = e.mindElixirBox.offsetTop, d = e.mindElixirBox.clientHeight, y = h + d - t.clientHeight - 40;
-      a > y ? (t.style.position = "absolute", t.style.top = y - h + 20 + "px") : a >= h ? (t.style.position = "fixed", t.style.top = "20px") : a < h && (t.style.position = "absolute", t.style.top = "20px");
+    (a) => {
+      const h = l.scrollTop, d = e.mindElixirBox.offsetTop, y = e.mindElixirBox.clientHeight, u = d + y - t.clientHeight - 40;
+      h > u ? (t.style.position = "absolute", t.style.top = u - d + 20 + "px") : h >= d ? (t.style.position = "fixed", t.style.top = "20px", t.style.left = r + 20 + "px") : h < d && (t.style.position = "absolute", t.style.top = "20px");
     }
   ), t;
 }
@@ -1600,7 +1600,7 @@ const J = (e) => {
   const t = document.createElement("div");
   return t.id = e, t;
 }, $n = [
-  "#2c3e50",
+  "#000000",
   "#34495e",
   "#7f8c8d",
   "#94a5a6",
@@ -1645,13 +1645,13 @@ function An(e) {
   `, o.innerHTML = `${S[t].tag}<textarea class="nm-tag" tabindex="-1" placeholder="${S[t].tagsSeparate}" /><br>`, s.innerHTML = `${S[t].icon}<div class="nm-icon" contenteditable="true" spellcheck="false" placeholder="${S[t].iconsSeparate}" ></div>`, l.innerHTML = `${S[t].hyperlink}<textarea class="nm-link" tabindex="-1" placeholder="${S[t].linkSeparate}" /><br>`, r.innerHTML = `${S[t].remark}<textarea class="nm-remark" tabindex="-1" placeholder="${S[t].reamrkSeparate}" /><br>`;
   function a(c) {
     c.ondblclick = (m) => {
-      const f = document.createElement("textarea"), C = c.children[0], w = e.container.offsetHeight - c.offsetTop - 60, v = 30, A = (z) => z < v ? v : z > w ? w : z;
-      f.value = C.value, f.style.position = "absolute", f.style.left = C.offsetLeft + "px", f.style.top = C.offsetTop - 10 + "px", f.style.height = A(C.scrollHeight) + "px", f.style.width = C.offsetWidth + "px", f.oninput = (z) => {
+      const p = document.createElement("textarea"), C = c.children[0], w = e.container.offsetHeight - c.offsetTop - 60, b = 30, A = (z) => z < b ? b : z > w ? w : z;
+      p.value = C.value, p.style.position = "absolute", p.style.left = C.offsetLeft + "px", p.style.top = C.offsetTop - 10 + "px", p.style.height = A(C.scrollHeight) + "px", p.style.width = C.offsetWidth + "px", p.oninput = (z) => {
         let te = z.target.scrollHeight;
-        f.style.height = A(te) + "px";
-      }, f.onblur = (z) => {
-        C.value = f.value, C.dispatchEvent(new CustomEvent("change")), f.remove();
-      }, c.appendChild(f), f.focus();
+        p.style.height = A(te) + "px";
+      }, p.onblur = (z) => {
+        C.value = p.value, C.dispatchEvent(new CustomEvent("change")), p.remove();
+      }, c.appendChild(p), p.focus();
     };
   }
   a(o), a(l), a(r);
@@ -1662,38 +1662,38 @@ function An(e) {
   </svg></div>
   `, h.appendChild(i), h.appendChild(o), h.appendChild(s), h.appendChild(l), h.appendChild(r), h.hidden = !0;
   function d(c, m) {
-    var f = e.container.querySelectorAll(c);
-    [].forEach.call(f, function(C) {
+    var p = e.container.querySelectorAll(c);
+    [].forEach.call(p, function(C) {
       C.classList.remove(m);
     });
   }
   e.container.append(h);
-  const y = h.querySelectorAll(".size"), u = h.querySelector(".bold"), p = h.querySelector(".button-container"), N = h.querySelector(".font"), E = e.container.querySelector(".nm-tag"), b = e.container.querySelector(".nm-icon"), x = e.container.querySelector(".nm-link"), k = e.container.querySelector(".nm-remark");
+  const y = h.querySelectorAll(".size"), u = h.querySelector(".bold"), f = h.querySelector(".button-container"), N = h.querySelector(".font"), k = e.container.querySelector(".nm-tag"), v = e.container.querySelector(".nm-icon"), x = e.container.querySelector(".nm-link"), E = e.container.querySelector(".nm-remark");
   h.onclick = (c) => {
     if (!e.currentNode)
       return;
-    const m = e.currentNode.nodeObj, f = c.target;
-    f.className === "palette" ? (m.style || (m.style = {}), d(".palette", "nmenu-selected"), f.className = "palette nmenu-selected", n === "font" ? m.style.color = f.dataset.color : n === "background" && (m.style.background = f.dataset.color), e.updateNodeStyle(m)) : f.className === "background" ? (d(".palette", "nmenu-selected"), n = "background", f.className = "background selected", f.previousElementSibling.className = "font", m.style && m.style.background && (h.querySelector(
+    const m = e.currentNode.nodeObj, p = c.target;
+    p.className === "palette" ? (m.style || (m.style = {}), d(".palette", "nmenu-selected"), p.className = "palette nmenu-selected", n === "font" ? m.style.color = p.dataset.color : n === "background" && (m.style.background = p.dataset.color), e.updateNodeStyle(m)) : p.className === "background" ? (d(".palette", "nmenu-selected"), n = "background", p.className = "background selected", p.previousElementSibling.className = "font", m.style && m.style.background && (h.querySelector(
       '.palette[data-color="' + m.style.background + '"]'
-    ).className = "palette nmenu-selected")) : f.className === "font" && (d(".palette", "nmenu-selected"), n = "font", f.className = "font selected", f.nextElementSibling.className = "background", m.style && m.style.color && (h.querySelector(
+    ).className = "palette nmenu-selected")) : p.className === "font" && (d(".palette", "nmenu-selected"), n = "font", p.className = "font selected", p.nextElementSibling.className = "background", m.style && m.style.color && (h.querySelector(
       '.palette[data-color="' + m.style.color + '"]'
     ).className = "palette nmenu-selected"));
   }, Array.from(y).map(
     (c) => {
       c.onclick = (m) => {
         e.currentNode.nodeObj.style || (e.currentNode.nodeObj.style = {}), d(".size", "size-selected");
-        const f = m.currentTarget;
-        e.currentNode.nodeObj.style.fontSize = f.dataset.size, f.className = "size size-selected", e.updateNodeStyle(e.currentNode.nodeObj);
+        const p = m.currentTarget;
+        e.currentNode.nodeObj.style.fontSize = p.dataset.size, p.className = "size size-selected", e.updateNodeStyle(e.currentNode.nodeObj);
       };
     }
   ), u.onclick = (c) => {
     e.currentNode.nodeObj.style || (e.currentNode.nodeObj.style = {}), e.currentNode.nodeObj.style.fontWeight === "bold" ? (delete e.currentNode.nodeObj.style.fontWeight, c.currentTarget.className = "bold", e.updateNodeStyle(e.currentNode.nodeObj)) : (e.currentNode.nodeObj.style.fontWeight = "bold", c.currentTarget.className = "bold size-selected", e.updateNodeStyle(e.currentNode.nodeObj));
-  }, E.onchange = (c) => {
+  }, k.onchange = (c) => {
     if (!!e.currentNode && (c.target.value !== null || c.target.value !== void 0)) {
       let m;
       c.target.value === "" ? m = [] : m = c.target.value.split(","), e.updateNodeTags(e.currentNode.nodeObj, m);
     }
-  }, b.addEventListener("input", (c) => {
+  }, v.addEventListener("input", (c) => {
     if (!!e.currentNode && (c.target.innerText !== null || c.target.innerText !== void 0)) {
       const m = c.target.innerText.split(",");
       e.updateNodeIcons(e.currentNode.nodeObj, m);
@@ -1703,38 +1703,38 @@ function An(e) {
       const m = c.target.value;
       e.updateNodeHyperLink(e.currentNode.nodeObj, m);
     }
-  }, k.onchange = (c) => {
+  }, E.onchange = (c) => {
     if (!!e.currentNode && (c.target.value !== null || c.target.value !== void 0)) {
       const m = c.target.value;
       e.updateNodeRemark(e.currentNode.nodeObj, m);
     }
   };
   let g = "open";
-  p.onclick = (c) => {
-    g === "open" ? (g = "close", h.className = "close", p.innerHTML = '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"></use></svg>') : (g = "open", h.className = "", p.innerHTML = '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-close"></use></svg>');
+  f.onclick = (c) => {
+    g === "open" ? (g = "close", h.className = "close", f.innerHTML = '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"></use></svg>') : (g = "open", h.className = "", f.innerHTML = '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-close"></use></svg>');
   }, e.bus.addListener("unselectNode", function() {
     h.hidden = !0;
   }), e.bus.addListener("selectNode", function(c, m) {
     if (!!m) {
       if (h.hidden = !1, d(".palette", "nmenu-selected"), d(".size", "size-selected"), d(".bold", "size-selected"), n = "font", N.className = "font selected", N.nextElementSibling.className = "background", c.style) {
         if (c.style.fontSize) {
-          const f = h.querySelector(
+          const p = h.querySelector(
             '.size[data-size="' + c.style.fontSize + '"]'
           );
-          f && (f.className = "size size-selected");
+          p && (p.className = "size size-selected");
         }
         if (c.style.fontWeight) {
-          const f = h.querySelector(".bold");
-          f && (f.className = "bold size-selected");
+          const p = h.querySelector(".bold");
+          p && (p.className = "bold size-selected");
         }
         if (c.style.color) {
-          const f = h.querySelector(
+          const p = h.querySelector(
             '.palette[data-color="' + c.style.color + '"]'
           );
-          f && (f.className = "palette nmenu-selected");
+          p && (p.className = "palette nmenu-selected");
         }
       }
-      c.tags ? E.value = c.tags.join(",") : E.value = "", c.icons ? b.innerText = c.icons.join(",") : b.innerText = "", x.value = "", c.hyperLink && (x.value = c.hyperLink), c.linkJump && (x.value.length > 0 && (x.value += ","), x.value += c.linkJump.map((f) => f.title).reduce((f, C, w) => f + (w ? "," : "") + C, "")), c.remark ? k.value = c.remark : k.value = "";
+      c.tags ? k.value = c.tags.join(",") : k.value = "", c.icons ? v.innerText = c.icons.join(",") : v.innerText = "", x.value = "", c.hyperLink && (x.value = c.hyperLink), c.linkJump && (x.value.length > 0 && (x.value += ","), x.value += c.linkJump.map((p) => p.title).reduce((p, C, w) => p + (w ? "," : "") + C, "")), c.remark ? E.value = c.remark : E.value = "";
     }
   });
 }
@@ -1869,17 +1869,17 @@ function Dn(e) {
   };
 }
 function Hn(e, t) {
-  const n = (u, p) => {
+  const n = (u, f) => {
     const N = document.createElement("div");
     return N.id = u, N.innerHTML = `<svg class="icon" aria-hidden="true">
-    <use xlink:href="#icon-${p}"></use>
+    <use xlink:href="#icon-${f}"></use>
   </svg>`, N;
   }, i = n("cm-add_child", "zijiedian"), o = n("cm-add_sibling", "tongjijiedian-"), s = n("cm-remove_child", "shanchu2"), l = n("cm-up", "rising"), r = n("cm-down", "falling"), a = n("cm-edit", "edit"), h = document.createElement("ul");
   if (h.className = "menu-list", t && t.extend)
     for (let u = 0; u < t.extend.length; u++) {
-      const p = t.extend[u], N = n(p.name, p.name);
-      h.appendChild(N), N.onclick = (E) => {
-        p.onclick(E);
+      const f = t.extend[u], N = n(f.name, f.name);
+      h.appendChild(N), N.onclick = (k) => {
+        f.onclick(k);
       };
     }
   const d = document.createElement("mmenu");
@@ -1945,8 +1945,8 @@ Oe.prototype = {
     s || (s = !0, i());
   }
   t = function() {
-    var d, y, u, p;
-    (p = document.createElement("div")).innerHTML = r, r = null, (u = p.getElementsByTagName("svg")[0]) && (u.setAttribute("aria-hidden", "true"), u.style.position = "absolute", u.style.width = 0, u.style.height = 0, u.style.overflow = "hidden", d = u, (y = document.body).firstChild ? (p = d, (u = y.firstChild).parentNode.insertBefore(p, u)) : y.appendChild(d));
+    var d, y, u, f;
+    (f = document.createElement("div")).innerHTML = r, r = null, (u = f.getElementsByTagName("svg")[0]) && (u.setAttribute("aria-hidden", "true"), u.style.position = "absolute", u.style.width = 0, u.style.height = 0, u.style.overflow = "hidden", d = u, (y = document.body).firstChild ? (f = d, (u = y.firstChild).parentNode.insertBefore(f, u)) : y.appendChild(d));
   }, document.addEventListener ? ~["complete", "loaded", "interactive"].indexOf(document.readyState) ? setTimeout(t, 0) : (n = function() {
     document.removeEventListener("DOMContentLoaded", n, !1), t();
   }, document.addEventListener("DOMContentLoaded", n, !1)) : document.attachEvent && (i = t, o = e.document, s = !1, (l = function() {
@@ -1975,33 +1975,33 @@ function j({
   keypress: d,
   before: y,
   newTopicName: u,
-  allowUndo: p,
+  allowUndo: f,
   primaryLinkStyle: N,
-  overflowHidden: E,
-  primaryNodeHorizontalGap: b,
+  overflowHidden: k,
+  primaryNodeHorizontalGap: v,
   primaryNodeVerticalGap: x,
-  mobileMenu: k,
+  mobileMenu: E,
   closeButton: g,
   widthControll: c,
   uploadButton: m,
-  nodeDraggable: f,
+  nodeDraggable: p,
   scrollContainer: C
 }) {
   const w = document.getElementById(e);
-  !w || (this.mindElixirBox = w, this.before = y || {}, this.nodeData = t.nodeData, this.linkData = t.linkData || {}, this.expandDeep = t == null ? void 0 : t.expandDeep, this.locale = i, this.contextMenuOption = r, this.contextMenu = l === void 0 ? !0 : l, this.toolBar = a === void 0 ? !0 : a, this.nodeMenu = h === void 0 ? !0 : h, this.keypress = d === void 0 ? !0 : d, this.closeButton = g === void 0 ? !1 : g, this.widthControll = c === void 0 ? !0 : c, this.mobileMenu = k, this.direction = t.direction !== void 0 ? t.direction : typeof n == "number" ? n : 1, this.draggable = o === void 0 ? !0 : o, this.newTopicName = u, this.editable = s === void 0 ? !0 : s, this.allowUndo = p === void 0 ? !0 : p, this.currentNode = null, this.currentLink = null, this.inputDiv = null, this.scaleVal = 1, this.tempDirection = null, this.primaryLinkStyle = N || 0, this.overflowHidden = E, this.primaryNodeHorizontalGap = b, this.primaryNodeVerticalGap = x, this.uploadButton = m === void 0 ? !0 : m, this.nodeDraggable = f === void 0 ? !0 : f, this.scrollContainer = C, this.bus = new Oe(), this.bus.addListener("operation", (v) => {
+  !w || (this.mindElixirBox = w, this.before = y || {}, this.nodeData = t.nodeData, this.linkData = t.linkData || {}, this.expandDeep = t == null ? void 0 : t.expandDeep, this.locale = i, this.contextMenuOption = r, this.contextMenu = l === void 0 ? !0 : l, this.toolBar = a === void 0 ? !0 : a, this.nodeMenu = h === void 0 ? !0 : h, this.keypress = d === void 0 ? !0 : d, this.closeButton = g === void 0 ? !1 : g, this.widthControll = c === void 0 ? !0 : c, this.mobileMenu = E, this.direction = t.direction !== void 0 ? t.direction : typeof n == "number" ? n : 1, this.draggable = o === void 0 ? !0 : o, this.newTopicName = u, this.editable = s === void 0 ? !0 : s, this.allowUndo = f === void 0 ? !0 : f, this.currentNode = null, this.currentLink = null, this.inputDiv = null, this.scaleVal = 1, this.tempDirection = null, this.primaryLinkStyle = N || 0, this.overflowHidden = k, this.primaryNodeHorizontalGap = v, this.primaryNodeVerticalGap = x, this.uploadButton = m === void 0 ? !0 : m, this.nodeDraggable = p === void 0 ? !0 : p, this.scrollContainer = C, this.bus = new Oe(), this.bus.addListener("operation", (b) => {
     if (this.isUndo) {
       this.isUndo = !1;
       return;
     }
     ["moveNode", "removeNode", "addChild", "finishEdit", "editStyle", "editTags", "editIcons"].includes(
-      v.name
-    ) && this.history.push(v);
+      b.name
+    ) && this.history.push(b);
   }), this.history = [], this.isUndo = !1, this.undo = function() {
-    const v = this.history.pop();
-    !v || (this.isUndo = !0, v.name === "moveNode" ? this.moveNode(
-      Y(v.obj.fromObj.id),
-      Y(v.obj.originParentId)
-    ) : v.name === "removeNode" ? v.originSiblingId ? this.insertBefore(Y(v.originSiblingId), v.obj) : this.addChild(Y(v.originParentId), v.obj) : v.name === "addChild" || v.name === "copyNode" ? this.removeNode(Y(v.obj.id)) : v.name === "finishEdit" ? this.setNodeTopic(Y(v.obj.id), v.origin) : this.isUndo = !1);
+    const b = this.history.pop();
+    !b || (this.isUndo = !0, b.name === "moveNode" ? this.moveNode(
+      Y(b.obj.fromObj.id),
+      Y(b.obj.originParentId)
+    ) : b.name === "removeNode" ? b.originSiblingId ? this.insertBefore(Y(b.originSiblingId), b.obj) : this.addChild(Y(b.originParentId), b.obj) : b.name === "addChild" || b.name === "copyNode" ? this.removeNode(Y(b.obj.id)) : b.name === "finishEdit" ? this.setNodeTopic(Y(b.obj.id), b.origin) : this.isUndo = !1);
   });
 }
 function T(e) {
