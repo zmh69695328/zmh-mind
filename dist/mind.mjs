@@ -1547,7 +1547,7 @@ function mn(e) {
   const l = e.scrollContainer, u = window.innerWidth - (l == null ? void 0 : l.getBoundingClientRect().right) + parseInt(l && getComputedStyle(l).paddingRight);
   return l == null || l.addEventListener("scroll", (p) => {
     const v = l.scrollTop + l.clientHeight, w = e.mindElixirBox.offsetTop, A = e.mindElixirBox.offsetTop + e.mindElixirBox.clientHeight, g = e.mindElixirBox.clientHeight;
-    v < w + t.clientHeight + 40 ? (t.style.position = "absolute", t.style.bottom = g - 20 - t.clientHeight + "px") : v <= A ? (t.style.position = "fixed", t.style.bottom = "20px", t.style.right = u + 20 + "px") : v > A && (t.style.position = "absolute", t.style.bottom = "20px");
+    v < w + t.clientHeight + 40 ? (t.style.position = "absolute", t.style.bottom = g - 20 - t.clientHeight + "px", t.style.right = "20px") : v <= A ? (t.style.position = "fixed", t.style.bottom = "20px", t.style.right = u + 20 + "px") : v > A && (t.style.position = "absolute", t.style.bottom = "20px", t.style.right = "20px");
   }), t;
 }
 function An(e) {
@@ -1567,7 +1567,7 @@ function An(e) {
     "scroll",
     (l) => {
       const u = o.scrollTop, a = e.mindElixirBox.offsetTop, p = e.mindElixirBox.clientHeight, f = a + p - t.clientHeight - 40;
-      u > f ? (t.style.position = "absolute", t.style.top = f - a + 20 + "px") : u >= a ? (t.style.position = "fixed", t.style.top = "20px", t.style.left = c + 20 + "px") : u < a && (t.style.position = "absolute", t.style.top = "20px");
+      u > f ? (t.style.position = "absolute", t.style.top = f - a + 20 + "px", t.style.left = "20px") : u >= a ? (t.style.position = "fixed", t.style.top = "20px", t.style.left = c + 20 + "px") : u < a && (t.style.position = "absolute", t.style.top = "20px", t.style.left = "20px");
     }
   ), t;
 }

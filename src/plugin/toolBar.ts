@@ -84,6 +84,7 @@ function createToolBarRBContainer(mind) {
     if(viewBottom<mindTop+toolBarRBContainer.clientHeight+40){
       toolBarRBContainer.style.position='absolute'
       toolBarRBContainer.style.bottom=mindHeight-20-toolBarRBContainer.clientHeight+'px'
+      toolBarRBContainer.style.right='20px'
     }else if(viewBottom<=mindBottom){
       toolBarRBContainer.style.position='fixed'
       toolBarRBContainer.style.bottom='20px'
@@ -91,6 +92,8 @@ function createToolBarRBContainer(mind) {
     } else if(viewBottom>mindBottom){
       toolBarRBContainer.style.position='absolute'
       toolBarRBContainer.style.bottom='20px'
+      toolBarRBContainer.style.right='20px'
+
     } 
   })
   return toolBarRBContainer
@@ -138,6 +141,7 @@ function createToolBarLTContainer(mind) {
     if(viewTop>toolbarBottom){
       toolBarLTContainer.style.position='absolute'
       toolBarLTContainer.style.top=toolbarBottom-mindTop+20+'px'
+      toolBarLTContainer.style.left='20px'
     }else if(viewTop>=mindTop){
       toolBarLTContainer.style.position='fixed'
       toolBarLTContainer.style.top='20px'
@@ -145,6 +149,7 @@ function createToolBarLTContainer(mind) {
     } else if(viewTop<mindTop){
       toolBarLTContainer.style.position='absolute'
       toolBarLTContainer.style.top='20px'
+      toolBarLTContainer.style.left='20px'
     } 
   },
   )
