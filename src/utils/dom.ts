@@ -123,9 +123,10 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
   if (nodeObj.icons) {
     const iconsContainer = $d.createElement('span')
     iconsContainer.className = 'icons'
-    iconsContainer.innerHTML = nodeObj.icons
-    .filter(icon=> icon!=='').map(icon => `<span>${encodeHTML(icon)}</span>`)
-      .join('')
+    if(typeof nodeObj.icons ==='string')
+      iconsContainer.innerHTML = nodeObj.icons
+    // .filter(icon=> icon!=='').map(icon => `<span>${encodeHTML(icon)}</span>`)
+    //   .join('')
     tpc.appendChild(iconsContainer)
   }
 

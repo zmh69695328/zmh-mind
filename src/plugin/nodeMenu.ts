@@ -1,8 +1,9 @@
+import { ImageElement } from 'canvg'
 import i18n from '../i18n'
 
-const createDiv = (id) => {
+const createDiv = (id?:string) => {
   const div = document.createElement('div')
-  div.id = id
+  if(id) div.id = id
   return div
 }
 
@@ -73,6 +74,57 @@ export default function(mind) {
   linkDiv.innerHTML = `${i18n[locale].hyperlink}<textarea class="nm-link" tabindex="-1" placeholder="${i18n[locale].linkSeparate}" /><br>`
   remarkDiv.innerHTML = `${i18n[locale].remark}<textarea class="nm-remark" tabindex="-1" placeholder="${i18n[locale].reamrkSeparate}" /><br>`
 
+  const iconPicker=createDiv()
+  iconPicker.className='picker'
+  iconPicker.style.display='none'
+  // const imglist=createDiv()
+  iconPicker.innerHTML=`<div class="header"></div><div class="list"></div>`
+  // iconPicker.children[0].children[0].appendChild(img)
+  // iconPicker.appendChild(imglist)
+  // const imgList=['flag','number','other','portrait','star']
+  // const imgListLength=[4,8,17,2,3]
+  // for(let i=0;i<imgList.length;i++){
+  //   for(let j=0;j<imgListLength[i])
+  // }
+  const headerList=['全部','旗杆','数字','其他','人像','星星']
+  headerList.forEach((val,i)=>{
+    
+    const box=createDiv()
+    box.className='box'
+    if(i===0){
+      box.className='box active'
+    }
+    box.innerText=val
+    iconPicker.children[0].appendChild(box)
+  })
+  const imgList={
+    flag:4,number:8,other:17,portrait:2,star:3
+  }
+  Object.keys(imgList).forEach(val => {
+    for(let i=1;i<=imgList[val];i++){
+      const img =document.createElement('img')
+      const list=createDiv()
+      list.className='item'
+      img.style.width='100%'
+      img.style.height='100%'
+      img.src=new URL(`../iconfont/icon/${val}/${val+i}.webp`, import.meta.url).href
+      list.appendChild(img)
+      iconPicker.children[1].appendChild(list)
+    }
+    (iconPicker.children[1] as HTMLElement).onclick=(e:MouseEvent & { target:HTMLElement})=>{
+      if(e.target.nodeName==='IMG'){
+        const item =createDiv()
+        item.className='divItem'
+        item.appendChild(e.target.cloneNode())
+        iconInput.appendChild(item)
+        mind.updateNodeIcons(mind.currentNode.nodeObj, iconInput.innerHTML)
+        e.stopPropagation()
+      }
+      console.log(e)
+    }
+  });
+  
+  iconDiv.appendChild(iconPicker)
   function addDropTextarea(xxxdiv:HTMLElement){
     xxxdiv.ondblclick=(e)=>{
       const textarea=document.createElement('textarea')
@@ -175,6 +227,8 @@ export default function(mind) {
         ).className = 'palette nmenu-selected'
       }
     }
+    if(target.className!=='picker'&&target.className!=='header'&&target.className!=='item'&&target.className!=='list'&&target.className!=='box')
+      iconPicker.style.display='none'
   }
   Array.from(sizeSelector).map(
     dom => {
@@ -225,6 +279,10 @@ export default function(mind) {
       mind.updateNodeIcons(mind.currentNode.nodeObj, newIcons)
     }
   })
+  iconInput.onclick=e=>{
+    iconPicker.style.display=''
+    e.stopPropagation()
+  }
   linkInput.onchange = (e:InputEvent & { target: HTMLInputElement}) => {
     if (!mind.currentNode) return
     if (e.target.value!==null||e.target.value!==undefined) {
@@ -287,7 +345,7 @@ export default function(mind) {
       tagInput.value = '' 
     }
     if (nodeObj.icons) {
-      iconInput.innerText = nodeObj.icons.join(',')
+      iconInput.innerHTML = nodeObj.icons
     } else {
       iconInput.innerText = ''
     }
@@ -304,5 +362,7 @@ export default function(mind) {
     } else {
       remarkInput.value = ''
     }
+    iconPicker.style.display='none'
   })
+  
 }

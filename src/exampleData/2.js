@@ -49,7 +49,8 @@ export default {
                                 "expanded": false
                             }
                         ],
-                        "expanded": false
+                        "expanded": false,
+                        "icons": "<div class=\"divItem\"><img src=\"http://localhost:5173/src/iconfont/icon/number/number2.webp\" style=\"width: 100%; height: 100%;\"></div><div class=\"divItem\"><img src=\"http://localhost:5173/src/iconfont/icon/flag/flag4.webp\" style=\"width: 100%; height: 100%;\"></div><div class=\"divItem\"><img src=\"http://localhost:5173/src/iconfont/icon/flag/flag4.webp\" style=\"width: 100%; height: 100%;\"></div><div class=\"divItem\"><img src=\"http://localhost:5173/src/iconfont/icon/flag/flag4.webp\" style=\"width: 100%; height: 100%;\"></div><div class=\"divItem\"><img src=\"http://localhost:5173/src/iconfont/icon/flag/flag4.webp\" style=\"width: 100%; height: 100%;\"></div>"
                     },
                     {
                         "topic": "使用简单",
@@ -59,15 +60,10 @@ export default {
                             {
                                 "topic": "操作手感类似其他主流思维导图应用",
                                 "id": "c1f09612fd89920d",
-                                "expanded": true
+                                "expanded": false
                             }
                         ]
-                    },
-                    // {
-                    //     "topic": "new node",
-                    //     "id": "35361d2879cb8a7e",
-                    //     "type": "summary"
-                    // }
+                    }
                 ],
                 "linkJump": [
                     {
@@ -89,7 +85,8 @@ export default {
                     {
                         "topic": "tab 新建子节点",
                         "id": "bd1b6892bcab126a",
-                        "expanded": false
+                        "expanded": false,
+                        "icons": "<div class=\"divItem\"><img src=\"http://localhost:5173/src/iconfont/icon/flag/flag1.webp\" style=\"width: 100%; height: 100%;\"></div>"
                     },
                     {
                         "topic": "enter 新建同级节点",
@@ -247,7 +244,7 @@ export default {
                         "tags": [
                             "已完成"
                         ],
-                        "tagsStyle":{
+                        "tagsStyle": {
                             "color": "#bdc3c7",
                             "background": "#2c3e50"
                         },
@@ -403,5 +400,10 @@ export default {
         ],
         "expanded": true
     },
-    "linkData": {}
+    "linkData": {},
+    "height": [
+        10005,
+        10005
+    ],
+    "expandDeep": 2
 }

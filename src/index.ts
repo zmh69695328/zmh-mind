@@ -110,7 +110,8 @@ export interface NodeObj {
   parent?: NodeObj,
   children?: NodeObj[],
   tags?: string[],
-  icons?: string[],
+  // icons?: string[],
+  icons?:string|string[],
   hyperLink?: string,
   remark?:string,
   image?:{

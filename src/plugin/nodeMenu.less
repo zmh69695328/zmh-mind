@@ -32,8 +32,82 @@ nmenu {
     [contenteditable=true]{
       display: inline-block; 
     }
+    .divItem {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      margin-right: 4px;
+    }
+    .picker{
+      position: absolute;
+      top: 220px;
+      background: #fff;
+      box-shadow: 0 8px 24px rgb(0 0 0 / 16%);
+      border-radius: 2px;
+      width: 275px;
+      right: 250px;
+      .header{
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #e5e6eb;
+        padding: 0 8px;
+        height: 35px;
+        
+        .box{
+          &.active{
+            background: #e5e6eb;
+          }
+          &:hover{
+            background: #f1f3f6;
+          }
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 47px;
+          height: 32px;
+          border-radius: 4px;
+          transition: background-color 0.2s;
+          margin-right: 5px;
+        }
+      }
+      .list{
+        height: 108px;
+        padding-left: 12px;
+        padding-bottom: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        // height: 270px;
+        box-sizing: border-box;
+        margin: 12px 4px;
+        .item{
+          position: relative;
+          width: 30px;
+          height: 30px;
+          margin-bottom: 8px;
+          margin-right: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
+      }
+      &::after{
+        content: "";
+        width: 12px;
+        height: 12px;
+        background-color: inherit;
+        position: absolute;
+        right: -6px;
+        bottom: 15px;
+        transform: rotate(135deg);
+      }
+    }
+
   }
-  #nm-icon div,
+  .nm-icon,
   textarea {
     background: #f7f9fa;
     border: 1px solid #dce2e6;
