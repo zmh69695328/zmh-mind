@@ -78,7 +78,7 @@ export default function(mind) {
   iconPicker.className='picker'
   iconPicker.style.display='none'
   // const imglist=createDiv()
-  iconPicker.innerHTML=`<div class="header"></div><div class="list"></div>`
+  iconPicker.innerHTML=`<div class="header"></div><div class="body"><div class="container"></div></div>`
   // iconPicker.children[0].children[0].appendChild(img)
   // iconPicker.appendChild(imglist)
   // const imgList=['flag','number','other','portrait','star']
@@ -86,6 +86,7 @@ export default function(mind) {
   // for(let i=0;i<imgList.length;i++){
   //   for(let j=0;j<imgListLength[i])
   // }
+  const container:HTMLElement=iconPicker.querySelector('.container')
   const headerList=['全部','旗杆','数字','其他','人像','星星']
   headerList.forEach((val,i)=>{
     
@@ -95,35 +96,52 @@ export default function(mind) {
       box.className='box active'
     }
     box.innerText=val
+    
+    box.onclick=()=>{
+      [...iconPicker.children[0].children].forEach(val=>{
+        val.className='box'
+      })
+      box.className='box active'
+      container.style.transform=`translateX(${-(i*275)}px)`
+    }
+    
     iconPicker.children[0].appendChild(box)
   })
   const imgList={
     flag:4,number:8,other:17,portrait:2,star:3
   }
+  const all=createDiv()
+  all.className='list'
   Object.keys(imgList).forEach(val => {
+    const list=createDiv()
+    list.className='list'
     for(let i=1;i<=imgList[val];i++){
       const img =document.createElement('img')
-      const list=createDiv()
-      list.className='item'
+      const item=createDiv()
+      item.className='item'
       img.style.width='100%'
       img.style.height='100%'
       img.src=new URL(`../iconfont/icon/${val}/${val+i}.webp`, import.meta.url).href
-      list.appendChild(img)
-      iconPicker.children[1].appendChild(list)
+      item.appendChild(img)
+      list.appendChild(item)
+      all.appendChild(item.cloneNode(true))
     }
-    (iconPicker.children[1] as HTMLElement).onclick=(e:MouseEvent & { target:HTMLElement})=>{
-      if(e.target.nodeName==='IMG'){
-        const item =createDiv()
-        item.className='divItem'
-        item.appendChild(e.target.cloneNode())
-        iconInput.appendChild(item)
-        mind.updateNodeIcons(mind.currentNode.nodeObj, iconInput.innerHTML)
-        e.stopPropagation()
-      }
-      console.log(e)
-    }
+    iconPicker.children[1].children[0].appendChild(list)
+    iconPicker.children[1].children[0].insertBefore(all,iconPicker.children[1].children[0].children[0])
   });
   
+  (iconPicker as HTMLElement).onclick=(e:MouseEvent & { target:HTMLElement})=>{
+    if(e.target.nodeName==='IMG'){
+      const item =createDiv()
+      item.className='divItem'
+      item.appendChild(e.target.cloneNode())
+      iconInput.appendChild(item)
+      mind.updateNodeIcons(mind.currentNode.nodeObj, iconInput.innerHTML)
+      e.stopPropagation()
+    }
+    // console.log(e)
+  }
+
   iconDiv.appendChild(iconPicker)
   function addDropTextarea(xxxdiv:HTMLElement){
     xxxdiv.ondblclick=(e)=>{
@@ -227,7 +245,7 @@ export default function(mind) {
         ).className = 'palette nmenu-selected'
       }
     }
-    if(target.className!=='picker'&&target.className!=='header'&&target.className!=='item'&&target.className!=='list'&&target.className!=='box')
+    if(target.className!=='picker'&&target.className!=='header'&&target.className!=='item'&&target.className!=='list'&&target.className!=='box'&&target.className!=='box active')
       iconPicker.style.display='none'
   }
   Array.from(sizeSelector).map(

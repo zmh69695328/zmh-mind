@@ -71,8 +71,20 @@ nmenu {
           margin-right: 5px;
         }
       }
+      
+      .body{
+        width: 100%;
+        overflow: hidden;
+        .container{
+          width: 600%;
+          transform: translateX(0px);
+          height: 125px;
+          display: flex;
+        }
+      }
       .list{
         height: 108px;
+        width: 100%;
         padding-left: 12px;
         padding-bottom: 12px;
         display: flex;
@@ -81,7 +93,7 @@ nmenu {
         overflow-y: scroll;
         // height: 270px;
         box-sizing: border-box;
-        margin: 12px 4px;
+        margin: 8px 4px;
         .item{
           position: relative;
           width: 30px;
@@ -92,6 +104,10 @@ nmenu {
           align-items: center;
           justify-content: center;
           cursor: pointer;
+          img:hover{
+            transform: translateZ(0) scale(1.2);
+            transition: transform .3s;
+          }
         }
       }
       &::after{
