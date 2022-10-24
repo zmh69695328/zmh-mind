@@ -72,7 +72,19 @@ function createToolBarRBContainer(mind) {
     mind.scale((mind.scaleVal += 0.2))
   }
   const scrollContainer = mind.scrollContainer;
-  const offsetRight=window.innerWidth-scrollContainer?.getBoundingClientRect().right+parseInt(scrollContainer&&getComputedStyle(scrollContainer).paddingRight)
+  let offsetRight=window.innerWidth-scrollContainer?.getBoundingClientRect().right+parseInt(scrollContainer&&getComputedStyle(scrollContainer).paddingRight)+scrollContainer?.offsetWidth-scrollContainer?.clientWidth
+  const io = new IntersectionObserver((entries) => {
+    //entries 为 IntersectionObserverEntry对像数组
+    entries.forEach((item) => {
+      if (item.isIntersecting) {
+        //div 可见时 进行相关操作
+        // console.log('相交了');
+        offsetRight=window.innerWidth-scrollContainer?.getBoundingClientRect().right+parseInt(scrollContainer&&getComputedStyle(scrollContainer).paddingRight)+scrollContainer?.offsetWidth-scrollContainer?.clientWidth
+        // io.unobserve(item.target); //停止监听该div DOM节点
+      }
+    });
+  },{root:scrollContainer}); 
+  io.observe(toolBarRBContainer)
   scrollContainer?.addEventListener('scroll',e=>{
     const viewTop=scrollContainer.scrollTop
     const viewBottom=viewTop+scrollContainer.clientHeight
@@ -132,7 +144,19 @@ function createToolBarLTContainer(mind) {
     mind.initSide()
   }
   const scrollContainer:HTMLElement= mind.scrollContainer
-  const offsetLeft=scrollContainer?.getBoundingClientRect().left+parseInt(scrollContainer&&getComputedStyle(scrollContainer).paddingLeft)
+  let offsetLeft=scrollContainer?.getBoundingClientRect().left+parseInt(scrollContainer&&getComputedStyle(scrollContainer).paddingLeft)
+  const io = new IntersectionObserver((entries) => {
+    //entries 为 IntersectionObserverEntry对像数组
+    entries.forEach((item) => {
+      if (item.isIntersecting) {
+        //div 可见时 进行相关操作
+        // console.log('相交了');
+        offsetLeft=scrollContainer?.getBoundingClientRect().left+parseInt(scrollContainer&&getComputedStyle(scrollContainer).paddingLeft)
+        // io.unobserve(item.target); //停止监听该div DOM节点
+      }
+    });
+  },{root:scrollContainer}); 
+  io.observe(toolBarLTContainer)
   scrollContainer?.addEventListener('scroll',e=>{
     const viewTop=scrollContainer.scrollTop
     const mindTop = mind.mindElixirBox.offsetTop
