@@ -75,7 +75,16 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
     widthControllLeft.style.height=widthControllRight.style.height=nodeObj.style.controllWidth || '29px'
   }
 
-  
+  if (nodeObj.icons) {
+    const iconsContainer = $d.createElement('span')
+    iconsContainer.className = 'icons'
+    if(typeof nodeObj.icons ==='string')
+      iconsContainer.innerHTML = nodeObj.icons
+    // .filter(icon=> icon!=='').map(icon => `<span>${encodeHTML(icon)}</span>`)
+    //   .join('')
+    tpc.insertBefore(iconsContainer,tpc.firstChild)
+    // tpc.appendChild(iconsContainer)
+  }
   if (nodeObj.hyperLink) {
     const linkContainer =$d.createElement('a')
     linkContainer.className = 'hyper-link'
@@ -85,6 +94,7 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
     linkContainer.href = nodeObj.hyperLink
     tpc.appendChild(linkContainer)
   }
+  
   if (nodeObj.remark) {
     const content=$d.createElement('div')
     content.className='content hidden'
@@ -120,15 +130,7 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
     remarkContainer.appendChild(content)
     tpc.appendChild(remarkContainer)
   }
-  if (nodeObj.icons) {
-    const iconsContainer = $d.createElement('span')
-    iconsContainer.className = 'icons'
-    if(typeof nodeObj.icons ==='string')
-      iconsContainer.innerHTML = nodeObj.icons
-    // .filter(icon=> icon!=='').map(icon => `<span>${encodeHTML(icon)}</span>`)
-    //   .join('')
-    tpc.appendChild(iconsContainer)
-  }
+
 
   if (nodeObj.linkJump) {
     nodeObj.linkJump.forEach(val => {
