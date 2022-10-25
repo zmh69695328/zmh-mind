@@ -292,9 +292,10 @@ export default function(mind) {
   // }
   iconInput.addEventListener('input',(e:InputEvent & { target: HTMLInputElement}) => {
     if (!mind.currentNode) return
-    if (e.target.innerText!==null||e.target.innerText!==undefined) {
-      const newIcons = e.target.innerText.split(',')
-      mind.updateNodeIcons(mind.currentNode.nodeObj, newIcons)
+    console.log('11111111')
+    if (e.target.innerHTML!==null||e.target.innerHTML!==undefined) {
+      // const newIcons = e.target.innerText.split(',')
+      mind.updateNodeIcons(mind.currentNode.nodeObj, e.target.innerHTML)
     }
   })
   iconInput.onclick=e=>{

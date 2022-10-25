@@ -62,7 +62,7 @@ export const updateNodeTags = function(object, tags) {
 }
 
 export const updateNodeIcons = function(object, icons) {
-  if (!icons) return
+  if (icons===null||icons===undefined) return
   const oldVal = object.icons
   object.icons = icons
   const nodeEle = findEle(object.id)
