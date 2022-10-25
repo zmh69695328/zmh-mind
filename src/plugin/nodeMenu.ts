@@ -292,7 +292,6 @@ export default function(mind) {
   // }
   iconInput.addEventListener('input',(e:InputEvent & { target: HTMLInputElement}) => {
     if (!mind.currentNode) return
-    console.log('11111111')
     if (e.target.innerHTML!==null||e.target.innerHTML!==undefined) {
       // const newIcons = e.target.innerText.split(',')
       mind.updateNodeIcons(mind.currentNode.nodeObj, e.target.innerHTML)

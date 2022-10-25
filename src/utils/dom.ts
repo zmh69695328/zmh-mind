@@ -267,7 +267,13 @@ export function createInputDiv(tpc: Topic) {
   console.time('createInputDiv')
   if (!tpc) return
   let div = $d.createElement('div')
-  const origin = tpc.childNodes[0].textContent as string
+  let origin
+  if(tpc.nodeObj.icons){
+    origin = tpc.childNodes[1].textContent as string
+
+  }else{
+    origin = tpc.childNodes[0].textContent as string
+  }
   tpc.appendChild(div)
   div.id = 'input-box'
   // div.innerHTML=origin.replace(/<div(([\s\S])*?)<\/div>/, '').replace('🔗','')

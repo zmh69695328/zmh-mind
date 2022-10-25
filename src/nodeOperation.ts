@@ -64,7 +64,10 @@ export const updateNodeTags = function(object, tags) {
 export const updateNodeIcons = function(object, icons) {
   if (icons===null||icons===undefined) return
   const oldVal = object.icons
-  object.icons = icons
+  if(icons.length===0)
+    delete object.icons
+  else
+    object.icons = icons
   const nodeEle = findEle(object.id)
   shapeTpc.call(this,nodeEle, object)
   this.linkDiv()

@@ -334,9 +334,8 @@ function lt(e) {
   var i, s, r, o, c, l, u;
   if (console.time("createInputDiv"), !e)
     return;
-  let t = N.createElement("div");
-  const n = e.childNodes[0].textContent;
-  e.appendChild(t), t.id = "input-box", t.contentEditable = "true", t.spellcheck = !1, t.textContent = n, t.draggable = !1, e.nodeObj.image && e.nodeObj.image.forEach((p) => {
+  let t = N.createElement("div"), n;
+  e.nodeObj.icons ? n = e.childNodes[1].textContent : n = e.childNodes[0].textContent, e.appendChild(t), t.id = "input-box", t.contentEditable = "true", t.spellcheck = !1, t.textContent = n, t.draggable = !1, e.nodeObj.image && e.nodeObj.image.forEach((p) => {
     const f = N.createElement("img");
     f.src = p.url, f.style.width = p.width + "px", f.style.display = "block", t.appendChild(f);
     const v = nt(f.clientWidth, f.clientHeight, f);
@@ -794,7 +793,7 @@ const $ = document, Wt = function(e) {
   if (t == null)
     return;
   const n = e.icons;
-  e.icons = t;
+  t.length === 0 ? delete e.icons : e.icons = t;
   const i = j(e.id);
   K.call(this, i, e), this.linkDiv(), this.bus.fire("operation", {
     name: "editIcons",
@@ -1736,7 +1735,7 @@ function di(e) {
       d.target.value === "" ? A = [] : A = d.target.value.split(","), e.updateNodeTags(e.currentNode.nodeObj, A);
     }
   }, H.addEventListener("input", (d) => {
-    !e.currentNode || (console.log("11111111"), (d.target.innerHTML !== null || d.target.innerHTML !== void 0) && e.updateNodeIcons(e.currentNode.nodeObj, d.target.innerHTML));
+    !e.currentNode || (d.target.innerHTML !== null || d.target.innerHTML !== void 0) && e.updateNodeIcons(e.currentNode.nodeObj, d.target.innerHTML);
   }), H.onclick = (d) => {
     l.style.display = "", d.stopPropagation();
   }, D.onchange = (d) => {
