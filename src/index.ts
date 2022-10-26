@@ -181,6 +181,7 @@ export interface MindElixirInstance {
   uploadButton:boolean,
   nodeDraggable:boolean,
   scrollContainer:HTMLElement
+  leftToolbarIntersection:HTMLElement[]
 }
 export interface Options {
   el: string,
@@ -211,6 +212,7 @@ export interface Options {
   nodeDraggable?:boolean
   //工具栏固钉
   scrollContainer?:HTMLElement
+  leftToolbarIntersection?:HTMLElement[]
 }
 const $d = document
 /**
@@ -254,7 +256,8 @@ function MindElixir(this: MindElixirInstance, {
   widthControll,
   uploadButton,
   nodeDraggable,
-  scrollContainer
+  scrollContainer,
+  leftToolbarIntersection
 }: Options) {
   const box = document.getElementById(el) as HTMLElement
   if (!box) return
@@ -292,6 +295,7 @@ function MindElixir(this: MindElixirInstance, {
   this.uploadButton = uploadButton === undefined ? true : uploadButton
   this.nodeDraggable = nodeDraggable === undefined ? true : nodeDraggable
   this.scrollContainer=scrollContainer
+  this.leftToolbarIntersection=leftToolbarIntersection
   this.bus = new Bus()
   ;(this.bus as any).addListener('operation', (operation: operation) => {
     if (this.isUndo) {

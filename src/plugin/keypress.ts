@@ -11,12 +11,12 @@ export default function(mind) {
     17: e => {
       // controll
       mind.ctrlRepeat=true
-      console.log('按下controll')
+      // console.log('按下controll')
     },
     91: e => {
       // command
       mind.ctrlRepeat=true
-      console.log('按下command')
+      // console.log('按下command')
     },
     113: () => {
       // f2

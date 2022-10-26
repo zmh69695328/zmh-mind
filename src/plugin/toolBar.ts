@@ -79,7 +79,7 @@ function createToolBarRBContainer(mind) {
       if (item.isIntersecting) {
         //div 可见时 进行相关操作
         // console.log('相交了');
-        offsetRight=window.innerWidth-scrollContainer?.getBoundingClientRect().right+parseInt(scrollContainer&&getComputedStyle(scrollContainer).paddingRight)+scrollContainer?.offsetWidth-scrollContainer?.clientWidth
+        offsetRight=window.innerWidth-item.boundingClientRect.right+parseInt(scrollContainer&&getComputedStyle(scrollContainer).paddingRight)+scrollContainer?.offsetWidth-scrollContainer?.clientWidth
         // io.unobserve(item.target); //停止监听该div DOM节点
       }
     });
@@ -151,12 +151,23 @@ function createToolBarLTContainer(mind) {
       if (item.isIntersecting) {
         //div 可见时 进行相关操作
         // console.log('相交了');
-        offsetLeft=scrollContainer?.getBoundingClientRect().left+parseInt(scrollContainer&&getComputedStyle(scrollContainer).paddingLeft)
+        offsetLeft=item.boundingClientRect.left+parseInt(scrollContainer&&getComputedStyle(scrollContainer).paddingLeft)
         // io.unobserve(item.target); //停止监听该div DOM节点
       }
     });
   },{root:scrollContainer}); 
   io.observe(toolBarLTContainer)
+
+  if(mind.leftToolbarIntersection){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((item) => {
+          offsetLeft=item.boundingClientRect.left+parseInt(scrollContainer&&getComputedStyle(scrollContainer).paddingLeft)
+          toolBarLTContainer.style.left=offsetLeft+20+'px'
+      });
+    },{root:mind.leftToolbarIntersection}); 
+    io.observe(toolBarLTContainer)
+  }
+
   scrollContainer?.addEventListener('scroll',e=>{
     const viewTop=scrollContainer.scrollTop
     const mindTop = mind.mindElixirBox.offsetTop
