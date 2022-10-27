@@ -76,6 +76,21 @@
         #input-box {
           padding: 10px @GAP;
         }
+        .icons {
+          font-size: 12px;
+          display: inline-block;
+          direction: ltr;
+          height: 30px;
+          vertical-align: bottom;
+          // margin-right: 10px;
+          // margin-left: 8px;
+          .divItem {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            margin-right: 4px;
+          }
+        }
       }
     }
   }
@@ -153,26 +168,6 @@
         line-height: 1; // 保证中英文行高一致
         #input-box {
           padding: 5px;
-        }
-        .width-controll-right{
-          border: none;
-          width: 7px;
-          height: 29px;
-          cursor: ew-resize;
-          display: inline-block;
-          position: absolute;
-          right: -4px;
-          top: 1px;
-        }
-        .width-controll-left{
-          border: none;
-          width: 7px;
-          height: 29px;
-          cursor: ew-resize;
-          display: inline-block;
-          position: absolute;
-          left: -4px;
-          top: 1px;
         }
         .tags {
           font-size: 25px;
@@ -369,4 +364,25 @@
   .resize{
     cursor: nwse-resize;
   }
+}
+
+.width-controll-right{
+  border: none;
+  width: 7px;
+  height: 29px;
+  cursor: ew-resize;
+  display: inline-block;
+  position: absolute;
+  right: -4px;
+  top: 1px;
+}
+.width-controll-left{
+  border: none;
+  width: 7px;
+  height: 29px;
+  cursor: ew-resize;
+  display: inline-block;
+  position: absolute;
+  left: -4px;
+  top: 1px;
 }
