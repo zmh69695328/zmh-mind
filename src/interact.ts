@@ -32,25 +32,7 @@ export const selectNode = function(targetElement, isNewNode, clickEvent) {
   if (typeof targetElement === 'string') {
     return this.selectNode(findEle(targetElement))
   }
-  // if ((this.currentNode&&!this.ctrlRepeat)||this.currentNode?.nodeObj.id===targetElement?.nodeObj.id) this.currentNode.className = ''
-  // else targetElement.className = 'selected'\
   if(this.ctrlRepeat){
-    // let flag=false
-    // this.currentSummaryNodeArr=this.currentSummaryNodeArr??[]
-    // this.currentSummaryNodeArr=this.currentSummaryNodeArr.filter(node=>{
-    //   if(node.nodeObj.id===targetElement.nodeObj.id){
-    //     flag=true
-    //     return false
-    //   }else{
-    //     return true
-    //   }
-    // })
-    // if(!flag){
-    //   this.currentSummaryNodeArr.push(targetElement)
-    //   targetElement.className='selected'
-    // }else{
-    //   targetElement.className=''
-    // }
     if(targetElement.className==='selected'){
       targetElement.className=''
     }else{

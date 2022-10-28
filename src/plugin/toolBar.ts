@@ -160,7 +160,8 @@ function createToolBarLTContainer(mind) {
 
   mind.bus.addListener('updateToolbarOffsetLeft',()=>{
     offsetLeft=scrollContainer?.getBoundingClientRect().left+parseInt(scrollContainer&&getComputedStyle(scrollContainer).paddingLeft)
-    toolBarLTContainer.style.left=offsetLeft+20+'px'
+    if(toolBarLTContainer.style.position==='fixed')
+      toolBarLTContainer.style.left=offsetLeft+20+'px'
   })
   
   scrollContainer?.addEventListener('scroll',e=>{

@@ -72,7 +72,9 @@ export const shapeTpc = function(tpc: Topic, nodeObj: NodeObj) {
       tpc.style.fontSize = nodeObj.style.fontSize + 'px'
     tpc.style.fontWeight = nodeObj.style.fontWeight || 'normal'
     tpc.style.width= nodeObj.style.width || 'fit-content'
-    widthControllLeft.style.height=widthControllRight.style.height=nodeObj.style.controllWidth || '29px'
+    setTimeout(() => {
+      widthControllLeft.style.height=widthControllRight.style.height=nodeObj.style.controllWidth || tpc.clientHeight+'px'
+    }, 0);
   }
 
   if (nodeObj.icons) {
