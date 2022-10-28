@@ -252,7 +252,9 @@ function De(e, t, n) {
 const K = function(e, t) {
   var s;
   const n = N.createElement("widthControllRight"), i = N.createElement("widthControllLeft");
-  if (e.textContent = t.topic, this != null && this.widthControll && (De.call(this, i, e, n), De.call(this, n, e, i), e.appendChild(n), e.appendChild(i)), t.style && (e.style.color = t.style.color || "#2c3e50", e.style.background = t.style.background ? t.style.background : (s = t == null ? void 0 : t.parent) != null && s.root ? "#ffffff" : "inherit", /[a-z]/i.test(t.style.fontSize) ? e.style.fontSize = t.style.fontSize : e.style.fontSize = t.style.fontSize + "px", e.style.fontWeight = t.style.fontWeight || "normal", e.style.width = t.style.width || "fit-content", i.style.height = n.style.height = t.style.controllWidth || "29px"), t.icons) {
+  if (e.textContent = t.topic, this != null && this.widthControll && (De.call(this, i, e, n), De.call(this, n, e, i), e.appendChild(n), e.appendChild(i)), t.style && (e.style.color = t.style.color || "#2c3e50", e.style.background = t.style.background ? t.style.background : (s = t == null ? void 0 : t.parent) != null && s.root ? "#ffffff" : "inherit", /[a-z]/i.test(t.style.fontSize) ? e.style.fontSize = t.style.fontSize : e.style.fontSize = t.style.fontSize + "px", e.style.fontWeight = t.style.fontWeight || "normal", e.style.width = t.style.width || "fit-content", setTimeout(() => {
+    i.style.height = n.style.height = t.style.controllWidth || e.clientHeight + "px";
+  }, 0)), t.icons) {
     const r = N.createElement("span");
     r.className = "icons", typeof t.icons == "string" && (r.innerHTML = t.icons), e.insertBefore(r, e.firstChild);
   }
@@ -1237,17 +1239,17 @@ function Ce(e, t, n, i) {
       }
       const k = d.offsetLeft + d.offsetWidth + 8, ee = d.offsetTop + 15, te = A.offsetTop + A.offsetHeight - 5, W = A.offsetLeft + A.offsetWidth + 8, ae = v.offsetTop + v.children[0].offsetTop + v.children[0].offsetHeight;
       let oe = (u = v.style.top) != null ? u : 0;
-      typeof oe == "string" && (oe = Number(oe.replace("px", ""))), v.style.top = oe + (te + ee + 20) / 2 - ae + "px", ce += `M ${k} ${ee} H ${k + 10} V ${te} H${W}`;
+      typeof oe == "string" && (oe = Number(oe.replace("px", ""))), v.style.top = oe + (te + ee + v.children[0].clientHeight) / 2 - ae + "px", ce += `M ${k} ${ee} H ${k + 10} V ${te} H${W}`;
     }
     const w = v.children[0];
     let m = w.offsetTop, g = w.offsetHeight;
     l && (m += w.offsetParent.offsetTop);
     let z;
-    i || l ? z = s + c / 2 : z = s + c;
+    i ? z = s + c / 2 : z = s + c;
     const y = m + g;
     let P, h, H;
     const D = v.offsetParent.className || v.offsetParent.offsetParent.className;
-    D === "lhs" && (v == null ? void 0 : v.tagName) !== "SMY" ? (P = r + 15, H = r, h = r - w.offsetWidth, m + g < s + c / 2 + 50 && m + g > s + c / 2 - 50 ? Y += `M ${P} ${z} H ${H} V ${y} H ${h}` : m + g >= s + c / 2 ? Y += `M ${P} ${z} H ${H} V ${y} H ${h}` : Y += `M ${P} ${z} H ${H} V ${y} H ${h}`) : D === "rhs" && (v == null ? void 0 : v.tagName) !== "SMY" && (P = r + o - 15, l && (P += 15), H = r + o, h = r + o + w.offsetWidth, m + g < s + c / 2 + 50 && m + g > s + c / 2 - 50 ? Y += `M ${P} ${z} H ${H} V ${y} H ${h}` : m + g >= s + c / 2 ? Y += `M ${P} ${z} H ${H} V ${y} H ${h}` : Y += `M ${P} ${z} H ${H} V ${y} H ${h}`);
+    D === "lhs" && (v == null ? void 0 : v.tagName) !== "SMY" ? (P = r + 15, H = r, h = r - w.offsetWidth, m + g < s + c / 2 + 50 && m + g > s + c / 2 - 50 ? Y += `M ${P} ${z} H ${H} V ${y} H ${h}` : m + g >= s + c / 2 ? Y += `M ${P} ${z} H ${H} V ${y} H ${h}` : Y += `M ${P} ${z} H ${H} V ${y} H ${h}`) : D === "rhs" && (v == null ? void 0 : v.tagName) !== "SMY" && (P = r + o - 15, H = r + o, h = r + o + w.offsetWidth, l && (P += 15), m + g < s + c / 2 + 50 && m + g > s + c / 2 - 50 ? Y += `M ${P} ${z} H ${H} V ${y} H ${h}` : m + g >= s + c / 2 ? Y += `M ${P} ${z} H ${H} V ${y} H ${h}` : Y += `M ${P} ${z} H ${H} V ${y} H ${h}`);
     const x = w.children[1];
     if (x) {
       if (x.style.top = (w.offsetHeight - x.offsetHeight) / 2 + "px", D === "lhs" ? x.style.left = -10 + "px" : D === "rhs" && (x.style.left = w.offsetWidth - 10 + "px"), !x.expanded)
@@ -1573,7 +1575,7 @@ function An(e) {
       a.isIntersecting && (c = (o == null ? void 0 : o.getBoundingClientRect().left) + parseInt(o && getComputedStyle(o).paddingLeft));
     });
   }, { root: o }).observe(t), e.bus.addListener("updateToolbarOffsetLeft", () => {
-    c = (o == null ? void 0 : o.getBoundingClientRect().left) + parseInt(o && getComputedStyle(o).paddingLeft), t.style.left = c + 20 + "px";
+    c = (o == null ? void 0 : o.getBoundingClientRect().left) + parseInt(o && getComputedStyle(o).paddingLeft), t.style.position === "fixed" && (t.style.left = c + 20 + "px");
   }), o == null || o.addEventListener(
     "scroll",
     (u) => {

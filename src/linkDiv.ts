@@ -247,7 +247,7 @@ function loopChildren(children: HTMLElement[], parent: HTMLElement,nodeData:Node
       const y=child.offsetTop+(child.children[0] as HTMLElement).offsetTop+(child.children[0] as HTMLElement).offsetHeight
       let top=child.style.top??0
       if(typeof top ==='string') top=Number(top.replace('px',''))
-      child.style.top=top+(ylast+yfirst+20)/2-y+'px'
+      child.style.top=top+(ylast+yfirst+child.children[0].clientHeight)/2-y+'px'
       smypath+=`M ${xfirst} ${yfirst} H ${xfirst+10} V ${ylast} H${xlast}`
     }
     const childT: HTMLElement = child.children[0] as HTMLElement // t tag inside the child dom
@@ -258,7 +258,7 @@ function loopChildren(children: HTMLElement[], parent: HTMLElement,nodeData:Node
       // childTOH=(childT.offsetParent as HTMLElement).offsetHeight
     }
     let y1: number
-    if (first||isSmyChild) {
+    if (first) {
       y1 = parentOT + parentOH / 2
     } else {
       y1 = parentOT + parentOH
@@ -285,12 +285,14 @@ function loopChildren(children: HTMLElement[], parent: HTMLElement,nodeData:Node
       }
     } else if (direction === 'rhs'&&child?.tagName!=='SMY') {
       x1 = parentOL + parentOW - GAP
+
+      xMiddle = parentOL + parentOW
+      x2 = parentOL + parentOW + childT.offsetWidth
       if(isSmyChild){
         x1+=GAP
         // y2=y1
+        // y1=y2
       } 
-      xMiddle = parentOL + parentOW
-      x2 = parentOL + parentOW + childT.offsetWidth
       if (
         childTOT + childTOH < parentOT + parentOH / 2 + 50 &&
         childTOT + childTOH > parentOT + parentOH / 2 - 50
