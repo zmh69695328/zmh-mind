@@ -297,7 +297,7 @@ const K = function(e, t) {
 };
 function Oe(e) {
   let t = this.container.querySelector(`tpc[data-nodeid=me${e}]`);
-  t || (Ne(this.nodeData, e), this.layout(), this.linkDiv(), t = this.container.querySelector(`tpc[data-nodeid=me${e}]`)), t.scrollIntoView({ block: "center", behavior: "auto", inline: "center" }), t.className = "blink", setTimeout(() => {
+  t || (Ne(this.nodeData, e), this.layout(), this.linkDiv(), t = this.container.querySelector(`tpc[data-nodeid=me${e}]`)), t.scrollIntoView({ block: "center", behavior: "auto" }), t.className = "blink", setTimeout(() => {
     t.classList.remove("blink");
   }, 3e3);
 }
@@ -1591,7 +1591,7 @@ function xn(e) {
     (u) => {
       const a = o.scrollTop, p = e.mindElixirBox.offsetTop, f = e.mindElixirBox.clientHeight, v = p + f - t.clientHeight - 40;
       a > v ? (t.style.position = "absolute", t.style.top = v - p + 20 + "px", t.style.left = "20px", e.sidebar.style.position = "absolute", e.sidebar.style.top = v - p + 20 + "px", e.sidebar.style.left = "80px", e.sidebar.style.maxHeight = "154px") : a >= p ? (t.style.position = "fixed", t.style.top = "20px", t.style.left = c + 20 + "px", e.sidebar.style.position = "fixed", e.sidebar.style.top = "195px", e.sidebar.style.left = c + 20 + "px", yn(() => {
-        e.sidebar.style.maxHeight = v - a - 10 + "px";
+        e.sidebar.style.maxHeight = Math.min(v - a - 10, window.innerHeight) + "px";
       }, 250)()) : a < p && (t.style.position = "absolute", t.style.top = "20px", t.style.left = "20px", e.sidebar.style.position = "absolute", e.sidebar.style.top = "195px", e.sidebar.style.left = "20px");
     }
   ), t;
