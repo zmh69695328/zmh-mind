@@ -111,6 +111,18 @@ function createToolBarRBContainer(mind) {
   return toolBarRBContainer
 }
 
+function throttle (callback, limit) {
+  var waiting = false;                      // Initially, we're not waiting
+  return function () {                      // We return a throttled function
+      if (!waiting) {                       // If we're not waiting
+          callback.apply(this, arguments);  // Execute users function
+          waiting = true;                   // Prevent future invocations
+          setTimeout(function () {          // After a period of time
+              waiting = false;              // And allow future invocations
+          }, limit);
+      }
+  }
+}
 
 function createToolBarLTContainer(mind) {
   const toolBarLTContainer = document.createElement('toolbar')
@@ -173,14 +185,30 @@ function createToolBarLTContainer(mind) {
       toolBarLTContainer.style.position='absolute'
       toolBarLTContainer.style.top=toolbarBottom-mindTop+20+'px'
       toolBarLTContainer.style.left='20px'
+      //sidebar
+      mind.sidebar.style.position='absolute'
+      mind.sidebar.style.top=toolbarBottom-mindTop+20+'px'
+      mind.sidebar.style.left='80px'
+      mind.sidebar.style.maxHeight='154px'
     }else if(viewTop>=mindTop){
       toolBarLTContainer.style.position='fixed'
       toolBarLTContainer.style.top='20px'
       toolBarLTContainer.style.left=offsetLeft+20+'px'
+      //sidebar
+      mind.sidebar.style.position='fixed'
+      mind.sidebar.style.top='195px'
+      mind.sidebar.style.left=offsetLeft+20+'px'
+      throttle(()=>{
+        mind.sidebar.style.maxHeight=toolbarBottom-viewTop-10+'px'
+      },250)()
     } else if(viewTop<mindTop){
       toolBarLTContainer.style.position='absolute'
       toolBarLTContainer.style.top='20px'
       toolBarLTContainer.style.left='20px'
+      //sidebar
+      mind.sidebar.style.position='absolute'
+      mind.sidebar.style.top='195px'
+      mind.sidebar.style.left='20px'
     } 
   },
   )

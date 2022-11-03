@@ -39,8 +39,11 @@ export function updateSidebar(mind,sidebar:HTMLElement){
     })
 }
 
+
 export default function(mind){
     const sidebar = document.createElement('sidebar')
+    sidebar.style.maxHeight=window.innerHeight-215+'px'
+    mind.sidebar=sidebar
     const nodeData=mind.nodeData
     sidebar.innerHTML = `${queryList(nodeData,0)}`
     mind.container.append(sidebar)

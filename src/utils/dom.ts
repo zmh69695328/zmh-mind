@@ -181,7 +181,7 @@ export function moveToNode(id:string){
   //   10000 - this.container.offsetWidth / 2 + getWidthFromRootToAnotherNode(this.container,toNode),
   //   10000 - this.container.offsetHeight / 2 - getHeightFromRootToAnotherNode(this.container,toNode)
   // )
-  toNode.scrollIntoView({block:'center',behavior:'smooth'})
+  toNode.scrollIntoView({block:'center',behavior:'auto',inline:'center'})
   toNode.className='blink'
   setTimeout(() => {
     toNode.classList.remove('blink')
