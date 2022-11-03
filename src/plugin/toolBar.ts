@@ -199,7 +199,7 @@ function createToolBarLTContainer(mind) {
       mind.sidebar.style.top='195px'
       mind.sidebar.style.left=offsetLeft+20+'px'
       throttle(()=>{
-        mind.sidebar.style.maxHeight=toolbarBottom-viewTop-10+'px'
+          mind.sidebar.style.maxHeight=Math.min(toolbarBottom-viewTop-10,window.innerHeight)+'px'
       },250)()
     } else if(viewTop<mindTop){
       toolBarLTContainer.style.position='absolute'
