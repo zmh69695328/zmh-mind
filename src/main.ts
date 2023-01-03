@@ -2,6 +2,20 @@ import './style.css'
 import MindElixir from './index'
 import data from './examples/data.json'
 import data1 from './exampleData/2'
+import * as Sentry from "@sentry/browser";
+import { BrowserTracing } from "@sentry/tracing";
+
+Sentry.init({
+  dsn: "http://1d65e0f08fde420dab7e4c99c6172fab@113.31.125.185:10271/2",
+  integrations: [new BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+  release:'0.0.1'
+});
+
 let mind = new MindElixir({
   el: 'map',
   direction: MindElixir.RIGHT,
