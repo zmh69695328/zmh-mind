@@ -10,7 +10,7 @@ env:
   cache-name: note
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main","dev-sentry" ]
 
 jobs:
   build:
