@@ -9,4 +9,5 @@
 > npm i zmh-mind
 
 # Demo
-https://zmh.dounx.me/mindmapping/
+https://mindmapping.zhuminhao.top/
+![image](https://github.com/zmh69695328/zmh-mind/assets/18231787/e1b4acd0-9954-4467-9d2f-2700ac917538)
