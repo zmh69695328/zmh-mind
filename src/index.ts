@@ -87,6 +87,7 @@ import './plugin/mobileMenu.less'
 
 import { exportSvg, exportSvgDom ,exportPng} from '../painter/index.foreignObject'
 
+import {exportPng as anotherExportPng} from '../painter/index'
 import './iconfont/iconfont.js'
 import { node } from 'canvg/dist/presets'
 
@@ -410,6 +411,7 @@ MindElixir.prototype = {
   exportSvg,
   exportSvgDom,
   exportPng,
+  anotherExportPng,
   init: function(nodeData?:NodeObj,expandDeep?:number) {
     /**
      * @function

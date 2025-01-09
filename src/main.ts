@@ -1,15 +1,16 @@
 import './style.css'
 import MindElixir from './index'
-import data from './examples/data.json'
-import data1 from './exampleData/2'
+// import data from './examples/1'
+import data from './exampleData/2'
 let mind = new MindElixir({
   el: 'map',
   direction: MindElixir.RIGHT,
   // create new map data
-  data:data1,
+  data:data,
   // data: MindElixir.new('new topic'), 
   // or set as data that is return from `.getAllData()`
-  // data: {...},
+  // data: {...},]
+  editable:true,
   draggable: true, // default true
   contextMenu: true, // default true
   toolBar: true, // default true
